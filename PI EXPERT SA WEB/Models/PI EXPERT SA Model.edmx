@@ -1,0 +1,558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Gr02Proy4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="cedulaPK" />
+          </Key>
+          <Property Name="cedulaPK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="apellido1" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="apellido2" Type="nvarchar" MaxLength="16" />
+          <Property Name="correo" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="provincia" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="canton" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="distrito" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="cedulaPK" />
+          </Key>
+          <Property Name="cedulaPK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="apellido1" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="apellido2" Type="nvarchar" MaxLength="16" />
+          <Property Name="correo" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fechaContratacion" Type="date" Nullable="false" />
+          <Property Name="fechaDespido" Type="date" />
+          <Property Name="tipoUsuario" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="disponibilidad" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HABILIDADES">
+          <Key>
+            <PropertyRef Name="cedulaEmpleadoPK" />
+            <PropertyRef Name="habilidadPK" />
+          </Key>
+          <Property Name="cedulaEmpleadoPK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="habilidadPK" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODULO">
+          <Key>
+            <PropertyRef Name="idModuloPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idModuloPK" Type="int" Nullable="false" />
+          <Property Name="idProyectoPK" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="fechaInicio" Type="date" />
+        </EntityType>
+        <EntityType Name="PROYECTO">
+          <Key>
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idProyectoPK" Type="int" Nullable="false" />
+          <Property Name="costoEstimado" Type="int" Nullable="false" />
+          <Property Name="costoReal" Type="int" />
+          <Property Name="fechaInicio" Type="date" />
+          <Property Name="fechaFin" Type="date" />
+          <Property Name="duracionEstimada" Type="int" />
+          <Property Name="cedulaClienteFK" Type="nchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REQUERIMIENTO">
+          <Key>
+            <PropertyRef Name="idRequerimientoPK" />
+            <PropertyRef Name="idModuloPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idRequerimientoPK" Type="int" Nullable="false" />
+          <Property Name="idModuloPK" Type="int" Nullable="false" />
+          <Property Name="idProyectoPK" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="complejidad" Type="int" Nullable="false" />
+          <Property Name="duracionEstimada" Type="int" />
+          <Property Name="cedulaDesarroladorFK" Type="nchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="cedulaPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="cedulaPK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="idProyectoPK" Type="int" Nullable="false" />
+          <Property Name="tipoRol" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="numEquipo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_PROYECTO">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="PROYECTO">
+              <PropertyRef Name="cedulaClienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_HABILIDADES">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="HABILIDADES" Type="Self.HABILIDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="HABILIDADES">
+              <PropertyRef Name="cedulaEmpleadoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REQUERIMIENTO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="REQUERIMIENTO">
+              <PropertyRef Name="cedulaDesarroladorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_ROL">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="ROL">
+              <PropertyRef Name="cedulaPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULO_REQUERIMIENTO">
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
+          <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULO">
+              <PropertyRef Name="idModuloPK" />
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="REQUERIMIENTO">
+              <PropertyRef Name="idModuloPK" />
+              <PropertyRef Name="idProyectoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROYECTO">
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+          <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROYECTO">
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="ROL">
+              <PropertyRef Name="idProyectoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROYECTO_MODULO">
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROYECTO">
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="MODULO">
+              <PropertyRef Name="idProyectoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gr02Proy4ModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODULO" EntityType="Self.MODULO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REQUERIMIENTO" EntityType="Self.REQUERIMIENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLIENTE_PROYECTO" Association="Self.FK_CLIENTE_PROYECTO">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_HABILIDADES" Association="Self.FK_EMPLEADO_HABILIDADES">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="HABILIDADES" EntitySet="HABILIDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REQUERIMIENTO" Association="Self.FK_EMPLEADO_REQUERIMIENTO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_ROL" Association="Self.FK_EMPLEADO_ROL">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="ROL" EntitySet="ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULO_REQUERIMIENTO" Association="Self.FK_MODULO_REQUERIMIENTO">
+            <End Role="MODULO" EntitySet="MODULO" />
+            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROYECTO" Association="Self.FK_PROYECTO">
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+            <End Role="ROL" EntitySet="ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROYECTO_MODULO" Association="Self.FK_PROYECTO_MODULO">
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+            <End Role="MODULO" EntitySet="MODULO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gr02Proy4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="cedulaPK" />
+          </Key>
+          <Property Name="cedulaPK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellido1" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellido2" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="provincia" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PROYECTO" Relationship="Self.FK_CLIENTE_PROYECTO" FromRole="CLIENTE" ToRole="PROYECTO" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="cedulaPK" />
+          </Key>
+          <Property Name="cedulaPK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellido1" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellido2" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fechaContratacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaDespido" Type="DateTime" Precision="0" />
+          <Property Name="tipoUsuario" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="disponibilidad" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HABILIDADES" Relationship="Self.FK_EMPLEADO_HABILIDADES" FromRole="EMPLEADO" ToRole="HABILIDADES" />
+          <NavigationProperty Name="REQUERIMIENTO" Relationship="Self.FK_EMPLEADO_REQUERIMIENTO" FromRole="EMPLEADO" ToRole="REQUERIMIENTO" />
+          <NavigationProperty Name="ROL" Relationship="Gr02Proy4Model.FK_EMPLEADO_ROL" FromRole="EMPLEADO" ToRole="ROL" />
+        </EntityType>
+        <EntityType Name="HABILIDADES">
+          <Key>
+            <PropertyRef Name="cedulaEmpleadoPK" />
+            <PropertyRef Name="habilidadPK" />
+          </Key>
+          <Property Name="cedulaEmpleadoPK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="habilidadPK" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_HABILIDADES" FromRole="HABILIDADES" ToRole="EMPLEADO" />
+        </EntityType>
+        <EntityType Name="MODULO">
+          <Key>
+            <PropertyRef Name="idModuloPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idModuloPK" Type="Int32" Nullable="false" />
+          <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="REQUERIMIENTO" Relationship="Self.FK_MODULO_REQUERIMIENTO" FromRole="MODULO" ToRole="REQUERIMIENTO" />
+          <NavigationProperty Name="PROYECTO" Relationship="Self.FK_PROYECTO_MODULO" FromRole="MODULO" ToRole="PROYECTO" />
+        </EntityType>
+        <EntityType Name="PROYECTO">
+          <Key>
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
+          <Property Name="costoEstimado" Type="Int32" Nullable="false" />
+          <Property Name="costoReal" Type="Int32" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="fechaFin" Type="DateTime" Precision="0" />
+          <Property Name="duracionEstimada" Type="Int32" />
+          <Property Name="cedulaClienteFK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_PROYECTO" FromRole="PROYECTO" ToRole="CLIENTE" />
+          <NavigationProperty Name="MODULO" Relationship="Self.FK_PROYECTO_MODULO" FromRole="PROYECTO" ToRole="MODULO" />
+          <NavigationProperty Name="ROL" Relationship="Gr02Proy4Model.FK_PROYECTO" FromRole="PROYECTO" ToRole="ROL" />
+        </EntityType>
+        <EntityType Name="REQUERIMIENTO">
+          <Key>
+            <PropertyRef Name="idRequerimientoPK" />
+            <PropertyRef Name="idModuloPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idRequerimientoPK" Type="Int32" Nullable="false" />
+          <Property Name="idModuloPK" Type="Int32" Nullable="false" />
+          <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="nombre" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="complejidad" Type="Int32" Nullable="false" />
+          <Property Name="duracionEstimada" Type="Int32" />
+          <Property Name="cedulaDesarroladorFK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_REQUERIMIENTO" FromRole="REQUERIMIENTO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="MODULO" Relationship="Self.FK_MODULO_REQUERIMIENTO" FromRole="REQUERIMIENTO" ToRole="MODULO" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_PROYECTO">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="PROYECTO">
+              <PropertyRef Name="cedulaClienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_HABILIDADES">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="HABILIDADES" Type="Self.HABILIDADES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="HABILIDADES">
+              <PropertyRef Name="cedulaEmpleadoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REQUERIMIENTO">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="REQUERIMIENTO">
+              <PropertyRef Name="cedulaDesarroladorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MODULO_REQUERIMIENTO">
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
+          <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULO">
+              <PropertyRef Name="idModuloPK" />
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="REQUERIMIENTO">
+              <PropertyRef Name="idModuloPK" />
+              <PropertyRef Name="idProyectoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROYECTO_MODULO">
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROYECTO">
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="MODULO">
+              <PropertyRef Name="idProyectoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gr02Proy4Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" />
+          <EntitySet Name="MODULO" EntityType="Self.MODULO" />
+          <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" />
+          <EntitySet Name="REQUERIMIENTO" EntityType="Self.REQUERIMIENTO" />
+          <AssociationSet Name="FK_CLIENTE_PROYECTO" Association="Self.FK_CLIENTE_PROYECTO">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_HABILIDADES" Association="Self.FK_EMPLEADO_HABILIDADES">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="HABILIDADES" EntitySet="HABILIDADES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REQUERIMIENTO" Association="Self.FK_EMPLEADO_REQUERIMIENTO">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MODULO_REQUERIMIENTO" Association="Self.FK_MODULO_REQUERIMIENTO">
+            <End Role="MODULO" EntitySet="MODULO" />
+            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROYECTO_MODULO" Association="Self.FK_PROYECTO_MODULO">
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+            <End Role="MODULO" EntitySet="MODULO" />
+          </AssociationSet>
+          <EntitySet Name="ROL" EntityType="Gr02Proy4Model.ROL" />
+          <AssociationSet Name="FK_EMPLEADO_ROL" Association="Gr02Proy4Model.FK_EMPLEADO_ROL">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="ROL" EntitySet="ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROYECTO" Association="Gr02Proy4Model.FK_PROYECTO">
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+            <End Role="ROL" EntitySet="ROL" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ROL">
+          <Key>
+            <PropertyRef Name="cedulaPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="cedulaPK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
+          <Property Name="tipoRol" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="numEquipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Gr02Proy4Model.FK_EMPLEADO_ROL" FromRole="ROL" ToRole="EMPLEADO" />
+          <NavigationProperty Name="PROYECTO" Relationship="Gr02Proy4Model.FK_PROYECTO" FromRole="ROL" ToRole="PROYECTO" />
+        </EntityType>
+        <Association Name="FK_EMPLEADO_ROL">
+          <End Type="Gr02Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.ROL" Role="ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="ROL">
+              <PropertyRef Name="cedulaPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROYECTO">
+          <End Type="Gr02Proy4Model.PROYECTO" Role="PROYECTO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.ROL" Role="ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROYECTO">
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="ROL">
+              <PropertyRef Name="idProyectoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Gr02Proy4ModelStoreContainer" CdmEntityContainer="Gr02Proy4Entities">
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="cedulaPK" ColumnName="cedulaPK" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="cedulaPK" ColumnName="cedulaPK" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido1" ColumnName="apellido1" />
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fechaContratacion" ColumnName="fechaContratacion" />
+                <ScalarProperty Name="fechaDespido" ColumnName="fechaDespido" />
+                <ScalarProperty Name="tipoUsuario" ColumnName="tipoUsuario" />
+                <ScalarProperty Name="disponibilidad" ColumnName="disponibilidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HABILIDADES">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.HABILIDADES">
+              <MappingFragment StoreEntitySet="HABILIDADES">
+                <ScalarProperty Name="cedulaEmpleadoPK" ColumnName="cedulaEmpleadoPK" />
+                <ScalarProperty Name="habilidadPK" ColumnName="habilidadPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODULO">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.MODULO">
+              <MappingFragment StoreEntitySet="MODULO">
+                <ScalarProperty Name="idModuloPK" ColumnName="idModuloPK" />
+                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROYECTO">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.PROYECTO">
+              <MappingFragment StoreEntitySet="PROYECTO">
+                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
+                <ScalarProperty Name="costoEstimado" ColumnName="costoEstimado" />
+                <ScalarProperty Name="costoReal" ColumnName="costoReal" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
+                <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
+                <ScalarProperty Name="cedulaClienteFK" ColumnName="cedulaClienteFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REQUERIMIENTO">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.REQUERIMIENTO">
+              <MappingFragment StoreEntitySet="REQUERIMIENTO">
+                <ScalarProperty Name="idRequerimientoPK" ColumnName="idRequerimientoPK" />
+                <ScalarProperty Name="idModuloPK" ColumnName="idModuloPK" />
+                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="complejidad" ColumnName="complejidad" />
+                <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
+                <ScalarProperty Name="cedulaDesarroladorFK" ColumnName="cedulaDesarroladorFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROL">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.ROL">
+              <MappingFragment StoreEntitySet="ROL">
+                <ScalarProperty Name="numEquipo" ColumnName="numEquipo" />
+                <ScalarProperty Name="tipoRol" ColumnName="tipoRol" />
+                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
+                <ScalarProperty Name="cedulaPK" ColumnName="cedulaPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
