@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
+    <Compile Include="Controllers\EMPLEADOController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -364,6 +365,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\EMPLEADO\Create.cshtml" />
+    <Content Include="Views\EMPLEADO\Delete.cshtml" />
+    <Content Include="Views\EMPLEADO\Details.cshtml" />
+    <Content Include="Views\EMPLEADO\Edit.cshtml" />
+    <Content Include="Views\EMPLEADO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
