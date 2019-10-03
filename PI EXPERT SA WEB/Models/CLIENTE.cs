@@ -11,6 +11,7 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class CLIENTE
     {
@@ -19,12 +20,19 @@ namespace PI_EXPERT_SA_WEB.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
         }
-    
+        [Required]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "La cedula solo contiene numeros")]
+        [StringLength(maximumLength: 9,ErrorMessage ="Cedula invalida", MinimumLength = 9)]
         public string cedulaPK { get; set; }
+        [Required]
         public string name { get; set; }
+        [Required]
         public string apellido1 { get; set; }
         public string apellido2 { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string correo { get; set; }
+        [DataType(DataType.PhoneNumber)]
         public string telefono { get; set; }
         public string provincia { get; set; }
         public string canton { get; set; }
