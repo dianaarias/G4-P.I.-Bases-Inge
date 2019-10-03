@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
     <Compile Include="Controllers\EMPLEADOController.cs" />
+    <Compile Include="Controllers\HABILIDADESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -370,6 +371,11 @@
     <Content Include="Views\EMPLEADO\Details.cshtml" />
     <Content Include="Views\EMPLEADO\Edit.cshtml" />
     <Content Include="Views\EMPLEADO\Index.cshtml" />
+    <Content Include="Views\HABILIDADES\Create.cshtml" />
+    <Content Include="Views\HABILIDADES\Delete.cshtml" />
+    <Content Include="Views\HABILIDADES\Details.cshtml" />
+    <Content Include="Views\HABILIDADES\Edit.cshtml" />
+    <Content Include="Views\HABILIDADES\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
