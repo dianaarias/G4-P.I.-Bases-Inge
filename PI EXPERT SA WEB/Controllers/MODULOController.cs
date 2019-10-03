@@ -19,16 +19,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var mODULO = db.MODULO.Include(m => m.PROYECTO);
             return View(mODULO.ToList());
+            //return View();
         }
 
         // GET: MODULO/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? idModuloPK, int? idProyectoPK)
         {
-            if (id == null)
+            if (idModuloPK == null || idProyectoPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MODULO mODULO = db.MODULO.Find(id);
+            MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
             if (mODULO == null)
             {
                 return HttpNotFound();
@@ -62,13 +63,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: MODULO/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idModuloPK, int? idProyectoPK)
         {
-            if (id == null)
+            if (idModuloPK == null || idProyectoPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MODULO mODULO = db.MODULO.Find(id);
+            MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
             if (mODULO == null)
             {
                 return HttpNotFound();
@@ -95,13 +96,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: MODULO/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idModuloPK, int? idProyectoPK)
         {
-            if (id == null)
+            if (idModuloPK == null || idProyectoPK == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MODULO mODULO = db.MODULO.Find(id);
+            MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
             if (mODULO == null)
             {
                 return HttpNotFound();
@@ -112,9 +113,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // POST: MODULO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? idModuloPK, int? idProyectoPK)
         {
-            MODULO mODULO = db.MODULO.Find(id);
+            MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
             db.MODULO.Remove(mODULO);
             db.SaveChanges();
             return RedirectToAction("Index");
