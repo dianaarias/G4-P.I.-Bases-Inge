@@ -20,14 +20,18 @@ namespace PI_EXPERT_SA_WEB.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
         }
+
         [Required]
         [RegularExpression("^[0-9]*$", ErrorMessage = "La cedula solo contiene numeros")]
         [StringLength(maximumLength: 9,ErrorMessage ="Cedula invalida", MinimumLength = 9)]
         public string cedulaPK { get; set; }
         [Required]
+        [StringLength(16)]
         public string name { get; set; }
         [Required]
+        [StringLength(16)]
         public string apellido1 { get; set; }
+        [StringLength(16)]
         public string apellido2 { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
