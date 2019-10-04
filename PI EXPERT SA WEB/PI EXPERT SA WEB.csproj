@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PROYECTOController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,6 +257,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Styles\custom.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -286,6 +288,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\PROYECTO\Create.cshtml" />
+    <Content Include="Views\PROYECTO\Delete.cshtml" />
+    <Content Include="Views\PROYECTO\Details.cshtml" />
+    <Content Include="Views\PROYECTO\Edit.cshtml" />
+    <Content Include="Views\PROYECTO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
