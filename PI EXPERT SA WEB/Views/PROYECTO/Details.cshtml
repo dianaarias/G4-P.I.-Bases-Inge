@@ -1,0 +1,66 @@
+﻿@model PI_EXPERT_SA_WEB.Models.PROYECTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PROYECTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.costoEstimado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoEstimado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.costoReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.costoReal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracionEstimada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTE.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProyectoPK }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
