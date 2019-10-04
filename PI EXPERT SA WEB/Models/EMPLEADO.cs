@@ -52,7 +52,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [Display(Name = "Fecha finalización de contrato")]
         public Nullable<System.DateTime> fechaDespido { get; set; }
         [StringLength(16, ErrorMessage = "El campo rol actual excede el número de caracteres")]
-        [Display(Name = "RoL actual")]
+        [Display(Name = "Rol actual")]
         public string tipoUsuario { get; set; }
         [Display(Name = "Disponibilidad")]
         public bool disponibilidad { get; set; }
