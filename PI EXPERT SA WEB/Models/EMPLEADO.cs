@@ -44,7 +44,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [Display(Name = "Correo")]
         public string correo { get; set; }
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Telefono")]
+        [Display(Name = "Teléfono")]
         public string telefono { get; set; }
         [Required(ErrorMessage = "El campo fecha de contratación es requerido")]
         [Display(Name = "Fecha de contratación")]
