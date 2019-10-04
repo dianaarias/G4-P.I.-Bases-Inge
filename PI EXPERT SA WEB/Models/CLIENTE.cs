@@ -28,25 +28,27 @@ namespace PI_EXPERT_SA_WEB.Models
         public string cedulaPK { get; set; }
         [DisplayName("Nombre")]
         [Required(ErrorMessage ="Este campo es obligatorio")]
-        [StringLength(16)]
+        [StringLength(16, ErrorMessage ="El Nombre excede el numero de caracteres")]
         public string name { get; set; }
         [DisplayName("Primer apellido")]
         [Required(ErrorMessage ="Este campo es obligatorio")]
-        [StringLength(16)]
+        [StringLength(16, ErrorMessage = "El Primer apellido excede el numero de caracteres")]
         public string apellido1 { get; set; }
         [DisplayName("Segundo apellido")]
-        [StringLength(16)]
+        [StringLength(16, ErrorMessage = "El Segundo apellido excede el numero de caracteres")]
         public string apellido2 { get; set; }
         [DisplayName("Correo")]
         [Required(ErrorMessage = "Este campo es obligatorio")]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress,ErrorMessage ="Porfavor introducir un correo valido")]
         public string correo { get; set; }
         [DisplayName("Teléfono")]
         [DataType(DataType.PhoneNumber)]
         public string telefono { get; set; }
-        [DisplayName("Teléfono")]
+        [DisplayName("Provincia")]
         public string provincia { get; set; }
+        [DisplayName("Distrito")]
         public string canton { get; set; }
+        [DisplayName("Cantón")]
         public string distrito { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
