@@ -14,10 +14,10 @@
           <Property Name="apellido1" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="apellido2" Type="nvarchar" MaxLength="16" />
           <Property Name="correo" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="provincia" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="canton" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="distrito" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" />
+          <Property Name="provincia" Type="nvarchar" MaxLength="16" />
+          <Property Name="canton" Type="nvarchar" MaxLength="16" />
+          <Property Name="distrito" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -230,10 +230,10 @@
           <Property Name="apellido1" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido2" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="correo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="provincia" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="provincia" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PROYECTO" Relationship="Self.FK_CLIENTE_PROYECTO" FromRole="CLIENTE" ToRole="PROYECTO" />
         </EntityType>
         <EntityType Name="EMPLEADO">
