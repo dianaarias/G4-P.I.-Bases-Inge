@@ -12,6 +12,7 @@ namespace PI_EXPERT_SA_WEB.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel;
     
     public partial class CLIENTE
     {
@@ -20,20 +21,30 @@ namespace PI_EXPERT_SA_WEB.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
         }
-        [Required]
+        [DisplayName("Cédula de Identidad")]
+        [Required(ErrorMessage ="Este campo es obligatorio")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "La cedula solo contiene numeros")]
         [StringLength(maximumLength: 9,ErrorMessage ="Cedula invalida", MinimumLength = 9)]
         public string cedulaPK { get; set; }
-        [Required]
+        [DisplayName("Nombre")]
+        [Required(ErrorMessage ="Este campo es obligatorio")]
+        [StringLength(16)]
         public string name { get; set; }
-        [Required]
+        [DisplayName("Primer apellido")]
+        [Required(ErrorMessage ="Este campo es obligatorio")]
+        [StringLength(16)]
         public string apellido1 { get; set; }
+        [DisplayName("Segundo apellido")]
+        [StringLength(16)]
         public string apellido2 { get; set; }
-        [Required]
+        [DisplayName("Correo")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         [DataType(DataType.EmailAddress)]
         public string correo { get; set; }
+        [DisplayName("Teléfono")]
         [DataType(DataType.PhoneNumber)]
         public string telefono { get; set; }
+        [DisplayName("Teléfono")]
         public string provincia { get; set; }
         public string canton { get; set; }
         public string distrito { get; set; }

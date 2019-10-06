@@ -10,108 +10,112 @@ using PI_EXPERT_SA_WEB.Models;
 
 namespace PI_EXPERT_SA_WEB.Controllers
 {
-    public class CLIENTEController : Controller
+    public class PROYECTOController : Controller
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
-        // GET: CLIENTE
-        // Genera la vista index con todos los clientes
+        // GET: PROYECTO
         public ActionResult Index()
         {
-            return View(db.CLIENTE.ToList());
+            var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
+            return View(pROYECTO.ToList());
         }
 
-        // GET: CLIENTE/Details/5
-        public ActionResult Details(string id)
+        // GET: PROYECTO/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            PROYECTO pROYECTO = db.PROYECTO.Find(id);
+            if (pROYECTO == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            return View(pROYECTO);
         }
 
-        // GET: CLIENTE/Create
+        // GET: PROYECTO/Create
         public ActionResult Create()
         {
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name");
             return View();
         }
 
-        // POST: CLIENTE/Create
+        // POST: PROYECTO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,name,apellido1,apellido2,correo,telefono,provincia,canton,distrito")] CLIENTE cLIENTE)
+        public ActionResult Create([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
-                db.CLIENTE.Add(cLIENTE);
+                db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cLIENTE);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name", pROYECTO.cedulaClienteFK);
+            return View(pROYECTO);
         }
 
-        // GET: CLIENTE/Edit/5
-        public ActionResult Edit(string id)
+        // GET: PROYECTO/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            PROYECTO pROYECTO = db.PROYECTO.Find(id);
+            if (pROYECTO == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name", pROYECTO.cedulaClienteFK);
+            return View(pROYECTO);
         }
 
-        // POST: CLIENTE/Edit/5
+        // POST: PROYECTO/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,name,apellido1,apellido2,correo,telefono,provincia,canton,distrito")] CLIENTE cLIENTE)
+        public ActionResult Edit([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cLIENTE).State = EntityState.Modified;
+                db.Entry(pROYECTO).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cLIENTE);
+            ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name", pROYECTO.cedulaClienteFK);
+            return View(pROYECTO);
         }
 
-        // GET: CLIENTE/Delete/5
-        public ActionResult Delete(string id)
+        // GET: PROYECTO/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            PROYECTO pROYECTO = db.PROYECTO.Find(id);
+            if (pROYECTO == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            return View(pROYECTO);
         }
 
-        // POST: CLIENTE/Delete/5
+        // POST: PROYECTO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            db.CLIENTE.Remove(cLIENTE);
+            PROYECTO pROYECTO = db.PROYECTO.Find(id);
+            db.PROYECTO.Remove(pROYECTO);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
