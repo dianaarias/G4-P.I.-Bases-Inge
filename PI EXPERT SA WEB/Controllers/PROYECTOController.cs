@@ -18,7 +18,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Index()
         {
             var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
-            return View(pROYECTO.ToList());
+            return View(db.PROYECTO.ToList());
         }
 
         // GET: PROYECTO/Details/5

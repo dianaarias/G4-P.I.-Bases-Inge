@@ -139,6 +139,7 @@
     <Compile Include="Controllers\CLIENTEController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
+    <Compile Include="Controllers\MODULOController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +177,15 @@
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ROL.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,6 +305,11 @@
     <Content Include="Views\PROYECTO\Details.cshtml" />
     <Content Include="Views\PROYECTO\Edit.cshtml" />
     <Content Include="Views\PROYECTO\Index.cshtml" />
+    <Content Include="Views\MODULO\Create.cshtml" />
+    <Content Include="Views\MODULO\Delete.cshtml" />
+    <Content Include="Views\MODULO\Details.cshtml" />
+    <Content Include="Views\MODULO\Edit.cshtml" />
+    <Content Include="Views\MODULO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
