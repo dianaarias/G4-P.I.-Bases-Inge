@@ -20,6 +20,7 @@ namespace PI_EXPERT_SA_WEB.Models
             this.HABILIDADES = new HashSet<HABILIDADES>();
             this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
             this.ROL = new HashSet<ROL>();
+            this.PROYECTO = new HashSet<PROYECTO>();
         }
     
         public string cedulaPK { get; set; }
@@ -32,6 +33,10 @@ namespace PI_EXPERT_SA_WEB.Models
         public Nullable<System.DateTime> fechaDespido { get; set; }
         public string tipoUsuario { get; set; }
         public bool disponibilidad { get; set; }
+        public string provincia { get; set; }
+        public string canton { get; set; }
+        public string distrito { get; set; }
+        public Nullable<System.DateTime> fechaNacimiento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HABILIDADES> HABILIDADES { get; set; }
@@ -39,5 +44,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROL> ROL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROYECTO> PROYECTO { get; set; }
     }
 }
