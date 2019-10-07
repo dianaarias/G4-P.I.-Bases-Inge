@@ -4,79 +4,62 @@
     ViewBag.Title = "Details";
 }
 
+@Html.ActionLink("Borrar", "Delete", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large", @style = "float: right;" })
+@Html.ActionLink("Editar", "Edit", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large", @style = "float: right;" })
 
-<div>
-    <h3>Informacion del Cliente</h3>
+<div class="form-horizontal text-center">
+    <h4>Informacion del Cliente</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.apellido1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.apellido1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.apellido2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.apellido2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.provincia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.canton)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.distrito)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
-
-    </dl>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.name, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.apellido1, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.apellido2, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.correo, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.telefono, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.provincia, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.canton, new { disabled = "disabl;ed" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.distrito, new { disabled = "disabl;ed" })
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.cedulaPK }, new { @class = ".editButton" })
-    @Html.ActionLink("Borrar", "Delete", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large" })
-    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-primary btn-large" }) 
-</p>
+
+<div class="col text-center ">
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary btn-large" })
+</div>
