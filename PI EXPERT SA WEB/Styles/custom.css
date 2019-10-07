@@ -56,6 +56,12 @@ body {
 
 .required-field-asterisk {
     color: red;
+    font-size: 16px;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
 }
 
 .table {
