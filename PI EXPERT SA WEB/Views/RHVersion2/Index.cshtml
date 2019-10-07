@@ -1,0 +1,97 @@
+﻿
+@model PI_EXPERT_SA_WEB.Models.ModeloIntermedio
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Lista de empleados</h2>
+@*<p>*@
+   @* @Html.ActionLink("Create New", "Create")*@
+@*</p>*@
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.cedulaPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.apellido1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.correo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.tipoUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.disponibilidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modeloHabilidades1.habilidadPK)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @for (int i = 0; i < Model.listaEmpleados.Count; i++)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(i).cedulaPK)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(i).nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(i).apellido1)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(i).correo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(i).tipoUsuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(i).disponibilidad)
+    </td>
+    <td>
+        @for (int j = 0; j < Model.listaHabilidades.Count; j++)
+        {
+            if (Model.listaEmpleados.ElementAt(i).cedulaPK.Equals(Model.listaHabilidades.ElementAt(j).cedulaEmpleadoPK))
+            {
+                @Html.DisplayFor(modelItem => Model.listaHabilidades.ElementAt(j).habilidadPK)
+                @Html.Raw(" ")
+            }
+        }
+    </td>
+    <td>
+    </td>
+
+    @*<td>
+            @Html.ActionLink("Edit", "Edit", new
+            {
+                id = Model.listaEmpleados.ElementAt(i).cedulaPK
+            }) |
+            @Html.ActionLink("Details", "Details", new
+            {
+                id = Model.listaEmpleados.ElementAt(i).cedulaPK
+            }) |
+            @Html.ActionLink("Delete", "Delete", new
+            {
+                id = Model.listaEmpleados.ElementAt(i).cedulaPK
+            })
+        </td>*@
+    <td>
+        <div class="col text-center">
+            @Html.ActionLink("Más información", "Details", new { id = Model.listaEmpleados.ElementAt(i).cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+        </div>
+    </td>
+</tr>
+    }
+</table>
+<div class="col text-center">
+    <p>
+        @Html.ActionLink("Crear Empleado", "Create", null, new { @class = "btn btn-info btn-large text-center" })
+    </p>
+</div>
