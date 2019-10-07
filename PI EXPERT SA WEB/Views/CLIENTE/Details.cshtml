@@ -4,8 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-@Html.ActionLink("Borrar", "Delete", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large", @style = "float: right;" })
-@Html.ActionLink("Editar", "Edit", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large", @style = "float: right;" })
+<a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+    <img src="~/images/deleteImg.svg" width="30" height="30"/>   
+</a>
+<a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+    <img src="~/images/editImg.svg" width="30" height="30"/>
+</a>
 
 <div class="form-horizontal text-center">
     <h4>Informacion del Cliente</h4>
