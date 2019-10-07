@@ -11,9 +11,13 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HABILIDADES
     {
+        [Required(ErrorMessage = "El campo cédula es requerido")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "La cédula sólo puede contener números")]
+        [StringLength(maximumLength: 9, ErrorMessage = "Cédula invalida", MinimumLength = 9)]
         public string cedulaEmpleadoPK { get; set; }
         public string habilidadPK { get; set; }
     
