@@ -16,7 +16,6 @@ namespace PI_EXPERT_SA_WEB.Models
     public partial class HABILIDADES
     {
         public string cedulaEmpleadoPK { get; set; }
-        [Required(ErrorMessage = "El campo habilidad es requerido")]
         [Display(Name = "Habilidades")]
         public string habilidadPK { get; set; }
     

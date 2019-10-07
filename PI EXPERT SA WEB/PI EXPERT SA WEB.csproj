@@ -323,6 +323,7 @@
     <Content Include="Views\HABILIDADES\Edit.cshtml" />
     <Content Include="Views\HABILIDADES\Index.cshtml" />
     <Content Include="Views\RHVersion2\Index.cshtml" />
+    <Content Include="Views\RHVersion2\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

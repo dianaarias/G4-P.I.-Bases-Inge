@@ -22,5 +22,44 @@ namespace PI_EXPERT_SA_WEB.Controllers
             modelo.listaHabilidades = db.HABILIDADES.ToList();
             return View(modelo);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ModeloIntermedio modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.EMPLEADO.Add(modelo.modeloEmpleado);
+                db.SaveChanges();
+                if (modelo.modeloHabilidades1.habilidadPK != null)
+                {
+                    modelo.modeloHabilidades1.cedulaEmpleadoPK = modelo.modeloEmpleado.cedulaPK;
+                    db.HABILIDADES.Add(modelo.modeloHabilidades1);
+                }
+                if (modelo.modeloHabilidades2.habilidadPK != null)
+                {
+                    modelo.modeloHabilidades2.cedulaEmpleadoPK = modelo.modeloEmpleado.cedulaPK;
+                    db.HABILIDADES.Add(modelo.modeloHabilidades2);
+                }
+                if (modelo.modeloHabilidades3.habilidadPK != null)
+                {
+                    modelo.modeloHabilidades3.cedulaEmpleadoPK = modelo.modeloEmpleado.cedulaPK;
+                    db.HABILIDADES.Add(modelo.modeloHabilidades3);
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Debe completar toda la información necesaria.");
+                return View(modelo);
+            }
+        }
+
     }
 }
