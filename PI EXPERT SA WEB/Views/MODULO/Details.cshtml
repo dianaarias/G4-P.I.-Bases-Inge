@@ -8,22 +8,36 @@
 
 <div>
 
-    <a href="@Url.Action("Editar","Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
+
+    @*<a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+            <img src="~/images/deleteImg.svg" width="30" height="30" />
+        </a>
+        <a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+            <img src="~/images/editImg.svg" width="30" height="30" />
+        </a>*@
+
+    @*<div class="row">
+            <div class="col-md-11 utilities" style="margin-top: 3rem; text-align: right">
+                @Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})
+                <img src="~/edit.png" width="30rem" height="30rem" alt="editarequipo">
+                <img src="~/trash.png" width="30rem" height="30rem" alt="borrarequipo">
+            </div>
+        </div>*@
+
+
+
+    <a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
         <img src="~/edit.png" width="30" height="30" />
+    </a>
+
+    <a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
+        <img src="~/trash.png" width="30" height="30" />
     </a>
 
 
 
+    @*<h4>MODULO</h4>*@
 
-    <div class="row">
-        <div class="col-md-11 utilities" style="margin-top: 3rem; text-align: right">
-            @*@Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})*@
-            <img src="~/edit.png" width="30rem" height="30rem" alt="editarequipo">
-            <img src="~/trash.png" width="30rem" height="30rem" alt="borrarequipo">
-        </div>
-    </div>
-
-    <h4>MODULO</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
