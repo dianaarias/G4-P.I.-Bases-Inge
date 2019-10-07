@@ -35,9 +35,12 @@
             @Html.DisplayFor(modelItem => item.PROYECTO.cedulaClienteFK)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK}) |
+
+            @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
+
+            @*@Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
             @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-            @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
+            @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })*@
         </td>
     </tr>
 }
