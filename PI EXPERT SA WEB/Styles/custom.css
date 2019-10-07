@@ -71,6 +71,29 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+.utilities {
+    margin-top: 5rem;
+    padding-top: 5rem;
+}
+
+table {
+    margin-top: 3rem;
+}
+
+.wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+
+>>>>>>> c3ab319d122da030f23a4e3bcc46153b50982afe
 dl:after {
     content: "";
     display: table;
@@ -133,6 +156,7 @@ dt + dt + dd + dt {
     margin-top: 2em;
 }
 
+<<<<<<< HEAD
 =======
 .utilities {
     margin-top: 5rem;
@@ -153,3 +177,5 @@ table {
     top: 50%;
 }
 >>>>>>> master
+=======
+>>>>>>> c3ab319d122da030f23a4e3bcc46153b50982afe
