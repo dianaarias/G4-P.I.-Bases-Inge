@@ -38,7 +38,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         // GET: EQUIPO/Create
         public ActionResult Create()
-        {
+         {
             ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
             return View();

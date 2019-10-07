@@ -1,57 +1,28 @@
-﻿﻿@model PI_EXPERT_SA_WEB.Models.ROL
+﻿@model PI_EXPERT_SA_WEB.Models.ROL
 
 @{
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm()) 
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Equipo</h4>
+        <h4>ROL</h4>
         <hr />
         
+        
         <div class="form-group">
-            @Html.LabelFor(model => model.numEquipo,htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.numEquipo, "Numero de equipo" , new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.numEquipo, "*Espacio Obligatorio", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <!-- @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.cedulaPK, "cedulaPK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("cedulaPK", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.ValidationMessageFor(model => model.cedulaPK, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idProyectoPK, "idProyectoPK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
-            </div>
-        </div> -->
-
-        <!-- <div class="form-group">
-            @Html.LabelFor(model => model.tipoRol, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tipoRol, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tipoRol, "", new { @class = "text-danger" })
-            </div>
-        </div> -->
-
-        <!-- <div class="form-group">
             @Html.LabelFor(model => model.numEquipo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.numEquipo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.numEquipo, "", new { @class = "text-danger" })
             </div>
-        </div> -->
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -60,6 +31,46 @@
         </div>
     </div>
 }
+
+@*Tabla que muestra los empleados disponibles*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADO.cedulaPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADO.apellido1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADO.apellido2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADO.HABILIDADES)
+        </th>
+        <th></th>
+    </tr>
+
+    @*@foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROYECTO.cedulaClienteFK)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
+                @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
+                @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
+            </td>
+        </tr>
+    }*@
+
+</table>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

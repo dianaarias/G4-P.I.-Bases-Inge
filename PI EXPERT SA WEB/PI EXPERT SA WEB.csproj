@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
+    <Compile Include="Controllers\EquipoAsociadoController.cs" />
     <Compile Include="Controllers\EQUIPOController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Models\HABILIDADES.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloIntermedioRolEmpleadoHabilidades.cs" />
     <Compile Include="Models\MODULO.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -309,9 +311,11 @@
     <Content Include="Views\MODULO\Details.cshtml" />
     <Content Include="Views\MODULO\Edit.cshtml" />
     <Content Include="Views\MODULO\Index.cshtml" />
+    <Content Include="Views\Equipo_Asociado\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EquipoAsociado\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
