@@ -4,13 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista de empleados</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cedulaPK)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
@@ -53,53 +56,57 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellido1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellido2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaContratacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaDespido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipoUsuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.disponibilidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.provincia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.canton)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.distrito)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaNacimiento)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.cedulaPK }) |
-            @Html.ActionLink("Details", "Details", new { id=item.cedulaPK }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.cedulaPK })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.cedulaPK)
+            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellido2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaContratacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaDespido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.disponibilidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.provincia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.canton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.distrito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaNacimiento)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.cedulaPK }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.cedulaPK }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.cedulaPK })
+            </td>
+        </tr>
+    }
 
 </table>

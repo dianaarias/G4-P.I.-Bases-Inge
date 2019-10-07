@@ -11,7 +11,8 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class EMPLEADO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,22 +23,53 @@ namespace PI_EXPERT_SA_WEB.Models
             this.ROL = new HashSet<ROL>();
             this.PROYECTO = new HashSet<PROYECTO>();
         }
-    
+
+        [Required(ErrorMessage = "El campo cédula es requerido")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "La cédula sólo puede contener números")]
+        [StringLength(maximumLength: 9, ErrorMessage = "Cédula invalida", MinimumLength = 9)]
+        [Display(Name = "Cédula")]
         public string cedulaPK { get; set; }
+        [Required(ErrorMessage = "El campo nombre es requerido")]
+        [StringLength(16, ErrorMessage = "El campo nombre excede el número de caracteres")]
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
+        [Required(ErrorMessage = "El campo apellido es requerido")]
+        [StringLength(16, ErrorMessage = "El campo apellido excede el número de caracteres")]
+        [Display(Name = "Primer apellido")]
         public string apellido1 { get; set; }
+        [StringLength(16, ErrorMessage = "El campo apellido excede el número de caracteres")]
+        [Display(Name = "Segundo apellido")]
         public string apellido2 { get; set; }
+        [Required(ErrorMessage = "El campo correo es requerido")]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Correo")]
         public string correo { get; set; }
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Teléfono")]
         public string telefono { get; set; }
+        [Required(ErrorMessage = "El campo fecha de contratación es requerido")]
+        [Display(Name = "Fecha de contratación")]
         public System.DateTime fechaContratacion { get; set; }
+        [Display(Name = "Fecha finalización de contrato")]
         public Nullable<System.DateTime> fechaDespido { get; set; }
+        [StringLength(16, ErrorMessage = "El campo rol actual excede el número de caracteres")]
+        [Display(Name = "Rol actual")]
         public string tipoUsuario { get; set; }
+        [Display(Name = "Disponibilidad")]
         public bool disponibilidad { get; set; }
+        [StringLength(16, ErrorMessage = "El campo provincia excede el número de caracteres")]
+        [Display(Name = "Provincia")]
         public string provincia { get; set; }
+        [StringLength(16, ErrorMessage = "El campo cantón excede el número de caracteres")]
+        [Display(Name = "Cantón")]
         public string canton { get; set; }
+        [StringLength(16, ErrorMessage = "El campo distrito excede el número de caracteres")]
+        [Display(Name = "Distrito")]
         public string distrito { get; set; }
-        public Nullable<System.DateTime> fechaNacimiento { get; set; }
-    
+        [Required(ErrorMessage = "El campo fecha de nacimiento es requerido")]
+        [Display(Name = "Fecha de nacimiento")]
+        public System.DateTime fechaNacimiento { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HABILIDADES> HABILIDADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
