@@ -1,0 +1,155 @@
+﻿@model PI_EXPERT_SA_WEB.Models.ModeloIntermedio
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>EMPLEADO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.cedulaPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.cedulaPK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.apellido1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.apellido1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.apellido2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.apellido2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.fechaContratacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.fechaContratacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.fechaDespido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.fechaDespido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.tipoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.tipoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.disponibilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.disponibilidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.provincia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.provincia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.canton)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.canton)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.distrito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.distrito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloEmpleado.fechaNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloEmpleado.fechaNacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloHabilidades1.habilidadPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloHabilidades1.habilidadPK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloHabilidades2.habilidadPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloHabilidades2.habilidadPK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modeloHabilidades3.habilidadPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modeloHabilidades3.habilidadPK)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.modeloEmpleado.cedulaPK }) |
+    @Html.ActionLink("Borrar", "Delete", new {id = Model.modeloEmpleado.cedulaPK }) |
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large text-center" })
+</p>
