@@ -7,40 +7,49 @@
 <h2>Detalles</h2>
 
 <div>
+
+    <a href="@Url.Action("Editar","Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
+        <img src="~/edit.png" width="30" height="30" />
+    </a>
+
+
+
+
     <div class="row">
         <div class="col-md-11 utilities" style="margin-top: 3rem; text-align: right">
             @*@Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})*@
             <img src="~/edit.png" width="30rem" height="30rem" alt="editarequipo">
             <img src="~/trash.png" width="30rem" height="30rem" alt="borrarequipo">
         </div>
-   </div>
-   <h4>MODULO</h4>
-   <hr />
-   <dl class="dl-horizontal">
-       <dt>
-           @Html.DisplayNameFor(model => model.nombre)
-       </dt>
+    </div>
 
-       <dd>
-           @Html.DisplayFor(model => model.nombre)
-       </dd>
+    <h4>MODULO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
 
-       <dt>
-           @Html.DisplayNameFor(model => model.fechaInicio)
-       </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
 
-       <dd>
-           @Html.DisplayFor(model => model.fechaInicio)
-       </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
 
-       <dt>
-           @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
-       </dt>
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
 
-       <dd>
-           @Html.DisplayFor(model => model.PROYECTO.cedulaClienteFK)
-       </dd>
-   </dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROYECTO.cedulaClienteFK)
+        </dd>
+    </dl>
 </div>
 
 
