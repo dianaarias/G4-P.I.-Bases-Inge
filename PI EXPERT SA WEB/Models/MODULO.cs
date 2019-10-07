@@ -19,7 +19,9 @@ namespace PI_EXPERT_SA_WEB.Models
         {
             this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
         }
-    
+
+
+
         public int idModuloPK { get; set; }
         public int idProyectoPK { get; set; }
         public string nombre { get; set; }
