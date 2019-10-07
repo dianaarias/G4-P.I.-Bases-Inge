@@ -22,7 +22,7 @@ namespace PI_EXPERT_SA_WEB.Models
         }
     
         public int idProyectoPK { get; set; }
-        public int costoEstimado { get; set; }
+        public int costoEstimado { get; set; } 
         public Nullable<int> costoReal { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
         public Nullable<System.DateTime> fechaFin { get; set; }
