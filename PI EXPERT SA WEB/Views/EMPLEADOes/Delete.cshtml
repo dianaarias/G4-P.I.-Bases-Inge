@@ -121,9 +121,9 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Borrar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar a la lista", "Index")
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Borrar" class="btn btn-info btn-large text-center" /> |
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large text-center" })
+</div>
     }
 </div>

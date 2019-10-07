@@ -142,6 +142,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
     <Compile Include="Controllers\MODULOController.cs" />
+    <Compile Include="Controllers\RHVersion2Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -154,6 +155,7 @@
     <Compile Include="Models\HABILIDADES.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloIntermedio.cs" />
     <Compile Include="Models\MODULO.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -320,6 +322,7 @@
     <Content Include="Views\HABILIDADES\Details.cshtml" />
     <Content Include="Views\HABILIDADES\Edit.cshtml" />
     <Content Include="Views\HABILIDADES\Index.cshtml" />
+    <Content Include="Views\RHVersion2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
