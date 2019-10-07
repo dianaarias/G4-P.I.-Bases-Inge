@@ -4,12 +4,52 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<a href="@Url.Action("Delete","PROYECTO", new { id = Model.idProyectoPK })" style="float:right">
+    <img src="~/images/deleteImg.svg" width="30" height="30" />
+</a>
+<a href="@Url.Action("Edit","PROYECTO", new { id = Model.idProyectoPK })" style="float:right">
+    <img src="~/images/editImg.svg" width="30" height="30" />
+</a>
+
+<h2>Resumen de Proyecto</h2>
+<div class="separador"></div>
 
 <div>
-    <h4>PROYECTO</h4>
-    <hr />
+    <h4>Datos de Proyecto</h4>
+
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idProyectoPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idProyectoPK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.objetivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.objetivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.costoEstimado)
         </dt>
@@ -27,11 +67,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
+            @Html.DisplayNameFor(model => model.costoDesarrollador)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
+            @Html.DisplayFor(model => model.costoDesarrollador)
         </dd>
 
         <dt>
@@ -51,6 +91,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.duracionReal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracionReal)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CLIENTE.name)
         </dt>
 
@@ -58,9 +106,47 @@
             @Html.DisplayFor(model => model.CLIENTE.name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPLEADO.nombre)
+        </dd>
+
     </dl>
 </div>
+
+<div class="separador"></div>
+
+<div class="card-deck">
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Equipo</h5>
+            <p class="card-text">Ingresar para consultar y, para proyectos nuevos, administrar miembros del equipo de trabajo.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Módulos</h5>
+            <p class="card-text">Ingresar para consultar y administrar los módulos que conforman la división lógica de mi proyecto.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Progreso</h5>
+            <p class="card-text">***Funcionalidad a implementar en Sprint 3*** Ingresar para consultar el progreso de mi proyecto.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+</div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idProyectoPK }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Modificar", "Edit", new { id = Model.idProyectoPK }) |*@
+    <div class="col text-center">
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })
+    </div>
+        
 </p>

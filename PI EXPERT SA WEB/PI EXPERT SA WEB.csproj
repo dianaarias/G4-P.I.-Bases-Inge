@@ -209,6 +209,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\deleteImg.svg" />
+    <Content Include="images\editImg.svg" />
     <Content Include="Models\PI EXPERT SA Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PI EXPERT SA Model.Context.cs</LastGenOutput>
@@ -328,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PROYECTOController2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
