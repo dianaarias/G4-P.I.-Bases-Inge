@@ -14,10 +14,10 @@
           <Property Name="apellido1" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="apellido2" Type="nvarchar" MaxLength="16" />
           <Property Name="correo" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="provincia" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="canton" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="distrito" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar(max)" />
+          <Property Name="provincia" Type="nvarchar" MaxLength="16" />
+          <Property Name="canton" Type="nvarchar" MaxLength="16" />
+          <Property Name="distrito" Type="nvarchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -28,15 +28,15 @@
           <Property Name="apellido1" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="apellido2" Type="nvarchar" MaxLength="16" />
           <Property Name="correo" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="telefono" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="12" />
           <Property Name="fechaContratacion" Type="date" Nullable="false" />
           <Property Name="fechaDespido" Type="date" />
-          <Property Name="tipoUsuario" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="tipoUsuario" Type="varchar" MaxLength="16" />
           <Property Name="disponibilidad" Type="bit" Nullable="false" />
           <Property Name="provincia" Type="nvarchar" MaxLength="16" />
           <Property Name="canton" Type="nvarchar" MaxLength="16" />
           <Property Name="distrito" Type="nvarchar" MaxLength="16" />
-          <Property Name="fechaNacimiento" Type="date" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="date" />
         </EntityType>
         <EntityType Name="HABILIDADES">
           <Key>
@@ -61,12 +61,17 @@
             <PropertyRef Name="idProyectoPK" />
           </Key>
           <Property Name="idProyectoPK" Type="int" Nullable="false" />
-          <Property Name="costoEstimado" Type="int" Nullable="false" />
-          <Property Name="costoReal" Type="int" />
+          <Property Name="costoEstimado" Type="money" Nullable="false" />
+          <Property Name="costoReal" Type="money" />
           <Property Name="fechaInicio" Type="date" />
           <Property Name="fechaFin" Type="date" />
           <Property Name="duracionEstimada" Type="int" />
           <Property Name="cedulaClienteFK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="objetivo" Type="varchar(max)" Nullable="false" />
+          <Property Name="duracionReal" Type="int" />
+          <Property Name="costoDesarrollador" Type="money" />
+          <Property Name="cedulaLiderFK" Type="nchar" MaxLength="9" Nullable="false" />
         </EntityType>
         <EntityType Name="REQUERIMIENTO">
           <Key>
@@ -94,6 +99,28 @@
           <Property Name="tipoRol" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="numEquipo" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__PROYECTO__cedula__09A971A2">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="PROYECTO">
+              <PropertyRef Name="cedulaLiderFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CLIENTE_PROYECTO">
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
           <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
@@ -180,6 +207,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Gr02Proy4ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
@@ -188,6 +246,11 @@
           <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REQUERIMIENTO" EntityType="Self.REQUERIMIENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PROYECTO__cedula__09A971A2" Association="Self.FK__PROYECTO__cedula__09A971A2">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+          </AssociationSet>
           <AssociationSet Name="FK_CLIENTE_PROYECTO" Association="Self.FK_CLIENTE_PROYECTO">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -230,10 +293,10 @@
           <Property Name="apellido1" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido2" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="correo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="provincia" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="provincia" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PROYECTO" Relationship="Self.FK_CLIENTE_PROYECTO" FromRole="CLIENTE" ToRole="PROYECTO" />
         </EntityType>
         <EntityType Name="EMPLEADO">
@@ -245,10 +308,10 @@
           <Property Name="apellido1" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido2" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="correo" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="fechaContratacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fechaDespido" Type="DateTime" Precision="0" />
-          <Property Name="tipoUsuario" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoUsuario" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="disponibilidad" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="HABILIDADES" Relationship="Self.FK_EMPLEADO_HABILIDADES" FromRole="EMPLEADO" ToRole="HABILIDADES" />
           <NavigationProperty Name="REQUERIMIENTO" Relationship="Self.FK_EMPLEADO_REQUERIMIENTO" FromRole="EMPLEADO" ToRole="REQUERIMIENTO" />
@@ -256,7 +319,8 @@
           <Property Name="provincia" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="fechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PROYECTO" Relationship="Gr02Proy4Model.FK__PROYECTO__cedula__09A971A2" FromRole="EMPLEADO" ToRole="PROYECTO" />
         </EntityType>
         <EntityType Name="HABILIDADES">
           <Key>
@@ -293,6 +357,12 @@
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CLIENTE_PROYECTO" FromRole="PROYECTO" ToRole="CLIENTE" />
           <NavigationProperty Name="MODULO" Relationship="Self.FK_PROYECTO_MODULO" FromRole="PROYECTO" ToRole="MODULO" />
           <NavigationProperty Name="ROL" Relationship="Gr02Proy4Model.FK_PROYECTO" FromRole="PROYECTO" ToRole="ROL" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="objetivo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="duracionReal" Type="Int32" />
+          <Property Name="costoDesarrollador" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cedulaLiderFK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Gr02Proy4Model.FK__PROYECTO__cedula__09A971A2" FromRole="PROYECTO" ToRole="EMPLEADO" />
         </EntityType>
         <EntityType Name="REQUERIMIENTO">
           <Key>
@@ -410,6 +480,41 @@
             <End Role="PROYECTO" EntitySet="PROYECTO" />
             <End Role="ROL" EntitySet="ROL" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="Gr02Proy4Model.sysdiagrams" />
+          <AssociationSet Name="FK__PROYECTO__cedula__09A971A2" Association="Gr02Proy4Model.FK__PROYECTO__cedula__09A971A2">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="PROYECTO" EntitySet="PROYECTO" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Gr02Proy4Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Gr02Proy4Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="ROL">
           <Key>
@@ -447,6 +552,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__PROYECTO__cedula__09A971A2">
+          <End Type="Gr02Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.PROYECTO" Role="PROYECTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="PROYECTO">
+              <PropertyRef Name="cedulaLiderFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -509,6 +647,11 @@
           <EntitySetMapping Name="PROYECTO">
             <EntityTypeMapping TypeName="Gr02Proy4Model.PROYECTO">
               <MappingFragment StoreEntitySet="PROYECTO">
+                <ScalarProperty Name="cedulaLiderFK" ColumnName="cedulaLiderFK" />
+                <ScalarProperty Name="costoDesarrollador" ColumnName="costoDesarrollador" />
+                <ScalarProperty Name="duracionReal" ColumnName="duracionReal" />
+                <ScalarProperty Name="objetivo" ColumnName="objetivo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
                 <ScalarProperty Name="costoEstimado" ColumnName="costoEstimado" />
                 <ScalarProperty Name="costoReal" ColumnName="costoReal" />
@@ -544,6 +687,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Gr02Proy4Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Gr02Proy4Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Gr02Proy4Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Gr02Proy4Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy4Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Gr02Proy4Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy4Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Gr02Proy4Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Gr02Proy4Model.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
