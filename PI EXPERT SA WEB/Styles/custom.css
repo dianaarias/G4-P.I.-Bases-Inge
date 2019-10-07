@@ -70,6 +70,7 @@ body {
     border-width: 2.5px;
 }
 
+<<<<<<< HEAD
 dl:after {
     content: "";
     display: table;
@@ -132,3 +133,23 @@ dt + dt + dd + dt {
     margin-top: 2em;
 }
 
+=======
+.utilities {
+    margin-top: 5rem;
+    padding-top: 5rem;
+}
+
+table {
+    margin-top: 3rem;
+}
+
+.wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+>>>>>>> master
