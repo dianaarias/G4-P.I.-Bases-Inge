@@ -4,41 +4,47 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>MODULO</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+    <div class="row">
+        <div class="col-md-11 utilities" style="margin-top: 3rem; text-align: right">
+            @*@Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})*@
+            <img src="~/edit.png" width="30rem" height="30rem" alt="editarequipo">
+            <img src="~/trash.png" width="30rem" height="30rem" alt="borrarequipo">
+        </div>
+   </div>
+   <h4>MODULO</h4>
+   <hr />
+   <dl class="dl-horizontal">
+       <dt>
+           @Html.DisplayNameFor(model => model.nombre)
+       </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+       <dd>
+           @Html.DisplayFor(model => model.nombre)
+       </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </dt>
+       <dt>
+           @Html.DisplayNameFor(model => model.fechaInicio)
+       </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
+       <dd>
+           @Html.DisplayFor(model => model.fechaInicio)
+       </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
-        </dt>
+       <dt>
+           @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
+       </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PROYECTO.cedulaClienteFK)
-        </dd>
-    </dl>
+       <dd>
+           @Html.DisplayFor(model => model.PROYECTO.cedulaClienteFK)
+       </dd>
+   </dl>
 </div>
 
 
 <p>
-
-    @Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK }, new { @class = "btn btn-info btn-large"})
+    @*@Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK }, new { @class = "btn btn-info btn-large" })*@
     @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large" })
 </p>
