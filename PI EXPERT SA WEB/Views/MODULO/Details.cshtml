@@ -36,8 +36,9 @@
     </dl>
 </div>
 
+
 <p>
 
-    @Html.ActionLink("Edit", "Edit")  |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK }, new { @class = "btn btn-info btn-large"})
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large" })
 </p>

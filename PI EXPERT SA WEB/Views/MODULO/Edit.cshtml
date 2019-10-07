@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Editar</h2>
 
 
 @using (Html.BeginForm())
@@ -43,9 +43,9 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Regresar", "Index", new { @class = "btn btn-info btn-large" })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
