@@ -11,7 +11,7 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations; //Data annotations para establecer restricciones y nombres en vistas de los atributos
     
     public partial class PROYECTO
     {
@@ -23,53 +23,52 @@ namespace PI_EXPERT_SA_WEB.Models
         }
 
         [Required(ErrorMessage = "Campo requerido")]
-        [Display(Name = "ID Proyecto:")]
+        [Display(Name = "ID Proyecto")]
         public int idProyectoPK { get; set; }
 
-        [Display(Name = "Costo Estimado:")]
+        [Display(Name = "Costo Estimado")]
         public int costoEstimado { get; set; }
 
-        [Display(Name = "Costo Real:")]
+        [Display(Name = "Costo Real")]
         public Nullable<int> costoReal { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
-        [Display(Name = "Fecha de Inicio:")]
+        [Display(Name = "Fecha de Inicio")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
 
-        [Display(Name = "Fecha de Finalización:")]
+        [Display(Name = "Fecha de Finalización")]
         public Nullable<System.DateTime> fechaFin { get; set; }
 
-        [Display(Name = "Duración Estimada:")]
+        [Display(Name = "Duración Estimada")]
         public Nullable<int> duracionEstimada { get; set; }
 
-        [Display(Name = "Cliente:")]
+        [Required(ErrorMessage = "Campo requerido")]
+        [Display(Name = "Cliente")]
         public string cedulaClienteFK { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
-        [Display(Name = "Nombre:")]
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
 
         [Required(ErrorMessage = "Campo requerido")]
-        [Display(Name = "Objetivo:")]
+        [Display(Name = "Objetivo")]
         public string objetivo { get; set; }
 
-        [Display(Name = "Duración Real:")]
+        [Display(Name = "Duración Real")]
         public Nullable<int> duracionReal { get; set; }
 
-        [Display(Name = "Costo Estimado de Desarrollador por Hora:")]
+        [Display(Name = "Costo Desarrollador por Hora")]
         public Nullable<decimal> costoDesarrollador { get; set; }
 
-        [Display(Name = "Líder:")]
+        [Required(ErrorMessage = "Campo requerido")]
+        [Display(Name = "Líder")]
         public string cedulaLiderFK { get; set; }
-
+    
         public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
         public virtual ICollection<MODULO> MODULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
         public virtual ICollection<ROL> ROL { get; set; }
-        
         public virtual EMPLEADO EMPLEADO { get; set; }
     }
 }

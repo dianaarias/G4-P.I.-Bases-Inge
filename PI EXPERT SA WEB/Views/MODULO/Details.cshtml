@@ -4,18 +4,65 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalles</h2>
 
 <div>
-    <h4>MODULO</h4>
+
+
+    @*<a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+            <img src="~/images/deleteImg.svg" width="30" height="30" />
+        </a>
+        <a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+            <img src="~/images/editImg.svg" width="30" height="30" />
+        </a>*@
+
+    @*<div class="row">
+            <div class="col-md-11 utilities" style="margin-top: 3rem; text-align: right">
+                @Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})
+                <img src="~/edit.png" width="30rem" height="30rem" alt="editarequipo">
+                <img src="~/trash.png" width="30rem" height="30rem" alt="borrarequipo">
+            </div>
+        </div>*@
+
+
+
+    <a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
+        <img src="~/edit.png" width="30" height="30" />
+    </a>
+
+    <a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
+        <img src="~/trash.png" width="30" height="30" />
+    </a>
+
+
+
+    @*<h4>MODULO</h4>*@
+
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idModuloPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idModuloPK)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idProyectoPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idProyectoPK)
         </dd>
 
         <dt>
@@ -33,10 +80,11 @@
         <dd>
             @Html.DisplayFor(model => model.PROYECTO.cedulaClienteFK)
         </dd>
-
     </dl>
 </div>
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK }, new { @class = "btn btn-info btn-large" })*@
+    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large" })
 </p>

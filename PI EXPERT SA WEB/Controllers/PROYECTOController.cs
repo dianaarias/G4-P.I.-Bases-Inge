@@ -18,7 +18,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Index()
         {
             var pROYECTO = db.PROYECTO.Include(p => p.CLIENTE);
-            return View(db.PROYECTO.ToList());
+            return View(pROYECTO.ToList());
         }
 
         // GET: PROYECTO/Details/5
@@ -40,6 +40,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Create()
         {
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name");
+            ViewBag.cedulaLiderFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             return View();
         }
 
@@ -48,7 +49,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Create([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK,nombre,objetivo,duracionReal,costoDesarrollador,cedulaLiderFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +59,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             }
 
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaLiderFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", pROYECTO.cedulaLiderFK);
             return View(pROYECTO);
         }
 
@@ -74,6 +76,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return HttpNotFound();
             }
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaLiderFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", pROYECTO.cedulaLiderFK);
             return View(pROYECTO);
         }
 
@@ -82,7 +85,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK")] PROYECTO pROYECTO)
+        public ActionResult Edit([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK,nombre,objetivo,duracionReal,costoDesarrollador,cedulaLiderFK")] PROYECTO pROYECTO)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +94,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.cedulaClienteFK = new SelectList(db.CLIENTE, "cedulaPK", "name", pROYECTO.cedulaClienteFK);
+            ViewBag.cedulaLiderFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", pROYECTO.cedulaLiderFK);
             return View(pROYECTO);
         }
 
@@ -128,5 +132,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             }
             base.Dispose(disposing);
         }
+
+      
     }
 }

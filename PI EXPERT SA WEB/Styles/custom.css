@@ -56,12 +56,104 @@ body {
 
 .required-field-asterisk {
     color: red;
+    font-size: 16px;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
 }
 
 .table {
     border-style: solid;
     border-color: #4d7ea8;
     border-width: 2.5px;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+.utilities {
+    margin-top: 5rem;
+    padding-top: 5rem;
+}
+
+table {
+    margin-top: 3rem;
+}
+
+.wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+
+>>>>>>> c3ab319d122da030f23a4e3bcc46153b50982afe
+dl:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+dd {
+    padding: .5em 0;
+}
+
+dl {
+    width: 100%;
+}
+
+dt, dd {
+    display: inline-block;
+    width: 30%;
+}
+
+dt {
+    text-align: left;
+    font-weight: bold;
+    clear: left;
+    float: left;
+    background-color: #4d7ea8;
+    color: white; 
+}
+
+dd {
+    width: 70%;
+    padding-left: 1em;
+    clear: right;
+    font-weight: bold;
+}
+
+dd + dd {
+    float: right;
+    clear: both;
+}
+
+dt:first-child {
+    padding-top: .5em;
+}
+
+dd + dt {
+    clear: both;
+    padding-top: .5em;
+}
+
+dt + dt {
+    width: 100%;
+    float: none;
+    padding: 0 70% 0 0;
+}
+dt + dt + dd {
+    margin-top: -2em;
+}
+
+dt + dt + dd + dt {
+    margin-top: 2em;
 }
 
 .utilities {
@@ -81,4 +173,10 @@ table {
 .button {
     position: absolute;
     top: 50%;
+}
+
+.separador {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid blue;
 }

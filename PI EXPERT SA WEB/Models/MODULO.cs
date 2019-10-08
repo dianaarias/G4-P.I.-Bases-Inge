@@ -12,7 +12,8 @@ namespace PI_EXPERT_SA_WEB.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.ComponentModel;
+
     public partial class MODULO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +21,34 @@ namespace PI_EXPERT_SA_WEB.Models
         {
             this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
         }
-    
-        [Key]
+
+
+        //Nombre que se mostrara en pantalla para el atributo
+        [DisplayName("ID de Módulo")]
+        //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        //Asegura que siempre se tenga una cedula de 9 digitos
+        [StringLength(maximumLength: 12, ErrorMessage = "ID de Módulo inválido", MinimumLength = 1)]
         public int idModuloPK { get; set; }
 
-        [Key]
+
+        //Nombre que se mostrara en pantalla para el atributo
+        [DisplayName("ID de Proyecto")]
+        //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         public int idProyectoPK { get; set; }
 
+
+        //Nombre que se mostrara en pantalla para el atributo
+        [DisplayName("Nombre Módulo")]
+        //Campo Obligatorio
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         public string nombre { get; set; }
 
+
+
+        //Nombre que se mostrara en pantalla para el atributo
+        [DisplayName("Fecha de inicio")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
