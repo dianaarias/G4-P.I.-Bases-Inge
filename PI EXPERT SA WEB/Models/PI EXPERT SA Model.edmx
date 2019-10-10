@@ -109,6 +109,22 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="LoginCliente">
+          <Key>
+            <PropertyRef Name="cedulaClientePK" />
+          </Key>
+          <Property Name="cedulaClientePK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginEmpleado">
+          <Key>
+            <PropertyRef Name="cedulaEmpleadoPK" />
+          </Key>
+          <Property Name="cedulaEmpleadoPK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <Association Name="FK__PROYECTO__cedula__09A971A2">
           <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
           <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
@@ -134,7 +150,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_EMPLEADO_HABILIDADES">
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="HABILIDADES" Type="Self.HABILIDADES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EMPLEADO">
@@ -207,6 +225,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Seguridad_LoginCliente_Cedula_FK">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="LoginCliente" Type="Self.LoginCliente" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="LoginCliente">
+              <PropertyRef Name="cedulaClientePK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Seguridad_LoginEmpleado_Cedula_FK">
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="LoginEmpleado" Type="Self.LoginEmpleado" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="LoginEmpleado">
+              <PropertyRef Name="cedulaEmpleadoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -247,6 +289,8 @@
           <EntitySet Name="REQUERIMIENTO" EntityType="Self.REQUERIMIENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROL" EntityType="Self.ROL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginCliente" EntityType="Self.LoginCliente" Schema="Seguridad" store:Type="Tables" />
+          <EntitySet Name="LoginEmpleado" EntityType="Self.LoginEmpleado" Schema="Seguridad" store:Type="Tables" />
           <AssociationSet Name="FK__PROYECTO__cedula__09A971A2" Association="Self.FK__PROYECTO__cedula__09A971A2">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -279,6 +323,14 @@
             <End Role="PROYECTO" EntitySet="PROYECTO" />
             <End Role="MODULO" EntitySet="MODULO" />
           </AssociationSet>
+          <AssociationSet Name="Seguridad_LoginCliente_Cedula_FK" Association="Self.Seguridad_LoginCliente_Cedula_FK">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="LoginCliente" EntitySet="LoginCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Seguridad_LoginEmpleado_Cedula_FK" Association="Self.Seguridad_LoginEmpleado_Cedula_FK">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="LoginEmpleado" EntitySet="LoginEmpleado" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -298,6 +350,7 @@
           <Property Name="canton" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PROYECTO" Relationship="Self.FK_CLIENTE_PROYECTO" FromRole="CLIENTE" ToRole="PROYECTO" />
+          <NavigationProperty Name="LoginCliente" Relationship="Gr02Proy4Model.Seguridad_LoginCliente_Cedula_FK" FromRole="CLIENTE" ToRole="LoginCliente" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -321,6 +374,7 @@
           <Property Name="distrito" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="PROYECTO" Relationship="Gr02Proy4Model.FK__PROYECTO__cedula__09A971A2" FromRole="EMPLEADO" ToRole="PROYECTO" />
+          <NavigationProperty Name="LoginEmpleado" Relationship="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" FromRole="EMPLEADO" ToRole="LoginEmpleado" />
         </EntityType>
         <EntityType Name="HABILIDADES">
           <Key>
@@ -515,6 +569,16 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="LoginCliente" EntityType="Gr02Proy4Model.LoginCliente" />
+          <EntitySet Name="LoginEmpleado" EntityType="Gr02Proy4Model.LoginEmpleado" />
+          <AssociationSet Name="Seguridad_LoginCliente_Cedula_FK" Association="Gr02Proy4Model.Seguridad_LoginCliente_Cedula_FK">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="LoginCliente" EntitySet="LoginCliente" />
+          </AssociationSet>
+          <AssociationSet Name="Seguridad_LoginEmpleado_Cedula_FK" Association="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK">
+            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="LoginEmpleado" EntitySet="LoginEmpleado" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ROL">
           <Key>
@@ -585,6 +649,48 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="LoginCliente">
+          <Key>
+            <PropertyRef Name="cedulaClientePK" />
+          </Key>
+          <Property Name="cedulaClientePK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENTE" Relationship="Gr02Proy4Model.Seguridad_LoginCliente_Cedula_FK" FromRole="LoginCliente" ToRole="CLIENTE" />
+        </EntityType>
+        <EntityType Name="LoginEmpleado">
+          <Key>
+            <PropertyRef Name="cedulaEmpleadoPK" />
+          </Key>
+          <Property Name="cedulaEmpleadoPK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" FromRole="LoginEmpleado" ToRole="EMPLEADO" />
+        </EntityType>
+        <Association Name="Seguridad_LoginCliente_Cedula_FK">
+          <End Type="Gr02Proy4Model.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.LoginCliente" Role="LoginCliente" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="LoginCliente">
+              <PropertyRef Name="cedulaClientePK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Seguridad_LoginEmpleado_Cedula_FK">
+          <End Type="Gr02Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.LoginEmpleado" Role="LoginEmpleado" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADO">
+              <PropertyRef Name="cedulaPK" />
+            </Principal>
+            <Dependent Role="LoginEmpleado">
+              <PropertyRef Name="cedulaEmpleadoPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -722,6 +828,24 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Gr02Proy4Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Gr02Proy4Model.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="LoginCliente">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.LoginCliente">
+              <MappingFragment StoreEntitySet="LoginCliente">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cedulaClientePK" ColumnName="cedulaClientePK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginEmpleado">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.LoginEmpleado">
+              <MappingFragment StoreEntitySet="LoginEmpleado">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="cedulaEmpleadoPK" ColumnName="cedulaEmpleadoPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
