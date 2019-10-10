@@ -19,8 +19,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var mODULO = db.MODULO.Include(m => m.PROYECTO);
             return View(mODULO.ToList());
-            //return View();
         }
+
+
 
         // GET: MODULO/Details/5
         public ActionResult Details(int? idModuloPK, int? idProyectoPK)
