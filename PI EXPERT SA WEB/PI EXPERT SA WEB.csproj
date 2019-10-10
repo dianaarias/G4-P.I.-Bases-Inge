@@ -137,9 +137,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
+    <Compile Include="Controllers\EMPLEADOesController.cs" />
+    <Compile Include="Controllers\HABILIDADESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
     <Compile Include="Controllers\MODULOController.cs" />
+    <Compile Include="Controllers\RHVersion2Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -152,6 +155,7 @@
     <Compile Include="Models\HABILIDADES.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloIntermedio.cs" />
     <Compile Include="Models\MODULO.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -310,6 +314,19 @@
     <Content Include="Views\MODULO\Details.cshtml" />
     <Content Include="Views\MODULO\Edit.cshtml" />
     <Content Include="Views\MODULO\Index.cshtml" />
+    <Content Include="Views\EMPLEADOes\Create.cshtml" />
+    <Content Include="Views\EMPLEADOes\Delete.cshtml" />
+    <Content Include="Views\EMPLEADOes\Details.cshtml" />
+    <Content Include="Views\EMPLEADOes\Edit.cshtml" />
+    <Content Include="Views\EMPLEADOes\Index.cshtml" />
+    <Content Include="Views\HABILIDADES\Create.cshtml" />
+    <Content Include="Views\HABILIDADES\Delete.cshtml" />
+    <Content Include="Views\HABILIDADES\Details.cshtml" />
+    <Content Include="Views\HABILIDADES\Edit.cshtml" />
+    <Content Include="Views\HABILIDADES\Index.cshtml" />
+    <Content Include="Views\RHVersion2\Index.cshtml" />
+    <Content Include="Views\RHVersion2\Create.cshtml" />
+    <Content Include="Views\RHVersion2\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
