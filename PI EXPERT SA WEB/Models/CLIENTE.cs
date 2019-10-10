@@ -11,8 +11,9 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class CLIENTE
     {
@@ -20,7 +21,10 @@ namespace PI_EXPERT_SA_WEB.Models
         public CLIENTE()
         {
             this.PROYECTO = new HashSet<PROYECTO>();
+            
         }
+        //verifica que cedula sea unico
+        [Index(IsUnique = true)]
         //Nombre que se mostrara en pantalla para el atributo
         [DisplayName("Cédula de Identidad")]
         //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
@@ -34,20 +38,23 @@ namespace PI_EXPERT_SA_WEB.Models
         [DisplayName("Nombre")]
         //Campo Obligatorio
         [Required(ErrorMessage ="Este campo es obligatorio")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
         //Asegura que el nombre no sea de mas de 16 caracteres
-        [StringLength(16, ErrorMessage ="El Nombre excede el numero de caracteres")]
+        [StringLength(64, ErrorMessage ="El Nombre excede el numero de caracteres")]
         public string name { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
         [DisplayName("Primer apellido")]
         //Campo Obligatorio
         [Required(ErrorMessage ="Este campo es obligatorio")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
         //Asegura que el apellido no tenga mas de 16 caracteres
-        [StringLength(16, ErrorMessage = "El Primer apellido excede el numero de caracteres")]
+        [StringLength(64, ErrorMessage = "El Primer apellido excede el numero de caracteres")]
         public string apellido1 { get; set; }        
         //Nombre que se mostrara en pantalla para el atributo
         [DisplayName("Segundo apellido")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
         //Asegura que el segundo apellido no tenga mas de 16 caracteres
-        [StringLength(16, ErrorMessage = "El Segundo apellido excede el numero de caracteres")]
+        [StringLength(64, ErrorMessage = "El Segundo apellido excede el numero de caracteres")]
         public string apellido2 { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
         [DisplayName("Correo")]

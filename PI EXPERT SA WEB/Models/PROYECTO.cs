@@ -63,15 +63,12 @@ namespace PI_EXPERT_SA_WEB.Models
         [Required(ErrorMessage = "Campo requerido")]
         [Display(Name = "Líder")]
         public string cedulaLiderFK { get; set; }
-
+    
         public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
         public virtual ICollection<MODULO> MODULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
         public virtual ICollection<ROL> ROL { get; set; }
-        
         public virtual EMPLEADO EMPLEADO { get; set; }
     }
 }

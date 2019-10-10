@@ -11,10 +11,12 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HABILIDADES
     {
         public string cedulaEmpleadoPK { get; set; }
+        [Display(Name = "Habilidades")]
         public string habilidadPK { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
