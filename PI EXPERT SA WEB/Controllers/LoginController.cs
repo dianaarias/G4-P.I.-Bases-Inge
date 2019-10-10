@@ -13,5 +13,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             return View();
         }
+
+        //Recibo lista de Empleado y Customers
+
+        // Verificar correo o nombre exista
     }
 }
