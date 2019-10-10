@@ -68,6 +68,9 @@
         <div class="col text-center">
             @Html.ActionLink("Más información", "Details", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
         </div>
+        <div class="col text-center">
+            @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+        </div>
     </td>
 </tr>
     }
