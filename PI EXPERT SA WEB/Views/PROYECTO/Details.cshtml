@@ -12,10 +12,11 @@
 </a>
 
 <h2>Resumen de Proyecto</h2>
+<div class="separador"></div>
 
 <div>
     <h4>Datos de Proyecto</h4>
-    <hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.idProyectoPK)
@@ -116,7 +117,36 @@
     </dl>
 </div>
 
+<div class="separador"></div>
+
+<div class="card-deck">
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Equipo</h5>
+            <p class="card-text">Ingresar para consultar y, para proyectos nuevos, administrar miembros del equipo de trabajo.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Módulos</h5>
+            <p class="card-text">Ingresar para consultar y administrar los módulos que conforman la división lógica de mi proyecto.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Progreso</h5>
+            <p class="card-text">***Funcionalidad a implementar en Sprint 3*** Ingresar para consultar el progreso de mi proyecto.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+</div>
+
 <p>
-    @Html.ActionLink("Modificar", "Edit", new { id = Model.idProyectoPK }) |
-    @Html.ActionLink("Regresar", "Index")
+    @*@Html.ActionLink("Modificar", "Edit", new { id = Model.idProyectoPK }) |*@
+    <div class="col text-center">
+        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })
+    </div>
+        
 </p>
