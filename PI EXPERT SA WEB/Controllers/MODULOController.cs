@@ -17,8 +17,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO
         public ActionResult Index()
         {
-            var mODULO = db.MODULO.Include(m => m.PROYECTO);
-            return View(mODULO.ToList());
+            //var mODULO = db.MODULO.Include(m => m.PROYECTO);
+            //return View(mODULO.ToList());
+            //ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "idProyectoPK");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
+ 
+            return View();
         }
 
 
@@ -129,6 +133,22 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Retorna una lista con los modulos del proyecto actual
+        public List<MODULO> getModulo(int? idProyectoPK) {
+
+            List<MODULO> mlista = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+
+            return mlista;
+        }
+
+
+        //Retorna una lista con los proyectos
+        public List<PROYECTO> getProyecto() {
+            List<PROYECTO> plista = db.PROYECTO.ToList();
+
+            return plista;
         }
     }
 }

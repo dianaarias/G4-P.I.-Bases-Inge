@@ -6,13 +6,20 @@
 
 <h2>Módulos</h2>
 
-
+<div class="form-group">
+    @Html.LabelFor(model => model.idProyectoPK,  "idProyectoPK", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
+    </div>
+</div>
 
 
 <table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
+            @Html.DisplayNameFor(model => model.PROYECTO.)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.idModuloPK)
@@ -25,35 +32,36 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.idModuloPK)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.idProyectoPK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInicio)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.idModuloPK)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.idProyectoPK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaInicio)
+            </td>
 
-        @*<td>
-            @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-            @Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-            @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-            @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-        </td>*@
+            @*<td>
+                    @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
+                    @Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
+                    @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
+                    @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
+                </td>*@
 
-        <td>
-            <div class="col text-center">
-                @Html.ActionLink("Más información", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
-            </div>
-        </td>
-    </tr>
-}
+            <td>
+                <div class="col text-center">
+                    @Html.ActionLink("Más información", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+                </div>
+            </td>
+        </tr>
+    }
 
 </table>
 
