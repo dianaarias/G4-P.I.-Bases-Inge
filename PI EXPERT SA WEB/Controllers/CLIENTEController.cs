@@ -13,7 +13,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
     public class CLIENTEController : Controller
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
-
         // GET: CLIENTE
         // Genera la vista index con todos los clientes
         public ActionResult Index()
