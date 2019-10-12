@@ -5,12 +5,13 @@
 }
 
 <h2>Lista de clientes</h2>
-
+<a href="@Url.Action("Create","CLIENTE", new { })" style="float:right">
+    <img src="~/images/editImg.svg" width="30" height="30" />
+</a>
 <table class="table table-bordered table-striped">
+    
     <tr>
-        <p>
-            @Html.ActionLink("Agregar cliente", "Create", null, new { @class = "btn btn-info btn-large text-center" })
-        </p>
+
         <th>
             @Html.DisplayNameFor(model => model.name)
         </th>
