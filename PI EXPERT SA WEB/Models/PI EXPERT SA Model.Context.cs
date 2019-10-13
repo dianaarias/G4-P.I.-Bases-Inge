@@ -35,8 +35,6 @@ namespace PI_EXPERT_SA_WEB.Models
         public virtual DbSet<REQUERIMIENTO> REQUERIMIENTO { get; set; }
         public virtual DbSet<ROL> ROL { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<LoginCliente> LoginCliente { get; set; }
-        public virtual DbSet<LoginEmpleado> LoginEmpleado { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

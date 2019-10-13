@@ -2,18 +2,12 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
-    $(document).ready(function () {
-        getProvincia();
-    })
-</script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>Agregar nuevo cliente</h4>
         <div class="required-field-asterisk">
@@ -74,7 +68,7 @@
         <div class="form-group row offset-3 required">
             @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.provincia,Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
+                @Html.EditorFor(model => model.provincia, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -82,7 +76,7 @@
         <div class="form-group row offset-3 required">
             @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrito()" })
+                @Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -90,7 +84,7 @@
         <div class="form-group row offset-3 required">
             @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.distrito, Enumerable.Empty<SelectListItem>(), "--Distritos--", new { @class = "form-control" })
+                @Html.EditorFor(model => model.distrito, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -99,7 +93,7 @@
 
         <div class="form-group text-center">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Aceptar" class="btn btn-outline-primary" />
+                <input type="submit" value="Agregar" class="btn btn-outline-primary" />
                 @Html.ActionLink("Cancelar", "Index")
             </div>
         </div>
@@ -111,6 +105,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
-
 }
