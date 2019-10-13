@@ -1,5 +1,4 @@
-﻿
-function getProvincia() {
+﻿function getProvincia(){
     $.ajax({
         dataType: "json",
         url: "https://ubicaciones.paginasweb.cr/provincias.json",

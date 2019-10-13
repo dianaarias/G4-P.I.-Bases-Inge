@@ -10,114 +10,116 @@ using PI_EXPERT_SA_WEB.Models;
 
 namespace PI_EXPERT_SA_WEB.Controllers
 {
-    public class CLIENTEController : Controller
+    public class EQUIPOController : Controller
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
-        // GET: CLIENTE
-        // Genera la vista index con todos los clientes
+
+        // GET: EQUIPO
         public ActionResult Index()
         {
-            return View(db.CLIENTE.ToList());
+            var rOL = db.ROL.Include(r => r.EMPLEADO).Include(r => r.PROYECTO);
+            return View(rOL.ToList());
         }
 
-        // GET: CLIENTE/Details/5
+        // GET: EQUIPO/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            ROL rOL = db.ROL.Find(id);
+            if (rOL == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            return View(rOL);
         }
 
-        // GET: CLIENTE/Create
+        // GET: EQUIPO/Create
         public ActionResult Create()
-        {
+         {
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
             return View();
         }
 
-        // POST: CLIENTE/Create
+        // POST: EQUIPO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,name,apellido1,apellido2,correo,telefono,provincia,canton,distrito")] CLIENTE cLIENTE)
+        public ActionResult Create([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
-                if (!db.CLIENTE.Any(model => model.cedulaPK == cLIENTE.cedulaPK))
-                {
-                    db.CLIENTE.Add(cLIENTE);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("cedulaPK", "Cédula ya existe en el sistema");
-                }
-
+                db.ROL.Add(rOL);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View(cLIENTE);
+
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", rOL.idProyectoPK);
+            return View(rOL);
         }
 
-        // GET: CLIENTE/Edit/5
+        // GET: EQUIPO/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            ROL rOL = db.ROL.Find(id);
+            if (rOL == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", rOL.idProyectoPK);
+            return View(rOL);
         }
 
-        // POST: CLIENTE/Edit/5
+        // POST: EQUIPO/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,name,apellido1,apellido2,correo,telefono,provincia,canton,distrito")] CLIENTE cLIENTE)
+        public ActionResult Edit([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cLIENTE).State = EntityState.Modified;
+                db.Entry(rOL).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cLIENTE);
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", rOL.idProyectoPK);
+            return View(rOL);
         }
 
-        // GET: CLIENTE/Delete/5
+        // GET: EQUIPO/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            ROL rOL = db.ROL.Find(id);
+            if (rOL == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            return View(rOL);
         }
 
-        // POST: CLIENTE/Delete/5
+        // POST: EQUIPO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            db.CLIENTE.Remove(cLIENTE);
+            ROL rOL = db.ROL.Find(id);
+            db.ROL.Remove(rOL);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

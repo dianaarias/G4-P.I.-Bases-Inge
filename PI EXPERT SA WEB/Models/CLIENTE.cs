@@ -11,9 +11,11 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
+
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+
 
     public partial class CLIENTE
     {
@@ -24,9 +26,9 @@ namespace PI_EXPERT_SA_WEB.Models
             
         }
         //verifica que cedula sea unico
-        [Index(IsUnique = true)]
+        [Key]
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Cédula de Identidad")]
+        [DisplayName("CÃ©dula de Identidad")]
         //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
         [Required(ErrorMessage ="Este campo es obligatorio")]
         //Asegura que solo se puedan utilizar los caracteres deseados
@@ -64,7 +66,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [DataType(DataType.EmailAddress,ErrorMessage ="Porfavor introducir un correo valido")]
         public string correo { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Teléfono")]
+        [DisplayName("TelÃ©fono")]
         //Verifica que se ingrese el dato en formato de numero telefonico
         [DataType(DataType.PhoneNumber)]
         public string telefono { get; set; }
@@ -72,7 +74,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [DisplayName("Provincia")]
         public string provincia { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Cantón")]
+        [DisplayName("CantÃ³n")]
         public string canton { get; set; }
         //Nombre que se mostrara en pantalla para el atributo      
         [DisplayName("Distrito")]
@@ -80,5 +82,6 @@ namespace PI_EXPERT_SA_WEB.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROYECTO> PROYECTO { get; set; }
+        public virtual LoginCliente LoginCliente { get; set; }
     }
 }
