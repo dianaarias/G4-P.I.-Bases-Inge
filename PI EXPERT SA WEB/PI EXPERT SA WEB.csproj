@@ -219,6 +219,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\deleteImg.svg" />
     <Content Include="images\editImg.svg" />
+    <Content Include="images\lightbulb.svg" />
+    <Content Include="images\plus.svg" />
     <Content Include="Models\PI EXPERT SA Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PI EXPERT SA Model.Context.cs</LastGenOutput>

@@ -6,7 +6,7 @@
 
 <h2>Lista de clientes</h2>
 <a href="@Url.Action("Create","CLIENTE", new { })" style="float:right">
-    <img src="~/images/editImg.svg" width="30" height="30" />
+    <img src="~/images/plus.svg" width="30" height="30" />
 </a>
 <table class="table table-bordered table-striped">
     
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.correo)
             </td>
             <td>
-                <div>
-                    @Html.ActionLink("Mas informacion", "Details", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
-                </div>
+                <a href="@Url.Action("Details","CLIENTE", new { id = item.cedulaPK })">
+                    <img src="~/images/lightbulb.svg" width="30" height="30" />
+                </a>
             </td>
         </tr>
     }
