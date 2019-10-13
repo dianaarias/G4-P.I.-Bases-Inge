@@ -5,20 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-}
 <script>
     $(document).ready(function () {
         getProvincia();
     })
 </script>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Agregar nuevo empleado</h4>
+    <h4>Editar información</h4>
     <div class="required-field-asterisk">
         <p>*<span style="color:black">Campos requeridos</span> </p>
     </div>
