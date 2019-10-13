@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
     <Compile Include="Controllers\EMPLEADOesController.cs" />
+    <Compile Include="Controllers\EQUIPOSController.cs" />
     <Compile Include="Controllers\HABILIDADESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Models\LoginEmpleado.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModeloEquipo.cs" />
     <Compile Include="Models\ModeloIntermedio.cs" />
     <Compile Include="Models\ModeloLogin.cs" />
     <Compile Include="Models\MODULO.cs">
@@ -337,6 +339,7 @@
     <Content Include="Views\RHVersion2\Create.cshtml" />
     <Content Include="Views\RHVersion2\Details.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Equipos\Equipos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
