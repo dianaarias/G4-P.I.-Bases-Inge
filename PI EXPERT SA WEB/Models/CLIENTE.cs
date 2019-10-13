@@ -26,7 +26,7 @@ namespace PI_EXPERT_SA_WEB.Models
             
         }
         //verifica que cedula sea unico
-        [Index(IsUnique = true)]
+        [Key]
         //Nombre que se mostrara en pantalla para el atributo
         [DisplayName("Cédula de Identidad")]
         //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
@@ -82,5 +82,6 @@ namespace PI_EXPERT_SA_WEB.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROYECTO> PROYECTO { get; set; }
+        public virtual LoginCliente LoginCliente { get; set; }
     }
 }

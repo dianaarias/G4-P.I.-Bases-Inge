@@ -12,11 +12,12 @@ namespace PI_EXPERT_SA_WEB.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HABILIDADES
+    public partial class LoginCliente
     {
-        public string cedulaEmpleadoPK { get; set; }
-        public string habilidadPK { get; set; }
+        public string cedulaClientePK { get; set; }
+        public string nombre { get; set; }
+        public string password { get; set; }
     
-        public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual CLIENTE CLIENTE { get; set; }
     }
 }
