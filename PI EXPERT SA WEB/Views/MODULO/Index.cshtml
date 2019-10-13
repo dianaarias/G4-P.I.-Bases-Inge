@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.MODULO>
+@*@model PI_EXPERT_SA_WEB.Models.MODULO*@
+
 
 @{
     ViewBag.Title = "Index";
@@ -6,20 +8,22 @@
 
 <h2>Módulos</h2>
 
-<div class="form-group">
-    @Html.LabelFor(model => model.idProyectoPK,  "idProyectoPK", htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
-    </div>
+
+
+
+
+<div class="col text-center">
+    <p>
+        @Html.ActionLink("Crear Modulo", "Create", null, new { @class = "btn btn-info btn-large text-center" })
+    </p>
 </div>
 
 
-<table class="table table-bordered table-striped">
+
+*<table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
-            @Html.DisplayNameFor(model => model.PROYECTO.)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.idModuloPK)
@@ -48,12 +52,6 @@
                 @Html.DisplayFor(modelItem => item.fechaInicio)
             </td>
 
-            @*<td>
-                    @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-                    @Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-                    @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-                    @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-                </td>*@
 
             <td>
                 <div class="col text-center">
@@ -65,8 +63,4 @@
 
 </table>
 
-<div class="col text-center">
-    <p>
-        @Html.ActionLink("Crear Modulo", "Create", null, new { @class = "btn btn-info btn-large text-center" })
-    </p>
-</div>
+

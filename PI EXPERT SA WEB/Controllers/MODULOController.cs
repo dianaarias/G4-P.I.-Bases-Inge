@@ -14,19 +14,36 @@ namespace PI_EXPERT_SA_WEB.Controllers
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
-        // GET: MODULO
+
+
+
+
+        //INDEX ORIGINAL
+         //GET: MODULO
         public ActionResult Index()
         {
-            //var mODULO = db.MODULO.Include(m => m.PROYECTO);
-            //return View(mODULO.ToList());
-            //ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "idProyectoPK");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
- 
-            return View();
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
+
+            List<PROYECTO> proyectos = new PROYECTOController().GetProyecto();
+            List<MODULO> modulos = db.MODULO.ToList();
+
+            return View(modulos);
         }
 
 
 
+        public JsonResult ObtenerListaModulos(int idProyectoPK) {
+
+            List<MODULO> ListaModulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            return Json(ListaModulo, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+        //DETAILS ORIGINAL
         // GET: MODULO/Details/5
         public ActionResult Details(int? idModuloPK, int? idProyectoPK)
         {
@@ -42,6 +59,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(mODULO);
         }
 
+
+
+
+
+
+
+
+        //CREATE ORIGINAL
         // GET: MODULO/Create
         public ActionResult Create()
         {
@@ -49,6 +74,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+
+
+
+
+
+
+
+
+        //POST CREATE ORIGINAL
         // POST: MODULO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -67,6 +101,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(mODULO);
         }
 
+
+
+
+
+
+
+
+
+
+        //EDIT ORIGINAL
         // GET: MODULO/Edit/5
         public ActionResult Edit(int? idModuloPK, int? idProyectoPK)
         {
@@ -83,6 +127,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(mODULO);
         }
 
+
+
+
+
+
+
+
+
+
+        //POST EDIT ORIGINAL
         // POST: MODULO/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -100,6 +154,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(mODULO);
         }
 
+
+
+
+
+
+
+
+
+
+        //DELETE ORIGINAL
         // GET: MODULO/Delete/5
         public ActionResult Delete(int? idModuloPK, int? idProyectoPK)
         {
@@ -115,6 +179,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(mODULO);
         }
 
+
+
+
+
+
+
+
+
+
+
+        //POST DELETE ORIGINAL
         // POST: MODULO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -135,8 +210,24 @@ namespace PI_EXPERT_SA_WEB.Controllers
             base.Dispose(disposing);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //Retorna una lista con los modulos del proyecto actual
-        public List<MODULO> getModulo(int? idProyectoPK) {
+        public List<MODULO> GetModulo(int? idProyectoPK) {
 
             List<MODULO> mlista = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
 
@@ -144,11 +235,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
-        //Retorna una lista con los proyectos
-        public List<PROYECTO> getProyecto() {
-            List<PROYECTO> plista = db.PROYECTO.ToList();
 
-            return plista;
+
+        //Vista principal de una lista
+        public ActionResult Lista() {
+            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK");
+            return View();
         }
+
+
+
+
+        public ActionResult ListaParcialModulos()
+        {
+            List<MODULO> m = db.MODULO.ToList();
+            return PartialView(m);
+        }
+
+
     }
 }

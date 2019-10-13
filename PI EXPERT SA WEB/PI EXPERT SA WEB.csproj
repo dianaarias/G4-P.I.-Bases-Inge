@@ -337,6 +337,8 @@
     <Content Include="Views\RHVersion2\Create.cshtml" />
     <Content Include="Views\RHVersion2\Details.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\MODULO\Lista.cshtml" />
+    <Content Include="Views\MODULO\ListaParcialModulos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
