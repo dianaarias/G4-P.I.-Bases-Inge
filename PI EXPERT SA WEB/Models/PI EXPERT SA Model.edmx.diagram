@@ -25,6 +25,7 @@
         <EntityTypeShape EntityType="Gr02Proy4Model.LoginEmpleado" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginCliente_Cedula_FK" />
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" />
+        <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
