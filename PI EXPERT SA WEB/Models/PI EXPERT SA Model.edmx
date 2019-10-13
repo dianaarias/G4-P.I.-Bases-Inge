@@ -351,7 +351,6 @@
           <Property Name="tipoUsuario" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="disponibilidad" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="HABILIDADES" Relationship="Self.FK_EMPLEADO_HABILIDADES" FromRole="EMPLEADO" ToRole="HABILIDADES" />
-          <NavigationProperty Name="REQUERIMIENTO" Relationship="Self.FK_EMPLEADO_REQUERIMIENTO" FromRole="EMPLEADO" ToRole="REQUERIMIENTO" />
           <NavigationProperty Name="ROL" Relationship="Gr02Proy4Model.FK_EMPLEADO_ROL" FromRole="EMPLEADO" ToRole="ROL" />
           <Property Name="provincia" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="canton" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -417,7 +416,6 @@
           <Property Name="nombre" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="complejidad" Type="Int32" Nullable="false" />
           <Property Name="duracionEstimada" Type="Int32" />
-          <NavigationProperty Name="EMPLEADO" Relationship="Self.FK_EMPLEADO_REQUERIMIENTO" FromRole="REQUERIMIENTO" ToRole="EMPLEADO" />
           <NavigationProperty Name="MODULO" Relationship="Self.FK_MODULO_REQUERIMIENTO" FromRole="REQUERIMIENTO" ToRole="MODULO" />
           <Property Name="cedulaDesarrolladorFK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="EMPLEADO1" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="REQUERIMIENTO" ToRole="EMPLEADO" />
@@ -443,18 +441,6 @@
             </Principal>
             <Dependent Role="HABILIDADES">
               <PropertyRef Name="cedulaEmpleadoPK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EMPLEADO_REQUERIMIENTO">
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
-          <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLEADO">
-              <PropertyRef Name="cedulaPK" />
-            </Principal>
-            <Dependent Role="REQUERIMIENTO">
-              <PropertyRef Name="cedulaDesarroladorFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -498,10 +484,6 @@
           <AssociationSet Name="FK_EMPLEADO_HABILIDADES" Association="Self.FK_EMPLEADO_HABILIDADES">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="HABILIDADES" EntitySet="HABILIDADES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EMPLEADO_REQUERIMIENTO" Association="Self.FK_EMPLEADO_REQUERIMIENTO">
-            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
-            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
           </AssociationSet>
           <AssociationSet Name="FK_MODULO_REQUERIMIENTO" Association="Self.FK_MODULO_REQUERIMIENTO">
             <End Role="MODULO" EntitySet="MODULO" />

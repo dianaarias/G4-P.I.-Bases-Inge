@@ -13,8 +13,7 @@
         <EntityTypeShape EntityType="Gr02Proy4Model.REQUERIMIENTO" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="Gr02Proy4Model.FK_CLIENTE_PROYECTO" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_EMPLEADO_HABILIDADES" ManuallyRouted="false" />
-        <AssociationConnector Association="Gr02Proy4Model.FK_EMPLEADO_REQUERIMIENTO" ManuallyRouted="false" />
-        <AssociationConnector Association="Gr02Proy4Model.FK_MODULO_REQUERIMIENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="Gr02Proy4Model.FK_MODULO_REQUERIMIENTO" ManuallyRouted="false" ></AssociationConnector>
         <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO_MODULO" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Gr02Proy4Model.ROL" Width="1.5" PointX="6.75" PointY="6.25" />
         <AssociationConnector Association="Gr02Proy4Model.FK_EMPLEADO_ROL" />

@@ -22,9 +22,9 @@ namespace PI_EXPERT_SA_WEB.Models
         public string nombre { get; set; }
         public int complejidad { get; set; }
         public Nullable<int> duracionEstimada { get; set; }
-        public string cedulaDesarroladorFK { get; set; }
+        public string cedulaDesarrolladorFK { get; set; }
     
-        public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual MODULO MODULO { get; set; }
+        public virtual EMPLEADO EMPLEADO1 { get; set; }
     }
 }
