@@ -7,9 +7,9 @@
 
 <h2>Lista de empleados</h2>
 
-@*<p>*@
-   @* @Html.ActionLink("Create New", "Create")*@
-@*</p>*@
+<a href="@Url.Action("Create","EMPLEADOes", new { })" style="float:right">
+    <img src="~/images/plus.svg" width="30" height="30" />
+</a>
 <table class="table table-striped">
     <tr>
         <th>
@@ -60,25 +60,25 @@
     <td>
         @Html.DisplayFor(modelItem => item.disponibilidad)
     </td>
-    @*<td>*@
-    @* @Html.ActionLink("Editar", "Edit", new { id = item.cedulaPK }) |*@
-    @* @Html.ActionLink("Detalles", "Details", new { id = item.cedulaPK }) |*@
-    @*@Html.ActionLink("Borrar", "Delete", new { id = item.cedulaPK })*@
-    @*</td>*@
+
     <td>
         <div class="col text-center">
-            @Html.ActionLink("Más información", "Details", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
-        </div>
-        <div class="col text-center">
-            @Html.ActionLink("Habilidades", "Index", "HABILIDADES", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+            @*@Html.ActionLink("Más información", "Details", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })*@
+            <a href="@Url.Action("Index","HABILIDADES", new {id = item.cedulaPK})" style="float:right">
+                <img src="~/images/lightbulb.svg" width="30" height="30" />
+            </a>
+
+            <a href="@Url.Action("Details","EMPLEADOes", new {id = item.cedulaPK})" style="float:right">
+                <img src="~/images/more.svg" width="30" height="30" />
+            </a>
         </div>
     </td>
 </tr>
     }
 
 </table>
-<div class="col text-center">
+@*<div class="col text-center">
     <p>
         @Html.ActionLink("Crear Empleado", "Create", null, new { @class = "btn btn-info btn-large text-center" })
     </p>
-</div>
+</div>*@
