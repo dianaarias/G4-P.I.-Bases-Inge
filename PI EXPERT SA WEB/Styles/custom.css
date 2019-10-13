@@ -35,7 +35,8 @@ body {
 .navbar-styles .nav-link:hover {
     color: #324856;
     border-style: solid;
-    border-color: #052d3f;
+    //border-color: #052d3f;
+    border-color: #4d7ea8;
     border-width: 5px;
 }
 
