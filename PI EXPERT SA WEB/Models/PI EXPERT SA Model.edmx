@@ -358,7 +358,7 @@
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="PROYECTO" Relationship="Gr02Proy4Model.FK__PROYECTO__cedula__09A971A2" FromRole="EMPLEADO" ToRole="PROYECTO" />
           <NavigationProperty Name="LoginEmpleado" Relationship="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" FromRole="EMPLEADO" ToRole="LoginEmpleado" />
-          <NavigationProperty Name="REQUERIMIENTO1" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="EMPLEADO" ToRole="REQUERIMIENTO" />
+          <NavigationProperty Name="REQUERIMIENTO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="EMPLEADO" ToRole="REQUERIMIENTO" />
         </EntityType>
         <EntityType Name="HABILIDADES">
           <Key>
@@ -378,8 +378,8 @@
           <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fechaInicio" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="REQUERIMIENTO" Relationship="Self.FK_MODULO_REQUERIMIENTO" FromRole="MODULO" ToRole="REQUERIMIENTO" />
           <NavigationProperty Name="PROYECTO" Relationship="Self.FK_PROYECTO_MODULO" FromRole="MODULO" ToRole="PROYECTO" />
+          <NavigationProperty Name="REQUERIMIENTO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO" FromRole="MODULO" ToRole="REQUERIMIENTO" />
         </EntityType>
         <EntityType Name="PROYECTO">
           <Key>
@@ -401,24 +401,6 @@
           <Property Name="costoDesarrollador" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="cedulaLiderFK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="EMPLEADO" Relationship="Gr02Proy4Model.FK__PROYECTO__cedula__09A971A2" FromRole="PROYECTO" ToRole="EMPLEADO" />
-        </EntityType>
-        <EntityType Name="REQUERIMIENTO">
-          <Key>
-            <PropertyRef Name="idRequerimientoPK" />
-            <PropertyRef Name="idModuloPK" />
-            <PropertyRef Name="idProyectoPK" />
-          </Key>
-          <Property Name="idRequerimientoPK" Type="Int32" Nullable="false" />
-          <Property Name="idModuloPK" Type="Int32" Nullable="false" />
-          <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="nombre" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="complejidad" Type="Int32" Nullable="false" />
-          <Property Name="duracionEstimada" Type="Int32" />
-          <NavigationProperty Name="MODULO" Relationship="Self.FK_MODULO_REQUERIMIENTO" FromRole="REQUERIMIENTO" ToRole="MODULO" />
-          <Property Name="cedulaDesarrolladorFK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="EMPLEADO1" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="REQUERIMIENTO" ToRole="EMPLEADO" />
         </EntityType>
         <Association Name="FK_CLIENTE_PROYECTO">
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
@@ -444,20 +426,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MODULO_REQUERIMIENTO">
-          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
-          <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MODULO">
-              <PropertyRef Name="idModuloPK" />
-              <PropertyRef Name="idProyectoPK" />
-            </Principal>
-            <Dependent Role="REQUERIMIENTO">
-              <PropertyRef Name="idModuloPK" />
-              <PropertyRef Name="idProyectoPK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PROYECTO_MODULO">
           <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
           <End Role="MODULO" Type="Self.MODULO" Multiplicity="*" />
@@ -476,7 +444,6 @@
           <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" />
           <EntitySet Name="MODULO" EntityType="Self.MODULO" />
           <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" />
-          <EntitySet Name="REQUERIMIENTO" EntityType="Self.REQUERIMIENTO" />
           <AssociationSet Name="FK_CLIENTE_PROYECTO" Association="Self.FK_CLIENTE_PROYECTO">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -484,10 +451,6 @@
           <AssociationSet Name="FK_EMPLEADO_HABILIDADES" Association="Self.FK_EMPLEADO_HABILIDADES">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="HABILIDADES" EntitySet="HABILIDADES" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MODULO_REQUERIMIENTO" Association="Self.FK_MODULO_REQUERIMIENTO">
-            <End Role="MODULO" EntitySet="MODULO" />
-            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
           </AssociationSet>
           <AssociationSet Name="FK_PROYECTO_MODULO" Association="Self.FK_PROYECTO_MODULO">
             <End Role="PROYECTO" EntitySet="PROYECTO" />
@@ -547,8 +510,13 @@
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="LoginEmpleado" EntitySet="LoginEmpleado" />
           </AssociationSet>
+          <EntitySet Name="REQUERIMIENTO" EntityType="Gr02Proy4Model.REQUERIMIENTO" />
           <AssociationSet Name="FK_REQUERIMIENTO_EMPLEADO" Association="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+            <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REQUERIMIENTO_MODULO" Association="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO">
+            <End Role="MODULO" EntitySet="MODULO" />
             <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
           </AssociationSet>
         </EntityContainer>
@@ -663,6 +631,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="REQUERIMIENTO">
+          <Key>
+            <PropertyRef Name="idRequerimientoPK" />
+            <PropertyRef Name="idModuloPK" />
+            <PropertyRef Name="idProyectoPK" />
+          </Key>
+          <Property Name="idRequerimientoPK" Type="Int32" Nullable="false" />
+          <Property Name="idModuloPK" Type="Int32" Nullable="false" />
+          <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="complejidad" Type="Int32" Nullable="false" />
+          <Property Name="duracionEstimada" Type="Int32" />
+          <Property Name="cedulaDesarrolladorFK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="EMPLEADO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="REQUERIMIENTO" ToRole="EMPLEADO" />
+          <NavigationProperty Name="MODULO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO" FromRole="REQUERIMIENTO" ToRole="MODULO" />
+        </EntityType>
         <Association Name="FK_REQUERIMIENTO_EMPLEADO">
           <End Type="Gr02Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="1" />
           <End Type="Gr02Proy4Model.REQUERIMIENTO" Role="REQUERIMIENTO" Multiplicity="*" />
@@ -672,6 +658,20 @@
             </Principal>
             <Dependent Role="REQUERIMIENTO">
               <PropertyRef Name="cedulaDesarrolladorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REQUERIMIENTO_MODULO">
+          <End Type="Gr02Proy4Model.MODULO" Role="MODULO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.REQUERIMIENTO" Role="REQUERIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODULO">
+              <PropertyRef Name="idModuloPK" />
+              <PropertyRef Name="idProyectoPK" />
+            </Principal>
+            <Dependent Role="REQUERIMIENTO">
+              <PropertyRef Name="idModuloPK" />
+              <PropertyRef Name="idProyectoPK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -752,21 +752,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="REQUERIMIENTO">
-            <EntityTypeMapping TypeName="Gr02Proy4Model.REQUERIMIENTO">
-              <MappingFragment StoreEntitySet="REQUERIMIENTO">
-                <ScalarProperty Name="cedulaDesarrolladorFK" ColumnName="cedulaDesarrolladorFK" />
-                <ScalarProperty Name="idRequerimientoPK" ColumnName="idRequerimientoPK" />
-                <ScalarProperty Name="idModuloPK" ColumnName="idModuloPK" />
-                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="complejidad" ColumnName="complejidad" />
-                <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ROL">
             <EntityTypeMapping TypeName="Gr02Proy4Model.ROL">
               <MappingFragment StoreEntitySet="ROL">
@@ -827,6 +812,21 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="cedulaEmpleadoPK" ColumnName="cedulaEmpleadoPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REQUERIMIENTO">
+            <EntityTypeMapping TypeName="Gr02Proy4Model.REQUERIMIENTO">
+              <MappingFragment StoreEntitySet="REQUERIMIENTO">
+                <ScalarProperty Name="cedulaDesarrolladorFK" ColumnName="cedulaDesarrolladorFK" />
+                <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
+                <ScalarProperty Name="complejidad" ColumnName="complejidad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
+                <ScalarProperty Name="idModuloPK" ColumnName="idModuloPK" />
+                <ScalarProperty Name="idRequerimientoPK" ColumnName="idRequerimientoPK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -10,10 +10,8 @@
         <EntityTypeShape EntityType="Gr02Proy4Model.HABILIDADES" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr02Proy4Model.MODULO" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr02Proy4Model.PROYECTO" Width="1.5" PointX="1.5" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Gr02Proy4Model.REQUERIMIENTO" Width="1.5" PointX="6" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="Gr02Proy4Model.FK_CLIENTE_PROYECTO" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_EMPLEADO_HABILIDADES" ManuallyRouted="false" />
-        <AssociationConnector Association="Gr02Proy4Model.FK_MODULO_REQUERIMIENTO" ManuallyRouted="false" ></AssociationConnector>
         <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO_MODULO" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Gr02Proy4Model.ROL" Width="1.5" PointX="6.75" PointY="6.25" />
         <AssociationConnector Association="Gr02Proy4Model.FK_EMPLEADO_ROL" />
@@ -24,7 +22,9 @@
         <EntityTypeShape EntityType="Gr02Proy4Model.LoginEmpleado" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginCliente_Cedula_FK" />
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" />
+        <EntityTypeShape EntityType="Gr02Proy4Model.REQUERIMIENTO" Width="1.5" PointX="6" PointY="1.5" />
         <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" />
+        <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
