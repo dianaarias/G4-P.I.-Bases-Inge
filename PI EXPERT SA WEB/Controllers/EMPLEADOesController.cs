@@ -15,9 +15,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: EMPLEADOes
-        public ActionResult Index()
+        // Genera la vista index con todos los empleados o con el nombre del empleado a buscar
+        public ActionResult Index(string busqueda)
         {
-            return View(db.EMPLEADO.ToList());
+            //Se usa el atributo busqueda para filtrar por nombre a los empleados
+            return View(db.EMPLEADO.Where(x => x.nombre.Contains(busqueda) || busqueda == null).ToList());
         }
 
         // GET: EMPLEADOes/Details/5
