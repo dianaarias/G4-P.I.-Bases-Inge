@@ -17,14 +17,14 @@
     <hr />
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.cedulaPK, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.cedulaPK, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.cedulaPK, new {  disabled = "disabled" })
+            @Html.TextBoxFor(model => model.cedulaPK, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.nombre, new { disabled = "disabled" })
         </div>
@@ -32,29 +32,29 @@
 
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.apellido1, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.apellido2, new { @class = "disabled" })
+            @Html.TextBoxFor(model => model.apellido2, new { disabled = "disabled" })
         </div>
     </div>
 
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaNacimiento, new { @class = "disabled" })
+            @Html.TextBoxFor(model => model.fechaNacimiento, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.telefono, new { disabled = "disabled" })
         </div>
@@ -81,41 +81,52 @@
     </div>
 
     <div class="form-group row offset-3 ">
-        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.correo, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.fechaContratacion, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.fechaContratacion, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaContratacion, new {  disabled = "disabled"})
+            @Html.TextBoxFor(model => model.fechaContratacion, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.fechaDespido, htmlAttributes: new { @class = "control-label col-md-2", @align = "left"  })
+        @Html.LabelFor(model => model.fechaDespido, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.fechaDespido, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.tipoUsuario, htmlAttributes: new { @class = "control-label col-md-2" ,@align = "left" })
+        @Html.LabelFor(model => model.tipoUsuario, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.tipoUsuario, new {  disabled = "disabled"})
+            @Html.TextBoxFor(model => model.tipoUsuario, new { disabled = "disabled" })
         </div>
     </div>
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.disponibilidad, htmlAttributes: new { @class = "control-label col-md-2",@align = "left"  })
+        @Html.LabelFor(model => model.disponibilidad, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.(model => model.disponibilidad, new { disabled = "disabled"})
+                @Html.CheckBoxFor(model => model.disponibilidad, new { disabled = "disabled" })
             </div>
         </div>
+        <div class="form-group text-center ">
+            <a href="@Url.Action("Index","EMPLEADOes", new {})" style="float:left">
+                <img src="~/images/left-arrow.svg" width="30" height="30" />
+            </a>
+        </div>
     </div>
+
+    @*<div class="form-group text-center">
+        <a href="@Url.Action("Index","EMPLEADOes", new {})" style="float:left">
+            <img src="~/images/left-arrow.svg" width="30" height="30" />
+        </a>
+    </div>*@
 
 </div>
 

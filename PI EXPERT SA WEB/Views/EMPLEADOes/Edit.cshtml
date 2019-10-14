@@ -140,7 +140,7 @@
 
     <div class="form-group text-center">
         <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" />
-        <a href="@Url.Action("Index","EMPLEADOes", new {})" style="float:left">
+        <a href="@Url.Action("Details","EMPLEADOes", new {id = Model.cedulaPK})" style="float:left">
             <img src="~/images/left-arrow.svg" width="30" height="30" />
         </a>
     </div>
