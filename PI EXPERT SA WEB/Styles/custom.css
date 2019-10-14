@@ -72,10 +72,6 @@ body {
     border-width: 2.5px;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
 .utilities {
     margin-top: 5rem;
     padding-top: 5rem;
@@ -95,7 +91,6 @@ table {
     top: 50%;
 }
 
->>>>>>> c3ab319d122da030f23a4e3bcc46153b50982afe
 dl:after {
     content: "";
     display: table;
@@ -183,6 +178,9 @@ table {
     border-top: 1px solid blue;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 41e43fd0d3eb442b47933f35535f85a0abd0667a
 
 
 /* Para el Login */
@@ -253,5 +251,9 @@ table {
 .center {
     text-align: center;
 }
+<<<<<<< HEAD
 =======
 >>>>>>> master
+=======
+
+>>>>>>> 41e43fd0d3eb442b47933f35535f85a0abd0667a
