@@ -14,10 +14,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
         // GET: CLIENTE
-        // Genera la vista index con todos los clientes
-        public ActionResult Index()
+        // Genera la vista index con todos los clientes o Con el nombre de los clientes a buscar
+        public ActionResult Index(string busqueda)
         {
-            return View(db.CLIENTE.ToList());
+            //Se usa el atributo busqueda para filtrar por nombre a los clientes
+            return View(db.CLIENTE.Where(x=>x.name.Contains(busqueda) || busqueda == null).ToList());
         }
 
         // GET: CLIENTE/Details/5
@@ -50,11 +51,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CLIENTE.Add(cLIENTE);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (!db.CLIENTE.Any(model => model.cedulaPK == cLIENTE.cedulaPK))
+                {
+                    db.CLIENTE.Add(cLIENTE);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("cedulaPK", "Cédula ya existe en el sistema");
+                }
 
+            }
             return View(cLIENTE);
         }
 

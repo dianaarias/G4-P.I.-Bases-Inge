@@ -74,7 +74,7 @@
         <div class="form-group row offset-3 required">
             @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.provincia, Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
+                @Html.DropDownListFor(model => model.provincia,Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
                 @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
             </div>
         </div>
