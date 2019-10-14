@@ -9,17 +9,20 @@
 
 <table class="table table-bordered table-striped">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.objetivo)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.fechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaFin)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.costoEstimado)
@@ -29,9 +32,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.costoDesarrollador)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaFin)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.duracionEstimada)
@@ -45,18 +45,21 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.idProyectoPK)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.nombre)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.objetivo)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.fechaInicio)
             </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.fechaFin)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.CLIENTE.name)
             </td>

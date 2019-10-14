@@ -25,8 +25,8 @@ namespace PI_EXPERT_SA_WEB.Models
         public string nombre { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
     
+        public virtual PROYECTO PROYECTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }
-        public virtual PROYECTO PROYECTO { get; set; }
     }
 }

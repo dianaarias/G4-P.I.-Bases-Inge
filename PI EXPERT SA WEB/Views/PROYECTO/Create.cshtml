@@ -44,7 +44,7 @@
     <div class="form-group row offset-3 required">
         @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control", type= "date" } })
             @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -76,7 +76,7 @@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.fechaFin, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { @class = "form-control", type= "date" } })
             @Html.ValidationMessageFor(model => model.fechaFin, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -97,16 +97,16 @@
         </div>
     </div>
 
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.cedulaClienteFK, "cedulaClienteFK", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group row offset-3 required">
+        @Html.LabelFor(model => model.cedulaClienteFK, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("cedulaClienteFK", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.cedulaClienteFK, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.cedulaLiderFK, "cedulaLiderFK", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group row offset-3 required">
+        @Html.LabelFor(model => model.cedulaLiderFK, "Líder", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("cedulaLiderFK", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.cedulaLiderFK, "", new { @class = "text-danger" })

@@ -11,73 +11,23 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-
+    
     public partial class CLIENTE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CLIENTE()
         {
             this.PROYECTO = new HashSet<PROYECTO>();
-            
         }
-        //verifica que cedula sea unico
-        [Key]
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Cédula de Identidad")]
-        //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
-        [Required(ErrorMessage ="Este campo es obligatorio")]
-        //Asegura que solo se puedan utilizar los caracteres deseados
-        [RegularExpression("^[0-9]*$", ErrorMessage = "La cedula solo contiene numeros")]
-        //Asegura que siempre se tenga una cedula de 9 digitos
-        [StringLength(maximumLength: 9,ErrorMessage ="Cedula invalida", MinimumLength = 9)]
+    
         public string cedulaPK { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Nombre")]
-        //Campo Obligatorio
-        [Required(ErrorMessage ="Este campo es obligatorio")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
-        //Asegura que el nombre no sea de mas de 16 caracteres
-        [StringLength(64, ErrorMessage ="El Nombre excede el numero de caracteres")]
         public string name { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Primer apellido")]
-        //Campo Obligatorio
-        [Required(ErrorMessage ="Este campo es obligatorio")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
-        //Asegura que el apellido no tenga mas de 16 caracteres
-        [StringLength(64, ErrorMessage = "El Primer apellido excede el numero de caracteres")]
-        public string apellido1 { get; set; }        
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Segundo apellido")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
-        //Asegura que el segundo apellido no tenga mas de 16 caracteres
-        [StringLength(64, ErrorMessage = "El Segundo apellido excede el numero de caracteres")]
+        public string apellido1 { get; set; }
         public string apellido2 { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Correo")]
-        //Campo obligatorio
-        [Required(ErrorMessage = "Este campo es obligatorio")]
-        //Verifica que se ingrese un String en formato de correo electronico "ABC@XYZ.com"
-        [DataType(DataType.EmailAddress,ErrorMessage ="Porfavor introducir un correo valido")]
         public string correo { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Teléfono")]
-        //Verifica que se ingrese el dato en formato de numero telefonico
-        [DataType(DataType.PhoneNumber)]
         public string telefono { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Provincia")]
         public string provincia { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Cantón")]
         public string canton { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo      
-        [DisplayName("Distrito")]
         public string distrito { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
