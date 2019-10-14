@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<a href="@Url.Action("Index","PROYECTO", new {})" class="boton-icono" style="float:left">
+<a href="@Url.Action("Details","PROYECTO", new {id=Model.idProyectoPK})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 <h2>Actualizar Datos de Proyecto</h2>
