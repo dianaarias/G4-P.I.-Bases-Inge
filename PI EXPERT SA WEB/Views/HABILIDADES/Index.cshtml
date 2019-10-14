@@ -4,11 +4,16 @@
     ViewBag.Title = "Index";
 }
 
+
+<a href="@Url.Action("Index","EMPLEADOes", new {})" style="float:left">
+    <img src="~/images/left-arrow.svg" width="40" height="30" />
+</a>
 <h2>Lista de habilidades</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<a href="@Url.Action("Create","HABILIDADES", new { })" style="float:right">
+    <img src="~/images/plus.svg" width="30" height="30" />
+</a>
+
 <table class="table">
     <tr>
         @*<th>
@@ -30,13 +35,16 @@
                 @Html.DisplayFor(modelItem => item.habilidadPK)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EMPLEADO.cedulaPK, habilidad = item.habilidadPK }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.EMPLEADO.cedulaPK, habilidad = item.habilidadPK })
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.EMPLEADO.cedulaPK, habilidad = item.habilidadPK }) |
+                 @Html.ActionLink("Delete", "Delete", new { id = item.EMPLEADO.cedulaPK, habilidad = item.habilidadPK })*@
+                <a href="@Url.Action("Delete","HABILIDADES", new {id = item.EMPLEADO.cedulaPK, habilidad = item.habilidadPK })" style="float:right">
+                    <img src="~/images/deleteImg.svg" width="30" height="30" />
+                </a>
             </td>
 
         </tr>
     }
 </table>
-<div>
-    @Html.ActionLink("Back to List", "Index", "EMPLEADOes")
-</div>
+@*<div>*@
+@*@Html.ActionLink("Back to List", "Index", "EMPLEADOes")*@
+@*</div>*@

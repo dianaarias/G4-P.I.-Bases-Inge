@@ -4,11 +4,13 @@
     ViewBag.Title = "Delete";
 }
 
+<a href="@Url.Action("Details","EMPLEADOes", new {id = Model.cedulaPK})" style="float:left">
+    <img src="~/images/left-arrow.svg" width="40" height="30" />
+</a>
+
 <h2>Eliminar cliente</h2>
 
 <h3 class="text-center alert">¿Esta seguro que desea borrar?</h3>
-
-
 <div class="form-horizontal">
     <h4>Informacion del empleado</h4>
     <hr />
@@ -122,8 +124,8 @@
 
     <div class="form-group text-center">
         <input type="image" src="~/images/deleteImg.svg" alt=”submit” name=”submit” width="50" height="50" />
-        <a href="@Url.Action("Details","EMPLEADOes", new {id = Model.cedulaPK})" style="float:left">
-            <img src="~/images/left-arrow.svg" width="30" height="30" />
-        </a>
+        @*<a href="@Url.Action("Details","EMPLEADOes", new {id = Model.cedulaPK})" style="float:left">
+                <img src="~/images/left-arrow.svg" width="30" height="30" />
+            </a>*@
     </div>
 }
