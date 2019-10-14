@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Lista de clientes</h2>
+<h2>Lista de Clientes</h2>
 <a href="@Url.Action("Create","CLIENTE", new { })" style="float:right">
     <img src="~/images/plus.svg" width="30" height="30" />
 </a>
@@ -25,7 +25,7 @@
             @Html.DisplayNameFor(model => model.correo)
         </th>
         <th>
-            Ver mas información
+            Ver más información
         </th>
     </tr>
     @if (Model.Count() == 0)
