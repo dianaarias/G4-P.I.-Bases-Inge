@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Seleccionar Proyecto</h2>
+<h2>Módulos</h2>
+<h3>Seleccionar Proyecto</h3>
 <a href="@Url.Action("Create", "MODULO", new { })" style="float:right">
     <img src="~/images/plus.svg" whd="30" height="30" />
 </a>
@@ -51,8 +52,8 @@
                     @Html.DisplayFor(modelItem => item.fechaInicio)
                 </td>
                 <td>
-                    <a href="@Url.Action("Details", "MODULO", new { id = item.idModuloPK })">
-                        <img src="~/images/lightbulb.svg" width="30" height="30" />
+                    <a href="@Url.Action("Details", "MODULO", new {idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK})" style="float:unset">
+                        <img src="~/images/more.svg" width="30" height="30" />
                     </a>
                 </td>
         </tr>

@@ -5,32 +5,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
-    <img src="~/edit.png" width="30" height="30" />
+<a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK })" class="boton-icono" style="float:right">
+    <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
-<a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
-    <img src="~/trash.png" width="30" height="30" />
+<a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" class="boton-icono" style="float:right">
+    <img src="~/images/editImg.svg" width="30" height="30" />
 </a>
 
-<div class="form-horizontal text-center">
-    <h4>Información del módulo</h4>
+<a href="@Url.Action("Index","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK })" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+<h2>Resumen de Módulo</h2>
+<div class="separador"></div>
+
+<div>
+    <h4>Datos del Módulo</h4>
 
 
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.nombre, new { disabled = "disabled" })
-        </div>
-    </div>
+    <d1 class="d1-horizontal">
+        <dt class>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
 
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.fechaInicio, new { disabled = "disabled" })
-        </div>
-    </div>
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idModuloPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idModuloPK)
+        </dd>
+
+        <dt class>
+            @Html.DisplayNameFor(model => model.idProyectoPK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idProyectoPK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+
+    </d1>
 </div>
 
-<div class="col text-center ">
-    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary btn-large" })
-</div>
+

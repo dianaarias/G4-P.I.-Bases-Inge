@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Editar</h2>
+<a href="@Url.Action("Index","MODULO", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+<h2>Actualizar datos de Módulo</h2>
 
 
 @using (Html.BeginForm())
@@ -13,13 +17,12 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>MODULO</h4>
-    <hr />
+    <div class="separador"></div>
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.idModuloPK)
     @Html.HiddenFor(model => model.idProyectoPK)
 
-    <div class="form-group">
+    <div class="form-group row offset-3 ">
         @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
@@ -27,7 +30,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row offset-3 ">
         @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
@@ -35,9 +38,16 @@
         </div>
     </div>
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Guardar" class="btn btn-info btn-large" /> |
-        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large" })
+
+    <div class="col text-center">
+        <div class="form-group">
+            <div class="col-md-auto" style="margin-top: 50px">
+                @*Comenta botones textuales*@
+                @*<input type="submit" value="Guardar" class="btn btn-info btn-large" style="margin-left: 150px" />*@
+                @*@Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })*@
+                <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+            </div>
+        </div>
     </div>
 
 </div>
