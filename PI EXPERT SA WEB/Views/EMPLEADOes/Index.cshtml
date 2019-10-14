@@ -64,9 +64,9 @@
     <td>
         <div class="col text-center">
             @*@Html.ActionLink("Más información", "Details", new { id = item.cedulaPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })*@
-            <a href="@Url.Action("Index","HABILIDADES", new {id = item.cedulaPK})" style="float:right">
+            @*<a href="@Url.Action("Index","HABILIDADES", new {id = item.cedulaPK})" style="float:right">
                 <img src="~/images/lightbulb.svg" width="30" height="30" />
-            </a>
+            </a>*@
 
             <a href="@Url.Action("Details","EMPLEADOes", new {id = item.cedulaPK})" style="float:right">
                 <img src="~/images/more.svg" width="30" height="30" />
