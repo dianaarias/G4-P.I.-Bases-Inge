@@ -35,23 +35,23 @@ namespace PI_EXPERT_SA_WEB.Models
         public decimal costoEstimado { get; set; }
 
         [DisplayName("Costo Real")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
         public Nullable<decimal> costoReal { get; set; }
 
         [DisplayName("Fecha de Inicio")]
         [Required(ErrorMessage = "Campo requerido")]
         //[DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaInicio { get; set; }
 
         [DisplayName("Fecha de Finalización")]
         [Required(ErrorMessage = "Campo requerido")]
         //[DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaFin { get; set; }
 
         [DisplayName("Duración Estimada")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
         public Nullable<int> duracionEstimada { get; set; }
 
         [DisplayName("Cliente")]
@@ -69,18 +69,19 @@ namespace PI_EXPERT_SA_WEB.Models
         public string objetivo { get; set; }
 
         [DisplayName("Duración Real")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
         public Nullable<int> duracionReal { get; set; }
 
         [DisplayName("Costo Desarrollador")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
         public Nullable<decimal> costoDesarrollador { get; set; }
 
         [DisplayName("Líder")]
         [Required(ErrorMessage = "Campo requerido")]
         public string cedulaLiderFK { get; set; }
-   
+
         public virtual CLIENTE CLIENTE { get; set; }
+
         public virtual EMPLEADO EMPLEADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MODULO> MODULO { get; set; }
