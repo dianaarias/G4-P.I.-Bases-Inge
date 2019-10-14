@@ -209,6 +209,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\check-symbol.svg" />
+    <Content Include="images\close.svg" />
     <Content Include="images\deleteImg.svg" />
     <Content Include="images\editImg.svg" />
     <Content Include="images\lightbulb.svg" />
@@ -336,7 +338,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PROYECTOController2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
