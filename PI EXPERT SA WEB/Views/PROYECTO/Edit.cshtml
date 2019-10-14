@@ -4,11 +4,14 @@
     ViewBag.Title = "Edit";
 }
 
+@*Edit se trata de una vista que permite al usuario modificar ciertos atributos de un proyecto.*@
+
 <a href="@Url.Action("Details","PROYECTO", new {id=Model.idProyectoPK})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 <h2>Actualizar Datos de Proyecto</h2>
 
+@*Al igual que durante la creación de un proyecto, se hace uso de forms para editar sus atributos.*@
 
 @using (Html.BeginForm())
 {

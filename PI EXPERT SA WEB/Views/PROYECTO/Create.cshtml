@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*Create permite al usuario crear un proyecto, introduciendo los valores de sus atributos. Algunos de estos son opcionales, y otros obligatorios, de acuerdo
+a los requerimientos del sistema.*@
+
 <a href="@Url.Action("Index","PROYECTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
@@ -13,6 +16,7 @@
     <p>*<span style="color:black">Campos requeridos</span> </p>
 </div>
 
+@*Se hace uso de forms para recopilar la información.*@
 
 @using (Html.BeginForm()) 
 {

@@ -4,12 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
+@*Delete es una vista que permite a un usuario borrar un proyecto y todos sus atributos del sistema.
+    Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el proyecto en cuestión.*@
+
 <a href="@Url.Action("Details","PROYECTO", new {id=Model.idProyectoPK})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 <h2>Borrar Proyecto</h2>
-<div class="separador"></div>
 
+<div class="separador"></div>
 
 <div>
     <h4 style="color:red">¿Está seguro de que desea borrar este proyecto y los datos asociados al mismo?</h4> <p></p>

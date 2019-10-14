@@ -4,12 +4,16 @@
     ViewBag.Title = "Index";
 }
 
+@*Index se trata de una página que muestra una lista en forma de tabla con la información más significativa de los proyectos registrados en el sistema.*@
+
 <h2>Mis Proyectos
     <a href="@Url.Action("Create","PROYECTO", new { })" style="float:right">
         <img src="~/images/plus.svg" width="30" height="30" />
     </a>
 </h2>
 
+
+@*En esta tabla, de acuerdo a los requerimientos acordados, se mostrará el nombre del proyecto, las fechas de inicio y fin del mismo, y el nombre del cliente asociado al mismo.*@
 <table class="table table-bordered table-striped">
     <tr>
         @*<th>

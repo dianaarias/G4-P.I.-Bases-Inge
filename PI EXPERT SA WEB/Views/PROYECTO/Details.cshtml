@@ -4,6 +4,9 @@
     ViewBag.Title = "Details";
 }
 
+@*Details es una vista que despliega un resumen de la información de un proyecto. Esto incluye los datos asociados al proyecto (los valores de sus atributos)
+y botones para accesar sus módulos, equipo y consultar el progreso del desarrollo del proyecto en cuestión.*@
+
 <a href="@Url.Action("Delete","PROYECTO", new { id = Model.idProyectoPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
@@ -121,6 +124,8 @@
 </div>
 
 <div class="separador"></div>
+
+@*Cards de Bootstrap con botones que enlazan a Equipo, Módulos y consultas de progreso.*@
 
 <div class="card-deck">
     <div class="card">
