@@ -17,7 +17,7 @@ namespace PI_EXPERT_SA_WEB.Models
     public partial class HABILIDADES
     {
         public string cedulaEmpleadoPK { get; set; }
-        [Display(Name = "Habilidades")]
+        [Display(Name = "Habilidad")]
         public string habilidadPK { get; set; }
 
         public virtual EMPLEADO EMPLEADO { get; set; }
