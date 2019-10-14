@@ -31,11 +31,11 @@ namespace PI_EXPERT_SA_WEB.Models
         public int idProyectoPK { get; set; }
 
         [DisplayName("Costo Estimado")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invÃ¡lidos")]
         public decimal costoEstimado { get; set; }
 
         [DisplayName("Costo Real")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invÃ¡lidos")]
         public Nullable<decimal> costoReal { get; set; }
 
         [DisplayName("Fecha de Inicio")]
@@ -44,14 +44,14 @@ namespace PI_EXPERT_SA_WEB.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaInicio { get; set; }
 
-        [DisplayName("Fecha de Finalización")]
+        [DisplayName("Fecha de FinalizaciÃ³n")]
         [Required(ErrorMessage = "Campo requerido")]
         //[DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaFin { get; set; }
 
-        [DisplayName("Duración Estimada")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [DisplayName("DuraciÃ³n Estimada")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invÃ¡lidos")]
         public Nullable<int> duracionEstimada { get; set; }
 
         [DisplayName("Cliente")]
@@ -59,8 +59,8 @@ namespace PI_EXPERT_SA_WEB.Models
         public string cedulaClienteFK { get; set; }
 
         [DisplayName("Nombre de Proyecto")]
-        [StringLength(maximumLength: 64, MinimumLength = 1, ErrorMessage = "No puede introducir nombres de más de 64 caracteres")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres inválidos")]
+        [StringLength(maximumLength: 64, MinimumLength = 1, ErrorMessage = "No puede introducir nombres de mÃ¡s de 64 caracteres")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invÃ¡lidos")]
         [Required(ErrorMessage = "Campo requerido")]
         public string nombre { get; set; }
 
@@ -68,24 +68,23 @@ namespace PI_EXPERT_SA_WEB.Models
         [Required(ErrorMessage = "Campo requerido")]
         public string objetivo { get; set; }
 
-        [DisplayName("Duración Real")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [DisplayName("DuraciÃ³n Real")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invÃ¡lidos")]
         public Nullable<int> duracionReal { get; set; }
 
         [DisplayName("Costo Desarrollador")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres invÃ¡lidos")]
         public Nullable<decimal> costoDesarrollador { get; set; }
 
-        [DisplayName("Líder")]
+        [DisplayName("LÃ­der")]
         [Required(ErrorMessage = "Campo requerido")]
         public string cedulaLiderFK { get; set; }
-    
-
+   
+        public virtual CLIENTE CLIENTE { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MODULO> MODULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROL> ROL { get; set; }
-        public virtual CLIENTE CLIENTE { get; set; }
     }
 }
