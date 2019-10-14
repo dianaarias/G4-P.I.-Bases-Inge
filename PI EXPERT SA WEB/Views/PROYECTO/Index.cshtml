@@ -4,8 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Mis Proyectos</h2>
-
+<h2>Mis Proyectos
+    <a href="@Url.Action("Create","PROYECTO", new { })" style="float:right">
+        <img src="~/images/plus.svg" width="30" height="30" />
+    </a>
+</h2>
 
 <table class="table table-bordered table-striped">
     <tr>
@@ -77,8 +80,9 @@
 
 </table>
 
-<div class="col text-center">
+@*Botón con texto para crear un nuevo proyecto, en caso de que se decida cambiar el estándar de íconos a texto.*@
+@*<div class="col text-center">
     <p>
         @Html.ActionLink("Crear Proyecto", "Create", null, new { @class = "btn btn-info btn-large text-center" })
     </p>
-</div>
+</div>*@
