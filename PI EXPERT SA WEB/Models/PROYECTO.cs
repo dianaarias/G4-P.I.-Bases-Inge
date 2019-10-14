@@ -22,8 +22,8 @@ namespace PI_EXPERT_SA_WEB.Models
         }
     
         public int idProyectoPK { get; set; }
-        public int costoEstimado { get; set; }
-        public Nullable<int> costoReal { get; set; }
+        public decimal costoEstimado { get; set; }
+        public Nullable<decimal> costoReal { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
         public Nullable<System.DateTime> fechaFin { get; set; }
         public Nullable<int> duracionEstimada { get; set; }
@@ -34,11 +34,11 @@ namespace PI_EXPERT_SA_WEB.Models
         public Nullable<decimal> costoDesarrollador { get; set; }
         public string cedulaLiderFK { get; set; }
     
-        public virtual CLIENTE CLIENTE { get; set; }
+        public virtual EMPLEADO EMPLEADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MODULO> MODULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROL> ROL { get; set; }
-        public virtual EMPLEADO EMPLEADO { get; set; }
+        public virtual CLIENTE CLIENTE { get; set; }
     }
 }

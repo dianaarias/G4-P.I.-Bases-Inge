@@ -17,10 +17,10 @@ namespace PI_EXPERT_SA_WEB.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPLEADO()
         {
-            this.HABILIDADES = new HashSet<HABILIDADES>();
-            this.ROL = new HashSet<ROL>();
             this.PROYECTO = new HashSet<PROYECTO>();
+            this.HABILIDADES = new HashSet<HABILIDADES>();
             this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
+            this.ROL = new HashSet<ROL>();
         }
     
         public string cedulaPK { get; set; }
@@ -39,13 +39,13 @@ namespace PI_EXPERT_SA_WEB.Models
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PROYECTO> PROYECTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HABILIDADES> HABILIDADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROL> ROL { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROYECTO> PROYECTO { get; set; }
-        public virtual LoginEmpleado LoginEmpleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ROL> ROL { get; set; }
+        public virtual LoginEmpleado LoginEmpleado { get; set; }
     }
 }
