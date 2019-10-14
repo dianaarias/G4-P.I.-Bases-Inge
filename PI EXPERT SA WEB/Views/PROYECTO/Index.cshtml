@@ -42,7 +42,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CLIENTE.name)
         </th>
-        <th></th>
+        <th>
+            Ver más información
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -70,7 +72,10 @@
                 <div class="col text-center">
                     @*Escondidas las opciones de editar y borrar en Index por requerimientos del sistema*@
                     @*@Html.ActionLink("Edit", "Edit", new { id = item.idProyectoPK }) |*@
-                    @Html.ActionLink("Más información", "Details", new { id = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+                    @*@Html.ActionLink("Más información", "Details", new { id = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })*@
+                    <a href="@Url.Action("Details","PROYECTO", new {id = item.idProyectoPK})" style="float:unset">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
                     @*@Html.ActionLink("Delete", "Delete", new { id = item.idProyectoPK })*@
                 </div>
             </td>

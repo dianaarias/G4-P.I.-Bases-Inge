@@ -91,7 +91,35 @@ table {
     top: 50%;
 }
 
-dl:after {
+dl {
+    padding: 0.5em;
+}
+
+/** Nuevo formato para Details */
+dt {
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: left;
+    font-weight: bold;
+    color: #08415c;
+}
+
+dt::after {
+    content: ":";
+}
+
+dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+}
+
+.boton-icono {
+    padding: 10px;
+}
+
+/** Formato para Details obsoleto */
+/*dl:after {
     content: "";
     display: table;
     clear: both;
@@ -151,7 +179,7 @@ dt + dt + dd {
 
 dt + dt + dd + dt {
     margin-top: 2em;
-}
+}*/
 
 .utilities {
     margin-top: 5rem;

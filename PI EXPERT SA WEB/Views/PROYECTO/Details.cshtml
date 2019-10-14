@@ -4,13 +4,16 @@
     ViewBag.Title = "Details";
 }
 
-<a href="@Url.Action("Delete","PROYECTO", new { id = Model.idProyectoPK })" style="float:right">
+<a href="@Url.Action("Delete","PROYECTO", new { id = Model.idProyectoPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
-<a href="@Url.Action("Edit","PROYECTO", new { id = Model.idProyectoPK })" style="float:right">
+<a href="@Url.Action("Edit","PROYECTO", new { id = Model.idProyectoPK })" class="boton-icono" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30" />
 </a>
 
+<a href="@Url.Action("Index","PROYECTO", new { id = Model.idProyectoPK })" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
 <h2>Resumen de Proyecto</h2>
 <div class="separador"></div>
 
@@ -18,7 +21,7 @@
     <h4>Datos de Proyecto</h4>
 
     <dl class="dl-horizontal">
-        <dt>
+        <dt class>
             @Html.DisplayNameFor(model => model.idProyectoPK)
         </dt>
 
@@ -146,7 +149,7 @@
 <p>
     @*@Html.ActionLink("Modificar", "Edit", new { id = Model.idProyectoPK }) |*@
     <div class="col text-center">
-        @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })
+        @*@Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })*@
     </div>
         
 </p>
