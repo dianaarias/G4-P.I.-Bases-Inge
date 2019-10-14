@@ -15,12 +15,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: MODULO
-        public ActionResult Index()
+        public ActionResult Index(string busqueda)
         {
-            var mODULO = db.MODULO.Include(m => m.PROYECTO);
-            return View(mODULO.ToList());
-            //return View();
+            List<MODULO> lmodulo = db.MODULO.Where(x => x.PROYECTO.nombre == busqueda || busqueda == null).ToList();
+            //ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            return View(lmodulo);
         }
+
+
+        //// GET: MODULO
+        //public ActionResult Index()
+        //{
+        //    var mODULO = db.MODULO.Include(m => m.PROYECTO);
+        //    return View(mODULO.ToList());
+        //    //return View();
+        //}
+
+
 
         // GET: MODULO/Details/5
         public ActionResult Details(int? idModuloPK, int? idProyectoPK)
@@ -37,12 +48,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(mODULO);
         }
 
+
         // GET: MODULO/Create
         public ActionResult Create()
         {
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
+
 
         // POST: MODULO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -58,7 +71,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", mODULO.idProyectoPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", mODULO.idProyectoPK);
             return View(mODULO);
         }
 
@@ -70,12 +83,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
-            if (mODULO == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", mODULO.idProyectoPK);
+            //List<MODULO> lmodulo = db.MODULO.Where(x => x.PROYECTO.idProyectoPK == idProyectoPK).ToList();
+
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "idModuloPK", mODULO.idProyectoPK);
             return View(mODULO);
+
+            //return View(lmodulo);
         }
 
         // POST: MODULO/Edit/5

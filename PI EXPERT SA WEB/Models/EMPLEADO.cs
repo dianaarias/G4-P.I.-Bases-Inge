@@ -19,6 +19,7 @@ namespace PI_EXPERT_SA_WEB.Models
         {
             this.PROYECTO = new HashSet<PROYECTO>();
             this.HABILIDADES = new HashSet<HABILIDADES>();
+            this.PROYECTO = new HashSet<PROYECTO>();
             this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
             this.ROL = new HashSet<ROL>();
         }
