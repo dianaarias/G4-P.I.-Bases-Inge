@@ -17,11 +17,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // Genera la vista index con todos los clientes o Con el nombre de los clientes a buscar
         public ActionResult Index(string busqueda)
         {
-            //Se usa el atributo busqueda para filtrar por nombre a los clientes
+            //Se usa el atributo busqueda para filtrar por nombre a los clientes, en caso de no filtrar nada se mostraran todos
             return View(db.CLIENTE.Where(x=>x.name.Contains(busqueda) || busqueda == null).ToList());
         }
 
         // GET: CLIENTE/Details/5
+        // Detalles para cada cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,6 +38,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: CLIENTE/Create
+        // Crear nuevo cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Create()
         {
             return View();
@@ -67,6 +69,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: CLIENTE/Edit/5
+        // Editar un cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -98,6 +101,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: CLIENTE/Delete/5
+        // Borrar un cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Delete(string id)
         {
             if (id == null)
