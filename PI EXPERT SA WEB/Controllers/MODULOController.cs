@@ -18,27 +18,34 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
 
+        ////INDEX ORIGINAL
+        ////GET: MODULO
+        //public ActionResult Index()
+        //{
+        //    //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
+        //    List<PROYECTO> proyectos = new PROYECTOController().GetProyecto();
+        //    List<MODULO> modulos = db.MODULO.ToList();
+        //    return View(modulos);
+        //}
+
+
+
+
         //INDEX ORIGINAL
-         //GET: MODULO
+        //GET: MODULO
         public ActionResult Index()
         {
-            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
-
-            List<PROYECTO> proyectos = new PROYECTOController().GetProyecto();
-            List<MODULO> modulos = db.MODULO.ToList();
-
-            return View(modulos);
+            List<MODULO> Lmodulo = db.MODULO.ToList();
+            ViewBag.Lmodulo = new SelectList(Lmodulo, "idProyectoPK", "nombre");
+            return View();
         }
 
-
-
-        public JsonResult ObtenerListaModulos(int idProyectoPK) {
-
+        public JsonResult ObtenerNombreModulo(int idProyectoPK)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
             List<MODULO> ListaModulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             return Json(ListaModulo, JsonRequestBehavior.AllowGet);
         }
-
-
 
 
 
