@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
+    //Empieza el script lo que permite conseguir las Provincias, Cantones y Distritos
     $(document).ready(function () {
         getProvincia();
     })
@@ -99,6 +100,7 @@
 
         <div class="form-group text-center">
             <div class="col-md-offset-2 col-md-10">
+                @*Aqui se muestran los botones de aceptar y cancelar *@
                 <button type="submit" value="Aceptar" class="btn">
                     <img src="~/images/check-symbol.svg" width="30" height="30">
                 </button>

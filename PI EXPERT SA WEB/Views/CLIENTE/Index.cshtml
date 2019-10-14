@@ -8,12 +8,13 @@
 <a href="@Url.Action("Create","CLIENTE", new { })" style="float:right">
     <img src="~/images/plus.svg" width="30" height="30" />
 </a>
+@*El metodo para el buscador *@
 @using (Html.BeginForm("Index", "CLIENTE", FormMethod.Get))
 {
-    @Html.TextBox("busqueda")<input type="submit" value="Busqueda"/>
+    @Html.TextBox("busqueda")<input type="submit" value="Busqueda" />
 }
 <table class="table table-bordered table-striped">
-    
+
     <tr>
 
         <th>
@@ -50,13 +51,14 @@
                     @Html.DisplayFor(modelItem => item.correo)
                 </td>
                 <td>
+                    @*Aqui se muestra el boton para buscar detalles*@
                     <a href="@Url.Action("Details", "CLIENTE", new { id = item.cedulaPK })">
                         <img src="~/images/lightbulb.svg" width="30" height="30" />
                     </a>
                 </td>
-        </tr>
-    }
+            </tr>
+        }
     }
 
 </table>
-    
+
