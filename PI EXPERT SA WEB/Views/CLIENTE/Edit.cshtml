@@ -2,7 +2,12 @@
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+    <a href="@Url.Action("Details","CLIENTE", new {id=Model.cedulaPK})" class="boton-icono" style="float:left">
+        <img src="~/images/left-arrow.svg" width="30" height="30" />
+    </a>
 
 @using (Html.BeginForm())
 {
@@ -78,14 +83,9 @@
             </div>
         </div>
 
-        <div class="col text-center ">
-            @*Aqui se muestran los botones de aceptar y cancelar *@
-            <button type="submit" value="Aceptar" class="btn">
-                <img src="~/images/check-symbol.svg" width="30" height="30">
-            </button>
-            <a href="@Url.Action("Index","CLIENTE", new { })" style="float:right">
-                <img src="~/images/close.svg" width="30" height="30" />
-            </a>
+        <div class="col-md-auto" style="margin-top: 50px">
+            @*Aqui se muestran el boton de aceptar *@
+            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
 
         </div>
     </div>

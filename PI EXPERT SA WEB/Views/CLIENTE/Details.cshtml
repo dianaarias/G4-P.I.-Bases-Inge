@@ -43,16 +43,20 @@
         });
 </script>
 @*Aqui se muestran los botones de Borrar y Editar *@
-<a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+<a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
-<a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+<a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" class="boton-icono" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30" />
+</a>
+@*Aqui se muestra el boton para retornar al indice *@
+<a href="@Url.Action("Index","CLIENTE")" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 
 <div class="form-horizontal text-center">
-    <h4>Informacion del Cliente</h4>
-    <hr />
+    <h2>Informacion del Cliente</h2>
+    <hr/>
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.cedulaPK, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
@@ -108,7 +112,5 @@
         </div>
     </div>
 </div>
-@*Aqui se muestra el boton para retornar al indice *@
-<div class="col text-center ">
-    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-primary btn-large" })
-</div>
+
+
