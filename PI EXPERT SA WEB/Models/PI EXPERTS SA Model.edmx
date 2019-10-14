@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="cedulaPK" />
           </Key>
-          <Property Name="cedulaPK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="cedulaPK" Type="nchar" MaxLength="9" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="apellido1" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="apellido2" Type="nvarchar" MaxLength="64" />
@@ -298,7 +298,7 @@
           <Key>
             <PropertyRef Name="cedulaPK" />
           </Key>
-          <Property Name="cedulaPK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="cedulaPK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="apellido2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
