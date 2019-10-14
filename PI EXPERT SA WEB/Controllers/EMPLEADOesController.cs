@@ -52,9 +52,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.EMPLEADO.Add(eMPLEADO);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.EMPLEADO.Any(model => model.cedulaPK == eMPLEADO.cedulaPK))
+                {
+                    db.EMPLEADO.Add(eMPLEADO);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("cedulaPK", "La cédula ya se encuentra en el sistema");
+                }
             }
 
             return View(eMPLEADO);
