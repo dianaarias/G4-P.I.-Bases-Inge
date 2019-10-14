@@ -10,109 +10,127 @@ using PI_EXPERT_SA_WEB.Models;
 
 namespace PI_EXPERT_SA_WEB.Controllers
 {
-    public class CLIENTEController : Controller
+    public class HABILIDADES2Controller : Controller
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
-        // GET: CLIENTE
-        // Genera la vista index con todos los clientes o Con el nombre de los clientes a buscar
-        public ActionResult Index(string busqueda)
+        // GET: HABILIDADES2
+        public ActionResult Index(string id)
         {
-            //Se usa el atributo busqueda para filtrar por nombre a los clientes
-            return View(db.CLIENTE.Where(x=>x.name.Contains(busqueda) || busqueda == null).ToList());
+            HABILIDADES modelo = new HABILIDADES();
+            List<HABILIDADES> aList;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            aList = new List<HABILIDADES>();
+            modelo.listaHabilidades = db.HABILIDADES.ToList();
+            for (int j = 0; j < modelo.listaHabilidades.Count; j++)
+            {
+                if (id.Equals(modelo.listaHabilidades.ElementAt(j).cedulaEmpleadoPK))
+                {
+                    aList.Add(modelo.listaHabilidades.ElementAt(j));
+                }
+            }
+            return View(aList.ToList());
         }
 
-        // GET: CLIENTE/Details/5
+        // GET: HABILIDADES2/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            if (hABILIDADES == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            return View(hABILIDADES);
         }
 
-        // GET: CLIENTE/Create
+        // GET: HABILIDADES2/Create
         public ActionResult Create()
         {
+            ViewBag.cedulaEmpleadoPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             return View();
         }
 
-        // POST: CLIENTE/Create
+        // POST: HABILIDADES2/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,name,apellido1,apellido2,correo,telefono,provincia,canton,distrito")] CLIENTE cLIENTE)
+        public ActionResult Create([Bind(Include = "cedulaEmpleadoPK,habilidadPK")] HABILIDADES hABILIDADES)
         {
             if (ModelState.IsValid)
             {
-                db.CLIENTE.Add(cLIENTE);
+                db.HABILIDADES.Add(hABILIDADES);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cLIENTE);
+            ViewBag.cedulaEmpleadoPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", hABILIDADES.cedulaEmpleadoPK);
+            return View(hABILIDADES);
         }
 
-        // GET: CLIENTE/Edit/5
+        // GET: HABILIDADES2/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            if (hABILIDADES == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            ViewBag.cedulaEmpleadoPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", hABILIDADES.cedulaEmpleadoPK);
+            return View(hABILIDADES);
         }
 
-        // POST: CLIENTE/Edit/5
+        // POST: HABILIDADES2/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,name,apellido1,apellido2,correo,telefono,provincia,canton,distrito")] CLIENTE cLIENTE)
+        public ActionResult Edit([Bind(Include = "cedulaEmpleadoPK,habilidadPK")] HABILIDADES hABILIDADES)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cLIENTE).State = EntityState.Modified;
+                db.Entry(hABILIDADES).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cLIENTE);
+            ViewBag.cedulaEmpleadoPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", hABILIDADES.cedulaEmpleadoPK);
+            return View(hABILIDADES);
         }
 
-        // GET: CLIENTE/Delete/5
+        // GET: HABILIDADES2/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            if (cLIENTE == null)
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            if (hABILIDADES == null)
             {
                 return HttpNotFound();
             }
-            return View(cLIENTE);
+            return View(hABILIDADES);
         }
 
-        // POST: CLIENTE/Delete/5
+        // POST: HABILIDADES2/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            CLIENTE cLIENTE = db.CLIENTE.Find(id);
-            db.CLIENTE.Remove(cLIENTE);
+            HABILIDADES hABILIDADES = db.HABILIDADES.Find(id);
+            db.HABILIDADES.Remove(hABILIDADES);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

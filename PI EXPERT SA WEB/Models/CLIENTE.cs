@@ -37,7 +37,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [StringLength(maximumLength: 9, ErrorMessage = "Cedula invalida", MinimumLength = 9)]
         public string cedulaPK { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Nombre")]
+        [DisplayName("Nombre cliente")]
         //Campo Obligatorio
         [Required(ErrorMessage = "Este campo es obligatorio")]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
