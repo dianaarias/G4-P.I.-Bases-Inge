@@ -15,10 +15,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: CLIENTE
-        // Genera la vista index con todos los clientes
-        public ActionResult Index()
+        // Genera la vista index con todos los clientes o Con el nombre de los clientes a buscar
+        public ActionResult Index(string busqueda)
         {
-            return View(db.CLIENTE.ToList());
+            //Se usa el atributo busqueda para filtrar por nombre a los clientes
+            return View(db.CLIENTE.Where(x=>x.name.Contains(busqueda) || busqueda == null).ToList());
         }
 
         // GET: CLIENTE/Details/5

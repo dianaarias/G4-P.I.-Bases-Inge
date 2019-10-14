@@ -6,7 +6,7 @@
 
 <h2>Eliminar cliente</h2>
 
-<h3 class="text-center alert">¿Esta seguro que desea borrar?</h3>
+<h3 style="color:red" class="text-center alert">¿Esta seguro que desea borrar?</h3>
 <div class="form-horizontal text-center">
     <h4>Informacion del Cliente</h4>
     <hr />
@@ -64,8 +64,13 @@
         @Html.AntiForgeryToken()
 
         <div class="col text-center">
-            <input type="submit" value="Borrar" class="btn btn-primary btn-large" />
-            @Html.ActionLink("Cancelar", "Details", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large" })
+            <button type="submit" value="Aceptar" class="btn">
+                <img src="~/images/check-symbol.svg" width="30" height="30">
+            </button>
+            
+            <a href="@Url.Action("Details","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
+                <img src="~/images/close.svg" width="30" height="30" />
+            </a>
         </div>
     }
 </div>

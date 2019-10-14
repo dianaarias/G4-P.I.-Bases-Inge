@@ -140,6 +140,7 @@
     <Compile Include="Controllers\EMPLEADOesController.cs" />
     <Compile Include="Controllers\HABILIDADESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
     <Compile Include="Controllers\MODULOController.cs" />
     <Compile Include="Controllers\RHVersion2Controller.cs" />
@@ -147,50 +148,48 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CLIENTE.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EMPLEADO.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HABILIDADES.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginCliente.cs">
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginEmpleado.cs">
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModeloIntermedio.cs" />
+    <Compile Include="Models\ModeloLogin.cs" />
     <Compile Include="Models\MODULO.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PI EXPERT SA Model.Context.cs">
+    <Compile Include="Models\PI EXPERTS SA Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PI EXPERT SA Model.Context.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PI EXPERT SA Model.cs">
+    <Compile Include="Models\PI EXPERTS SA Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PI EXPERT SA Model.Designer.cs">
+    <Compile Include="Models\PI EXPERTS SA Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PROYECTO.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\REQUERIMIENTO.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ROL.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -209,29 +208,21 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\check-symbol.svg" />
+    <Content Include="images\close.svg" />
     <Content Include="images\deleteImg.svg" />
     <Content Include="images\editImg.svg" />
-    <Content Include="images\left-arrow.svg" />
     <Content Include="images\lightbulb.svg" />
-    <Content Include="images\more.svg" />
     <Content Include="images\plus.svg" />
-    <Content Include="images\success.svg" />
-    <Content Include="Models\PI EXPERT SA Model.Context.tt">
+    <Content Include="Models\PI EXPERTS SA Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PI EXPERT SA Model.Context.cs</LastGenOutput>
-      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
+      <LastGenOutput>PI EXPERTS SA Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PI EXPERT SA Model.tt">
+    <Content Include="Models\PI EXPERTS SA Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
-      <LastGenOutput>PI EXPERT SA Model.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\PI EXPERT SA Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PI EXPERT SA Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PI EXPERT SA Model.edmx.diagram">
-      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
+      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
+      <LastGenOutput>PI EXPERTS SA Model.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -255,6 +246,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\PI EXPERTS SA Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PI EXPERTS SA Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PI EXPERTS SA Model.edmx.diagram">
+      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -333,10 +331,10 @@
     <Content Include="Views\RHVersion2\Index.cshtml" />
     <Content Include="Views\RHVersion2\Create.cshtml" />
     <Content Include="Views\RHVersion2\Details.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PROYECTOController2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -2,10 +2,49 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <script>
+
+        $(document).ready(function () {
+            if (@Html.DisplayFor(model => model.provincia) == 1) {
+                $("#provincia").html("San José");
+            } else if(@Html.DisplayFor(model => model.provincia) == 2){
+                $("#provincia").html("Alajuela");
+            } else if(@Html.DisplayFor(model => model.provincia) == 3){
+                $("#provincia").html("Cartago");
+            } else if(@Html.DisplayFor(model => model.provincia) == 4){
+                $("#provincia").html("Heredia");
+            } else if(@Html.DisplayFor(model => model.provincia) == 5){
+                $("#provincia").html("Guanacaste");
+            } else if(@Html.DisplayFor(model => model.provincia) == 6){
+                $("#provincia").html("Puntarenas");
+            } else if(@Html.DisplayFor(model => model.provincia) == 7){
+                $("#provincia").html("Limón");
+            }
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/cantones.json",
+                data: {},
+                success: function (data) {
+                    $("#canton").html(data[@Html.DisplayFor(model => model.canton)]);
+                }
+            });
+
+            $.ajax({
+                dataType: "json",
+                url: "https://ubicaciones.paginasweb.cr/provincia/" + @Html.DisplayFor(model => model.provincia) + "/canton/"+@Html.DisplayFor(model => model.canton)+"/distritos.json",
+                data: {},
+                success: function (data) {
+                    $("#distrito").html(data[@Html.DisplayFor(model => model.distrito)]);
+                }
+            });
+        });
+    </script>
 
 <a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
-    <img src="~/images/deleteImg.svg" width="30" height="30"/>   
+    <img src="~/images/deleteImg.svg" width="30" height="30"/>
 </a>
 <a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30"/>
@@ -15,51 +54,57 @@
     <h4>Informacion del Cliente</h4>
     <hr />
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.cedulaPK, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.cedulaPK, new { disabled = "disabled" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.name, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.apellido1, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.apellido2, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.correo, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.telefono, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.provincia, new { disabled = "disabled" })
+            <span id="provincia" ></span>
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.canton, new { disabled = "disabled" })
+            <span id="canton" ></span>
         </div>
     </div>
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+    <div class="form-group row offset-3" >
+        @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.distrito, new { disabled = "disabled" })
+            <span id="distrito"></span>
         </div>
     </div>
 </div>
