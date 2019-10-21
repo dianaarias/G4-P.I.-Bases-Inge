@@ -17,9 +17,20 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index(string busquedaProyecto, string busquedaModulo)
         {
-
-            var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
-            return View(rEQUERIMIENTO.ToList());
+            if (busquedaModulo == null)
+            {
+                busquedaModulo = "";
+            }
+            
+            if (busquedaProyecto != null) { 
+                var rEQUERIMIENTO = db.SP_RecuperarRequerimientos(busquedaProyecto, busquedaModulo); 
+                return View(rEQUERIMIENTO.ToList());
+            }
+            else
+            {
+                var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
+                return View(rEQUERIMIENTO.ToList());
+            }
         }
 
         // GET: REQUERIMIENTO/Details/5
@@ -38,7 +49,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idProyecto, int? idModulo)
         {
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
