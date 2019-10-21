@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Gr02Proy4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Gr02Proy4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CLIENTE">
           <Key>
             <PropertyRef Name="cedulaPK" />
@@ -239,6 +239,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_RecuperarRequerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreProyecto" Type="nvarchar" Mode="In" />
+          <Parameter Name="nombreModulo" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="Gr02Proy4ModelStoreContainer">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
@@ -290,8 +294,7 @@
             <End Role="LoginEmpleado" EntitySet="LoginEmpleado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Gr02Proy4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -599,7 +602,22 @@
             <End Role="PROYECTO" EntitySet="PROYECTO" />
             <End Role="ROL" EntitySet="ROL" />
           </AssociationSet>
+          <FunctionImport Name="SP_RecuperarRequerimientos" ReturnType="Collection(Gr02Proy4Model.SP_RecuperarRequerimientos_Result)">
+            <Parameter Name="nombreProyecto" Mode="In" Type="String" />
+            <Parameter Name="nombreModulo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="SP_RecuperarRequerimientos_Result">
+          <Property Type="Int32" Name="idRequerimientoPK" Nullable="false" />
+          <Property Type="Int32" Name="idModuloPK" Nullable="false" />
+          <Property Type="Int32" Name="idProyectoPK" Nullable="false" />
+          <Property Type="String" Name="estado" Nullable="false" MaxLength="32" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="complejidad" Nullable="false" />
+          <Property Type="Int32" Name="duracionEstimada" Nullable="true" />
+          <Property Type="String" Name="cedulaDesarrolladorFK" Nullable="false" MaxLength="9" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -720,6 +738,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_RecuperarRequerimientos" FunctionName="Gr02Proy4Model.Store.SP_RecuperarRequerimientos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy4Model.SP_RecuperarRequerimientos_Result">
+                <ScalarProperty Name="idRequerimientoPK" ColumnName="idRequerimientoPK" />
+                <ScalarProperty Name="idModuloPK" ColumnName="idModuloPK" />
+                <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="complejidad" ColumnName="complejidad" />
+                <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
+                <ScalarProperty Name="cedulaDesarrolladorFK" ColumnName="cedulaDesarrolladorFK" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

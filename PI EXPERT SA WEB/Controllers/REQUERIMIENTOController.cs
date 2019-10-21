@@ -15,8 +15,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: REQUERIMIENTO
-        public ActionResult Index()
+        public ActionResult Index(string busquedaProyecto, string busquedaModulo)
         {
+
             var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
             return View(rEQUERIMIENTO.ToList());
         }
