@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<a href="@Url.Action("Create", "CLIENTE", new {})" style="float:right">
+<a href="@Url.Action("Create", "REQUERIMIENTO", new {idProyectoPK =  , idModuloPK =})" style="float:right">
     <img src="~/images/plus.svg" width="30" height="30" />
 </a>
 @using (Html.BeginForm("Index", "REQUERIMIENTO", FormMethod.Get))
