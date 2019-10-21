@@ -31,11 +31,11 @@ namespace PI_EXPERT_SA_WEB.Models
         public int idProyectoPK { get; set; }
 
         [DisplayName("Costo Estimado")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
+        [RegularExpression("^$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$", ErrorMessage = "Caracteres inválidos")]
         public decimal costoEstimado { get; set; }
 
         [DisplayName("Costo Real")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
+        [RegularExpression("^$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
         public Nullable<decimal> costoReal { get; set; }
 
         [DisplayName("Fecha de Inicio")]
@@ -73,7 +73,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public Nullable<int> duracionReal { get; set; }
 
         [DisplayName("Costo Desarrollador")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
+        [RegularExpression("^$?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9][0-9])?$", ErrorMessage = "Caracteres inválidos: Introducir números solamente")]
         public Nullable<decimal> costoDesarrollador { get; set; }
 
         [DisplayName("Líder")]
