@@ -338,6 +338,7 @@
     <Content Include="Views\REQUERIMIENTO\Details.cshtml" />
     <Content Include="Views\REQUERIMIENTO\Edit.cshtml" />
     <Content Include="Views\REQUERIMIENTO\Index.cshtml" />
+    <Content Include="Views\Shared\MostrarModulos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

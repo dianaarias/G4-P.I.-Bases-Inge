@@ -4,8 +4,35 @@
     ViewBag.Title = "Index";
 }
 
+@Html.DropDownList("Modulos", (SelectList)ViewBag.idModuloPK)
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#idProyectoPK").change(function () {
+            var proyectoID = $(this).val();
+            debugger
+            $.ajax({
+                type: "post",
+                url: "/REQUERIMIENTO/getListaModulos?idProyectoPK=" + proyectoID,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#idModuloPK").empty();
+                    $("#idModuloPK").append(response);
+                }
+            })
+        })
+    })
+</script>
+
 <h2>Index</h2>
 
+@if (ViewBag.Proyectos != null)
+{
+    @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
+}
+@Html.DropDownListFor(m => m.idModuloPK, new SelectList(""), "-- Seleccione modulo --", new { @class = "form-control" })
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -35,35 +62,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.complejidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.duracionEstimada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODULO.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.complejidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
