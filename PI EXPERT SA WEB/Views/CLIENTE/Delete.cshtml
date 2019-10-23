@@ -4,56 +4,60 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Eliminar cliente</h2>
+<a href="@Url.Action("Details", "CLIENTE", new { id=Model.cedulaPK })" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
 
-<h3 class="text-center alert">¿Esta seguro que desea borrar?</h3>
+<h2>Eliminar Cliente</h2>
+
+<h3 style="color:red" class="text-center alert">¿Está seguro de que desea borrar este Cliente?</h3>
 <div class="form-horizontal text-center">
-    <h4>Informacion del Cliente</h4>
+    <h2>Información del Cliente</h2>
     <hr />
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.name, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.apellido1, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.apellido2, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
+        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.correo, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.telefono, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.provincia, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.canton, new { disabled = "disabled" })
         </div>
     </div>
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
+        @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.distrito, new { disabled = "disabled" })
         </div>
@@ -63,9 +67,9 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="col text-center">
-            <input type="submit" value="Borrar" class="btn btn-primary btn-large" />
-            @Html.ActionLink("Cancelar", "Details", new { id = Model.cedulaPK }, new { @class = "btn btn-primary btn-large" })
+        <div class="col-md-auto" style="margin-top: 50px">
+            @*Aqui se muestran el boton de aceptar *@
+            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
         </div>
     }
 </div>

@@ -2,44 +2,35 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles</h2>
+<a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK })" class="boton-icono" style="float:right">
+    <img src="~/images/deleteImg.svg" width="30" height="30" />
+</a>
+<a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" class="boton-icono" style="float:right">
+    <img src="~/images/editImg.svg" width="30" height="30" />
+</a>
+
+<a href="@Url.Action("Index","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK })" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+<h2>Resumen de Módulo</h2>
+<div class="separador"></div>
 
 <div>
+    <h4>Datos del Módulo</h4>
 
 
-    @*<a href="@Url.Action("Delete","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
-            <img src="~/images/deleteImg.svg" width="30" height="30" />
-        </a>
-        <a href="@Url.Action("Edit","CLIENTE", new { id = Model.cedulaPK })" style="float:right">
-            <img src="~/images/editImg.svg" width="30" height="30" />
-        </a>*@
+    <d1 class="d1-horizontal">
+        <dt class>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
 
-    @*<div class="row">
-            <div class="col-md-11 utilities" style="margin-top: 3rem; text-align: right">
-                @Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})
-                <img src="~/edit.png" width="30rem" height="30rem" alt="editarequipo">
-                <img src="~/trash.png" width="30rem" height="30rem" alt="borrarequipo">
-            </div>
-        </div>*@
-
-
-
-    <a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
-        <img src="~/edit.png" width="30" height="30" />
-    </a>
-
-    <a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" style="float:right">
-        <img src="~/trash.png" width="30" height="30" />
-    </a>
-
-
-
-    @*<h4>MODULO</h4>*@
-
-    <hr />
-    <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.idModuloPK)
@@ -49,15 +40,7 @@
             @Html.DisplayFor(model => model.idModuloPK)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
+        <dt class>
             @Html.DisplayNameFor(model => model.idProyectoPK)
         </dt>
 
@@ -73,18 +56,7 @@
             @Html.DisplayFor(model => model.fechaInicio)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PROYECTO.cedulaClienteFK)
-        </dd>
-    </dl>
+    </d1>
 </div>
 
 
-<p>
-    @*@Html.ActionLink("Editar", "Edit", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK }, new { @class = "btn btn-info btn-large" })*@
-    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large" })
-</p>

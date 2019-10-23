@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Scripts/scriptLocacion.js")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     <link href="~/Styles/custom.css" rel="stylesheet" />
 </head>
 
@@ -41,7 +43,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Empleados</a>
+                        <a class="nav-link" href="~/EMPLEADOes/Index">Empleados</a>
                     </li>
 
                     <li class="nav-item">
@@ -69,7 +71,7 @@
             </div>
         </div>
     </nav><nav class="navbar navbar-expand-lg navbar-light navbar-styles fixed-top">
-        <div class="container">
+        <div class="container"> 
 
             <a class="navbar-brand" href="#">
                 <img src="~/planet.svg" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -100,7 +102,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="~/RHVersion2/Index">Empleados</a>
+                        <a class="nav-link" href="~/EMPLEADOes/Index">Empleados</a>
                     </li>
 
                     <li class="nav-item">
@@ -121,7 +123,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Mis datos</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="~/Login/login">Salir</a>
+                            <a class="dropdown-item" href="#">Salir</a>
                         </div>
                     </li>
                 </ul>

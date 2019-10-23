@@ -2,99 +2,111 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    //Empieza el script lo que permite conseguir las Provincias, Cantones y Distritos
+    $(document).ready(function () {
+        getProvincia();
+    })
+</script>
+<a href="@Url.Action("Index","CLIENTE", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Agregar nuevo cliente</h4>
-    <hr />
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.cedulaPK,  htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.cedulaPK, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.cedulaPK, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h2>Crear Cliente</h2>
+        <div class="required-field-asterisk">
+            <p>*<span style="color:black">Campos requeridos</span> </p>
         </div>
-    </div>
 
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.name,  htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row offset-3 required">
+            @Html.LabelFor(model => model.cedulaPK, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
 
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido1,  htmlAttributes: new { @class = "control-label col-md-2",@align ="left" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.apellido2, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.apellido2, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.correo,  htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.provincia,  htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.provincia, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.canton,  htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.canton, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.distrito,  htmlAttributes: new { @class = "control-label col-md-2" ,@align ="left"})
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.distrito, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    
-
-        <div class="form-group text-center">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Agregar" class="btn btn-outline-primary" />
-                @Html.ActionLink("Cancelar", "Index")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cedulaPK, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cedulaPK, "", new { @class = "text-danger" })
             </div>
         </div>
-</div>
+
+        <div class="form-group row offset-3 required">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3 required">
+            @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.apellido1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.apellido1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3">
+            @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.apellido2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.apellido2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3 required">
+            @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.correo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.correo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3">
+            @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3">
+            @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.provincia,Enumerable.Empty<SelectListItem>(), "--Provincia--", new { @class = "form-control", onchange = "getCanton()" })
+                @Html.ValidationMessageFor(model => model.provincia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3">
+            @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.canton, Enumerable.Empty<SelectListItem>(), "--Cantón--", new { @class = "form-control", onchange = "getDistrito()" })
+                @Html.ValidationMessageFor(model => model.canton, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row offset-3">
+            @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.distrito, Enumerable.Empty<SelectListItem>(), "--Distritos--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.distrito, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group text-center">
+            <div class="col-md-auto" style="margin-top: 50px">
+                @*Aqui se muestran los botones de aceptar y cancelar *@
+                <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+            </div>
+        </div>
+    </div>
 
 }
 
@@ -102,4 +114,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
 }

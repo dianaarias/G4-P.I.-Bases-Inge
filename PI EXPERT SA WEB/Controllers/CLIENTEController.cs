@@ -15,13 +15,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: CLIENTE
-        // Genera la vista index con todos los clientes
-        public ActionResult Index()
+        // Genera la vista index con todos los clientes o Con el nombre de los clientes a buscar
+        public ActionResult Index(string busqueda)
         {
-            return View(db.CLIENTE.ToList());
+            //Se usa el atributo busqueda para filtrar por nombre a los clientes, en caso de no filtrar nada se mostraran todos
+            return View(db.CLIENTE.Where(x=>x.name.Contains(busqueda) || busqueda == null).ToList());
         }
 
         // GET: CLIENTE/Details/5
+        // Detalles para cada cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: CLIENTE/Create
+        // Crear nuevo cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Create()
         {
             return View();
@@ -51,15 +54,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CLIENTE.Add(cLIENTE);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.CLIENTE.Any(model => model.cedulaPK == cLIENTE.cedulaPK))
+                {
+                    db.CLIENTE.Add(cLIENTE);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("cedulaPK","La cédula ya se encuentra en el sistema");
+                }
             }
 
             return View(cLIENTE);
         }
 
         // GET: CLIENTE/Edit/5
+        // Editar un cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -91,6 +102,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: CLIENTE/Delete/5
+        // Borrar un cliente, no se hizo ninguna modificacion en base a la plantilla
         public ActionResult Delete(string id)
         {
             if (id == null)

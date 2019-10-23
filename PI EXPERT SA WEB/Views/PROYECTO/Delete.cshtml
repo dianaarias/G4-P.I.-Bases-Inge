@@ -4,9 +4,15 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Borrar Proyecto</h2>
-<div class="separador"></div>
+@*Delete es una vista que permite a un usuario borrar un proyecto y todos sus atributos del sistema.
+    Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el proyecto en cuestión.*@
 
+<a href="@Url.Action("Details","PROYECTO", new {id=Model.idProyectoPK})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+<h2>Borrar Proyecto</h2>
+
+<div class="separador"></div>
 
 <div>
     <h4 style="color:red">¿Está seguro de que desea borrar este proyecto y los datos asociados al mismo?</h4> <p></p>
@@ -115,9 +121,11 @@
 
         <div class="col text-center">
             <div class="form-group">
-                <div class="col-md-7 col-md-10" style="margin-top: 50px">
-                    <input type="submit" value="Aceptar" class="btn btn-info btn-large" style="margin-left: 150px" />
-                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })
+                <div class="col-md-auto" style="margin-top: 50px">
+                    @*Comenta botones textuales*@
+                    @*<input type="submit" value="Aceptar" class="btn btn-info btn-large" style="margin-left: 150px" />*@
+                    @*@Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })*@
+                    <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
                 </div>
             </div>
         </div>

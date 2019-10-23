@@ -4,11 +4,14 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<a href="@Url.Action("Index", new {id = Model.cedulaEmpleadoPK })" style="float:left">
+        <img src="~/images/left-arrow.svg" width="40" height="30" />
+ </a>
+<h2>Eliminar habilidad</h2>
+<h3 class="text-center alert">¿Esta seguro que desea borrar?</h3>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>HABILIDADES</h4>
+    <h4>Habilidad</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,17 +19,20 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EMPLEADO.nombre)
+            @Html.DisplayFor(model => model.habilidadPK)
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group text-center">
+            @*<input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", new { id = Model.cedulaEmpleadoPK })*@
+            <input type="image" src="~/images/deleteImg.svg" alt=”submit” name=”submit” width="50" height="50" />
         </div>
     }
 </div>
+
