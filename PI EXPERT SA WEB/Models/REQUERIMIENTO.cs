@@ -11,17 +11,45 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class REQUERIMIENTO
     {
+        
         public int idRequerimientoPK { get; set; }
+        
+        
         public int idModuloPK { get; set; }
+        
+        
         public int idProyectoPK { get; set; }
+
+        [DisplayName("Estado")]
         public string estado { get; set; }
+        
+        
+        [DisplayName("Fecha de Inicio")]
+        [Required(ErrorMessage = "Campo requerido")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime fecha { get; set; }
+
+        [DisplayName("Nombre de Requerimiento")]
+        [StringLength(maximumLength: 64, MinimumLength = 1, ErrorMessage = "No puede introducir nombres de más de 64 caracteres")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres inválidos")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string nombre { get; set; }
+
+        [DisplayName("Complejidad")]
         public int complejidad { get; set; }
+
+        [DisplayName("Duración Estimada")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inválidos")]
         public Nullable<int> duracionEstimada { get; set; }
+
+        [DisplayName("Desarrollador Asignado")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string cedulaDesarrolladorFK { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }

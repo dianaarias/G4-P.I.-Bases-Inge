@@ -40,6 +40,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Create()
         {
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             return View();
         }
@@ -59,6 +60,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             }
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rEQUERIMIENTO.idProyectoPK);
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
             return View(rEQUERIMIENTO);
         }
@@ -76,6 +78,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return HttpNotFound();
             }
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rEQUERIMIENTO.idProyectoPK);
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
             return View(rEQUERIMIENTO);
         }
@@ -94,6 +97,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rEQUERIMIENTO.idProyectoPK);
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
             return View(rEQUERIMIENTO);
         }
