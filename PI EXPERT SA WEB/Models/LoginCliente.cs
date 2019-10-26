@@ -6,6 +6,10 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace PI_EXPERT_SA_WEB.Models
 {
@@ -14,8 +18,11 @@ namespace PI_EXPERT_SA_WEB.Models
     
     public partial class LoginCliente
     {
+        [Required(ErrorMessage = "Nombre o cedula deben de ser digitados")]
         public string cedulaClientePK { get; set; }
+        [Required(ErrorMessage = "Nombre o cedula deben de ser digitados")]
         public string nombre { get; set; }
+        [Required(ErrorMessage = "Debe de digitar una contraseña")]
         public string password { get; set; }
     
         public virtual CLIENTE CLIENTE { get; set; }

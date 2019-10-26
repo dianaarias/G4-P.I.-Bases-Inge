@@ -18,14 +18,14 @@
                 <h3>Experts S.A</h3>
                 <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Correo o Nombre *" value="" />
+                        <input id="userName" type="text" class="form-control" placeholder="Correo o Nombre *" value="" />
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Contraseña *" value="" />
+                        <input id="userPassword" type="password" class="form-control" placeholder="Contraseña *" value="" />
                     </div>
                     <div class="form-group center">
                         <a href="~/PROYECTO">
-                            <input type="button" class="btnSubmit" value="Entrar"/>
+                            <input type="button" class="btnSubmit" value="Entrar" onclick="HandleIT()"/>
                         </a>
                     </div>                  
                     <div class="form-group">
@@ -35,3 +35,21 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function HandleIT() {
+            var name = document.getElementById('<%=userName.ClientID %>').value;
+            var address = document.getElementById('<%=userPassword.ClientID %>').value;
+
+            console.log('Usuario: ' + this.name + ' Password: ' + this.address);
+
+            //PageMethods.ProcessIT(name, address, onSucess, onError);
+            function onSucess(result) {
+                alert(result);
+            }
+
+            function onError(result) {
+                alert('Something wrong.');
+            }
+        }
+    </script>

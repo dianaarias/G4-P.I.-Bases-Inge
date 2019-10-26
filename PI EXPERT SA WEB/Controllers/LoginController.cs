@@ -11,7 +11,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
         
-        // Crear mapas de empleado y de cliente vacias
+        // Crear mapas de empleado y de cliente vacias 
 
             public LoginController()
         {
