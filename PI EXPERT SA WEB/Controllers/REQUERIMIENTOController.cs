@@ -41,6 +41,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
