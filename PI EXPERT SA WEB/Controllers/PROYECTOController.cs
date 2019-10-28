@@ -21,6 +21,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(pROYECTO.ToList());
         }
 
+
         // GET: PROYECTO/Details/5
         public ActionResult Details(int? id)
         {

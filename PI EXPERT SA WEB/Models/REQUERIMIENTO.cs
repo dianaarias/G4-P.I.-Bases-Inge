@@ -26,7 +26,8 @@ namespace PI_EXPERT_SA_WEB.Models
         public System.DateTime fechaEstado { get; set; }
         public string nombre { get; set; }
         public int complejidad { get; set; }
-        public Nullable<int> duracionEstimada { get; set; }
+        //public Nullable<int> duracionEstimada { get; set; }
+        public int duracionEstimada { get; set; }
         public string cedulaDesarrolladorFK { get; set; }
         public Nullable<System.DateTime> fechaInicio { get; set; }
         public Nullable<System.DateTime> fechaFin { get; set; }
