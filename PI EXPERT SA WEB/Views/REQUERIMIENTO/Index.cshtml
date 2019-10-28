@@ -4,18 +4,54 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@Html.DropDownList("Modulos", (SelectList)ViewBag.idModuloPK)
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#idProyectoPK").change(function () {
+            var proyectoID = $(this).val();
+            debugger
+            $.ajax({
+                type: "post",
+                url: "/REQUERIMIENTO/getListaModulos?idProyectoPK=" + proyectoID,
+                contentType: "html",
+                success: function (response) {
+                    debugger
+                    $("#idModuloPK").empty();
+                    $("#idModuloPK").append(response);
+                }
+            })
+        })
+    })
+</script>
+
+<h2>Index</h2>
+@*
+    @if (ViewBag.Proyectos != null)
+    {
+        @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
+    }
+    @Html.DropDownListFor(m => m.idModuloPK, new SelectList(""), "-- Seleccione modulo --", new { @class = "form-control" })
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <a href="@Url.Action("Create", "REQUERIMIENTO", new {idProyectoPK =  , idModuloPK =})" style="float:right">
+        <img src="~/images/plus.svg" width="30" height="30" />
+    </a>
+    @using (Html.BeginForm("Index", "REQUERIMIENTO", FormMethod.Get))
+    {
+        @Html.TextBox("busquedaProyecto")
+        @Html.TextBox("busquedaModulo")<input type="submit" value="Busqueda" />
+    }*@
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.fechaEstado)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
@@ -35,35 +71,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.complejidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.duracionEstimada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODULO.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaEstado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.complejidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
 
 </table>
