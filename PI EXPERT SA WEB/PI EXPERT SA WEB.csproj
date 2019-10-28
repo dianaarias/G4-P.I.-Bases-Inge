@@ -143,6 +143,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
     <Compile Include="Controllers\MODULOController.cs" />
+    <Compile Include="Controllers\REQUERIMIENTOController.cs" />
     <Compile Include="Controllers\RHVersion2Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -332,6 +333,11 @@
     <Content Include="Views\RHVersion2\Create.cshtml" />
     <Content Include="Views\RHVersion2\Details.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Create.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Delete.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Details.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Edit.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Index.cshtml" />
     <Content Include="Views\MODULO\ModuloPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
