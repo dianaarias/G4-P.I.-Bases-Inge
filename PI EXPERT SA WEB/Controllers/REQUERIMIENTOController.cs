@@ -15,22 +15,27 @@ namespace PI_EXPERT_SA_WEB.Controllers
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: REQUERIMIENTO
-        public ActionResult Index(string busquedaProyecto, string busquedaModulo)
+        public ActionResult Index()
         {
-            if (busquedaModulo == null)
-            {
-                busquedaModulo = "";
-            }
-            
-            if (busquedaProyecto != null) { 
-                var rEQUERIMIENTO = db.SP_RecuperarRequerimientos(busquedaProyecto, busquedaModulo); 
-                return View(rEQUERIMIENTO.ToList());
-            }
-            else
-            {
-                var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
-                return View(rEQUERIMIENTO.ToList());
-            }
+
+            ViewBag.Proyectos = new SelectList(getListaProyecto(), "idProyectoPK", "nombre");
+            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
+            return View(rEQUERIMIENTO.ToList());
+        }
+
+        public List<PROYECTO> getListaProyecto()
+        {
+            List<PROYECTO> proyectos = db.PROYECTO.ToList();
+            return proyectos;
+        }
+
+        public ActionResult getListaModulos(int idProyectoPK)
+        {
+            List<MODULO> modulos = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.modulos = new SelectList(modulos, "idModuloPK", "nombre");
+            return PartialView("MostrarModulos");
         }
 
         // GET: REQUERIMIENTO/Details/5
