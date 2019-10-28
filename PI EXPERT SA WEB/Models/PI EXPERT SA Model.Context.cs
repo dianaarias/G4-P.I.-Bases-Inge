@@ -32,10 +32,10 @@ namespace PI_EXPERT_SA_WEB.Models
         public virtual DbSet<HABILIDADES> HABILIDADES { get; set; }
         public virtual DbSet<MODULO> MODULO { get; set; }
         public virtual DbSet<PROYECTO> PROYECTO { get; set; }
-        public virtual DbSet<REQUERIMIENTO> REQUERIMIENTO { get; set; }
         public virtual DbSet<ROL> ROL { get; set; }
         public virtual DbSet<LoginCliente> LoginCliente { get; set; }
         public virtual DbSet<LoginEmpleado> LoginEmpleado { get; set; }
+        public virtual DbSet<REQUERIMIENTO> REQUERIMIENTO { get; set; }
     
         public virtual ObjectResult<SP_RecuperarRequerimientos_Result> SP_RecuperarRequerimientos(string nombreProyecto, string nombreModulo)
         {

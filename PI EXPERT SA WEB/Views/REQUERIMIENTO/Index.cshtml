@@ -27,23 +27,23 @@
 </script>
 
 <h2>Index</h2>
-
-@if (ViewBag.Proyectos != null)
-{
-    @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
-}
-@Html.DropDownListFor(m => m.idModuloPK, new SelectList(""), "-- Seleccione modulo --", new { @class = "form-control" })
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<a href="@Url.Action("Create", "REQUERIMIENTO", new {idProyectoPK =  , idModuloPK =})" style="float:right">
-    <img src="~/images/plus.svg" width="30" height="30" />
-</a>
-@using (Html.BeginForm("Index", "REQUERIMIENTO", FormMethod.Get))
-{
-    @Html.TextBox("busquedaProyecto")
-    @Html.TextBox("busquedaModulo")<input type="submit" value="Busqueda" />
-}
+@*
+    @if (ViewBag.Proyectos != null)
+    {
+        @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
+    }
+    @Html.DropDownListFor(m => m.idModuloPK, new SelectList(""), "-- Seleccione modulo --", new { @class = "form-control" })
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <a href="@Url.Action("Create", "REQUERIMIENTO", new {idProyectoPK =  , idModuloPK =})" style="float:right">
+        <img src="~/images/plus.svg" width="30" height="30" />
+    </a>
+    @using (Html.BeginForm("Index", "REQUERIMIENTO", FormMethod.Get))
+    {
+        @Html.TextBox("busquedaProyecto")
+        @Html.TextBox("busquedaModulo")<input type="submit" value="Busqueda" />
+    }*@
 
 <table class="table">
     <tr>
@@ -51,7 +51,7 @@
             @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.fechaEstado)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
@@ -78,7 +78,7 @@
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fecha)
+                @Html.DisplayFor(modelItem => item.fechaEstado)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nombre)
