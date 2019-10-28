@@ -87,7 +87,7 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="complejidad" Type="int" Nullable="false" />
           <Property Name="duracionEstimada" Type="int" />
-          <Property Name="cedulaDesarrolladorFK" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="cedulaDesarrolladorFK" Type="nchar" MaxLength="9" />
           <Property Name="fechaInicio" Type="datetime" />
           <Property Name="fechaFin" Type="datetime" />
         </EntityType>
@@ -132,7 +132,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MODULO_PROYECTO">
-          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
+          <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="MODULO" Type="Self.MODULO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PROYECTO">
@@ -180,7 +182,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REQUERIMIENTO_EMPLEADO">
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
+          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="0..1" />
           <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EMPLEADO">
@@ -192,7 +194,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REQUERIMIENTO_MODULO">
-          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MODULO">
@@ -564,7 +568,7 @@
             <End Role="MODULO" EntitySet="MODULO" />
             <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="SP_RecuperarRequerimientos_Result">
           <Property Type="Int32" Name="idRequerimientoPK" Nullable="false" />
           <Property Type="Int32" Name="idModuloPK" Nullable="false" />
@@ -590,14 +594,14 @@
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="complejidad" Type="Int32" Nullable="false" />
           <Property Name="duracionEstimada" Type="Int32" />
-          <Property Name="cedulaDesarrolladorFK" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="cedulaDesarrolladorFK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
           <Property Name="fechaInicio" Type="DateTime" Precision="3" />
           <Property Name="fechaFin" Type="DateTime" Precision="3" />
           <NavigationProperty Name="EMPLEADO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="REQUERIMIENTO" ToRole="EMPLEADO" />
           <NavigationProperty Name="MODULO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO" FromRole="REQUERIMIENTO" ToRole="MODULO" />
         </EntityType>
         <Association Name="FK_REQUERIMIENTO_EMPLEADO">
-          <End Type="Gr02Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.EMPLEADO" Role="EMPLEADO" Multiplicity="0..1" />
           <End Type="Gr02Proy4Model.REQUERIMIENTO" Role="REQUERIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EMPLEADO">
@@ -609,7 +613,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REQUERIMIENTO_MODULO">
-          <End Type="Gr02Proy4Model.MODULO" Role="MODULO" Multiplicity="1" />
+          <End Type="Gr02Proy4Model.MODULO" Role="MODULO" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Gr02Proy4Model.REQUERIMIENTO" Role="REQUERIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MODULO">
@@ -622,7 +628,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
