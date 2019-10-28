@@ -26,7 +26,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
         public ActionResult ModuloPartialView() {
-            return View();
+            var mODULO = db.MODULO;
+            return View(mODULO.ToList());
         }
 
 
