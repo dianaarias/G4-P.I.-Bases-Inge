@@ -23,7 +23,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [Display(Name = "Proyecto")]
         public int idProyectoPK { get; set; }
         public string estado { get; set; }
-        public System.DateTime fechaEstado { get; set; }
+        public Nullable<System.DateTime> fechaEstado { get; set; }
         public string nombre { get; set; }
         public int complejidad { get; set; }
         //public Nullable<int> duracionEstimada { get; set; }
