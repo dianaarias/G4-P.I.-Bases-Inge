@@ -10,30 +10,17 @@
 namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
     
-    public partial class REQUERIMIENTO
+    public partial class SP_RecuperarRequerimientos_Result
     {
-        
         public int idRequerimientoPK { get; set; }
-        [Required]
-        [Display(Name ="Modulo")]
         public int idModuloPK { get; set; }
-        public IEnumerable<SelectListItem> Modulos { get; set; }
-        [Required]
-        [Display(Name ="Proyecto")]
         public int idProyectoPK { get; set; }
-        public IEnumerable<SelectListItem> Proyectos { get; set; }
         public string estado { get; set; }
         public System.DateTime fecha { get; set; }
         public string nombre { get; set; }
         public int complejidad { get; set; }
         public Nullable<int> duracionEstimada { get; set; }
         public string cedulaDesarrolladorFK { get; set; }
-    
-        public virtual EMPLEADO EMPLEADO { get; set; }
-        public virtual MODULO MODULO { get; set; }
     }
 }
