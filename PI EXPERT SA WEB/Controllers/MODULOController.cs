@@ -35,8 +35,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //GET: MODULO
         public ActionResult Index()
         {
-            List<MODULO> Lmodulo = db.MODULO.ToList();
-            ViewBag.Lmodulo = new SelectList(Lmodulo, "idProyectoPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
