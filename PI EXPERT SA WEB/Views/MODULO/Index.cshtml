@@ -1,102 +1,26 @@
-﻿@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.MODULO>*@
-@*@model PI_EXPERT_SA_WEB.Models.MODULO*@
-@model PI_EXPERT_SA_WEB.Models.ModeloProyectoModulo
-
+﻿@model PI_EXPERT_SA_WEB.Models.MODULO
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Módulos</h2>
 
-<div class="container">
+<div class="form-horizontal">
 
-    <div class="form_group">
-        @if (ViewBag.Lmodulo != null)
-        {
-            @Html.DropDownListFor(model => model.idProyectoPK, ViewBag.Lmodulo as SelectList, "---Seleccionar Proyecto---", new { @class = "form-control" })
-        }
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.idProyectoPK, "Proyectos", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
+        </div>
     </div>
-
-    <div class="form_group">
-        @Html.DropDownListFor(model => model.idModuloPK, new SelectList (" "), "---Seleccionar Modulo---", new { @class = "form-control" })
-    </div>
-
 </div>
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div id="ModuloPartialView">
+    @Html.Action("ModuloPartialView", new { id = Url.RequestContext.RouteData.Values["id"] })
+</div>
 
-<script>
-    $(document).ready(function () {
-        $("#idProyectoPK").change(function () {
-            $.get("/MODULO/ObtenerNombreModulo", { idProyectoPK: $("idProyectoPK").val() }, function (data) {
-                $("$idModuloPK").empty();
-                $.each(data, function (index, row) {
-                    $("#idModuloPK").append("<option value='" + row.nombre + "'>" + "</option>")
-                });
-            });
-        })
-    });
-</script>
-
-
-
-
-
-
-
-
-@*<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idModuloPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.idModuloPK)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.idProyectoPK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaInicio)
-            </td>
-
-
-            <td>
-                <div class="col text-center">
-                    @Html.ActionLink("Más información", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
-                </div>
-            </td>
-        </tr>
-    }
-
-</table>
-
-
-
- <div class="col text-center">
-     <p>
-         @Html.ActionLink("Crear Modulo", "Create", null, new { @class = "btn btn-info btn-large text-center" })
-     </p>
- </div>*@
 
 
 

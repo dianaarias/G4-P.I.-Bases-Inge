@@ -5,21 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
+    //Empieza el script lo que permite conseguir las Provincias, Cantones y Distritos
     $(document).ready(function () {
         getProvincia();
     })
 </script>
+<a href="@Url.Action("Index","CLIENTE", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Agregar nuevo cliente</h4>
+        <h2>Crear Cliente</h2>
         <div class="required-field-asterisk">
             <p>*<span style="color:black">Campos requeridos</span> </p>
         </div>
-        <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row offset-3 required">
@@ -98,13 +101,9 @@
 
 
         <div class="form-group text-center">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" value="Aceptar" class="btn">
-                    <img src="~/images/check-symbol.svg" width="30" height="30">
-                </button>
-                <a href="@Url.Action("Index","CLIENTE", new { })" style="float:right">
-                    <img src="~/images/close.svg" width="30" height="30" />
-                </a>
+            <div class="col-md-auto" style="margin-top: 50px">
+                @*Aqui se muestran los botones de aceptar y cancelar *@
+                <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
             </div>
         </div>
     </div>

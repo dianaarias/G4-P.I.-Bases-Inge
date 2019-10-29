@@ -143,54 +143,57 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PROYECTOController.cs" />
     <Compile Include="Controllers\MODULOController.cs" />
+    <Compile Include="Controllers\REQUERIMIENTOController.cs" />
     <Compile Include="Controllers\RHVersion2Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CLIENTE.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EMPLEADO.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HABILIDADES.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginCliente.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginEmpleado.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModeloIntermedio.cs" />
     <Compile Include="Models\ModeloLogin.cs" />
-    <Compile Include="Models\ModeloProyectoModulo.cs" />
     <Compile Include="Models\MODULO.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PI EXPERTS SA Model.Context.cs">
+    <Compile Include="Models\PI EXPERT SA Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PI EXPERTS SA Model.Context.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PI EXPERTS SA Model.cs">
+    <Compile Include="Models\PI EXPERT SA Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PI EXPERTS SA Model.Designer.cs">
+    <Compile Include="Models\PI EXPERT SA Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PROYECTO.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\REQUERIMIENTO.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ROL.cs">
-      <DependentUpon>PI EXPERTS SA Model.tt</DependentUpon>
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_RecuperarRequerimientos_Result.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -215,15 +218,15 @@
     <Content Include="images\editImg.svg" />
     <Content Include="images\lightbulb.svg" />
     <Content Include="images\plus.svg" />
-    <Content Include="Models\PI EXPERTS SA Model.Context.tt">
+    <Content Include="Models\PI EXPERT SA Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
-      <LastGenOutput>PI EXPERTS SA Model.Context.cs</LastGenOutput>
+      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
+      <LastGenOutput>PI EXPERT SA Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PI EXPERTS SA Model.tt">
+    <Content Include="Models\PI EXPERT SA Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
-      <LastGenOutput>PI EXPERTS SA Model.cs</LastGenOutput>
+      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
+      <LastGenOutput>PI EXPERT SA Model.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -247,12 +250,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\PI EXPERTS SA Model.edmx">
+    <EntityDeploy Include="Models\PI EXPERT SA Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PI EXPERTS SA Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>PI EXPERT SA Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\PI EXPERTS SA Model.edmx.diagram">
-      <DependentUpon>PI EXPERTS SA Model.edmx</DependentUpon>
+    <Content Include="Models\PI EXPERT SA Model.edmx.diagram">
+      <DependentUpon>PI EXPERT SA Model.edmx</DependentUpon>
     </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -333,8 +336,13 @@
     <Content Include="Views\RHVersion2\Create.cshtml" />
     <Content Include="Views\RHVersion2\Details.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\MODULO\Lista.cshtml" />
-    <Content Include="Views\MODULO\ListaParcialModulos.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Create.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Delete.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Details.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Edit.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\Index.cshtml" />
+    <Content Include="Views\Shared\MostrarModulos.cshtml" />
+    <Content Include="Views\MODULO\ModuloPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

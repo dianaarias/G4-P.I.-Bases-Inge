@@ -9,6 +9,7 @@ body {
 .navbar-styles {
     font-family: 'Ubuntu', sans-serif;
     background-color: #08415c;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .navbar-styles a {
@@ -35,7 +36,8 @@ body {
 .navbar-styles .nav-link:hover {
     color: #324856;
     border-style: solid;
-    border-color: #052d3f;
+    //border-color: #052d3f;
+    border-color: #4d7ea8;
     border-width: 5px;
 }
 
@@ -89,7 +91,35 @@ table {
     top: 50%;
 }
 
-dl:after {
+dl {
+    padding: 0.5em;
+}
+
+/** Nuevo formato para Details */
+dt {
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: left;
+    font-weight: bold;
+    color: #08415c;
+}
+
+dt::after {
+    content: ":";
+}
+
+dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+}
+
+.boton-icono {
+    padding: 10px;
+}
+
+/** Formato para Details obsoleto */
+/*dl:after {
     content: "";
     display: table;
     clear: both;
@@ -149,7 +179,7 @@ dt + dt + dd {
 
 dt + dt + dd + dt {
     margin-top: 2em;
-}
+}*/
 
 .utilities {
     margin-top: 5rem;
@@ -175,6 +205,10 @@ table {
     margin-bottom: 1rem;
     border-top: 1px solid blue;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 41e43fd0d3eb442b47933f35535f85a0abd0667a
 
 
 /* Para el Login */
@@ -245,3 +279,9 @@ table {
 .center {
     text-align: center;
 }
+<<<<<<< HEAD
+=======
+>>>>>>> master
+=======
+
+>>>>>>> 41e43fd0d3eb442b47933f35535f85a0abd0667a

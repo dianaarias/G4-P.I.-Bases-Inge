@@ -4,22 +4,32 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Mis Proyectos</h2>
+@*Index se trata de una página que muestra una lista en forma de tabla con la información más significativa de los proyectos registrados en el sistema.*@
+
+<h2>Mis Proyectos
+    <a href="@Url.Action("Create","PROYECTO", new { })" style="float:right">
+        <img src="~/images/plus.svg" width="30" height="30" />
+    </a>
+</h2>
 
 
+@*En esta tabla, de acuerdo a los requerimientos acordados, se mostrará el nombre del proyecto, las fechas de inicio y fin del mismo, y el nombre del cliente asociado al mismo.*@
 <table class="table table-bordered table-striped">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.objetivo)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.fechaInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaFin)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.costoEstimado)
@@ -31,32 +41,34 @@
             @Html.DisplayNameFor(model => model.costoDesarrollador)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fechaFin)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.duracionEstimada)
         </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CLIENTE.name)
         </th>
-        <th></th>
+        <th>
+            Ver más información
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.idProyectoPK)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.nombre)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.objetivo)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.fechaInicio)
             </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.fechaFin)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.CLIENTE.name)
             </td>
@@ -64,7 +76,10 @@
                 <div class="col text-center">
                     @*Escondidas las opciones de editar y borrar en Index por requerimientos del sistema*@
                     @*@Html.ActionLink("Edit", "Edit", new { id = item.idProyectoPK }) |*@
-                    @Html.ActionLink("Más información", "Details", new { id = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
+                    @*@Html.ActionLink("Más información", "Details", new { id = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })*@
+                    <a href="@Url.Action("Details","PROYECTO", new {id = item.idProyectoPK})" style="float:unset">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
                     @*@Html.ActionLink("Delete", "Delete", new { id = item.idProyectoPK })*@
                 </div>
             </td>
@@ -74,8 +89,9 @@
 
 </table>
 
-<div class="col text-center">
+@*Botón con texto para crear un nuevo proyecto, en caso de que se decida cambiar el estándar de íconos a texto.*@
+@*<div class="col text-center">
     <p>
         @Html.ActionLink("Crear Proyecto", "Create", null, new { @class = "btn btn-info btn-large text-center" })
     </p>
-</div>
+</div>*@

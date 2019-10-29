@@ -4,18 +4,24 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
+
+    <a href="@Url.Action("Details","CLIENTE", new {id=Model.cedulaPK})" class="boton-icono" style="float:left">
+        <img src="~/images/left-arrow.svg" width="30" height="30" />
+    </a>
+
+    <script>
+    //Empieza el script lo que permite conseguir las Provincias, Cantones y Distritos
     $(document).ready(function () {
         getProvincia();
     })
-</script>
+    </script>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal text-center">
-        <h4>Información del cliente</h4>
+        <h4>Información del Cliente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.cedulaPK)
@@ -84,15 +90,10 @@
             </div>
         </div>
 
-        <div class="col text-center ">
-            
-            <button type="submit" value="Aceptar" class="btn">
-                <img src="~/images/check-symbol.svg" width="30" height="30">
-            </button>
-            <a href="@Url.Action("Index","CLIENTE", new { })" style="float:right">
-                <img src="~/images/close.svg" width="30" height="30" />
-            </a>
-            
+        <div class="col-md-auto" style="margin-top: 50px">
+            @*Aqui se muestran el boton de aceptar *@
+            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+
         </div>
     </div>
 

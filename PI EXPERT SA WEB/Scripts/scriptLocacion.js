@@ -1,4 +1,5 @@
-﻿function getProvincia(){
+﻿
+function getProvincia() {
     $.ajax({
         dataType: "json",
         url: "https://ubicaciones.paginasweb.cr/provincias.json",
@@ -27,7 +28,7 @@ function getCanton() {
             for (key in data) {
                 html += '<option data-name="' + data[key] + '"value="' + key + '">' + data[key] + '</option>';
             }
-            $("#canton").empty();
+            //$("#canton").empty();
             $("#canton").append(html);
         }
     });
@@ -48,7 +49,7 @@ function getDistrito() {
                 html += '<option data-name="' + data[key] + '"value="' + key + '">' + data[key] + '</option>';
             }
             console.log(data);
-            $("#distrito").empty();
+            //$("#distrito").empty();
             $("#distrito").append(html);
         }
     })

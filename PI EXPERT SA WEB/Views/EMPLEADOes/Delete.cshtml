@@ -4,126 +4,128 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Borrar</h2>
+<a href="@Url.Action("Details","EMPLEADOes", new {id = Model.cedulaPK})" style="float:left">
+    <img src="~/images/left-arrow.svg" width="40" height="30" />
+</a>
 
-<h3>¿Estás seguro de borrar este registro?</h3>
-<div>
-    @*<h4>EMPLEADO</h4>*@
+<h2>Eliminar cliente</h2>
+
+<h3 class="text-center alert">¿Esta seguro que desea borrar?</h3>
+<div class="form-horizontal">
+    <h4>Informacion del empleado</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.cedulaPK, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.cedulaPK, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.apellido1)
-        </dt>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.nombre, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido1)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.apellido2)
-        </dt>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.apellido1, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.apellido1, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellido2)
-        </dd>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.apellido2, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.apellido2, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.fechaNacimiento, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.fechaNacimiento, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.telefono, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.provincia, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.provincia, new { disabled = "disabled" })
+        </div>
+    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.canton, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.canton, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaContratacion)
-        </dt>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.distrito, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.distrito, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaContratacion)
-        </dd>
+    <div class="form-group row offset-3 ">
+        @Html.LabelFor(model => model.correo, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.correo, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaDespido)
-        </dt>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.fechaContratacion, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.fechaContratacion, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaDespido)
-        </dd>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.fechaDespido, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.fechaDespido, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tipoUsuario)
-        </dt>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.tipoUsuario, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.tipoUsuario, new { disabled = "disabled" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipoUsuario)
-        </dd>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.disponibilidad, htmlAttributes: new { @class = "control-label col-md-2", @align = "left" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.disponibilidad, new { disabled = "disabled" })
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.disponibilidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.disponibilidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.provincia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.provincia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.canton)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.canton)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.distrito)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.distrito)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaNacimiento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaNacimiento)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-    <input type="submit" value="Borrar" class="btn btn-info btn-large text-center" /> |
-    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large text-center" })
 </div>
-    }
-</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group text-center">
+        <input type="image" src="~/images/deleteImg.svg" alt=”submit” name=”submit” width="50" height="50" />
+        @*<a href="@Url.Action("Details","EMPLEADOes", new {id = Model.cedulaPK})" style="float:left">
+                <img src="~/images/left-arrow.svg" width="30" height="30" />
+            </a>*@
+    </div>
+}

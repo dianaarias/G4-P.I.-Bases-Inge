@@ -5,7 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<a href="@Url.Action("Index","MODULO", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
 <h2>Crear Modulo</h2>
+
 <div class="required-field-asterisk">
     <p>*<span style="color:black">Campos requeridos</span> </p>
 </div>
@@ -20,7 +26,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.PROYECTO.nombre, "Nombre del Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.idProyectoPK, "Nombre del Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
@@ -39,7 +45,7 @@
         @Html.LabelFor(model => model.nombre, "Nombre del Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+            @*@Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })*@
 
         </div>
     </div>
@@ -47,16 +53,16 @@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.fechaInicio, "Fecha de Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+            @*@Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })*@
         </div>
     </div>
 
+
     <div class="col text-center">
         <div class="form-group">
-            <div class="col-md-7 col-md-10" style="margin-top: 50px">
-                <input type="submit" value="Aceptar" class="btn btn-info btn-large" style="margin-left: 150px" />
-                @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-info btn-large ", style = "margin-left: 80px" })
+            <div class="col-md-auto" style="margin-top: 50px">
+                <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
             </div>
         </div>
     </div>

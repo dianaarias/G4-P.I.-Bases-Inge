@@ -1,0 +1,11 @@
+﻿@model PI_EXPERT_SA_WEB.Models.MODULO
+
+<option value=""> -- Seleccionar modulo --</option>
+
+@if(ViewBag.modulos != null)
+{
+    @foreach(var item in ViewBag.modulos)
+    {
+        <option value="@item.Value">,@item.Text</option>
+    }
+}

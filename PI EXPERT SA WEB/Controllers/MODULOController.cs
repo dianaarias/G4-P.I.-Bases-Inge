@@ -77,7 +77,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO/Create
         public ActionResult Create()
         {
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
@@ -95,7 +95,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idModuloPK,idProyectoPK,nombre,fechaInicio")] MODULO mODULO)
+        public ActionResult Create([Bind(Include = "idProyectoPK,idModuloPK,nombre,fechaInicio")] MODULO mODULO)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", mODULO.idProyectoPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", mODULO.idProyectoPK);
             return View(mODULO);
         }
 
@@ -126,12 +126,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
-            if (mODULO == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", mODULO.idProyectoPK);
+            //List<MODULO> lmodulo = db.MODULO.Where(x => x.PROYECTO.idProyectoPK == idProyectoPK).ToList();
+
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "idModuloPK", mODULO.idProyectoPK);
             return View(mODULO);
+
+            //return View(lmodulo);
         }
 
 
