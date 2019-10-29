@@ -27,8 +27,8 @@
 </script>
 
 <h2>Index</h2>
-@*
-    @if (ViewBag.Proyectos != null)
+
+    @*@if (ViewBag.Proyectos != null)
     {
         @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
     }
@@ -98,7 +98,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })
             </td>
         </tr>
     }
