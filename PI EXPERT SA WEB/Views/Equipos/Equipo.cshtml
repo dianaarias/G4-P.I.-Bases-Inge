@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.EMPLEADO>
+@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.ROL>*@
 @{
     ViewBag.Title = "Equipo";
 }
@@ -13,14 +14,23 @@
         <th>Correo</th>
     </tr>
 
-    @for (int iterator = 0; iterator < Model.listaEmpleados.Count; iterator++)
-    {
-<tr>
-    <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).nombre)</td>
-    <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).apellido1)</td>
-    <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).apellido2)</td>
-    <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).correo)</td>
-</tr>
+    @for (int iterator = 0; iterator < Model.Count(); iterator++) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).nombre)</td>
+            <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido1)</td>
+            <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido2)</td>
+            <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).correo)</td>
+        </tr>
     }
+
+
+    @*@for (int iterator = 0; iterator < Model.listaEmpleados.Count; iterator++) {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).nombre)</td>
+                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).apellido1)</td>
+                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).apellido2)</td>
+                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).correo)</td>
+            </tr>
+        }*@
 </table>
 
