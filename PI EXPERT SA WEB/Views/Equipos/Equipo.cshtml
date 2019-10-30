@@ -6,8 +6,11 @@
 
 <h2>Equipo</h2>
 
+<h4>Selecione los empleados que van a conformar el equipo*</h4>
+
 <table class="table">
     <tr>
+        <th></th>
         <th>Nombre</th>
         <th>Primer Apellido</th>
         <th>Segundo Apellido</th>
@@ -16,6 +19,7 @@
 
     @for (int iterator = 0; iterator < Model.Count(); iterator++) {
         <tr>
+            <td><input type="checkbox" /></td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).nombre)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido1)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido2)</td>
@@ -24,13 +28,5 @@
     }
 
 
-    @*@for (int iterator = 0; iterator < Model.listaEmpleados.Count; iterator++) {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).nombre)</td>
-                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).apellido1)</td>
-                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).apellido2)</td>
-                <td>@Html.DisplayFor(modelItem => Model.listaEmpleados.ElementAt(1).correo)</td>
-            </tr>
-        }*@
 </table>
 
