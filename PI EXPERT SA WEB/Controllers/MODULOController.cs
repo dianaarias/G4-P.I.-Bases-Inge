@@ -35,15 +35,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //GET: MODULO
         public ActionResult Index()
         {
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            ViewBag.bolsaDeProyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
-        public JsonResult ObtenerNombreModulo(int idProyectoPK)
+
+        public ActionResult ModuloPartialView(int? idProyectoPK)
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            List<MODULO> ListaModulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
-            return Json(ListaModulo, JsonRequestBehavior.AllowGet);
+            var mODULO = db.MODULO;
+            return View(mODULO.ToList());
         }
 
 

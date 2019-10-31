@@ -5,12 +5,18 @@
 }
 
 
+
+
+
 <div class="form-horizontal">
 
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.idProyectoPK, "Proyectos", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Proyectos", htmlAttributes : new {@class = "control-label col-md-2"})
         <div class="col-md-10">
-            @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("bolsaDeProyectos", null, htmlAttributes: new { @class = "form-control", @onchange = "getProyecto(value)"})
+
+            @*@Html.EnumDropDownListFor(model => model.PROYECTO, ViewBag)*@
+
             @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -18,9 +24,26 @@
 
 
 <div id="ModuloPartialView">
-    @Html.Action("ModuloPartialView", new { id = Url.RequestContext.RouteData.Values["id"] })
+    
+
+    @*@Html.Action("ModuloPartialView", new { id = Url.RequestContext.RouteData.Values["id"] })*@
+
+
 </div>
 
 
+<script>
 
+    function getProyecto(idProyectoPK) {
+        var x;
+        x = new XMLHttpRequest();
+        x.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("ModuloPartialView").innerHTML = this.responseText();
+            }
+        };
+        x.open("GET", "", true);
+        x.send();
+    }
 
+</script>
