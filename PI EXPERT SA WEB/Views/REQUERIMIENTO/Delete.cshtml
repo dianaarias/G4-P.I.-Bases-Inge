@@ -20,11 +20,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.fechaEstado)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fecha)
+            @Html.DisplayFor(model => model.fechaEstado)
         </dd>
 
         <dt>
@@ -66,7 +66,20 @@
         <dd>
             @Html.DisplayFor(model => model.MODULO.nombre)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaInicio)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.fechaInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaFin)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {
