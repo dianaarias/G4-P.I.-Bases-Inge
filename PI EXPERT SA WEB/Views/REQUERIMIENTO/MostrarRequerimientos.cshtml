@@ -1,47 +1,10 @@
 ﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "MostrarRequerimientos";
 }
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-@*<script>
-    $(document).ready(function () {
-        $("#idProyectoPK").change(function () {
-            var proyectoID = $(this).val();
-            debugger
-            $.ajax({
-                type: "post",
-                url: "/REQUERIMIENTO/getListaModulos?idProyectoPK=" + proyectoID,
-                contentType: "html",
-                success: function (response) {
-                    debugger
-                    $("#idModuloPK").empty();
-                    $("#idModuloPK").append(response);
-                }
-            })
-        })
-    })
-</script>*@
-<script>
-    $(document).ready(function () {
-            $("#idProyectoPK").change(function () {
-                var proyectoID = $("#idProyectoPK").val();
-                $("#dropdownModulo").load('/REQUERIMIENTO/GetListaModulos?idProyectoPK=' + proyectoID);
-                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
-            });
-    });
-</script>
-
-
-<h2>Index</h2>
-@Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--")
-<div id="dropdownModulo"></div>
-  
-<a href="@Url.Action("Create", "REQUERIMIENTO")" style="float:right">
-        <img src="~/images/plus.svg" width="30" height="30" />
-    </a>
+<h2>Requerimientos</h2>
 
 <table class="table">
     <tr>
@@ -72,9 +35,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                
-            </td>
+            <td></td>
             <td>
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
