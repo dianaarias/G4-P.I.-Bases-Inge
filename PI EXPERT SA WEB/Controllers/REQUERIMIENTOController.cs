@@ -17,8 +17,25 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
+
+            ViewBag.Proyectos = new SelectList(getListaProyecto(), "idProyectoPK", "nombre");
+            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
             return View(rEQUERIMIENTO.ToList());
+        }
+
+        public List<PROYECTO> getListaProyecto()
+        {
+            List<PROYECTO> proyectos = db.PROYECTO.ToList();
+            return proyectos;
+        }
+
+        public ActionResult getListaModulos(int idProyectoPK)
+        {
+            List<MODULO> modulos = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.modulos = new SelectList(modulos, "idModuloPK", "nombre");
+            return PartialView("MostrarModulos");
         }
 
         // GET: REQUERIMIENTO/Details/5
@@ -37,11 +54,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Create
-        public ActionResult Create()
+        public ActionResult Create(int? idProyecto, int? idModulo)
         {
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPk", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
@@ -100,13 +117,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? idProyecto, int? idModulo, int? idRequerimiento)
         {
-            if (id == null)
+            if (idProyecto == null || (idModulo == null || idRequerimiento == null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idProyecto,idModulo,idRequerimiento);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
