@@ -2,12 +2,11 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.DropDownList("Modulos", (SelectList)ViewBag.idModuloPK)
-
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
+@*<script>
     $(document).ready(function () {
         $("#idProyectoPK").change(function () {
             var proyectoID = $(this).val();
@@ -24,38 +23,28 @@
             })
         })
     })
+</script>*@
+<script>
+    $(document).ready(function () {
+            $("#idProyectoPK").change(function () {
+                var proyectoID = $("#idProyectoPK").val();
+                $("#dropdownModulo").load('/REQUERIMIENTO/GetListaModulos?idProyectoPK=' + proyectoID);
+                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
+            });
+    });
 </script>
 
-<h2>Index</h2>
 
-    @*@if (ViewBag.Proyectos != null)
-    {
-        @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
-    }
-    @Html.DropDownListFor(m => m.idModuloPK, new SelectList(""), "-- Seleccione modulo --", new { @class = "form-control" })
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <a href="@Url.Action("Create", "REQUERIMIENTO", new {idProyectoPK =  , idModuloPK =})" style="float:right">
+<h2>Index</h2>
+@Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--")
+<div id="dropdownModulo"></div>
+  
+<a href="@Url.Action("Create", "REQUERIMIENTO")" style="float:right">
         <img src="~/images/plus.svg" width="30" height="30" />
     </a>
-    @using (Html.BeginForm("Index", "REQUERIMIENTO", FormMethod.Get))
-    {
-        @Html.TextBox("busquedaProyecto")
-        @Html.TextBox("busquedaModulo")<input type="submit" value="Busqueda" />
-    }*@
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idModuloPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idRequerimientoPK)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
