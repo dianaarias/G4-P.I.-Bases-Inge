@@ -48,6 +48,15 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.idProyectoPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idModuloPK)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idRequerimientoPK)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
@@ -73,34 +82,49 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaEstado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.complejidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.duracionEstimada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MODULO.nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.idProyectoPK)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.idModuloPK)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.idRequerimientoPK)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.estado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.fechaEstado)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.complejidad)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.duracionEstimada)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MODULO.nombre)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+       
+        <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+            <img src="~/images/more.svg" width="30" height="30" />
+        </a>
+        <a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+            <img src="~/images/deleteImg.svg" width="30" height="30" />
+        </a>
+    </td>
+</tr>
     }
 
 </table>

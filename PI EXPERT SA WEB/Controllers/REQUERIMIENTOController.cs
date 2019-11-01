@@ -39,17 +39,19 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? idProyecto, int? idModulo, int? idRequerimiento)
         {
-            if (id == null)
+            if (idProyecto == null || (idModulo == null || idRequerimiento == null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
             }
+            List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
+            ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             return View(rEQUERIMIENTO);
         }
 
@@ -123,7 +125,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idProyecto,idModulo,idRequerimiento);
+            //REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idProyecto,idModulo,idRequerimiento);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
