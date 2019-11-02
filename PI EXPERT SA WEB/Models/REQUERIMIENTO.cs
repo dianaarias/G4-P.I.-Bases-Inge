@@ -11,8 +11,10 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class REQUERIMIENTO
     {
         [Key]
@@ -42,11 +44,10 @@ namespace PI_EXPERT_SA_WEB.Models
         public Nullable<System.DateTime> fechaInicio { get; set; }
         [Display(Name = "Fecha de Finalizacion")]
         public Nullable<System.DateTime> fechaFin { get; set; }
-    
+        public virtual PROYECTO PROYECTO  { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual MODULO MODULO { get; set; }
-        public virtual PROYECTO PROYECTO { get; set; }
-
+¿
 
     }
 }
