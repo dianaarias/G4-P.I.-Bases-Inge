@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CLIENTEController.cs" />
+    <Compile Include="Controllers\CONSULTASController.cs" />
     <Compile Include="Controllers\EMPLEADOesController.cs" />
     <Compile Include="Controllers\HABILIDADESController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -345,7 +346,6 @@
     <Content Include="Views\MODULO\ModuloPartialView.cshtml" />
     <Content Include="Views\REQUERIMIENTO\MostrarRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\Index.cshtml" />
-    <Content Include="Views\CONSULTASes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
