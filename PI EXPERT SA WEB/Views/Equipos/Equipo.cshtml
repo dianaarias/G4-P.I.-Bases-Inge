@@ -5,10 +5,10 @@
 }
 
 <h2>Equipo</h2>
+<br />
+<p>*Selecione los empleados que van a conformar el equipo*</p>
 
-<h4>Selecione los empleados que van a conformar el equipo*</h4>
-
-<table class="table">
+<table class="table" id="tblEmpleados">
     <tr>
         <th></th>
         <th>Nombre</th>
@@ -19,14 +19,65 @@
 
     @for (int iterator = 0; iterator < Model.Count(); iterator++) {
         <tr>
-            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" id="checkBox" /></td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).nombre)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido1)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido2)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).correo)</td>
         </tr>
     }
-
-
 </table>
+
+<button type="button" class="btn btn-primary" onclick="teamCheck()">Conformar Equipo</button>
+
+<div class="alert" id="insuficientEE">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+</div>
+
+<script>
+    function teamCheck() {
+        // Revisa que la cantidad de empleados desarrolladores sea menor o igual a 5        
+
+        //Reference the Table.
+        var grid = document.getElementById("tblEmpleados");
+ 
+        //Reference the CheckBoxes in Table.
+        var checkBoxes = grid.getElementsByTagName("INPUT");
+        var message = "Id Name                  Country\n";
+
+        // Count the number of rows
+        var totalRows = 0;
+
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                var row = checkBoxes[i].parentNode.parentNode;
+                message += row.cells[1].innerHTML;
+                message += "   " + row.cells[2].innerHTML;
+                message += "   " + row.cells[3].innerHTML;
+                message += "\n";
+                totalRows++;
+            }
+        }
+ 
+        //Display selected Row data in Alert Box.
+        //alert(message);
+
+        if (this.totalRows = 0) {
+            var x = document.getElementById("insuficientEE");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        //if (totalRows > 0) {
+        //    console.log('Passed with ' + totalRows);
+        //} else {
+        //    alert('Debe de seleccionar como máximo 5 desarrolladores');
+        //}
+    }
+</script>
 

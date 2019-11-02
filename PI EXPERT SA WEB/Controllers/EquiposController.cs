@@ -14,7 +14,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Equipo()
         {
             ModeloEquipo modelo = new ModeloEquipo();
-            var empleados = db.EMPLEADO.Where(t => t.disponibilidad == true).ToList();
+            var empleados = db.EMPLEADO.Where(t =>  t.disponibilidad == true && t.tipoUsuario == "Desarrollador").ToList();
             return View(empleados.ToList());
         }
     }
