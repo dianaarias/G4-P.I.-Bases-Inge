@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@*Consultas es una vista que despliega los enlaces para ir a las consultas más frecuentes*@
+
+<h2>Consultas</h2>
+<div class="separador"></div>
+
+
+@*Cards de Bootstrap con botones que enlazan a Equipo, Módulos y consultas de progreso.*@
+
+<div class="card-deck">
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Requerimientos</h5>
+            <p class="card-text">Ingresar para consultar los requrimientos asociados un desarrollador.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Historial</h5>
+            <p class="card-text">Ingresar para consultar el historial de un empleado.</p>
+            <a href="~/MODULO/Index" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body text-white bg-secondary d-flex flex-column">
+            <h5 class="card-title">Progreso</h5>
+            <p class="card-text">***Funcionalidad a implementar en Sprint 3*** Ingresar para consultar el progreso de mi proyecto.</p>
+            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+        </div>
+    </div>
+</div>
+
+<div class="separador"></div>
