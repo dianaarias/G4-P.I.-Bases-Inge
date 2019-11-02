@@ -2,11 +2,25 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+            $("#idProyectoPK").change(function () {
+                var proyectoID = $("#idProyectoPK").val();
+
+                $("#ModuloPartialView").load('/MODULO/ModuloPartialView', { idProyectoPK: proyectoID });
+                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
+            });
+    });
+</script>
 
 
 <div class="form-horizontal">
-
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.idProyectoPK, "Proyectos", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -17,9 +31,11 @@
 </div>
 
 
-<div id="ModuloPartialView">
-    @Html.Action("ModuloPartialView", new { id = Url.RequestContext.RouteData.Values["id"] })
-</div>
+
+
+
+
+<div id="ModuloPartialView"></div>
 
 
 

@@ -25,8 +25,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
-        public ActionResult ModuloPartialView() {
-            var mODULO = db.MODULO;
+        public ActionResult ModuloPartialView(int? idProyectoPK) {
+            var mODULO = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK);
             return View(mODULO.ToList());
         }
 
