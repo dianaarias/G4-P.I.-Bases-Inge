@@ -4,13 +4,42 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+@*Delete es una vista que permite a un usuario borrar un requerimiento y todos sus atributos del sistema.
+    Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el oequerimiento en cuestión.*@
 
-<h3>Are you sure you want to delete this?</h3>
+<a href="@Url.Action("Details","REQUERIMIENTO", new {idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+<h2>Borrar Requerimiento</h2>
+
+<div class="separador"></div>
 <div>
-    <h4>REQUERIMIENTO</h4>
-    <hr />
+    <h4 style="color:red">¿Está seguro de que desea borrar este requerimiento y los datos asociados al mismo?</h4> <p></p>
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROYECTO.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODULO.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODULO.nombre)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.estado)
         </dt>
@@ -20,19 +49,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fecha)
+            @Html.DisplayNameFor(model => model.fechaEstado)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fecha)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
+            @Html.DisplayFor(model => model.fechaEstado)
         </dd>
 
         <dt>
@@ -52,7 +73,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+            @*@Html.DisplayNameFor(model => model.EMPLEADO.nombre)*@
+            Desarrollador
         </dt>
 
         <dd>
@@ -60,21 +82,33 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
+            @Html.DisplayNameFor(model => model.fechaInicio)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MODULO.nombre)
+            @Html.DisplayFor(model => model.fechaInicio)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaFin)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.fechaFin)
+        </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="col text-center">
+            <div class="form-group">
+                <div class="col-md-auto" style="margin-top: 50px">
+                    @*Boton de confirmacion de borrado*@
+                    <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+                </div>
+            </div>
         </div>
+
     }
 </div>

@@ -45,5 +45,8 @@ namespace PI_EXPERT_SA_WEB.Models
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual MODULO MODULO { get; set; }
+        public virtual PROYECTO PROYECTO { get; set; }
+
+
     }
 }
