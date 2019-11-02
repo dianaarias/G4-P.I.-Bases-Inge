@@ -132,7 +132,7 @@ y botones para accesar sus módulos, equipo y consultar el progreso del desarrol
         <div class="card-body text-white bg-secondary d-flex flex-column">
             <h5 class="card-title">Equipo</h5>
             <p class="card-text">Ingresar para consultar y, para proyectos nuevos, administrar miembros del equipo de trabajo.</p>
-            <a href="#" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
+            <a href="@Url.Action("Equipo","Equipos", new { id = Model.idProyectoPK })" class="btn btn-primary align-self-end btn btn-block">Ingresar</a>
         </div>
     </div>
     <div class="card">
