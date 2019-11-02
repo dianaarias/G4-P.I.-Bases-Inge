@@ -17,31 +17,31 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
-        
-            
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
 
+
             var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
+
+
             return View(rEQUERIMIENTO.ToList());
-       
         }
 
        
         public PartialViewResult GetListaModulos(int? idProyectoPK)
         {
-
-            if (idProyectoPK == null)
-                idProyectoPK = 1;
-            List<MODULO> modulos = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
-            ViewBag.modulos = new SelectList(modulos, "idModuloPK", "nombre");
-            return PartialView("GetListaModulos", modulos);
+            List<MODULO> modulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.modulos = new SelectList(modulo, "idModuloPK", "nombre");
+            return PartialView("GetListaModulos");
         }
 
-        public PartialViewResult RenderizarRequerimientos(int? idProyectoPK, int? idModuloPK)
+
+        public PartialViewResult MostrarRequerimientos(int? idProyectoPK, int? idModuloPK)
         {
-            List<REQUERIMIENTO> requerimientos = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK &&  x.idModuloPK == idModuloPK).ToList();
-            return PartialView("MostrarRequerimientos",requerimientos);
+
+            List<REQUERIMIENTO> requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
+
+            return PartialView(requerimiento);
         }
 
         // GET: REQUERIMIENTO/Details/5
@@ -56,9 +56,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return HttpNotFound();
             }
-            List<PROYECTO> proyectos = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto ).ToList();
-            ViewBag.proyecto = new SelectList(proyectos, "idProyectoPK", "nombre");
-            //ViewBag.proyecto = db.PROYECTO.find(x => x.idProyectoPK == idProyecto);
             //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
             //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             return View(rEQUERIMIENTO);
@@ -78,7 +75,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fecha,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK")] REQUERIMIENTO rEQUERIMIENTO)
+        public ActionResult Create([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaEstado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
         {
             if (ModelState.IsValid)
             {
