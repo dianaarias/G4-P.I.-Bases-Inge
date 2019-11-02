@@ -17,5 +17,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
             var empleados = db.EMPLEADO.Where(t =>  t.disponibilidad == true && t.tipoUsuario == "Desarrollador").ToList();
             return View(empleados.ToList());
         }
+
+        public ActionResult guardarEquipo(String equipo) {
+            // Create and execute raw SQL query.
+            //string query = "INSERT INTO ROL() WHERE DepartmentID = @p0";
+            //Department department = await db.Departments.SqlQuery(query, id).SingleOrDefaultAsync();
+
+
+            // Redirect to Home Page or Team Summary
+            ModeloEquipo modelo = new ModeloEquipo();
+            return View(/*empleados.ToList()*/);
+        }
     }
 }

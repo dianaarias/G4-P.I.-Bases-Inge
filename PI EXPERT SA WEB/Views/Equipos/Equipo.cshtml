@@ -11,6 +11,7 @@
 <table class="table" id="tblEmpleados">
     <tr>
         <th></th>
+        <th hidden>Cédula</th>
         <th>Nombre</th>
         <th>Primer Apellido</th>
         <th>Segundo Apellido</th>
@@ -20,6 +21,7 @@
     @for (int iterator = 0; iterator < Model.Count(); iterator++) {
         <tr>
             <td><input type="checkbox" id="checkBox" /></td>
+            <td hidden>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).cedulaPK)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).nombre)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido1)</td>
             <td>@Html.DisplayFor(modelItem => Model.ElementAt(iterator).apellido2)</td>
@@ -28,12 +30,6 @@
     }
 </table>
 <br />
-
-@*<div class="alert" id="insuficientEE">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Error</strong> <br /> No seleccionó ningún empleado. <br /> No se puede guardar un equipo sin empleados seleccionados.
-</div>*@
-
 
 <div class="alert alert-danger" role="alert" id="insuficientEE" style="display:none">
     <strong>Error</strong> <br /> No seleccionó ningún empleado. <br /> No se puede guardar un equipo <strong>SIN</strong> empleados seleccionados.
@@ -59,6 +55,7 @@
         //Reference the CheckBoxes in Table.
         var checkBoxes = grid.getElementsByTagName("INPUT");
         var message = "Id Name                  Country\n";
+        var teamMembers = ''
 
         // Count the number of rows
         var totalRows = 0;
@@ -67,17 +64,16 @@
         for (var i = 0; i < checkBoxes.length; i++) {
             if (checkBoxes[i].checked) {
                 var row = checkBoxes[i].parentNode.parentNode;
-                message += row.cells[1].innerHTML;
-                message += "   " + row.cells[2].innerHTML;
-                message += "   " + row.cells[3].innerHTML;
-                message += "\n";
+                teamMembers += row.cells[1].innerHTML;
+                teamMembers += "   " + row.cells[2].innerHTML;
+                teamMembers += "   " + row.cells[3].innerHTML;
+                teamMembers += "   " + row.cells[4].innerHTML;
+                teamMembers += "\n";
                 totalRows++;
             }
         }
 
-        //Display selected Row data in Alert Box.
-        alert(totalRows);
-
+        // Check if the user select more than 5 EEs or none at all
         if (totalRows == 0) {
             console.log(totalRows);
             var x = document.getElementById("insuficientEE");
@@ -87,14 +83,14 @@
             var x = document.getElementById("higherEE");
             x.style.display = "block";
         } else {
-            console.log("Se agregan los EEs al equipo");
-        }
+            console.log("Se agregan los EEs al equipo; " + teamMembers);
+            // Call the Controller to save the EE via query
+            Html.Action("guardarEquipo", new { Type = teamMembers });
 
-        //if (totalRows > 0) {
-        //    console.log('Passed with ' + totalRows);
-        //} else {
-        //    alert('Debe de seleccionar como máximo 5 desarrolladores');
-        //}
+       
+            
+        }
     }
+
 </script>
 
