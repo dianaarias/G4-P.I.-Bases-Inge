@@ -33,7 +33,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PROYECTO.nombre)
+            @*@ViewBag.proyecto*@
+            @Html.DropDownList("proyecto", null, htmlAttributes: new {})
         </dd>
 
         <dt>

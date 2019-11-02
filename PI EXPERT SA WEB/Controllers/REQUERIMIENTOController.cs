@@ -17,11 +17,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
-
+        
+            
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+
             var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
             return View(rEQUERIMIENTO.ToList());
+       
         }
 
        
@@ -53,6 +56,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return HttpNotFound();
             }
+            List<PROYECTO> proyectos = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto ).ToList();
+            ViewBag.proyecto = new SelectList(proyectos, "idProyectoPK", "nombre");
+            //ViewBag.proyecto = db.PROYECTO.find(x => x.idProyectoPK == idProyecto);
             //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
             //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             return View(rEQUERIMIENTO);

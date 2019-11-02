@@ -11,8 +11,10 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class REQUERIMIENTO
     {
         [Key]
@@ -47,6 +49,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public virtual MODULO MODULO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
 
+        //public List<PROYECTO> listaProyectos { get; set; }
 
     }
 }
