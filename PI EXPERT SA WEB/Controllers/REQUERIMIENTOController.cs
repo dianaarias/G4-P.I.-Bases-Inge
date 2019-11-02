@@ -53,8 +53,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return HttpNotFound();
             }
-            List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
-            ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
+            //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
+            //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             return View(rEQUERIMIENTO);
         }
 
@@ -140,9 +140,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // POST: REQUERIMIENTO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int idProyecto, int idModulo, int idRequerimiento)
         {
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             db.REQUERIMIENTO.Remove(rEQUERIMIENTO);
             db.SaveChanges();
             return RedirectToAction("Index");
