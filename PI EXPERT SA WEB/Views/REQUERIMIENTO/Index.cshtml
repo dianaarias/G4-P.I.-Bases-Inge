@@ -2,59 +2,63 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.DropDownList("Modulos", (SelectList)ViewBag.idModuloPK)
-
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#idProyectoPK").change(function () {
-            var proyectoID = $(this).val();
-            debugger
-            $.ajax({
-                type: "post",
-                url: "/REQUERIMIENTO/getListaModulos?idProyectoPK=" + proyectoID,
-                contentType: "html",
-                success: function (response) {
-                    debugger
-                    $("#idModuloPK").empty();
-                    $("#idModuloPK").append(response);
-                }
+@*<script>
+        $(document).ready(function () {
+            $("#idProyectoPK").change(function () {
+                var proyectoID = $(this).val();
+                debugger
+                $.ajax({
+                    type: "post",
+                    url: "/REQUERIMIENTO/getListaModulos?idProyectoPK=" + proyectoID,
+                    contentType: "html",
+                    success: function (response) {
+                        debugger
+                        $("#idModuloPK").empty();
+                        $("#idModuloPK").append(response);
+                    }
+                })
             })
         })
-    })
+    </script>*@
+<script>
+    $(document).ready(function () {
+            $("#idProyectoPK").change(function () {
+                var proyectoID = $("#idProyectoPK").val();
+                $("#dropdownModulo").load('/REQUERIMIENTO/GetListaModulos?idProyectoPK=' + proyectoID);
+                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
+            });
+    });
 </script>
 
-<h2>Index</h2>
 
-    @*@if (ViewBag.Proyectos != null)
-    {
-        @Html.DropDownListFor(m => m.idProyectoPK, ViewBag.Proyectos as SelectList, "-- Seleccione proyecto --", new { @class = "form-control" })
-    }
-    @Html.DropDownListFor(m => m.idModuloPK, new SelectList(""), "-- Seleccione modulo --", new { @class = "form-control" })
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <a href="@Url.Action("Create", "REQUERIMIENTO", new {idProyectoPK =  , idModuloPK =})" style="float:right">
+<h2>Requerimientos</h2>
+<h2>
+    <a href="@Url.Action("Create", "REQUERIMIENTO")" style="float:right">
         <img src="~/images/plus.svg" width="30" height="30" />
     </a>
-    @using (Html.BeginForm("Index", "REQUERIMIENTO", FormMethod.Get))
-    {
-        @Html.TextBox("busquedaProyecto")
-        @Html.TextBox("busquedaModulo")<input type="submit" value="Busqueda" />
-    }*@
+</h2>
+@Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--")
+<div id="dropdownModulo"></div>
 
-<table class="table">
+
+@*En esta tabla se mostrará la informacion básica referente a un proyecto.*@
+<table class="table table-bordered table-striped">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MODULO.nombre)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.fechaEstado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.complejidad)
@@ -63,25 +67,28 @@
             @Html.DisplayNameFor(model => model.duracionEstimada)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+            @*@Html.DisplayNameFor(model => model.EMPLEADO.nombre)*@
+            Desarrollador
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
+            Ver más información
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.fechaEstado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.complejidad)
@@ -93,12 +100,15 @@
                 @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MODULO.nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                <div class="col text-center">
+                    <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
+                </div>
+                @*<a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                        <img src="~/images/deleteImg.svg" width="30" height="30" />
+                    </a>*@
             </td>
         </tr>
     }

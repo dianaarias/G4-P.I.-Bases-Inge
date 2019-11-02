@@ -18,38 +18,47 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Index()
         {
 
-            ViewBag.Proyectos = new SelectList(getListaProyecto(), "idProyectoPK", "nombre");
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+
+
             var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
+
+
             return View(rEQUERIMIENTO.ToList());
         }
 
-        public List<PROYECTO> getListaProyecto()
+       
+        public PartialViewResult GetListaModulos(int? idProyectoPK)
         {
-            List<PROYECTO> proyectos = db.PROYECTO.ToList();
-            return proyectos;
-        }
 
-        public ActionResult getListaModulos(int idProyectoPK)
-        {
+            if (idProyectoPK == null)
+                idProyectoPK = 1;
             List<MODULO> modulos = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.modulos = new SelectList(modulos, "idModuloPK", "nombre");
-            return PartialView("MostrarModulos");
+            return PartialView("GetListaModulos", modulos);
+        }
+
+        public PartialViewResult RenderizarRequerimientos(int? idProyectoPK, int? idModuloPK)
+        {
+            List<REQUERIMIENTO> requerimientos = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK &&  x.idModuloPK == idModuloPK).ToList();
+            return PartialView("MostrarRequerimientos",requerimientos);
         }
 
         // GET: REQUERIMIENTO/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? idProyecto, int? idModulo, int? idRequerimiento)
         {
-            if (id == null)
+            if (idProyecto == null || (idModulo == null || idRequerimiento == null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
             }
+            //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
+            //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             return View(rEQUERIMIENTO);
         }
 
@@ -123,7 +132,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idProyecto,idModulo,idRequerimiento);
+            //REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idProyecto,idModulo,idRequerimiento);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
@@ -134,9 +144,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // POST: REQUERIMIENTO/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int idProyecto, int idModulo, int idRequerimiento)
         {
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             db.REQUERIMIENTO.Remove(rEQUERIMIENTO);
             db.SaveChanges();
             return RedirectToAction("Index");
