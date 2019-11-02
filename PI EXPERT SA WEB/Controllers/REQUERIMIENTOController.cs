@@ -17,7 +17,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
-            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
+            //ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
 
 
@@ -25,9 +25,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
             return View(rEQUERIMIENTO.ToList());
-        }
-
-       
+        }       
         public PartialViewResult GetListaModulos(int? idProyectoPK)
         {
 
@@ -38,9 +36,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return PartialView("GetListaModulos", modulos);
         }
 
-        public PartialViewResult RenderizarRequerimientos(int? idProyectoPK, int? idModuloPK)
+        public PartialViewResult MostrarRequerimientos(int? idProyectoPK, int? idModuloPK)
         {
-            List<REQUERIMIENTO> requerimientos = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK &&  x.idModuloPK == idModuloPK).ToList();
+            List<REQUERIMIENTO> requerimientos = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK)
+                .Include(r => r.MODULO).Include(r =>r.EMPLEADO).ToList();
             return PartialView("MostrarRequerimientos",requerimientos);
         }
 

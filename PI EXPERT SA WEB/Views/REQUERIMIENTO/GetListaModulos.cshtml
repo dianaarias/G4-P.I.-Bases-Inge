@@ -4,10 +4,10 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
     $(document).ready(function () {
-            $("#idModuloPK").change(function () {
-                var moduloID = $("#idModuloPK").val();
+            $("#modulos").change(function () {
+                var moduloID = $("#modulos").val();
                 var proyectoID = $("#idProyectoPK").val();
-                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientos?idProyectoPK=' + proyectoID +'?idModuloPK' + moduloID);
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientos?idProyectoPK=' + proyectoID +'?modulos' + moduloID);
                 $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idModuloPK=' +moduloID);
             });
         });
@@ -16,6 +16,5 @@
 
     @Html.DropDownList("modulos", null, "--Seleccionar Modulo--")
     <div id="tablaRequerimientos"></div>
-    <h2>Requerimientos</h2>
 
 </body>

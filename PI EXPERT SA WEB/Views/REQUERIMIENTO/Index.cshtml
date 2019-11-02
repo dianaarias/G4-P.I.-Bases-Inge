@@ -70,11 +70,11 @@
             @Html.DisplayNameFor(model => model.duracionEstimada)
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.EMPLEADO.nombre)*@
-            Desarrollador
+            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+
         </th>
         <th>
-            Ver más información
+
         </th>
     </tr>
 
@@ -106,15 +106,15 @@
         @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
     </td>
     <td>
-        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
         <div class="col text-center">
             <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
                 <img src="~/images/more.svg" width="30" height="30" />
             </a>
         </div>
-        @*<a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+        <a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
                 <img src="~/images/deleteImg.svg" width="30" height="30" />
-            </a>*@
+            </a>
     </td>
 </tr>
     }

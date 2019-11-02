@@ -4,7 +4,6 @@
     ViewBag.Title = "MostrarRequerimientos";
 }
 
-<h2>Requerimientos</h2>
 
 <table class="table">
     <tr>
@@ -29,13 +28,15 @@
         <th>
             @Html.DisplayNameFor(model => model.MODULO.nombre)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+        </th>
     </tr>
+
 
     @foreach (var item in Model)
     {
         <tr>
-            <td></td>
             <td>
                 @Html.DisplayFor(modelItem => item.estado)
             </td>
@@ -56,6 +57,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
