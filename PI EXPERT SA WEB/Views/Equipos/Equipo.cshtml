@@ -27,21 +27,35 @@
         </tr>
     }
 </table>
+<br />
+
+@*<div class="alert" id="insuficientEE">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <strong>Error</strong> <br /> No seleccionó ningún empleado. <br /> No se puede guardar un equipo sin empleados seleccionados.
+</div>*@
+
+
+<div class="alert alert-danger" role="alert" id="insuficientEE" style="display:none">
+    <strong>Error</strong> <br /> No seleccionó ningún empleado. <br /> No se puede guardar un equipo <strong>SIN</strong> empleados seleccionados.
+</div>
+
+<br />
+
+<div class="alert alert-warning" role="alert" id="higherEE" style="display:none">
+    <strong>Alerta</strong> <br /> Un equipo sólo puede estar formado por 5 desarrollaodres! <br /> Por favor seleccione <strong>SÓLO</strong>  5 empleados!
+</div>
+
 
 <button type="button" class="btn btn-primary" onclick="teamCheck()">Conformar Equipo</button>
 
-<div class="alert" id="insuficientEE">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-</div>
 
 <script>
     function teamCheck() {
-        // Revisa que la cantidad de empleados desarrolladores sea menor o igual a 5        
+        // Revisa que la cantidad de empleados desarrolladores sea menor o igual a 5
 
         //Reference the Table.
         var grid = document.getElementById("tblEmpleados");
- 
+
         //Reference the CheckBoxes in Table.
         var checkBoxes = grid.getElementsByTagName("INPUT");
         var message = "Id Name                  Country\n";
@@ -60,17 +74,20 @@
                 totalRows++;
             }
         }
- 
-        //Display selected Row data in Alert Box.
-        //alert(message);
 
-        if (this.totalRows = 0) {
+        //Display selected Row data in Alert Box.
+        alert(totalRows);
+
+        if (totalRows == 0) {
+            console.log(totalRows);
             var x = document.getElementById("insuficientEE");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
+            x.style.display = "block";
+        } else if (totalRows > 5) {
+            console.log(totalRows);
+            var x = document.getElementById("higherEE");
+            x.style.display = "block";
+        } else {
+            console.log("Se agregan los EEs al equipo");
         }
 
         //if (totalRows > 0) {
