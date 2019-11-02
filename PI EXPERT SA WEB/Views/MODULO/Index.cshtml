@@ -1,61 +1,26 @@
-﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.MODULO>
+﻿@model PI_EXPERT_SA_WEB.Models.MODULO
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Módulos</h2>
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idModuloPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </th>
-    </tr>
+<div class="form-horizontal">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.idModuloPK)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.idProyectoPK)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaInicio)
-        </td>
-
-        @*<td>
-            @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-            @Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-            @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-            @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-        </td>*@
-
-        <td>
-            <div class="col text-center">
-                @Html.ActionLink("Más información", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
-            </div>
-        </td>
-    </tr>
-}
-
-</table>
-
-<div class="col text-center">
-    <p>
-        @Html.ActionLink("Crear Modulo", "Create", null, new { @class = "btn btn-info btn-large text-center" })
-    </p>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.idProyectoPK, "Proyectos", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
+        </div>
+    </div>
 </div>
+
+
+<div id="ModuloPartialView">
+    @Html.Action("ModuloPartialView", new { id = Url.RequestContext.RouteData.Values["id"] })
+</div>
+
+
+
+

@@ -11,7 +11,6 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -23,38 +22,38 @@ namespace PI_EXPERT_SA_WEB.Models
         public CLIENTE()
         {
             this.PROYECTO = new HashSet<PROYECTO>();
-            
+
         }
         //verifica que cedula sea unico
         [Key]
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("CÃ©dula de Identidad")]
+        [DisplayName("Cédula de Identidad")]
         //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
-        [Required(ErrorMessage ="Este campo es obligatorio")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
         //Asegura que solo se puedan utilizar los caracteres deseados
-        [RegularExpression("^[0-9]*$", ErrorMessage = "La cedula solo contiene numeros")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "La cédula debe contener números")]
         //Asegura que siempre se tenga una cedula de 9 digitos
-        [StringLength(maximumLength: 9,ErrorMessage ="Cedula invalida", MinimumLength = 9)]
+        [StringLength(maximumLength: 9, ErrorMessage = "Cédula inválida", MinimumLength = 9)]
         public string cedulaPK { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Nombre")]
+        [DisplayName("Nombre Cliente")]
         //Campo Obligatorio
-        [Required(ErrorMessage ="Este campo es obligatorio")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres inválidos")]
         //Asegura que el nombre no sea de mas de 16 caracteres
-        [StringLength(64, ErrorMessage ="El Nombre excede el numero de caracteres")]
+        [StringLength(64, ErrorMessage = "El Nombre excede el número de caracteres")]
         public string name { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Primer apellido")]
+        [DisplayName("Primer Apellido")]
         //Campo Obligatorio
-        [Required(ErrorMessage ="Este campo es obligatorio")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
+        [Required(ErrorMessage = "Este campo es obligatorio")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres inválidos")]
         //Asegura que el apellido no tenga mas de 16 caracteres
-        [StringLength(64, ErrorMessage = "El Primer apellido excede el numero de caracteres")]
-        public string apellido1 { get; set; }        
+        [StringLength(64, ErrorMessage = "El Primer apellido excede el número de caracteres")]
+        public string apellido1 { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("Segundo apellido")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres invalidos")]
+        [DisplayName("Segundo Apellido")]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres inválidos")]
         //Asegura que el segundo apellido no tenga mas de 16 caracteres
         [StringLength(64, ErrorMessage = "El Segundo apellido excede el numero de caracteres")]
         public string apellido2 { get; set; }
@@ -63,10 +62,10 @@ namespace PI_EXPERT_SA_WEB.Models
         //Campo obligatorio
         [Required(ErrorMessage = "Este campo es obligatorio")]
         //Verifica que se ingrese un String en formato de correo electronico "ABC@XYZ.com"
-        [DataType(DataType.EmailAddress,ErrorMessage ="Porfavor introducir un correo valido")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Por favor introducir un correo válido")]
         public string correo { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("TelÃ©fono")]
+        [DisplayName("Teléfono")]
         //Verifica que se ingrese el dato en formato de numero telefonico
         [DataType(DataType.PhoneNumber)]
         public string telefono { get; set; }
@@ -74,12 +73,12 @@ namespace PI_EXPERT_SA_WEB.Models
         [DisplayName("Provincia")]
         public string provincia { get; set; }
         //Nombre que se mostrara en pantalla para el atributo
-        [DisplayName("CantÃ³n")]
+        [DisplayName("Cantón")]
         public string canton { get; set; }
         //Nombre que se mostrara en pantalla para el atributo      
         [DisplayName("Distrito")]
         public string distrito { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROYECTO> PROYECTO { get; set; }
         public virtual LoginCliente LoginCliente { get; set; }

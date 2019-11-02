@@ -1,0 +1,24 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.MODULO>
+
+<body>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+    $(document).ready(function () {
+            $("#modulos").change(function () {
+                var moduloID = $("#modulos").val();
+                var proyectoID = $("#idProyectoPK").val();
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientos', { idProyectoPK: proyectoID, idModuloPK: moduloID });
+                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idModuloPK=' +moduloID);
+            });
+        });
+    </script>
+
+    
+    
+    
+    @Html.DropDownList("modulos", null, "--Seleccionar Modulo--")
+    
+    
+    <div id="tablaRequerimientos"></div>
+
+</body>

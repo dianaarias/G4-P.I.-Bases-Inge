@@ -11,19 +11,40 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class REQUERIMIENTO
     {
+        [Key]
         public int idRequerimientoPK { get; set; }
+        [Key]
+        [Required]
+        [Display(Name = "Modulo")]
         public int idModuloPK { get; set; }
+        [Key]
+        [Required]
+        [Display(Name = "Proyecto")]
         public int idProyectoPK { get; set; }
-        public int estado { get; set; }
-        public System.DateTime fecha { get; set; }
+        [Display(Name = "Estado")]
+        public string estado { get; set; }
+        [Display(Name ="Fecha de ultima modificacion")]
+        public System.DateTime fechaEstado { get; set; }
+        [Display(Name = "Nombre del requerimiento")]
         public string nombre { get; set; }
+        [Display(Name ="Grado de difucultad")]
         public int complejidad { get; set; }
-        public Nullable<int> duracionEstimada { get; set; }
-        public string cedulaDesarroladorFK { get; set; }
-    
+        //public Nullable<int> duracionEstimada { get; set; }
+        [Display(Name ="Duración Estimado")]
+        public int duracionEstimada { get; set; }
+        [Display(Name ="Cedula del Desarollador")]
+        public string cedulaDesarrolladorFK { get; set; }
+        [Display(Name = "Fecha de Inicio")]
+        public Nullable<System.DateTime> fechaInicio { get; set; }
+        [Display(Name = "Fecha de Finalizacion")]
+        public Nullable<System.DateTime> fechaFin { get; set; }
+        public virtual PROYECTO PROYECTO  { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual MODULO MODULO { get; set; }
     }
