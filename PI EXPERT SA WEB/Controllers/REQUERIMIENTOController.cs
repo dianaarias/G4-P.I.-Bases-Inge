@@ -17,7 +17,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
-
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
