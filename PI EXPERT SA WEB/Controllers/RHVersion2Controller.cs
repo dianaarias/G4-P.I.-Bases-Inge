@@ -20,6 +20,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             ModeloIntermedio modelo = new ModeloIntermedio();
             modelo.listaEmpleados = db.EMPLEADO.ToList();
             modelo.listaHabilidades = db.HABILIDADES.ToList();
+          
             return View(modelo);
         }
 
