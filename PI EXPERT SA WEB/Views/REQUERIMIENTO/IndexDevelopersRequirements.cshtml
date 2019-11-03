@@ -9,9 +9,8 @@
 <script>
     $(document).ready(function () {
             $("#dropDowmProyecto").change(function () {
-                var proyectoID = $("#idProyectoPK").val();
-                $("#dropdownModulo").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID });
-                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
+                var proyectoID = $("#dropDowmProyecto").val();
+                $("#dropdownModulo").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID })
             });
     });
 </script>
@@ -22,7 +21,7 @@
 
 @Html.DropDownList("dropDowmProyecto", null, "--Seleccionar Proyecto--")
 
-@Html.DropDownList("dropDowmEmpleados", null, "--Seleccionar Desarrollador--")
+
 
 
 

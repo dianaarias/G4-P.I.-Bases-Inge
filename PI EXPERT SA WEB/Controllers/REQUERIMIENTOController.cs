@@ -29,17 +29,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public ActionResult IndexDevelopersRequirements()
         {
-            //var Things = from EMPLEADO e in db.EMPLEADO
-            //             where e.cedulaPK  == id
-            //             join b in db.IssueTypes on a.ID equals b.ID
-            //             select new { a, b };
 
-            var Things = from EMPLEADO e in db.EMPLEADO
-                         join ROL r in db.ROL 
-                         on e.cedulaPK equals r.cedulaPK
-                         select new { e.nombre };
 
-            ViewBag.dropDowmEmpleados = Things;
+
+
+
+            //ViewBag.dropDowmEmpleados = new SelectList(Things, "cedulaPK", "nombre");
+            //ViewBag.dropDowmEmpleados = Things;
 
             //ViewBag.dropDowmEmpleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
 
@@ -62,9 +58,19 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public PartialViewResult GetDevelopers(int? idProyectoPK)
         {
+            //var Things = from e in db.EMPLEADO
+            //             join r in db.ROL
+            //             on e.cedulaPK equals r.cedulaPK
+            //             where r.idProyectoPK == idProyectoPK
+            //             select new { e, r };
+
+            //ViewBag.empleadospro = new SelectList(Things, "cedulaPK", "nombre");
+            //ViewBag.empleadospro = Things.ToList();
+
             List<ROL> equipo = db.ROL.Where(x => x.idProyectoPK == idProyectoPK).ToList();
-            ViewBag.empleados = new SelectList(equipo, "cedulaPk", "cedulaPK");
-            return PartialView("GetDevelopers");
+            ViewBag.empleadospro = new SelectList(equipo, "idProyectoPK", "cedulaPK");
+
+            return PartialView();
         }
 
 
@@ -72,6 +78,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
 
             List<REQUERIMIENTO> requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
+
+            return PartialView(requerimiento);
+        }
+
+        public PartialViewResult MostrarRequerimientosDesarrollador(string cedulaPk)
+        {
+
+            List<REQUERIMIENTO> requerimiento = db.REQUERIMIENTO.Where(x => x.cedulaDesarrolladorFK == cedulaPk).ToList();
 
             return PartialView(requerimiento);
         }

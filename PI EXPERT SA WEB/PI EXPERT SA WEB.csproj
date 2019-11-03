@@ -348,6 +348,7 @@
     <Content Include="Views\CONSULTAS\Index.cshtml" />
     <Content Include="Views\REQUERIMIENTO\GetDevelopers.cshtml" />
     <Content Include="Views\REQUERIMIENTO\IndexDevelopersRequirements.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\MostrarRequerimientosDesarrollador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
