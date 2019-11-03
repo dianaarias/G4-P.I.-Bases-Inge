@@ -344,6 +344,8 @@
     <Content Include="Views\REQUERIMIENTO\GetListaModulos.cshtml" />
     <Content Include="Views\MODULO\ModuloPartialView.cshtml" />
     <Content Include="Views\REQUERIMIENTO\MostrarRequerimientos.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\MostrarTotalRequerimientos.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\dropDownModulo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

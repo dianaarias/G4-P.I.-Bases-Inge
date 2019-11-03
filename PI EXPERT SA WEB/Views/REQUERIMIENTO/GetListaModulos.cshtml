@@ -1,24 +1,109 @@
-﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.MODULO>
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
 
 <body>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
             $("#modulos").change(function () {
                 var moduloID = $("#modulos").val();
-                var proyectoID = $("#idProyectoPK").val();
+                var proyectoID = $("#proyectos").val();
+                if (moduloID != null) {
+                    $("#tabla").hide();
+                } else {
+                    $("#tabla").show();
+                }
                 $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientos', { idProyectoPK: proyectoID, idModuloPK: moduloID });
-                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idModuloPK=' +moduloID);
             });
         });
     </script>
 
-    
-    
-    
-    @Html.DropDownList("modulos", null, "--Seleccionar Modulo--")
-    
-    
-    <div id="tablaRequerimientos"></div>
+
+
+    <div class="form-group row offset-3">
+        @Html.Label("Módulos", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("modulos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+
+
+    @*tabla que despliega todos los requerimientos del proyecto*@
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODULO.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaEstado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.complejidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.duracionEstimada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+            </th>
+            <th>
+                Ver más información
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODULO.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaEstado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.complejidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.duracionEstimada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+                </td>
+                <td>
+                    <div class="col text-center">
+                        <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                            <img src="~/images/more.svg" width="30" height="30" />
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+    <div id="tablaRequerimientos"> </div>
+
 
 </body>

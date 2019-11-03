@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
 
 @{
     ViewBag.Title = "Index";
@@ -10,13 +10,15 @@
 
 <script>
     $(document).ready(function () {
-            $("#idProyectoPK").change(function () {
-                var proyectoID = $("#idProyectoPK").val();
-                $("#dropdownModulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
-                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
-            });
+
+        $("#proyectos").change(function () {
+            var proyectoID = $("#proyectos").val();
+            $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID })
+        });
     });
 </script>
+
+
 
 
 <h2>Requerimientos</h2>
@@ -27,10 +29,22 @@
     </a>
 </h2>
 
-@Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--")
+
+@*<div class="form-group row offset-3">
+    @Html.LabelFor(model => model.idProyectoPK, "Proyectos", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
+    </div>
+</div>*@
 
 
+<div class="form-group row offset-3">
+    @Html.Label("Proyectos", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("proyectos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
 
 
-<div id="dropdownModulo"> </div>
-
+<div id="dropdownmodulo"> </div>

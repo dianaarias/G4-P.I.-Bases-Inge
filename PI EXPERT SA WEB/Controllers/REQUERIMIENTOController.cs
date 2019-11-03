@@ -17,32 +17,51 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
-            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-
-
-            var rEQUERIMIENTO = db.REQUERIMIENTO.Include(r => r.EMPLEADO).Include(r => r.MODULO);
-
-
-            return View(rEQUERIMIENTO.ToList());
+            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            return View();
         }
 
        
         public PartialViewResult GetListaModulos(int? idProyectoPK)
         {
-            List<MODULO> modulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            List<MODULO> modulo= db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.modulos = new SelectList(modulo, "idModuloPK", "nombre");
-            return PartialView("GetListaModulos");
+
+            List<REQUERIMIENTO> requerimiento;
+            requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+
+            return PartialView(requerimiento);
         }
+
 
 
         public PartialViewResult MostrarRequerimientos(int? idProyectoPK, int? idModuloPK)
         {
-
-            List<REQUERIMIENTO> requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
-
+            List<REQUERIMIENTO> requerimiento;
+            requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
             return PartialView(requerimiento);
         }
+
+
+
+        public PartialViewResult DropDownModulo(int? idProyectoPK) {
+            List<MODULO> modulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.modulos = new SelectList(modulo, "idModuloPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            return PartialView();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: REQUERIMIENTO/Details/5
         public ActionResult Details(int? idProyecto, int? idModulo, int? idRequerimiento)
@@ -61,14 +80,21 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(rEQUERIMIENTO);
         }
 
+
         // GET: REQUERIMIENTO/Create
         public ActionResult Create(int? idProyecto, int? idModulo)
         {
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
+
+
+            List<MODULO> modulo = db.MODULO.Where(x => x.idProyectoPK == 0).ToList();
+            ViewBag.idModuloPK = new SelectList(modulo, "idModuloPK", "nombre");
+
+
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
+
 
         // POST: REQUERIMIENTO/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
