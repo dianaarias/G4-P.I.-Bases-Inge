@@ -29,7 +29,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public ActionResult IndexDevelopersRequirements()
         {
-            ViewBag.dropDowmEmpleados = new SelectList(db.ROL, "idProyectoPK","cedulaPK");
+            List<MODULO> modulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.modulos = new SelectList(modulo, "idModuloPK", "nombre");
+
+            //ViewBag.dropDowmEmpleados = new SelectList(db.ROL, "idProyectoPK","cedulaPK");
             ViewBag.dropDowmProyecto = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
