@@ -346,6 +346,8 @@
     <Content Include="Views\MODULO\ModuloPartialView.cshtml" />
     <Content Include="Views\REQUERIMIENTO\MostrarRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\Index.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\GetDevelopers.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\IndexDevelopersRequirements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

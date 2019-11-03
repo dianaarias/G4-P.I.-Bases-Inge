@@ -11,99 +11,41 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-
+    
     public partial class EMPLEADO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPLEADO()
         {
-            this.PROYECTO = new HashSet<PROYECTO>();
             this.HABILIDADES = new HashSet<HABILIDADES>();
             this.PROYECTO = new HashSet<PROYECTO>();
-            this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
             this.ROL = new HashSet<ROL>();
+            this.REQUERIMIENTO = new HashSet<REQUERIMIENTO>();
         }
-
-        //verifica que cedula sea unico
-        [Key]
-        //Campo obligatorio, debe coincidir con la base de datos y NOT NULL.
-        [Required(ErrorMessage = "El campo cédula es requerido")]
-        //Asegura que solo se puedan utilizar los caracteres deseados
-        [RegularExpression("^[0-9]*$", ErrorMessage = "La cédula sólo puede contener números")]
-        //Asegura que siempre se tenga una cedula de 9 digitos
-        [StringLength(maximumLength: 9, ErrorMessage = "Cédula invalida", MinimumLength = 9)]
-        //Nombre que se mostrara en pantalla para el atributo
-        [Display(Name = "Cédula")]
+    
         public string cedulaPK { get; set; }
-        //Campo Obligatorio
-        [Required(ErrorMessage = "El campo nombre es requerido")]
-        //Asegura que el nombre no sea de mas de 64 caracteres
-        [StringLength(64, ErrorMessage = "El campo nombre excede el número de caracteres")]
-        //Nombre que se mostrara en pantalla para el atributo
-        [Display(Name = "Nombre")]
         public string nombre { get; set; }
-        //Campo Obligatorio
-        [Required(ErrorMessage = "El campo apellido es requerido")]
-        //Asegura que primer segundo apellido no tenga mas de 64 caracteres
-        [StringLength(64, ErrorMessage = "El campo apellido excede el número de caracteres")]
-        //Nombre que se mostrara en pantalla para el atributo
-        [Display(Name = "Primer apellido")]
         public string apellido1 { get; set; }
-        //Asegura que el segundo apellido no tenga mas de 64 caracteres
-        [StringLength(64, ErrorMessage = "El campo apellido excede el número de caracteres")]
-        //Nombre que se mostrara en pantalla para el atributo
-        [Display(Name = "Segundo apellido")]
         public string apellido2 { get; set; }
-        //Campo Obligatorio
-        [Required(ErrorMessage = "El campo correo es requerido")]
-        //Verifica que se ingrese un String en formato de correo electronico "ABC@XYZ.com"
-        [DataType(DataType.EmailAddress)]
-        //Nombre que se mostrara en pantalla para el atributo
-        [Display(Name = "Correo")]
         public string correo { get; set; }
-        //Verifica que se ingrese el dato en formato de numero telefonico
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Teléfono")]
         public string telefono { get; set; }
-        //Campo Obligatorio
-        [Required(ErrorMessage = "El campo fecha de contratación es requerido")]
-        [Display(Name = "Fecha de contratación")]
         public System.DateTime fechaContratacion { get; set; }
-        //Nombre que se mostrara en pantalla para el atributo
-        [Display(Name = "Fecha finalización de contrato")]
         public Nullable<System.DateTime> fechaDespido { get; set; }
-        [StringLength(64, ErrorMessage = "El campo rol actual excede el número de caracteres")]
-        [Display(Name = "Rol actual")]
         public string tipoUsuario { get; set; }
-        [Display(Name = "Disponibilidad")]
         public bool disponibilidad { get; set; }
-        [StringLength(64, ErrorMessage = "El campo provincia excede el número de caracteres")]
-        [Display(Name = "Provincia")]
         public string provincia { get; set; }
-        //Asegura que no tenga mas de 64 caracteres
-        [StringLength(64, ErrorMessage = "El campo cantón excede el número de caracteres")]
-        [Display(Name = "Cantón")]
         public string canton { get; set; }
-        //Asegura que no tenga mas de 64 caracteres
-        [StringLength(64, ErrorMessage = "El campo distrito excede el número de caracteres")]
-        [Display(Name = "Distrito")]
         public string distrito { get; set; }
-        [Required(ErrorMessage = "El campo fecha de nacimiento es requerido")]
-        [Display(Name = "Fecha de nacimiento")]
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
-
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PROYECTO> PROYECTO { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HABILIDADES> HABILIDADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }
+        public virtual ICollection<PROYECTO> PROYECTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROL> ROL { get; set; }
         public virtual LoginEmpleado LoginEmpleado { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }
     }
 }

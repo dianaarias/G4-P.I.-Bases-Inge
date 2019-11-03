@@ -27,12 +27,26 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(rEQUERIMIENTO.ToList());
         }
 
-       
+        public ActionResult IndexDevelopersRequirements()
+        {
+            ViewBag.dropDowmEmpleados = new SelectList(db.ROL, "idProyectoPK","cedulaPK");
+            ViewBag.dropDowmProyecto = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            return View();
+        }
+
+
         public PartialViewResult GetListaModulos(int? idProyectoPK)
         {
             List<MODULO> modulo = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.modulos = new SelectList(modulo, "idModuloPK", "nombre");
             return PartialView("GetListaModulos");
+        }
+
+        public PartialViewResult GetDevelopers(int? idProyectoPK)
+        {
+            List<ROL> equipo = db.ROL.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.empleados = new SelectList(equipo, "cedulaPk", "cedulaPK");
+            return PartialView("GetDevelopers");
         }
 
 

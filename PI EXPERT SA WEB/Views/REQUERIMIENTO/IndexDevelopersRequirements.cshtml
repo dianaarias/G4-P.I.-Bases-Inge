@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+
+@{
+    ViewBag.Title = "IndexDevelopersRequirements";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+            $("#dropDowmProyecto").change(function () {
+                var proyectoID = $("#idProyectoPK").val();
+                $("#dropdownModulo").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID });
+                $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
+            });
+    });
+</script>
+
+
+<h2>Requerimientos</h2>
+
+
+@Html.DropDownList("dropDowmProyecto", null, "--Seleccionar Proyecto--")
+
+@Html.DropDownList("dropDowmEmpleados", null, "--Seleccionar Desarrollador--")
+
+
+
+<div id="dropdownModulo"></div>
