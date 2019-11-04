@@ -29,16 +29,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+            @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
+            Nombre proyecto
         </dt>
 
         <dd>
-            @*@ViewBag.proyecto*@
-            @Html.DropDownList("proyecto", null, htmlAttributes: new {})
+            @*<label>@Html.Raw(ViewBag.proyecto)</label>*@
+            @html.dropdownlist("proyecto", null, htmlattributes: new {})
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
+            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
+            Nombre módulo
         </dt>
 
         <dd>
