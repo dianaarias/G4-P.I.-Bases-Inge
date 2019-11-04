@@ -77,7 +77,15 @@
         <div class="form-group row offset-3 required">
             @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
+                {
+                        new SelectListItem() {Text = "Sin asignar", Value="Sin asignar"},
+                        new SelectListItem() {Text = "Asignado", Value="Asignado"},
+                        new SelectListItem() {Text = "Iniciado", Value="Iniciado"},
+                        new SelectListItem() {Text = "Finalizado", Value="Finalizado"},
+                        new SelectListItem() {Text = "Suspendido", Value="Suspendido"}
+                 })
                 @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -101,7 +109,14 @@
         <div class="form-group row offset-3">
             @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.complejidad, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.complejidad, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.complejidad, new List<SelectListItem>
+                {
+                        new SelectListItem() {Text = "1-simple", Value="simple"},
+                        new SelectListItem() {Text = "2-mediano", Value="mediano"},
+                        new SelectListItem() {Text = "3-complejo", Value="complejo"},
+                        new SelectListItem() {Text = "4-muy complejo", Value="complejo"}
+                 })
                 @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
             </div>
         </div>

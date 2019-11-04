@@ -19,7 +19,7 @@
 
 
     <div class="form-group row offset-3">
-        @Html.Label("Desarrolladores", new { @class = "control-label col-md-2" })
+        @Html.Label("Desarrollador", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @*@Html.DropDownList("empleadospro", new SelectList(TempData["empleado"] as List<string>, "cedulaPK", "nombre"), "----------");*@
             @Html.DropDownList("empleadospro", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
