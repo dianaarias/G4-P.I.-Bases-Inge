@@ -156,13 +156,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idProyecto, int? idModulo, int? idRequerimiento)
         {
-            if (id == null)
+            if (idProyecto == null || (idModulo == null || idRequerimiento == null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
@@ -177,7 +177,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fecha,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK")] REQUERIMIENTO rEQUERIMIENTO)
+        public ActionResult Edit([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaEstado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
         {
             if (ModelState.IsValid)
             {
@@ -185,6 +185,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.idRequerimientoPK = new SelectList(db.REQUERIMIENTO, "idRequerimientoPK", "idRequerimientoPK", rEQUERIMIENTO.idRequerimientoPK);
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
             return View(rEQUERIMIENTO);

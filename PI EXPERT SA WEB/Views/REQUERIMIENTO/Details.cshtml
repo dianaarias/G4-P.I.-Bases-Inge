@@ -7,7 +7,7 @@
 <a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
-<a href="@Url.Action("Edit","PROYECTO", new { /* id=item.PrimaryKey */ })" class="boton-icono" style="float:right">
+<a href="@Url.Action("Edit","REQUERIMIENTO", new {  idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK  })" class="boton-icono" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30" />
 </a>
 
@@ -29,16 +29,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+            @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
+            Nombre proyecto
         </dt>
 
         <dd>
-            @*@ViewBag.proyecto*@
-            @Html.DropDownList("proyecto", null, htmlAttributes: new {})
+            @*<label>@Html.Raw(ViewBag.proyecto)</label>*@
+            @html.dropdownlist("proyecto", null, htmlattributes: new {})
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
+            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
+            Nombre módulo
         </dt>
 
         <dd>
