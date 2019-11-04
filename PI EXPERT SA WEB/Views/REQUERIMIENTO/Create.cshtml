@@ -6,16 +6,30 @@
 }
 
 
-<script>
-    $(document).ready(function () {
+@*<script>
+        $(document).ready(function () {
 
+            $("#idProyectoPK").change(function () {
+                var proyectoID = $("#idProyectoPK").val();
+                $("#idModuloO").load('/REQUERIMIENTO/DropDownModulo', { idProyectoPK: proyectoID });
+            });
+        });
+</script>*@
+
+
+@*<script>
+    $(document).ready(function () {
         $("#idProyectoPK").change(function () {
-            var proyectoID = $("#idProyectoPK").val();
-            $("#idModulo").load('/REQUERIMIENTO/DropDownModulo', { idProyectoPK: proyectoID });
-            $("#idModuloO").hide();
+            getModul();
         });
     });
-</script>
+</script>*@
+
+
+
+
+
+
 
 
 <a href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
@@ -39,24 +53,24 @@
 
 
     <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.idProyectoPK, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.idProyectoPK, "proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-    <div class="form-group row offset-3 required" id="idModuloO">
-        @Html.LabelFor(model => model.idModuloPK, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idModuloPK", null, "--Seleccionar Módulo--", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div id="idModulo"></div>
+
+    <div class="form-group row offset-3 required">
+        @Html.LabelFor(model => model.idModuloPK, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div id="idModuloO">
+                @Html.DropDownList("idModuloPK", null, "--Seleccionar Módulo--", htmlAttributes: new { @class = "form-control" })
+            </div>
+            @*@Html.DropDownList("idModuloO", Enumerable.Empty<SelectListItem>(), "--Seleccionar Módulo--", new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
 
     <div class="form-group row offset-3 required">
@@ -108,13 +122,13 @@
             </div>
         </div>*@
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.cedulaDesarrolladorFK, "cedulaDesarrolladorFK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cedulaDesarrolladorFK", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.cedulaDesarrolladorFK, "cedulaDesarrolladorFK", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("cedulaDesarrolladorFK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
     <div class="col text-center">
         <div class="form-group">
