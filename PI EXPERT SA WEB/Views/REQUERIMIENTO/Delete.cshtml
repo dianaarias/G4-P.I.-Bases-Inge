@@ -25,15 +25,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+            @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
+            Nombre del Proyecto
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PROYECTO.nombre)
+            @Html.DropDownList("proyecto", null, htmlAttributes: new { })
+            @*@Html.DisplayFor(model => model.PROYECTO.nombre)*@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
+            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
+            Nombre de Módulo
         </dt>
 
         <dd>

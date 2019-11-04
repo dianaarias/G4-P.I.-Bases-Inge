@@ -204,6 +204,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return HttpNotFound();
             }
+            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
+            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+
             return View(rEQUERIMIENTO);
         }
 
