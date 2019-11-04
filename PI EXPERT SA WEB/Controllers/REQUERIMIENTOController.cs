@@ -13,10 +13,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
     public class REQUERIMIENTOController : Controller
     {
 
-        int var = 0;
-
-
-
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: REQUERIMIENTO
@@ -74,13 +70,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
             //TempData["empleadospro"] = things.ToList();
 
 
-            var things = 
-                         from r in db.ROL
-                         where r.idProyectoPK == idProyectoPK
-                         select r.EMPLEADO.nombre;
+            //var things = 
+            //             from r in db.ROL
+            //             where r.idProyectoPK == idProyectoPK
+            //             select r.EMPLEADO.nombre;
 
 
-            List<string> empleados = things.ToList();
+            //List<string> empleados = things.ToList();
 
             /*foreach (var r in db.ROL) {
                 foreach (var e in db.EMPLEADO) {
@@ -90,7 +86,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 }
             }*/
 
-            TempData["empleado"] = empleados;
+            List<ROL> em = db.ROL.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.empleadospro = new SelectList(em, "cedulaPK", "cedulaPK");
 
             return PartialView();
         }
@@ -156,19 +153,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idProyecto, int? idModulo, int? idRequerimiento)
         {
-            if (id == null)
+            if (idProyecto == null || (idModulo == null || idRequerimiento == null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(id);
+            REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
-            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
+
+            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
+            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+            //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
+            //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
+            ViewBag.desarrolladores = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             return View(rEQUERIMIENTO);
         }
 

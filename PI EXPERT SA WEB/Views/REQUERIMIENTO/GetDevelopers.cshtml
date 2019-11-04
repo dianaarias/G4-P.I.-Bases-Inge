@@ -10,7 +10,7 @@
             $("#empleadospro").change(function () {
                 var desarrollador = $("#empleadospro").val();
                 var proyectoID = $("#proyectos").val();
-                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientosDesarrollador', { idProyectoPK: proyectoID, cedulaPK: desarrollador });
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientosDesarrollador', {cedulaPK: desarrollador});
             });
         });
     </script>
@@ -21,7 +21,8 @@
     <div class="form-group row offset-3">
         @Html.Label("Desarrolladores", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("empleadospro", new SelectList(TempData["empleado"] as List<string>, "cedulaPK", "nombre"), "----------");
+            @*@Html.DropDownList("empleadospro", new SelectList(TempData["empleado"] as List<string>, "cedulaPK", "nombre"), "----------");*@
+            @Html.DropDownList("empleadospro", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
 
