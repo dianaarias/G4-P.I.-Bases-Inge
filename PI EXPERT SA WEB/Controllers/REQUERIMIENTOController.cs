@@ -33,33 +33,22 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return PartialView(requerimiento);
         }
 
-        public ActionResult IndexDevelopersRequirements()
-        {
 
+        public PartialViewResult MostrarRequerimientos(int? idProyectoPK, int? idModuloPK) {
 
+            List<REQUERIMIENTO> requerimiento;
+            requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
 
-
-
-            //ViewBag.dropDowmEmpleados = new SelectList(Things, "cedulaPK", "nombre");
-            //ViewBag.dropDowmEmpleados = Things;
-
-            //ViewBag.dropDowmEmpleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-
-            //ViewBag.dropDowmEmpleados = new SelectList(db.ROL, "idProyectoPK","cedulaPK");
-
-            //List<EMPLEADO> modulo = db.EMPLEADO.Where(x => x.cedulaPK == ViewBag.dropDowmEmpleado).ToList();
-            //ViewBag.modulos = new SelectList(modulo, "cedulaPK", "nombre");
-
-            ViewBag.dropDowmProyecto = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            return View();
+            return PartialView(requerimiento);
         }
 
 
-        public PartialViewResult GetListaModulos(int? idProyectoPK)
+
+        public ActionResult IndexDevelopersRequirements()
         {
-            List<REQUERIMIENTO> requerimiento;
-            requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
-            return PartialView(requerimiento);
+
+            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            return View();
         }
 
 
@@ -71,30 +60,35 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return PartialView();
         }
 
+
         public PartialViewResult GetDevelopers(int? idProyectoPK)
         {
-            //var Things = from e in db.EMPLEADO
-            //             join r in db.ROL
-            //             on e.cedulaPK equals r.cedulaPK
-            //             where r.idProyectoPK == idProyectoPK
-            //             select new { e, r };
+            //List<EMPLEADO> desarrolladores = things as List<EMPLEADO>;   
+            //TempData["empleadospro"] = things.ToList();
 
-            //ViewBag.empleadospro = new SelectList(Things, "cedulaPK", "nombre");
-            //ViewBag.empleadospro = Things.ToList();
 
-            List<ROL> equipo = db.ROL.Where(x => x.idProyectoPK == idProyectoPK).ToList();
-            ViewBag.empleadospro = new SelectList(equipo, "idProyectoPK", "cedulaPK");
+            var things = 
+                         from r in db.ROL
+                         where r.idProyectoPK == idProyectoPK
+                         select r.EMPLEADO.nombre;
+
+
+            List<string> empleados = things.ToList();
+
+            /*foreach (var r in db.ROL) {
+                foreach (var e in db.EMPLEADO) {
+                    if (r.idProyectoPK == idProyectoPK && r.cedulaPK == e.cedulaPK) {
+                        em1 += db.EMPLEADO.Where(x => x.cedulaPK == r.cedulaPK).ToList();
+                    }
+                }
+            }*/
+
+            ViewBag.empleadospro = empleados;
 
             return PartialView();
         }
 
 
-        public PartialViewResult MostrarRequerimientos(int? idProyectoPK, int? idModuloPK)
-        {
-
-
-            return PartialView(requerimiento);
-        }
 
         public PartialViewResult MostrarRequerimientosDesarrollador(string cedulaPk)
         {
