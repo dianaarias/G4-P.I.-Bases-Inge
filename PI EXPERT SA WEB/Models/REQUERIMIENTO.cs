@@ -11,19 +11,38 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class REQUERIMIENTO
     {
+        [Key]
         public int idRequerimientoPK { get; set; }
+        [Key]
         public int idModuloPK { get; set; }
+        [Key]
         public int idProyectoPK { get; set; }
+
+        [Display(Name = "Estado actual")]
         public string estado { get; set; }
+        [Display(Name = "Fecha de ultima modificacion")]
         public System.DateTime fechaEstado { get; set; }
+
+        [Display(Name = "Nombre de requerimiento")]
         public string nombre { get; set; }
+
+        [Display(Name = "Indice de complejidad")]
         public int complejidad { get; set; }
+
+        [Display(Name = "Duracion Estimada")]
         public Nullable<int> duracionEstimada { get; set; }
+
+        [Display(Name = "Desarollador asociado")]
         public string cedulaDesarrolladorFK { get; set; }
+
+        [Display(Name = "Fecha de inicio")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
+
+        [Display(Name = "Fecha de finalizacion")]
         public Nullable<System.DateTime> fechaFin { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
