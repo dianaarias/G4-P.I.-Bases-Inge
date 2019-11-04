@@ -1,0 +1,29 @@
+﻿
+@model IEnumerable<PI_EXPERT_SA_WEB.Models.ROL>
+
+    <body>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script>
+    $(document).ready(function () {
+            $("#empleadospro").change(function () {
+                var nombreDesarrollador = $("#empleadospro").val();
+       
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientosDesarrollador', { cedulaPk: nombreDesarrollador });
+                
+            });
+        });
+        </script>
+
+
+
+
+
+        @Html.DropDownList("empleadospro", null, "--Seleccionar Desarrollador--")
+
+
+        <div id="tablaRequerimientos"></div>
+
+    </body>
+
+
+

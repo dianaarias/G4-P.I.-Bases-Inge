@@ -17,5 +17,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public List<EMPLEADO> listaEmpleados { get; set; }
 
         public List<HABILIDADES> listaHabilidades { get; set; }
+
+        public List<PROYECTO> listaProyectos { get; set; }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+
+@{
+    ViewBag.Title = "IndexDevelopersRequirements";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+            $("#dropDowmProyecto").change(function () {
+                var proyectoID = $("#dropDowmProyecto").val();
+                $("#dropdownModulo").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID })
+            });
+    });
+</script>
+
+
+<h2>Requerimientos</h2>
+
+
+@Html.DropDownList("dropDowmProyecto", null, "--Seleccionar Proyecto--")
+
+
+
+
+
+<div id="dropdownModulo"></div>
