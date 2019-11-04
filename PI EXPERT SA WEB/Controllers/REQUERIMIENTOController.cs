@@ -31,6 +31,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             List<REQUERIMIENTO> requerimiento;
             requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
 
+            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+
             return PartialView(requerimiento);
         }
 
@@ -39,6 +42,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             List<REQUERIMIENTO> requerimiento;
             requerimiento = db.REQUERIMIENTO.Where(x => x.idProyectoPK == idProyectoPK && x.idModuloPK == idModuloPK).ToList();
+
+            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
 
             return PartialView(requerimiento);
         }
@@ -176,9 +182,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // POST: REQUERIMIENTO/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+            //[Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaEstado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO
+
+            //[Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fecha,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK")] REQUERIMIENTO rEQUERIMIENTO
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fecha,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK")] REQUERIMIENTO rEQUERIMIENTO)
+        public ActionResult Edit([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaEstado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
         {
             if (ModelState.IsValid)
             {
