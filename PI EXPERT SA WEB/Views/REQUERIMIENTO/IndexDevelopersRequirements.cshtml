@@ -13,21 +13,11 @@
 
         $("#proyectos").change(function () {
             var proyectoID = $("#proyectos").val();
-            $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID })
+            $("#dropdownmodulo").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID })
         });
     });
 </script>
 
-
-
-
-<h2>Requerimientos</h2>
-
-<h2>
-    <a href="@Url.Action("Create", "REQUERIMIENTO")" style="float:right">
-        <img src="~/images/plus.svg" width="30" height="30" />
-    </a>
-</h2>
 
 
 

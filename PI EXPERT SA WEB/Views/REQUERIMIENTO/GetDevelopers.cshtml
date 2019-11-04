@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+
+
+<body>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#empleadospro").change(function () {
+                var desarrollador = $("#empleadospro").val();
+                var proyectoID = $("#proyectos").val();
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientosDesarrollador', { idProyectoPK: proyectoID, cedulaPK: desarrollador });
+            });
+        });
+    </script>
+
+
+
+
+    <div class="form-group row offset-3">
+        @Html.Label("Desarrolladores", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("empleadospro", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    @*@Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto", new { name = "nombreProyecto" })
+
+    @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto", new { name = "nombreProyecto" })*@
+
+
+    <div id="tablaRequerimientos"></div>
+
+</body>
+
+
+

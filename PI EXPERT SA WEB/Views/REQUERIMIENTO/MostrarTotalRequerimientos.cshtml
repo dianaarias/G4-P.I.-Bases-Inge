@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+
+@{
+    ViewBag.Title = "MostrarTotalRequerimientos";
+}
+
+
+@*En esta tabla se mostrará la informacion básica referente a un requerimiento.*@
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MODULO.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaEstado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.complejidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracionEstimada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+        </th>
+        <th>
+            Ver más información
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaEstado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.complejidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+            </td>
+            <td>
+                <div class="col text-center">
+                    <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+

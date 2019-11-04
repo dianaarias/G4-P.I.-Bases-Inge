@@ -22,6 +22,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
+
+        //Retorna una lista con los proyectos
+        public List<PROYECTO> GetProyecto()
+        {
+            List<PROYECTO> plista = db.PROYECTO.ToList();
+
+            return plista;
+        }
+
+
+
         // GET: PROYECTO/Details/5
         public ActionResult Details(int? id)
         {
@@ -133,7 +144,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             }
             base.Dispose(disposing);
         }
-
-      
+ 
     }
+
 }
