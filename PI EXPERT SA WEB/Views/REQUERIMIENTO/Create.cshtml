@@ -54,7 +54,7 @@
 
 
         <div class="form-group row offset-3 required">
-            @Html.LabelFor(model => model.idProyectoPK, "proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.idProyectoPK, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
@@ -138,7 +138,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 }

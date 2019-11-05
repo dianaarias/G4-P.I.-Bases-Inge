@@ -4,9 +4,12 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            var moduloID;
+
             $("#modulos").change(function () {
-                var moduloID = $("#modulos").val();
-                var proyectoID = $("#proyectos").val();
+                moduloID = $("#modulos").val();
+                proyectoID = $("#proyectos").val();
                 if (moduloID != null) {
                     $("#tabla").hide();
                 } else {
@@ -48,9 +51,6 @@
             </th>
             <th>
                 Responsable
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.estado)
             </th>
             <th>
                 Ver más información
