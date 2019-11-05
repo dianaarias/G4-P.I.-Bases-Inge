@@ -5,18 +5,20 @@
 }
 
 
-@*En esta tabla se mostrará la informacion básica referente a un requerimiento.*@
+@*tabla que despliega todos los requerimientos del proyecto*@
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id="tabla">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            Responsable
+            @*@Html.DisplayNameFor(model => model.nombre)*@
+            Requerimiento
         </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.EMPLEADO.nombre)*@
+            Encargado
         </th>
         <th>
             Ver más información
@@ -25,24 +27,23 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            <div class="col text-center">
-                <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
-                    <img src="~/images/more.svg" width="30" height="30" />
-                </a>
-            </div>
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+            </td>
+            <td>
+                <div class="col text-center">
+                    <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
+                </div>
+            </td>
+        </tr>
     }
-
 </table>

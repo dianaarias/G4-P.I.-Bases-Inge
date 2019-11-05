@@ -4,9 +4,12 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            var moduloID;
+
             $("#modulos").change(function () {
-                var moduloID = $("#modulos").val();
-                var proyectoID = $("#proyectos").val();
+                moduloID = $("#modulos").val();
+                proyectoID = $("#proyectos").val();
                 if (moduloID != null) {
                     $("#tabla").hide();
                 } else {
@@ -20,7 +23,7 @@
 
 
     <div class="form-group row offset-3">
-        @Html.Label("Módulos", new { @class = "control-label col-md-2" })
+        @Html.Label("Módulo", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("modulos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })
         </div>
@@ -37,16 +40,17 @@
         <tr>
             <th>
                 @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
-                Nombre de Módulo
+                Módulo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nombre)
-            </th>
-            <th>
-                Responsable
+                @*@Html.DisplayNameFor(model => model.nombre)*@
+                Requerimiento
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                Responsable
             </th>
             <th>
                 Ver más información
@@ -61,12 +65,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nombre)
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
             </td>
             <td>
                 <div class="col text-center">
