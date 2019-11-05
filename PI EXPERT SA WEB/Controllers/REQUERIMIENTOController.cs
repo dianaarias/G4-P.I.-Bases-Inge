@@ -130,7 +130,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO/Create
         public ActionResult Create()
         {
+            //if (idProyecto == null || idModulo == null )
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+
 
             ViewBag.idModuloPK = new SelectList(db.MODULO.ToList(), "idModuloPK", "nombre");
 

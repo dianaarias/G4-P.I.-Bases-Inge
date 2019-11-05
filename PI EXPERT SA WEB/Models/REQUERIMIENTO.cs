@@ -40,10 +40,9 @@ namespace PI_EXPERT_SA_WEB.Models
         [StringLength(64, ErrorMessage = "El campo nombre excede el número de caracteres")]
         public string nombre { get; set; }
         [Display(Name = "Complejidad")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "La complejidad sólo puede contener números")]
         public int complejidad { get; set; }
         [RegularExpression("^[0-9]*$", ErrorMessage = "La Duración Estimada sólo puede contener números")]
-        [Display(Name = "Duración Estimada")]
+        [Display(Name = "Duración estimada en horas")]
         public Nullable<int> duracionEstimada { get; set; }
         [Display(Name = "Cédula Desarrollador")]
         public string cedulaDesarrolladorFK { get; set; }
