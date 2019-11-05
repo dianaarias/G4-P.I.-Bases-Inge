@@ -34,6 +34,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
 
+            TempData.Add("proyectoID", idProyectoPK);
+            TempData.Add("moduloID", null);
+
             return PartialView(requerimiento);
         }
 
@@ -45,6 +48,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+
+            //TempData.Add("moduloID", idModuloPK);
 
             return PartialView(requerimiento);
         }
@@ -128,12 +133,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
         // GET: REQUERIMIENTO/Create
-        public ActionResult Create()
+        public ActionResult Create(TempDataDictionary data)
         {
             //if (idProyecto == null || idModulo == null )
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
+
+            int a = data.Count();
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
 
