@@ -34,8 +34,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
             List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
 
+
+            TempData.Remove("proyectoID");
             TempData.Add("proyectoID", idProyectoPK);
-            TempData.Add("moduloID", null);
+
+            TempData.Remove("nombreProyecto");
+            TempData.Add("nombreProyecto", db.PROYECTO.Find(idProyectoPK).nombre);
 
             return PartialView(requerimiento);
         }
@@ -49,8 +53,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
             List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyectoPK).ToList();
             ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
 
-            //TempData.Add("moduloID", idModuloPK);
+            TempData.Remove("moduloID");
+            TempData.Add("moduloID", idModuloPK);
 
+            TempData.Remove("nombreModulo");
+            TempData.Add("nombreModulo", db.MODULO.Find(idModuloPK, idProyectoPK).nombre);
             return PartialView(requerimiento);
         }
 
@@ -138,21 +145,35 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
         // GET: REQUERIMIENTO/Create
-        public ActionResult Create(TempDataDictionary data)
+        public ActionResult Create()
         {
             //if (idProyecto == null || idModulo == null )
             //{
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             //}
 
-            int a = data.Count();
+            var a = TempData.Peek("proyectoID");
+            var b = TempData.Peek("moduloID");
+            var c = TempData.Peek("nombreProyecto");
+            var d = TempData.Peek("nombreModulo");
+
+
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
 
+            //ViewBag.idModuloPK = new SelectList(db.MODULO.ToList(), "idModuloPK", "nombre");
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO.ToList(), "idProyectoPK", "nombre");
 
-            ViewBag.idModuloPK = new SelectList(db.MODULO.ToList(), "idModuloPK", "nombre");
 
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO.ToList(), "idProyectoPK", "nombre");
+
+
+            //if () {
+            //    return View();
+            //}
+            //else {
+            //    return RedirectToAction("Index");
+            //}
+
             return View();
         }
 
