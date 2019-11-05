@@ -22,13 +22,6 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
 
         <dt>
             @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
@@ -37,7 +30,8 @@
 
         <dd>
             @*@ViewBag.proyecto*@
-            @Html.DropDownList("proyecto", null, htmlAttributes: new { })
+            @*@Html.DropDownList("proyecto", null, htmlAttributes: new { })*@
+            @TempData.Peek("proyectoDetalle")
         </dd>
 
         <dt>
@@ -47,6 +41,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.MODULO.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
         </dd>
 
         <dt>

@@ -30,8 +30,9 @@
         </dt>
 
         <dd>
-            @Html.DropDownList("proyecto", null, htmlAttributes: new { })
+            @*@Html.DropDownList("proyecto", null, htmlAttributes: new { })*@
             @*@Html.DisplayFor(model => model.PROYECTO.nombre)*@
+            @TempData.Peek("proyectoDetalle")
         </dd>
 
         <dt>

@@ -136,8 +136,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return HttpNotFound();
             }
 
-            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto ).ToList();
-            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+            //List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto ).ToList();
+            //ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+
+            TempData.Remove("proyectoDetalle");
+            TempData.Add("proyectoDetalle", db.PROYECTO.Find(idProyecto).nombre);
+
             //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
             //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             return View(rEQUERIMIENTO);
@@ -227,8 +231,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return HttpNotFound();
             }
 
-            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
-            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+
+            TempData.Remove("proyectoDetalle");
+            TempData.Add("proyectoDetalle", db.PROYECTO.Find(idProyecto).nombre);
+
+            TempData.Remove("moduloDetalle");
+            TempData.Add("moduloDetalle", db.MODULO.Find(idModulo, idProyecto).nombre);
+
+            //List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
+            //ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
             //List<MODULO> modulos = db.MODULO.Where(x => (x.idProyectoPK == idProyecto && x.idModuloPK == idModulo)).ToList();
             //ViewBag.modulo = new SelectList(modulos, "idModuloPK", "nombre");
             ViewBag.desarrolladores = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
@@ -272,8 +283,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return HttpNotFound();
             }
-            List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
-            ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+            //List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
+            //ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
+
+            TempData.Remove("proyectoDetalle");
+            TempData.Add("proyectoDetalle", db.PROYECTO.Find(idProyecto).nombre);
 
             return View(rEQUERIMIENTO);
         }
