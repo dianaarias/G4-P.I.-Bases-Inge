@@ -5,33 +5,20 @@
 }
 
 
-@*En esta tabla se mostrará la informacion básica referente a un requerimiento.*@
+@*tabla que despliega todos los requerimientos del proyecto*@
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id="tabla">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
+            Módulo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
+            @*@Html.DisplayNameFor(model => model.nombre)*@
+            Requerimiento
         </th>
         <th>
             @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaEstado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.complejidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
         </th>
         <th>
             Ver más información
@@ -42,28 +29,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.MODULO.nombre)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaEstado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.complejidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.duracionEstimada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
             </td>
             <td>
                 <div class="col text-center">
@@ -74,6 +46,5 @@
             </td>
         </tr>
     }
-
 </table>
 
