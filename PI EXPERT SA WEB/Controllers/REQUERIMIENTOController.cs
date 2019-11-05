@@ -167,14 +167,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
 
-            //if () {
-            //    return View();
-            //}
-            //else {
-            //    return RedirectToAction("Index");
-            //}
-
-            return View();
+            if (TempData.Peek("proyectoID") != null && TempData.Peek("moduloID") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("index");
+            }
         }
 
 
@@ -189,6 +189,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 db.REQUERIMIENTO.Add(rEQUERIMIENTO);
                 db.SaveChanges();
+
+
+                TempData.Remove("proyectoID");
+                TempData.Add("proyectoID", null);
+
+                TempData.Remove("nombreProyecto");
+                TempData.Add("nombreProyecto", null);
+
+
+
+                TempData.Remove("moduloID");
+                TempData.Add("moduloID", null);
+
+                TempData.Remove("nombreModulo");
+                TempData.Add("nombreModulo", null);
+
+
                 return RedirectToAction("Index");
             }
 

@@ -35,6 +35,22 @@
 
 <a href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
+
+    @*@TempData.Remove("proyectoID");
+    @TempData.Add("proyectoID", null);
+
+    @TempData.Remove("nombreProyecto");
+    @TempData.Add("nombreProyecto", null);
+
+
+
+    @TempData.Remove("moduloID");
+    @TempData.Add("moduloID", null);
+
+    @TempData.Remove("nombreModulo");
+    @TempData.Add("nombreModulo", null);*@
+
+
 </a>
 <h2>Crear Requerimiento</h2>
 <div class="required-field-asterisk">
