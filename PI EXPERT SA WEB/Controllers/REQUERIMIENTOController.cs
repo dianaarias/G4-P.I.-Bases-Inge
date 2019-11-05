@@ -96,9 +96,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
                     }
                 }
             }*/
+            var query =
+                from emp in db.EMPLEADO
+                join rolEmp in db.ROL on emp.cedulaPK equals rolEmp.cedulaPK
+                where rolEmp.idProyectoPK == idProyectoPK
+                select new { emp.nombre, rolEmp.cedulaPK };
 
-            List<ROL> em = db.ROL.Where(x => x.idProyectoPK == idProyectoPK).ToList();
-            ViewBag.empleadospro = new SelectList(em, "cedulaPK", "cedulaPK");
+            //List<ROL> em = db.ROL.Join().Where(x => x.idProyectoPK == idProyectoPK).ToList();
+            ViewBag.empleadospro = new SelectList(query, "cedulaPK", "nombre");
 
             return PartialView();
         }
