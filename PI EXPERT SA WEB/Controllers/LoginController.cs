@@ -21,6 +21,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: Login
         public ActionResult Login ()
         {
+
+            TempData.Add("proyectoID", null);
+            TempData.Add("nombreProyecto", null);
+            TempData.Add("moduloID", null);
+            TempData.Add("nombreModulo", null);
+
+
             return View();
         }
 
