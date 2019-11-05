@@ -34,6 +34,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [Required(ErrorMessage = "El campo estado es requerido")]
         public string estado { get; set; }
         [Display(Name = "Fecha estado")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime fechaEstado { get; set; }
         [Display(Name = "Requerimiento")]
         [Required(ErrorMessage = "El campo nombre es requerido")]
@@ -48,8 +49,10 @@ namespace PI_EXPERT_SA_WEB.Models
         [Display(Name = "Cédula Desarrollador")]
         public string cedulaDesarrolladorFK { get; set; }
         [Display(Name = "Fecha inicio")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
         [Display(Name = "Fecha fin")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> fechaFin { get; set; }
 
         public virtual EMPLEADO EMPLEADO { get; set; }

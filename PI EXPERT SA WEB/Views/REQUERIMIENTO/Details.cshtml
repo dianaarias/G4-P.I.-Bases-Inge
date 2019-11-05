@@ -1,5 +1,7 @@
 ﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
 
+ 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -35,7 +37,7 @@
 
         <dd>
             @*@ViewBag.proyecto*@
-            @Html.DropDownList("proyecto", null, htmlAttributes: new {})
+            @Html.DropDownList("proyecto", null, htmlAttributes: new { })
         </dd>
 
         <dt>
@@ -61,6 +63,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.fechaEstado)
+            @*@Html.DisplayFor(model => model.fechaEstado.ToShortDateString())*@
         </dd>
 
         <dt>
@@ -107,5 +110,5 @@
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")*@
+        @Html.ActionLink("Back to List", "Index")*@
 </p>
