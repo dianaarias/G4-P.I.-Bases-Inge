@@ -35,7 +35,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public string estado { get; set; }
         [Display(Name = "Fecha estado")]
         public System.DateTime fechaEstado { get; set; }
-        [Display(Name = "Nombre requerimiento")]
+        [Display(Name = "Requerimiento")]
         [Required(ErrorMessage = "El campo nombre es requerido")]
         [StringLength(64, ErrorMessage = "El campo nombre excede el número de caracteres")]
         public string nombre { get; set; }
