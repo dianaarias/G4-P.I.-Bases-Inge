@@ -107,8 +107,8 @@
             @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
             {
                     new SelectListItem() {Text = "--Seleccionar estado--", Value=""},
-                    new SelectListItem() {Text = "Sin asignar", Value="Sin asignar"},
-                    new SelectListItem() {Text = "Asignado", Value="Asignado"},
+                    new SelectListItem() {Text = "Sin iniciar", Value="Sin iniciar"},
+                    new SelectListItem() {Text = "En ejecución", Value="En ejecución"},
              })
             @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
         </div>
@@ -129,10 +129,10 @@
             @Html.DropDownListFor(model => model.complejidad, new List<SelectListItem>
             {
                     new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
-                    new SelectListItem() {Text = "1-simple", Value="simple"},
-                    new SelectListItem() {Text = "2-mediano", Value="mediano"},
-                    new SelectListItem() {Text = "3-complejo", Value="complejo"},
-                    new SelectListItem() {Text = "4-muy complejo", Value="complejo"}
+                    new SelectListItem() {Text = "Simple", Value="Simple"},
+                    new SelectListItem() {Text = "Mediano", Value="Mediano"},
+                    new SelectListItem() {Text = "Complejo", Value="Complejo"},
+                    new SelectListItem() {Text = "Muy complejo", Value="Muy complejo"}
              })
             @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
         </div>
