@@ -33,7 +33,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [Display(Name = "Estado")]
         [Required(ErrorMessage = "El campo estado es requerido")]
         public string estado { get; set; }
-        [Display(Name = "Fecha estado")]
+        [Display(Name = "Fecha de creación")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> fechaCreacion { get; set; }
         [Display(Name = "Requerimiento")]
