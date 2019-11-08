@@ -18,6 +18,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: REQUERIMIENTO
         public ActionResult Index()
         {
+
+            @TempData.Remove("proyectoID");
+            @TempData.Remove("nombreProyecto");
+            @TempData.Remove("moduloID");
+            @TempData.Remove("nombreModulo");
+
             ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
@@ -38,8 +44,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
             TempData.Remove("proyectoID");
             TempData.Add("proyectoID", idProyectoPK);
 
-            TempData.Remove("nombreProyecto");
-            TempData.Add("nombreProyecto", db.PROYECTO.Find(idProyectoPK).nombre);
+            if (idProyectoPK != null) {
+                TempData.Remove("nombreProyecto");
+                TempData.Add("nombreProyecto", db.PROYECTO.Find(idProyectoPK).nombre);
+            } 
+
+            var a = TempData.Peek("nombreProyecto");
 
             return PartialView(requerimiento);
         }
@@ -56,8 +66,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
             TempData.Remove("moduloID");
             TempData.Add("moduloID", idModuloPK);
 
-            TempData.Remove("nombreModulo");
-            TempData.Add("nombreModulo", db.MODULO.Find(idModuloPK, idProyectoPK).nombre);
+            if (idModuloPK != null) {
+                TempData.Remove("nombreModulo");
+                TempData.Add("nombreModulo", db.MODULO.Find(idModuloPK, idProyectoPK).nombre);
+            }
             return PartialView(requerimiento);
         }
 
@@ -194,7 +206,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             var b = rEQUERIMIENTO.idModuloPK;
             var c = rEQUERIMIENTO.idProyectoPK;
             var d = rEQUERIMIENTO.estado;
-            var e = rEQUERIMIENTO.fechaEstado;
+            var e = rEQUERIMIENTO.fechaCreacion;
             var f = rEQUERIMIENTO.nombre;
             var g = rEQUERIMIENTO.complejidad;
             var h = rEQUERIMIENTO.duracionEstimada;
@@ -324,6 +336,22 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        public Boolean DesplegarMensaje() {
+            bool mensaje = false;
+
+            var a = TempData.Peek("proyectoID");
+
+            var b = TempData.Peek("moduloID");
+
+            if (a == null || b == null)
+            {
+                mensaje = true;
+            }
+            return mensaje;
         }
     }
 }

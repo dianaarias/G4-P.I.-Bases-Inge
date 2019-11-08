@@ -8,51 +8,8 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 
-@*<script>
-            $(document).ready(function () {
-
-                $("#idProyectoPK").change(function () {
-                    var proyectoID = $("#idProyectoPK").val();
-                    $("#idModuloO").load('/REQUERIMIENTO/DropDownModulo', { idProyectoPK: proyectoID });
-                    $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
-                });
-            });
-    </script>*@
-
-
-<script>
-        $(document).ready(function () {
-            $("#atras").click(function () {
-                @TempData.Remove("proyectoID");
-                @TempData.Remove("nombreProyecto");
-                @TempData.Remove("moduloID");
-                @TempData.Remove("nombreModulo");
-            });
-        });
-</script>
-
-
-
-
-
 <a id="atras" href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
-
-    @*@TempData.Remove("proyectoID");
-    @TempData.Add("proyectoID", null);
-
-    @TempData.Remove("nombreProyecto");
-    @TempData.Add("nombreProyecto", null);
-
-
-
-    @TempData.Remove("moduloID");
-    @TempData.Add("moduloID", null);
-
-    @TempData.Remove("nombreModulo");
-    @TempData.Add("nombreModulo", null);*@
-
-
 </a>
 <h2>Crear Requerimiento</h2>
 <div class="required-field-asterisk">
@@ -67,7 +24,6 @@
 
 
 <div class="form-horizontal">
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
@@ -75,15 +31,13 @@
         @Html.LabelFor(model => model.idProyectoPK, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
 
         @*<div class="col-md-10">
-                @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
-        </div>*@
+                    @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
+            </div>*@
 
         <div class="col-md-10">
-            @TempData.Peek("nombreProyecto")
+            @TempData.Peek("nombreProyecto").ToString()
         </div>
-
-
     </div>
 
 
@@ -96,7 +50,9 @@
                 @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
             </div>*@
 
-        @TempData.Peek("nombreModulo")
+        <div class="col-md-10">
+            @TempData.Peek("nombreModulo").ToString()
+        </div>
     </div>
 
 
@@ -127,7 +83,7 @@
 
 
     @*<div class="form-group">
-                @Html.LabelFor(model => model.fechaEstado, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.fechaCreacion, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.fechaEstado, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.fechaEstado, "", new { @class = "text-danger" })
@@ -160,7 +116,8 @@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.duracionEstimada)
             @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
         </div>
     </div>

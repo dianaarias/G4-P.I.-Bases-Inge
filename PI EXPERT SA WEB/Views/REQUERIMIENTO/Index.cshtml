@@ -5,44 +5,96 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@{var price = TempData.Peek("proyectoID");}
 
-<script>
+<html>
+
+<body>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    <script>
+            $(document).ready(function () {
+
+                var proyectoID;
+
+                $("#proyectos").change(function () {
+                    proyectoID = $("#proyectos").val();
+                    alert("Hello! I am an alert box!");
+                    $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
+                });
+
+                $("#jack").mouseenter(function () {
+
+
+                    //if ($("#p").load('/REQUERIMIENTO/DesplegarMensaje')) {
+                    //    alert("entra");
+                    //    $("#p").hide();
+                    //}
+                    //else {
+                    //    alert("sale");
+                    //}
+
+                    //if (5 == 5) {
+                    //    alert("entra");
+                    //}
+                    //alert("sale");
+
+                    $("#p").load('/REQUERIMIENTO/DesplegarMensaje');
+
+
+                })
+            });
+    </script>
+
+
+    @*<script>
     $(document).ready(function () {
+        $("#cre").click(function () {
+            if (@TempData.Peek("proyectoID") == null || @TempData.Peek("moduloID") == null) {
+                alert("Hello! I am an alert box!");
+            }
+            alert("Hello! I am an alert box!");
 
-        var proyectoID;
-
-        $("#proyectos").change(function () {
-            proyectoID = $("#proyectos").val();
-            
-            $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
-        });
+            $(this).hide();
+        })
     });
-</script>
+    </script>*@
 
 
-<h2>Listado de Requerimientos</h2>
+    @*<script>
+        function myFunction() {
+            alert("Hello! I am an alert box!");
+        }
+    </script>*@
 
 
-<h2>
-    @*href="@Url.Action("Details", "REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK})"*@
+    <h2 >Listado de Requerimientos</h2>
 
-    <a href="@Url.Action("Create", "REQUERIMIENTO", new { })" style="float:right">
-        <img src="~/images/plus.svg" width="30" height="30" />
-    </a>
-</h2>
+    <p id="p"></p>
+
+    <h2>
+        @*href="@Url.Action("Details", "REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK})"*@
+
+        <a id="jack" href="@Url.Action("Create", "REQUERIMIENTO", new { })" style="float:right">
+            <img src="~/images/plus.svg" width="30" height="30" />
+        </a>
+    </h2>
 
 
-
-
-<div class="form-group row offset-3">
-    @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+    <div class="form-group row offset-3">
+        @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+        </div>
     </div>
-</div>
 
 
-<div id="dropdownmodulo"> </div>
+    <div id="dropdownmodulo"> </div>
 
+
+
+</body>
+
+
+</html>
 
