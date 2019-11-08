@@ -282,8 +282,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaEstado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
+        public ActionResult Edit([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaCreacion,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
         {
+
+            var a = rEQUERIMIENTO.fechaCreacion;
+            var b = rEQUERIMIENTO.idRequerimientoPK;
+            var c = rEQUERIMIENTO.idProyectoPK;
+            var d = rEQUERIMIENTO.estado;
+            var e = rEQUERIMIENTO.cedulaDesarrolladorFK;
+
+
             if (ModelState.IsValid)
             {
                 db.Entry(rEQUERIMIENTO).State = EntityState.Modified;
