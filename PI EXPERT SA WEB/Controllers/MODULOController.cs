@@ -26,6 +26,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
         public ActionResult ModuloPartialView(int? idProyectoPK) {
+
+            TempData.Remove("proyectoID");
+            TempData.Remove("nombreProyecto");
+            TempData.Add("proyectoID", idProyectoPK);
+            TempData.Add("nombreProyecto", db.PROYECTO.Find(idProyectoPK).nombre);
+
             var mODULO = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK);
             return View(mODULO.ToList());
         }
@@ -52,8 +58,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO/Create
         public ActionResult Create()
         {
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            return View();
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            //return View();
+
+            if (TempData.Peek("proyectoID") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("index");
+            }
         }
 
 
@@ -64,8 +79,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProyectoPK,idModuloPK,nombre,fechaInicio")] MODULO mODULO)
         {
+
+            var a = mODULO.idModuloPK;
+            var c = mODULO.idProyectoPK;
+
             if (ModelState.IsValid)
             {
+
+                var b = mODULO.idModuloPK;
+                var d = mODULO.idProyectoPK;
+
                 db.MODULO.Add(mODULO);
                 db.SaveChanges();
                 return RedirectToAction("Index");

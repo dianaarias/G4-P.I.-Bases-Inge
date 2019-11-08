@@ -27,10 +27,13 @@
 <h2>
     @*href="@Url.Action("Details", "REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK})"*@
 
-    <a href="@Url.Action("Create", "REQUERIMIENTO")" style="float:right">
+    <a href="@Url.Action("Create", "REQUERIMIENTO", new { })" style="float:right">
         <img src="~/images/plus.svg" width="30" height="30" />
     </a>
 </h2>
+
+
+
 
 <div class="form-group row offset-3">
     @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
