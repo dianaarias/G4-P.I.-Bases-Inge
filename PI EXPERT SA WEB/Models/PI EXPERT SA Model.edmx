@@ -83,7 +83,7 @@
           <Property Name="idModuloPK" Type="int" Nullable="false" />
           <Property Name="idProyectoPK" Type="int" Nullable="false" />
           <Property Name="estado" Type="nvarchar" MaxLength="32" Nullable="false" />
-          <Property Name="fechaEstado" Type="date" Nullable="false" />
+          <Property Name="fechaCreacion" Type="date" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="complejidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="duracionEstimada" Type="int" />
@@ -590,7 +590,7 @@
           <Property Name="idModuloPK" Type="Int32" Nullable="false" />
           <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="fechaEstado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="complejidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="duracionEstimada" Type="Int32" />
@@ -757,7 +757,7 @@
                 <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
                 <ScalarProperty Name="complejidad" ColumnName="complejidad" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="fechaEstado" ColumnName="fechaEstado" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="idProyectoPK" ColumnName="idProyectoPK" />
                 <ScalarProperty Name="idModuloPK" ColumnName="idModuloPK" />
