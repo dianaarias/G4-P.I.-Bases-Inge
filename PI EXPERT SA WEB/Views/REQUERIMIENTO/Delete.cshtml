@@ -5,7 +5,7 @@
 }
 
 @*Delete es una vista que permite a un usuario borrar un requerimiento y todos sus atributos del sistema.
-    Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el oequerimiento en cuestión.*@
+    Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el oequerimiento en cuestión. *@
 
 <a href="@Url.Action("Details","REQUERIMIENTO", new {idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
@@ -25,18 +25,15 @@
         </dd>
 
         <dt>
-            @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
             Nombre del Proyecto
         </dt>
 
         <dd>
-            @*@Html.DropDownList("proyecto", null, htmlAttributes: new { })*@
-            @*@Html.DisplayFor(model => model.PROYECTO.nombre)*@
+            @*TempData para obtener el nombre del proyecto*@
             @TempData.Peek("proyectoDetalle")
         </dd>
 
         <dt>
-            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
             Nombre de Módulo
         </dt>
 
@@ -77,7 +74,6 @@
         </dd>
 
         <dt>
-            @*@Html.DisplayNameFor(model => model.EMPLEADO.nombre)*@
             Desarrollador
         </dt>
 

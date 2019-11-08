@@ -271,21 +271,21 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: REQUERIMIENTO/Delete/5
+        // Método para acceder a la vista de borrar un requerimiento
+        // Parametros: id proyecto, id modulo y id de requerimiento
         public ActionResult Delete(int? idProyecto, int? idModulo, int? idRequerimiento)
         {
-            if (idProyecto == null || (idModulo == null || idRequerimiento == null))
+            if (idProyecto == null || (idModulo == null || idRequerimiento == null)) 
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idProyecto,idModulo,idRequerimiento);
+          
             REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO == null)
             {
                 return HttpNotFound();
             }
-            //List<PROYECTO> proyecto = db.PROYECTO.Where(x => x.idProyectoPK == idProyecto).ToList();
-            //ViewBag.proyecto = new SelectList(proyecto, "idProyectoPK", "nombre");
-
+            //tempData para visualizar el nombre del proyecto en la vista de borrar
             TempData.Remove("proyectoDetalle");
             TempData.Add("proyectoDetalle", db.PROYECTO.Find(idProyecto).nombre);
 
@@ -293,14 +293,20 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // POST: REQUERIMIENTO/Delete/5
+        //Médodo para borrar requerimiento
+        //Sólo se puede borrar un requerimiento si su estado está en suspendido
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idProyecto, int idModulo, int idRequerimiento)
         {
             REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
-            db.REQUERIMIENTO.Remove(rEQUERIMIENTO);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (rEQUERIMIENTO.estado == "Suspendido")
+            {
+                db.REQUERIMIENTO.Remove(rEQUERIMIENTO);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Delete", new { idProyecto, idModulo, idRequerimiento });
         }
 
         protected override void Dispose(bool disposing)
