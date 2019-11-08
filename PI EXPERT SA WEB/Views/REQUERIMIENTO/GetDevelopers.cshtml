@@ -2,6 +2,7 @@
 @model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
 
 
+@*script que llama los requerimientos de un desarrollador*@
 <body>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -17,31 +18,15 @@
 
 
 
-
+    @*Despliega los des desarrolladores de un proyecto*@
     <div class="form-group row offset-3">
         @Html.Label("Desarrollador", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.DropDownList("empleadospro", new SelectList(TempData["empleado"] as List<string>, "cedulaPK", "nombre"), "----------");*@
             @Html.DropDownList("empleadospro", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
 
 
-    @*<div class="form-group row offset-3">
-            @Html.Label("Desarrolladores", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("empleadospro", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
-            </div>
-        </div>*@
-
-
-
-    @*@Html.DropDownList("empleadospro", ((PI_EXPERT_SA_WEB.Controllers.REQUERIMIENTOController)this.ViewContext.Controller).getDesarrollador((int)System.Web.HttpContext.Current.Session["idProyectoPK"])), "Seleccione un Proyecto", new { name = "nombreProyecto" })
-
-        @Html.DropDownList("nombreProyecto", ((Proyecto.Controllers.RequerimientoController)this.ViewContext.Controller).getProyectos(), "Seleccione un Proyecto", new { name = "nombreProyecto" })*@
-
-
-    @*@Html.DropDownList("empleadospro", new SelectList(TempData["empleado"] as List<PI_EXPERT_SA_WEB.Models.EMPLEADO>, "cedulaPK", "nombre"), "----------");*@
 
     <div id="tablaRequerimientos"></div>
 

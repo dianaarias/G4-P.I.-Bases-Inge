@@ -3,6 +3,16 @@
 @{
     ViewBag.Title = "Delete";
 }
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+@*script para enviar un mensaje si se intenta borrar en estado no suspendido*@
+  <script>
+   //https://social.msdn.microsoft.com/Forums/es-ES/8f1c4e60-47b5-495a-85b3-7fed3412b874/mostrar-confirmacin-en-vista-enviada-desde-controller?forum=aspnetmvces
+         if(ViewBag.Message != ""){
+          alert(@ViewBag.Message);
+        
+          }
+   </script>
 
 @*Delete es una vista que permite a un usuario borrar un requerimiento y todos sus atributos del sistema.
     Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el oequerimiento en cuestión. *@
@@ -15,6 +25,7 @@
 <div class="separador"></div>
 <div>
     <h4 style="color:red">¿Está seguro de que desea borrar este requerimiento y los datos asociados al mismo?</h4> <p></p>
+    <h5 style="color:red">Sólo se podrá borrar si se encuentra en estado suspendido</h5> <p></p>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.nombre)

@@ -333,14 +333,20 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idProyecto, int idModulo, int idRequerimiento)
         {
+            
             REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO.estado == "Suspendido")
             {
                 db.REQUERIMIENTO.Remove(rEQUERIMIENTO);
                 db.SaveChanges();
+                //ViewBag.Script = "<script type='text/javascript'>alert('Borrado exitoso');</script>";
                 return RedirectToAction("Index");
             }
+            else {
+                ViewBag.Message = "'Solo se puede borrar en estado suspendido";
+            }
             return RedirectToAction("Delete", new { idProyecto, idModulo, idRequerimiento });
+            
         }
 
         protected override void Dispose(bool disposing)
