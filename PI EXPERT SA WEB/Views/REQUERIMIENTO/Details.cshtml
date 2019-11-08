@@ -1,5 +1,7 @@
 ﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
 
+ 
+
 @{
     ViewBag.Title = "Details";
 }
@@ -7,7 +9,7 @@
 <a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
-<a href="@Url.Action("Edit","REQUERIMIENTO", new {  idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK  })" class="boton-icono" style="float:right">
+<a href="@Url.Action("Edit","REQUERIMIENTO", new { idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK })" class="boton-icono" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30" />
 </a>
 
@@ -20,31 +22,33 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
+            Nombre del Proyecto
+        </dt>
+
+        <dd>
+            @*@ViewBag.proyecto*@
+            @*@Html.DropDownList("proyecto", null, htmlAttributes: new { })*@
+            @TempData.Peek("proyectoDetalle")
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
+            Nombre de Módulo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODULO.nombre)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.nombre)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
-            Nombre proyecto
-        </dt>
-
-        <dd>
-            @*<label>@Html.Raw(ViewBag.proyecto)</label>*@
-            @html.dropdownlist("proyecto", null, htmlattributes: new {})
-        </dd>
-
-        <dt>
-            @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
-            Nombre módulo
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MODULO.nombre)
         </dd>
 
         <dt>
@@ -61,6 +65,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.fechaEstado)
+            @*@Html.DisplayFor(model => model.fechaEstado.ToShortDateString())*@
         </dd>
 
         <dt>
@@ -107,5 +112,5 @@
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")*@
+        @Html.ActionLink("Back to List", "Index")*@
 </p>

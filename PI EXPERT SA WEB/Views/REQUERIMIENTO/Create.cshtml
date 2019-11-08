@@ -5,35 +5,54 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
 
 @*<script>
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            $("#idProyectoPK").change(function () {
-                var proyectoID = $("#idProyectoPK").val();
-                $("#idModuloO").load('/REQUERIMIENTO/DropDownModulo', { idProyectoPK: proyectoID });
+                $("#idProyectoPK").change(function () {
+                    var proyectoID = $("#idProyectoPK").val();
+                    $("#idModuloO").load('/REQUERIMIENTO/DropDownModulo', { idProyectoPK: proyectoID });
+                    $("#crearReq").prop("href", '@(Url.Action("Create","REQUERIMIENTOS",null, Request.Url.Scheme))?idProyectoPK=' + proyectoID);
+                });
+            });
+    </script>*@
+
+
+<script>
+        $(document).ready(function () {
+            $("#atras").click(function () {
+                @TempData.Remove("proyectoID");
+                @TempData.Remove("nombreProyecto");
+                @TempData.Remove("moduloID");
+                @TempData.Remove("nombreModulo");
             });
         });
-</script>*@
-
-
-@*<script>
-    $(document).ready(function () {
-        $("#idProyectoPK").change(function () {
-            getModul();
-        });
-    });
-</script>*@
+</script>
 
 
 
 
 
-
-
-
-<a href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
+<a id="atras" href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
+
+    @*@TempData.Remove("proyectoID");
+    @TempData.Add("proyectoID", null);
+
+    @TempData.Remove("nombreProyecto");
+    @TempData.Add("nombreProyecto", null);
+
+
+
+    @TempData.Remove("moduloID");
+    @TempData.Add("moduloID", null);
+
+    @TempData.Remove("nombreModulo");
+    @TempData.Add("nombreModulo", null);*@
+
+
 </a>
 <h2>Crear Requerimiento</h2>
 <div class="required-field-asterisk">
@@ -52,58 +71,91 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-    <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.idProyectoPK, "proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.idProyectoPK, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
 
-
-    <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.idModuloPK, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div id="idModuloO">
-                @Html.DropDownList("idModuloPK", null, "--Seleccionar Módulo--", htmlAttributes: new { @class = "form-control" })
-            </div>
-            @*@Html.DropDownList("idModuloO", Enumerable.Empty<SelectListItem>(), "--Seleccionar Módulo--", new { @class = "form-control" })*@
-            @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.fechaEstado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaEstado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaEstado, "", new { @class = "text-danger" })
-            </div>
+        @*<div class="col-md-10">
+                @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
         </div>*@
 
+        <div class="col-md-10">
+            @TempData.Peek("nombreProyecto")
+        </div>
+
+
+    </div>
+
+
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.idModuloPK, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="col-md-10">
+                <div id="idModuloO">
+                    @Html.DropDownList("idModuloPK", null, "--Seleccionar Módulo--", htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
+            </div>*@
+
+        @TempData.Peek("nombreModulo")
+    </div>
+
+
     <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.nombre, "Nombre Requerimiento", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
         </div>
     </div>
 
+
+
+    @*<div class="form-group row offset-3 required">
+            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
+                {
+                        new SelectListItem() {Text = "--Seleccionar estado--", Value=""},
+                        new SelectListItem() {Text = "Sin asignar", Value="Sin asignar"},
+                        new SelectListItem() {Text = "Asignado", Value="Asignado"},
+                 })
+                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+
+    @*<div class="form-group">
+                @Html.LabelFor(model => model.fechaEstado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fechaEstado, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fechaEstado, "", new { @class = "text-danger" })
+                </div>
+        </div>*@
+
+
+
+
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.complejidad, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.EditorFor(model => model.complejidad, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownListFor(model => model.complejidad, new List<SelectListItem>
+            {
+                    new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
+                    new SelectListItem() {Text = "simple", Value="simple"},
+                    new SelectListItem() {Text = "mediano", Value="mediano"},
+                    new SelectListItem() {Text = "complejo", Value="complejo"},
+                    new SelectListItem() {Text = "muy complejo", Value="muy complejo"}
+             })
             @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+
+
 
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -114,21 +166,31 @@
     </div>
 
 
+
+
+
+
     @*<div class="form-group">
-            @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
-            </div>
+                @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
+                </div>
         </div>*@
 
+
+
+
     <div class="form-group row offset-3">
-        @Html.LabelFor(model => model.cedulaDesarrolladorFK, "cedulaDesarrolladorFK", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("cedulaDesarrolladorFK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+
 
     <div class="col text-center">
         <div class="form-group">
@@ -139,7 +201,10 @@
     </div>
 
 
+
+
 </div>
+
 }
 
 @section Scripts {

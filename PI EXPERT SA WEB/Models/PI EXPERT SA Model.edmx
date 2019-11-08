@@ -85,7 +85,7 @@
           <Property Name="estado" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="fechaEstado" Type="date" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="64" Nullable="false" />
-          <Property Name="complejidad" Type="int" Nullable="false" />
+          <Property Name="complejidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="duracionEstimada" Type="int" />
           <Property Name="cedulaDesarrolladorFK" Type="nchar" MaxLength="9" />
           <Property Name="fechaInicio" Type="datetime" />
@@ -592,7 +592,7 @@
           <Property Name="estado" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="fechaEstado" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="complejidad" Type="Int32" Nullable="false" />
+          <Property Name="complejidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="duracionEstimada" Type="Int32" />
           <Property Name="cedulaDesarrolladorFK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
           <Property Name="fechaInicio" Type="DateTime" Precision="3" />

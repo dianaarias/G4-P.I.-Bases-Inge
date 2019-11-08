@@ -4,9 +4,12 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            var moduloID;
+
             $("#modulos").change(function () {
-                var moduloID = $("#modulos").val();
-                var proyectoID = $("#proyectos").val();
+                moduloID = $("#modulos").val();
+                proyectoID = $("#proyectos").val();
                 if (moduloID != null) {
                     $("#tabla").hide();
                 } else {
@@ -20,7 +23,7 @@
 
 
     <div class="form-group row offset-3">
-        @Html.Label("Módulos", new { @class = "control-label col-md-2" })
+        @Html.Label("Módulo", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("modulos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })
         </div>
@@ -36,28 +39,18 @@
     <table class="table table-bordered table-striped" id="tabla">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nombre)
+                @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
+                Módulo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PROYECTO.nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MODULO.nombre)
+                @*@Html.DisplayNameFor(model => model.nombre)*@
+                Requerimiento
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fechaEstado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.complejidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.duracionEstimada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
+                Responsable
             </th>
             <th>
                 Ver más información
@@ -66,39 +59,27 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PROYECTO.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MODULO.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaEstado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.complejidad)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.duracionEstimada)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-                </td>
-                <td>
-                    <div class="col text-center">
-                        <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
-                            <img src="~/images/more.svg" width="30" height="30" />
-                        </a>
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+            </td>
+            <td>
+                <div class="col text-center">
+                    <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
+                </div>
+            </td>
+        </tr>
         }
     </table>
 

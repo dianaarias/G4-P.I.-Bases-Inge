@@ -26,16 +26,18 @@
 
         <dt>
             @*@Html.DisplayNameFor(model => model.PROYECTO.nombre)*@
-            Nombre proyecto
+            Nombre del Proyecto
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PROYECTO.nombre)
+            @*@Html.DropDownList("proyecto", null, htmlAttributes: new { })*@
+            @*@Html.DisplayFor(model => model.PROYECTO.nombre)*@
+            @TempData.Peek("proyectoDetalle")
         </dd>
 
         <dt>
             @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
-            Nombre módulo
+            Nombre de Módulo
         </dt>
 
         <dd>

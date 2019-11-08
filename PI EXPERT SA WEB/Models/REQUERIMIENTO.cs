@@ -34,24 +34,27 @@ namespace PI_EXPERT_SA_WEB.Models
         [Required(ErrorMessage = "El campo estado es requerido")]
         public string estado { get; set; }
         [Display(Name = "Fecha estado")]
-        public System.DateTime fechaEstado { get; set; }
-        [Display(Name = "Nombre requerimiento")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public Nullable<System.DateTime> fechaEstado { get; set; }
+        [Display(Name = "Requerimiento")]
         [Required(ErrorMessage = "El campo nombre es requerido")]
         [StringLength(64, ErrorMessage = "El campo nombre excede el número de caracteres")]
         public string nombre { get; set; }
         [Display(Name = "Complejidad")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "La complejidad sólo puede contener números")]
-        public int complejidad { get; set; }
+        [Required(ErrorMessage = "El campo complejidad es requerido")]
+        public string complejidad { get; set; }
         [RegularExpression("^[0-9]*$", ErrorMessage = "La Duración Estimada sólo puede contener números")]
-        [Display(Name = "Duración Estimada")]
+        [Display(Name = "Duración estimada en horas")]
         public Nullable<int> duracionEstimada { get; set; }
         [Display(Name = "Cédula Desarrollador")]
         public string cedulaDesarrolladorFK { get; set; }
         [Display(Name = "Fecha inicio")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> fechaInicio { get; set; }
         [Display(Name = "Fecha fin")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> fechaFin { get; set; }
-    
+
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual MODULO MODULO { get; set; }
 

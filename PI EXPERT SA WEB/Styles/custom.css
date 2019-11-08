@@ -200,6 +200,13 @@ table {
     top: 50%;
 }
 
+/*footer {
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}*/
+
 .separador {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -275,6 +282,9 @@ table {
 }
 
 /* Fin de Login */
+
+
+
 
 .center {
     text-align: center;
