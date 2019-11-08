@@ -189,25 +189,38 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaEstado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
         {
+
+            var a = rEQUERIMIENTO.idRequerimientoPK;
+            var b = rEQUERIMIENTO.idModuloPK;
+            var c = rEQUERIMIENTO.idProyectoPK;
+            var d = rEQUERIMIENTO.estado;
+            var e = rEQUERIMIENTO.fechaEstado;
+            var f = rEQUERIMIENTO.nombre;
+            var g = rEQUERIMIENTO.complejidad;
+            var h = rEQUERIMIENTO.duracionEstimada;
+            var i = rEQUERIMIENTO.cedulaDesarrolladorFK;
+            var j = rEQUERIMIENTO.fechaInicio;
+            var k = rEQUERIMIENTO.fechaFin;
+
             if (ModelState.IsValid)
             {
                 db.REQUERIMIENTO.Add(rEQUERIMIENTO);
                 db.SaveChanges();
 
 
-                TempData.Remove("proyectoID");
-                TempData.Add("proyectoID", null);
+                //TempData.Remove("proyectoID");
+                //TempData.Add("proyectoID", null);
 
-                TempData.Remove("nombreProyecto");
-                TempData.Add("nombreProyecto", null);
+                //TempData.Remove("nombreProyecto");
+                //TempData.Add("nombreProyecto", null);
 
 
 
-                TempData.Remove("moduloID");
-                TempData.Add("moduloID", null);
+                //TempData.Remove("moduloID");
+                //TempData.Add("moduloID", null);
 
-                TempData.Remove("nombreModulo");
-                TempData.Add("nombreModulo", null);
+                //TempData.Remove("nombreModulo");
+                //TempData.Add("nombreModulo", null);
 
 
                 return RedirectToAction("Index");
