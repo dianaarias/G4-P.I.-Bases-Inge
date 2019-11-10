@@ -38,6 +38,7 @@
                 @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
             </td>
             <td>
+                @*Boton de detalles del requerimiento*@
                 <div class="col text-center">
                     <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
                         <img src="~/images/more.svg" width="30" height="30" />

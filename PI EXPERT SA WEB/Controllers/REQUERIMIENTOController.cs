@@ -19,10 +19,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Index()
         {
 
-            @TempData.Remove("proyectoID");
-            @TempData.Remove("nombreProyecto");
-            @TempData.Remove("moduloID");
-            @TempData.Remove("nombreModulo");
+            TempData.Remove("proyectoID");
+            TempData.Remove("nombreProyecto");
+            TempData.Remove("moduloID");
+            TempData.Remove("nombreModulo");
 
             ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
@@ -199,8 +199,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaCreacion,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
+        public ActionResult Create([Bind(Include = "idRequerimientoPK,estado,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")] REQUERIMIENTO rEQUERIMIENTO)
         {
+
+            //[Bind(Include = "idRequerimientoPK,idModuloPK,idProyectoPK,estado,fechaCreacion,nombre,complejidad,duracionEstimada,cedulaDesarrolladorFK,fechaInicio,fechaFin")]
+
 
             var a = rEQUERIMIENTO.idRequerimientoPK;
             var b = rEQUERIMIENTO.idModuloPK;
@@ -214,26 +217,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
             var j = rEQUERIMIENTO.fechaInicio;
             var k = rEQUERIMIENTO.fechaFin;
 
+            //el id de proyecto y módulo se agregan al modelo desde el tempdata
+            rEQUERIMIENTO.idProyectoPK = (int)TempData.Peek("proyectoID");
+            rEQUERIMIENTO.idModuloPK = (int)TempData.Peek("moduloID");
+
+
+            //el atributo fechaCreacion se actualiza automáticamente con el trigger correspondiente
+
             if (ModelState.IsValid)
             {
                 db.REQUERIMIENTO.Add(rEQUERIMIENTO);
                 db.SaveChanges();
-
-
-                //TempData.Remove("proyectoID");
-                //TempData.Add("proyectoID", null);
-
-                //TempData.Remove("nombreProyecto");
-                //TempData.Add("nombreProyecto", null);
-
-
-
-                //TempData.Remove("moduloID");
-                //TempData.Add("moduloID", null);
-
-                //TempData.Remove("nombreModulo");
-                //TempData.Add("nombreModulo", null);
-
 
                 return RedirectToAction("Index");
             }
@@ -333,20 +327,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idProyecto, int idModulo, int idRequerimiento)
         {
-            
             REQUERIMIENTO rEQUERIMIENTO = db.REQUERIMIENTO.Find(idRequerimiento, idModulo, idProyecto);
             if (rEQUERIMIENTO.estado == "Suspendido")
             {
                 db.REQUERIMIENTO.Remove(rEQUERIMIENTO);
                 db.SaveChanges();
-                //ViewBag.Script = "<script type='text/javascript'>alert('Borrado exitoso');</script>";
                 return RedirectToAction("Index");
             }
-            else {
-                ViewBag.Message = "'Solo se puede borrar en estado suspendido";
-            }
+
             return RedirectToAction("Delete", new { idProyecto, idModulo, idRequerimiento });
-            
         }
 
         protected override void Dispose(bool disposing)

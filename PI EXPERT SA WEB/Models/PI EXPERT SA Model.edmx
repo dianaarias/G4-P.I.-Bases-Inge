@@ -83,7 +83,7 @@
           <Property Name="idModuloPK" Type="int" Nullable="false" />
           <Property Name="idProyectoPK" Type="int" Nullable="false" />
           <Property Name="estado" Type="nvarchar" MaxLength="32" Nullable="false" />
-          <Property Name="fechaCreacion" Type="date" Nullable="false" />
+          <Property Name="fechaCreacion" Type="date" />
           <Property Name="nombre" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="complejidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="duracionEstimada" Type="int" />
@@ -194,9 +194,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REQUERIMIENTO_MODULO">
-          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="MODULO" Type="Self.MODULO" Multiplicity="1" />
           <End Role="REQUERIMIENTO" Type="Self.REQUERIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MODULO">
@@ -590,7 +588,7 @@
           <Property Name="idModuloPK" Type="Int32" Nullable="false" />
           <Property Name="idProyectoPK" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="fechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="0" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="complejidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="duracionEstimada" Type="Int32" />
@@ -613,9 +611,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REQUERIMIENTO_MODULO">
-          <End Type="Gr02Proy4Model.MODULO" Role="MODULO" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="Gr02Proy4Model.MODULO" Role="MODULO" Multiplicity="1" />
           <End Type="Gr02Proy4Model.REQUERIMIENTO" Role="REQUERIMIENTO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MODULO">

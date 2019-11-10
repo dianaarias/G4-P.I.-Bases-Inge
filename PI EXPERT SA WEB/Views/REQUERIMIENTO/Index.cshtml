@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{var price = TempData.Peek("proyectoID");}
 
 <html>
 
@@ -13,74 +12,31 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
     <script>
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                var proyectoID;
+            var proyectoID;
 
-                $("#proyectos").change(function () {
-                    proyectoID = $("#proyectos").val();
-                    alert("Hello! I am an alert box!");
-                    $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
+            $("#proyectos").change(function () {
+                proyectoID = $("#proyectos").val();
+                alert("Hello! I am an alert box!");
+                $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
                 });
-
-                $("#jack").mouseenter(function () {
-
-
-                    //if ($("#p").load('/REQUERIMIENTO/DesplegarMensaje')) {
-                    //    alert("entra");
-                    //    $("#p").hide();
-                    //}
-                    //else {
-                    //    alert("sale");
-                    //}
-
-                    //if (5 == 5) {
-                    //    alert("entra");
-                    //}
-                    //alert("sale");
-
-                    $("#p").load('/REQUERIMIENTO/DesplegarMensaje');
-
-
-                })
             });
     </script>
 
 
-    @*<script>
-    $(document).ready(function () {
-        $("#cre").click(function () {
-            if (@TempData.Peek("proyectoID") == null || @TempData.Peek("moduloID") == null) {
-                alert("Hello! I am an alert box!");
-            }
-            alert("Hello! I am an alert box!");
-
-            $(this).hide();
-        })
-    });
-    </script>*@
-
-
-    @*<script>
-        function myFunction() {
-            alert("Hello! I am an alert box!");
-        }
-    </script>*@
-
 
     <h2 >Listado de Requerimientos</h2>
 
-    <p id="p"></p>
 
+    @*Boton para crear nuevo requerimiento*@
     <h2>
-        @*href="@Url.Action("Details", "REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK})"*@
-
-        <a id="jack" href="@Url.Action("Create", "REQUERIMIENTO", new { })" style="float:right">
+        <a id="jack" href="@Url.Action("Create", "REQUERIMIENTO", new {})" style="float:right">
             <img src="~/images/plus.svg" width="30" height="30" />
         </a>
     </h2>
 
-
+    @*Lista de proyectos*@
     <div class="form-group row offset-3">
         @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -89,8 +45,8 @@
     </div>
 
 
+    @*Espacio para desplegar la lista de módulos*@
     <div id="dropdownmodulo"> </div>
-
 
 
 </body>

@@ -21,7 +21,7 @@
     </script>
 
 
-
+    @*Lista de Módulos*@
     <div class="form-group row offset-3">
         @Html.Label("Módulo", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -39,11 +39,9 @@
     <table class="table table-bordered table-striped" id="tabla">
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.MODULO.nombre)*@
                 Módulo
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.nombre)*@
                 Requerimiento
             </th>
             <th>
@@ -73,6 +71,7 @@
                 @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
             </td>
             <td>
+                @*Detalles del requerimiento*@
                 <div class="col text-center">
                     <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
                         <img src="~/images/more.svg" width="30" height="30" />
@@ -84,6 +83,7 @@
     </table>
 
 
+    @*Espacio para desplegar tabla de requerimientos*@
     <div id="tablaRequerimientos"> </div>
 
 

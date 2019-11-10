@@ -6,120 +6,149 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 @*script para enviar un mensaje si se intenta borrar en estado no suspendido*@
-  <script>
+  
+@*<script>
    //https://social.msdn.microsoft.com/Forums/es-ES/8f1c4e60-47b5-495a-85b3-7fed3412b874/mostrar-confirmacin-en-vista-enviada-desde-controller?forum=aspnetmvces
-         if(ViewBag.Message != ""){
-          alert(@ViewBag.Message);
-        
+         if(@ViewBag.Message != ""){
+             alert(@ViewBag.Message);   
           }
-   </script>
+   </script>*@
 
-@*Delete es una vista que permite a un usuario borrar un requerimiento y todos sus atributos del sistema.
-    Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el oequerimiento en cuestión. *@
 
-<a href="@Url.Action("Details","REQUERIMIENTO", new {idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK})" class="boton-icono" style="float:left">
-    <img src="~/images/left-arrow.svg" width="30" height="30" />
-</a>
-<h2>Borrar Requerimiento</h2>
+<html>
 
-<div class="separador"></div>
-<div>
-    <h4 style="color:red">¿Está seguro de que desea borrar este requerimiento y los datos asociados al mismo?</h4> <p></p>
-    <h5 style="color:red">Sólo se podrá borrar si se encuentra en estado suspendido</h5> <p></p>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+<body>
 
-        <dt>
-            Nombre del Proyecto
-        </dt>
 
-        <dd>
-            @*TempData para obtener el nombre del proyecto*@
-            @TempData.Peek("proyectoDetalle")
-        </dd>
 
-        <dt>
-            Nombre de Módulo
-        </dt>
+    <script>
+        $(document).ready(function () {
+            $("#mess").mouseleave(function () {
+                alert("El elemento actual no se puede borrar");                
+            })
+        });
+    </script>
 
-        <dd>
-            @Html.DisplayFor(model => model.MODULO.nombre)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaCreacion)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaCreacion)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.complejidad)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.complejidad)
-        </dd>
+    @*Delete es una vista que permite a un usuario borrar un requerimiento y todos sus atributos del sistema.
+        Esta vista cuenta con un aviso al usuario, a modo de confirmación o advertencia de si realmente desea borrar el oequerimiento en cuestión. *@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </dt>
+    <a href="@Url.Action("Details","REQUERIMIENTO", new {idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK})" class="boton-icono" style="float:left">
+        <img src="~/images/left-arrow.svg" width="30" height="30" />
+    </a>
+    <h2>Borrar Requerimiento</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.duracionEstimada)
-        </dd>
+    <div class="separador"></div>
+    <div>
+        <h4 style="color:red">¿Está seguro de que desea borrar este requerimiento y los datos asociados al mismo?</h4> <p></p>
+        <h5 style="color:red">Sólo se podrá borrar si se encuentra en estado suspendido</h5> <p></p>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
 
-        <dt>
-            Desarrollador
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EMPLEADO.nombre)
-        </dd>
+            <dt>
+                Nombre del Proyecto
+                @ViewBag.Script
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </dt>
+            <dd>
+                @*TempData para obtener el nombre del proyecto*@
+                @TempData.Peek("proyectoDetalle")
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaInicio)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaFin)
-        </dt>
+            <dt>
+                Nombre de Módulo
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.fechaFin)
-        </dd>
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.MODULO.nombre)
+            </dd>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            <dt>
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
 
-        <div class="col text-center">
-            <div class="form-group">
-                <div class="col-md-auto" style="margin-top: 50px">
-                    @*Boton de confirmacion de borrado*@
-                    <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+            <dd>
+                @Html.DisplayFor(model => model.estado)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaCreacion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fechaCreacion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.complejidad)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.complejidad)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.duracionEstimada)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.duracionEstimada)
+            </dd>
+
+            <dt>
+                Desarrollador
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EMPLEADO.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaInicio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fechaInicio)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaFin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fechaFin)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col text-center">
+                <div class="form-group">
+                    <div class="col-md-auto" style="margin-top: 50px">
+                        @*Boton de confirmacion de borrado*@
+                        <input id="mess" type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+                    </div>
                 </div>
             </div>
-        </div>
 
-    }
-</div>
+        }
+    </div>
+
+
+</body>
+
+</html>
+
