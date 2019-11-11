@@ -45,6 +45,8 @@ namespace PI_EXPERT_SA_WEB.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "La Duración Estimada sólo puede contener números")]
         [Display(Name = "Duración estimada en horas")]
         public Nullable<int> duracionEstimada { get; set; }
+        [Display(Name = "Duración real en horas")]
+        public Nullable<int> duracionReal { get; set; }
         [Display(Name = "Cédula Desarrollador")]
         public string cedulaDesarrolladorFK { get; set; }
         [Display(Name = "Fecha inicio")]
