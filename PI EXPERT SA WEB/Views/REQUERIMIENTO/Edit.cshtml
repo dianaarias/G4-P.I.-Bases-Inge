@@ -25,8 +25,8 @@
         <h4>REQUERIMIENTO</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
-        
+
+
 
         @*Elementos de requerimientos que se conservan y no se permite su modificación por parte del usuario*@
         @Html.HiddenFor(model => model.idRequerimientoPK)
@@ -85,7 +85,7 @@
         </div>
 
 
-        
+
 
         @*Complejidad*@
         <div class="form-group">
@@ -123,7 +123,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("desarrolladores", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+                @*Se necesita usar dropdownlistfor para conservar la instancia del desarrollador a la hora de editar el requerimiento, sino se tendria que seleccionar cada vez*@
+                @*@Html.DropDownListFor(model => model.cedulaDesarrolladorFK, new SelectList(Model.EMPLEADO.nombre, "cedulaPK", "nombre"), "--Seleccionar Desarrollador--")*@
+                @Html.DropDownList("cedulaDesarrolladorFK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -142,8 +144,6 @@
 
 
     </div>
-
-
 
 }
 

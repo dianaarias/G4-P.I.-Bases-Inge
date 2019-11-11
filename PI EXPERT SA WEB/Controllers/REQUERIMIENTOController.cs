@@ -28,7 +28,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-    
         
 
         //Vista parcial que muestra la tabla de requerimientos filtrada por proyecto. Tambien muestra la lista de módulos de dicho proyecto
@@ -198,6 +197,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             //el id de proyecto y módulo se agregan al modelo desde el tempdata
             rEQUERIMIENTO.idProyectoPK = (int)TempData.Peek("proyectoID");
             rEQUERIMIENTO.idModuloPK = (int)TempData.Peek("moduloID");
+            var a = rEQUERIMIENTO.cedulaDesarrolladorFK;
 
 
             //el atributo fechaCreacion se actualiza automáticamente con el trigger correspondiente
@@ -244,7 +244,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             TempData.Add("moduloDetalle", db.MODULO.Find(idModulo, idProyecto).nombre);
 
 
-            ViewBag.desarrolladores = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+            ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
             return View(rEQUERIMIENTO);
         }
 
@@ -273,6 +273,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
             var j = rEQUERIMIENTO.cedulaDesarrolladorFK;
             var l = rEQUERIMIENTO.nombre;
 
+            //solución temporal que busca la cédula del desarrollador
+            if (rEQUERIMIENTO.cedulaDesarrolladorFK == null) {
+                rEQUERIMIENTO.cedulaDesarrolladorFK = db.REQUERIMIENTO.Find(e, d, c).cedulaDesarrolladorFK;
+                var p = rEQUERIMIENTO.cedulaDesarrolladorFK;
+            }
 
             if (ModelState.IsValid)
             {

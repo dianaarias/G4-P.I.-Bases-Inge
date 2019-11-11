@@ -87,6 +87,7 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="64" Nullable="false" />
           <Property Name="complejidad" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="duracionEstimada" Type="int" />
+          <Property Name="duracionReal" Type="int" />
           <Property Name="cedulaDesarrolladorFK" Type="nchar" MaxLength="9" />
           <Property Name="fechaInicio" Type="datetime" />
           <Property Name="fechaFin" Type="datetime" />
@@ -592,6 +593,7 @@
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="complejidad" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="duracionEstimada" Type="Int32" />
+          <Property Name="duracionReal" Type="Int32" />
           <Property Name="cedulaDesarrolladorFK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
           <Property Name="fechaInicio" Type="DateTime" Precision="3" />
           <Property Name="fechaFin" Type="DateTime" Precision="3" />
@@ -750,6 +752,7 @@
                 <ScalarProperty Name="fechaFin" ColumnName="fechaFin" />
                 <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
                 <ScalarProperty Name="cedulaDesarrolladorFK" ColumnName="cedulaDesarrolladorFK" />
+                <ScalarProperty Name="duracionReal" ColumnName="duracionReal" />
                 <ScalarProperty Name="duracionEstimada" ColumnName="duracionEstimada" />
                 <ScalarProperty Name="complejidad" ColumnName="complejidad" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />

@@ -21,7 +21,7 @@
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_MODULO_PROYECTO" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Gr02Proy4Model.REQUERIMIENTO" Width="1.5" PointX="10.5" PointY="5.125" />
+        <EntityTypeShape EntityType="Gr02Proy4Model.REQUERIMIENTO" Width="1.5" PointX="10.5" PointY="5" />
         <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" />
         <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO" />
         </Diagram>
