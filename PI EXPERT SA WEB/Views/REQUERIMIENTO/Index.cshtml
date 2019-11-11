@@ -9,19 +9,24 @@
 <html>
 
 <body>
+
+
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
 
     <script>
         $(document).ready(function () {
-
             var proyectoID;
-
             $("#proyectos").change(function () {
                 proyectoID = $("#proyectos").val();
-                alert("Hello! I am an alert box!");
+                //alert("Hello! I am an alert box!");
                 $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
-                });
             });
+
+            $("#jack").mouseleave(function () {
+                alert("Debe seleccionar proyecto y módulo para poder crear el requerimiento");
+            })
+        });
     </script>
 
 
@@ -31,8 +36,8 @@
 
     @*Boton para crear nuevo requerimiento*@
     <h2>
-        <a id="jack" href="@Url.Action("Create", "REQUERIMIENTO", new {})" style="float:right">
-            <img src="~/images/plus.svg" width="30" height="30" />
+        <a href="@Url.Action("Create", "REQUERIMIENTO", new {})" style="float:right">
+            <img id="jack" src="~/images/plus.svg" width="30" height="30" />
         </a>
     </h2>
 

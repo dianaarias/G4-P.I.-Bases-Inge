@@ -31,7 +31,6 @@ namespace PI_EXPERT_SA_WEB.Models
         [Required(ErrorMessage = "El campo id proyecto es requerido")]
         public int idProyectoPK { get; set; }
         [Display(Name = "Estado")]
-        [Required(ErrorMessage = "El campo estado es requerido")]
         public string estado { get; set; }
         [Display(Name = "Fecha de creación")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]

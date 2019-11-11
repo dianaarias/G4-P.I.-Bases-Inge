@@ -4,124 +4,144 @@
     ViewBag.Title = "Edit";
 }
 
-<a href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
+
+@*Boton de retorno a consulta del requerimiento*@
+<a href="@Url.Action("Details","REQUERIMIENTO", new {idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
+
+
+
 <h2>Actualizar Datos de Requerimiento</h2>
 
 
+
+@*Lista de elementos para modificar en la tabla de requerimientos*@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>REQUERIMIENTO</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.idRequerimientoPK)
+    <div class="form-horizontal">
+        <h4>REQUERIMIENTO</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        
 
-    @Html.HiddenFor(model => model.idModuloPK)
+        @*Elementos de requerimientos que se conservan y no se permite su modificación por parte del usuario*@
+        @Html.HiddenFor(model => model.idRequerimientoPK)
+        @Html.HiddenFor(model => model.idModuloPK)
+        @Html.HiddenFor(model => model.idProyectoPK)
+        @Html.HiddenFor(model => model.fechaCreacion)
+        @Html.HiddenFor(model => model.fechaInicio)
+        @Html.HiddenFor(model => model.fechaFin)
 
-    @Html.HiddenFor(model => model.idProyectoPK)
 
-    @Html.HiddenFor(model => model.fechaCreacion)
 
-    @Html.HiddenFor(model => model.fechaInicio)
 
-    @Html.HiddenFor(model => model.fechaFin)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PROYECTO.nombre, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
-        @*<div class="col-md-10">
-                @Html.EditorFor(model => model.PROYECTO.nombre, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.PROYECTO.nombre, "", new { @class = "text-danger" })
-            </div>*@
-
-        @TempData.Peek("proyectoDetalle")
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MODULO.nombre, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
-        @*<div class="col-md-10">
-                @Html.EditorFor(model => model.MODULO.nombre, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.MODULO.nombre, "", new { @class = "text-danger" })
-            </div>*@
-
-        @TempData.Peek("moduloDetalle")
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
-            {
-                    new SelectListItem() {Text = "--Seleccionar estado--", Value=""},
-                    new SelectListItem() {Text = "Sin iniciar", Value="Sin asignar"},
-                    new SelectListItem() {Text = "En ejecución", Value="En ejecucion"},
-                    new SelectListItem() {Text = "Finalizado", Value="Finalizado"},
-                    new SelectListItem() {Text = "Suspendido", Value="Suspendido"}
-             })
-            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.fechaEstado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaEstado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaEstado, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.complejidad, new List<SelectListItem>
-           {
-                   new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
-                   new SelectListItem() {Text = "Simple", Value="Simple"},
-                   new SelectListItem() {Text = "Mediano", Value="Mediano"},
-                   new SelectListItem() {Text = "Complejo", Value="Complejo"},
-                   new SelectListItem() {Text = "Muy complejo", Value="Muy complejo"}
-            })
-            @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("desarrolladores", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="col text-center">
+        @*Nombre de proyecto*@
         <div class="form-group">
-            <div class="col-md-auto" style="margin-top: 50px">
-                <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+            @Html.LabelFor(model => model.PROYECTO.nombre, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+            @TempData.Peek("proyectoDetalle")
+        </div>
+
+
+
+        @*Nombre de módulo*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.MODULO.nombre, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
+            @TempData.Peek("moduloDetalle")
+        </div>
+
+
+
+        @*Nombre del requerimiento*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
+
+
+        @*Estado del requerimiento*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
+                {
+                        new SelectListItem() {Text = "--Seleccionar estado--", Value=""},
+                        new SelectListItem() {Text = "Sin asignar", Value="Sin asignar"},
+                        new SelectListItem() {Text = "Asignado", Value="Asignado"},
+                        new SelectListItem() {Text = "En ejecución", Value="En ejecucion"},
+                        new SelectListItem() {Text = "Finalizado", Value="Finalizado"},
+                        new SelectListItem() {Text = "Suspendido", Value="Suspendido"}
+                 })
+                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        
+
+        @*Complejidad*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.complejidad, new List<SelectListItem>
+               {
+                       new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
+                       new SelectListItem() {Text = "Simple", Value="Simple"},
+                       new SelectListItem() {Text = "Mediano", Value="Mediano"},
+                       new SelectListItem() {Text = "Complejo", Value="Complejo"},
+                       new SelectListItem() {Text = "Muy complejo", Value="Muy complejo"}
+                })
+                @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        @*Duración Estimada*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        @*Asignar desarrollador*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("desarrolladores", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        @*Boton Aceptar*@
+        <div class="col text-center">
+            <div class="form-group">
+                <div class="col-md-auto" style="margin-top: 50px">
+                    <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+                </div>
+            </div>
+        </div>
+
+
     </div>
-
-
-</div>
 
 
 
