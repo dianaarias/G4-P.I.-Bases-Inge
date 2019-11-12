@@ -123,8 +123,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*Se necesita usar dropdownlistfor para conservar la instancia del desarrollador a la hora de editar el requerimiento, sino se tendria que seleccionar cada vez*@
-                @*@Html.DropDownListFor(model => model.cedulaDesarrolladorFK, new SelectList(Model.EMPLEADO.nombre, "cedulaPK", "nombre"), "--Seleccionar Desarrollador--")*@
                 @Html.DropDownList("cedulaDesarrolladorFK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
             </div>

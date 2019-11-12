@@ -244,7 +244,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             TempData.Add("moduloDetalle", db.MODULO.Find(idModulo, idProyecto).nombre);
 
 
-            ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+            ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
             return View(rEQUERIMIENTO);
         }
 

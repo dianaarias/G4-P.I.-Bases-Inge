@@ -64,8 +64,9 @@
     </div>
 
 
+    @*En la vista de Create no se debe habilitar la opcion de seleccionar estado, ya que este uniciamente puede ser "sin asignar" o "asignado" y de eso se encarga el trigger*@
     @*Estado del requerimiento*@
-    <div class="form-group row offset-3 required">
+    @*<div class="form-group row offset-3 required">
         @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
@@ -76,7 +77,7 @@
             })
             @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
         </div>
-    </div>
+    </div>*@
 
 
     @*Complejidad*@
