@@ -10,49 +10,49 @@
 }
 
 
-<h2>Módulos</h2>
-
-
 <table class="table table-bordered table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idModuloPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.fechaInicio)
+        </th>
+        <th>
+            Mas Información
+        </th>
+        <th>
+            Requerimientos
         </th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.idModuloPK)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.idProyectoPK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaInicio)
-            </td>
+    <tr>
 
-            <td>
-                <div class="col text-center">
-                    <a href="@Url.Action("Details","REQUERIMIENTO", new {id = item.idProyectoPK})" style="float:unset">
-                        <img src="~/images/more.svg" width="30" height="30" />
-                    </a>
-                </div>
-            </td>
-        </tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaInicio)
+        </td>
+
+        <td>
+            <div class="col text-center">
+                <a href="@Url.Action("Details","MODULO", new {idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK})" style="float:unset">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
+        </td>
+
+        <td>
+            <div class="col text-center">
+                <a href="@Url.Action("MostrarRequerimientos","REQUERIMIENTO", new {idProyectoPK = item.idProyectoPK, idModuloPK = item.idModuloPK})" style="float:unset">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
+        </td>
+    </tr>
     }
 
 </table>
