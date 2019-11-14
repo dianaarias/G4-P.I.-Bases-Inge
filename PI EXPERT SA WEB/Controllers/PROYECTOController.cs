@@ -21,6 +21,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(pROYECTO.ToList());
         }
 
+
+
+        //Retorna una lista con los proyectos
+        public List<PROYECTO> GetProyecto()
+        {
+            List<PROYECTO> plista = db.PROYECTO.ToList();
+
+            return plista;
+        }
+
+
+
         // GET: PROYECTO/Details/5
         public ActionResult Details(int? id)
         {
@@ -51,7 +63,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProyectoPK,costoEstimado,costoReal,fechaInicio,fechaFin,duracionEstimada,cedulaClienteFK,nombre,objetivo,duracionReal,costoDesarrollador,cedulaLiderFK")] PROYECTO pROYECTO)
         {
-            if (ModelState.IsValid)
+
+            var a = pROYECTO.idProyectoPK;
+            var b = pROYECTO.costoEstimado;
+            var c = pROYECTO.costoReal;
+            var d = pROYECTO.fechaInicio;
+
+
+            if (ModelState.IsValid) 
             {
                 db.PROYECTO.Add(pROYECTO);
                 db.SaveChanges();
@@ -132,7 +151,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             }
             base.Dispose(disposing);
         }
-
-      
+ 
     }
+
 }

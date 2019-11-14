@@ -1,69 +1,61 @@
-﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.complejidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.duracionEstimada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
-        </th>
-        <th></th>
-    </tr>
+<html>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.complejidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.duracionEstimada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MODULO.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+<body>
 
-</table>
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var proyectoID;
+            $("#proyectos").change(function () {
+                proyectoID = $("#proyectos").val();
+                //alert("Hello! I am an alert box!");
+                $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
+            });
+
+            $("#jack").mouseleave(function () {
+                alert("Debe seleccionar proyecto y módulo para poder crear el requerimiento");
+            })
+        });
+    </script>
+
+
+
+    <h2 >Listado de Requerimientos</h2>
+
+
+    @*Boton para crear nuevo requerimiento*@
+    <h2>
+        <a href="@Url.Action("Create", "REQUERIMIENTO", new {})" style="float:right">
+            <img id="jack" src="~/images/plus.svg" width="30" height="30" />
+        </a>
+    </h2>
+
+    @*Lista de proyectos*@
+    <div class="form-group row offset-3">
+        @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    @*Espacio para desplegar la lista de módulos*@
+    <div id="dropdownmodulo"> </div>
+
+
+</body>
+
+
+</html>
+

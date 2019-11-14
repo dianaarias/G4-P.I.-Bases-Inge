@@ -1,0 +1,32 @@
+﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#proyectos").change(function () {
+            var proyectoID = $("#proyectos").val();
+            $("#dropdownempleado").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID })
+        });
+    });
+</script>
+
+
+
+
+<div class="form-group row offset-3">
+    @Html.Label("Proyectos", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+
+<div id="dropdownempleado"> </div>

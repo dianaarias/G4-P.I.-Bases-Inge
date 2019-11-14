@@ -1,0 +1,52 @@
+﻿@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.MODULO>*@
+
+@{
+    ViewBag.Title = "Lista";
+}
+<h2>Lista</h2>
+
+
+
+@{ 
+    List<SelectListItem> selectionList = new List<SelectListItem>();
+
+    selectionList.Add(new SelectListItem { Text = "Top 5", Value = "1", Selected = true });
+    selectionList.Add(new SelectListItem { Text = "Top 10", Value = "2" });
+}
+
+
+
+@Html.DropDownList("Selection List", selectionList, "Select", htmlAttributes: new { @id = "dropdown" })
+
+
+<div id="contenedor_modulos">
+    La lista de modulos, se despliega aquí
+</div>
+
+
+
+
+
+@*------Script for dropdown-------*@
+<script>
+    $('#dropdown').change(function (e) {
+        var rows_num = $("#dropdown option:selected").val(); alert("Number of rows to show : " + rows_num);
+
+        $.ajax({
+            type: "GET",
+            url: "/MODULO/ListaParcialModulos",
+            //data: { id: rows_num },
+            success: function (data) {
+                $("contenedor_modulos").html(data);
+            },
+            error: function () {
+                alert("Something went wrong in controller.");
+            }
+        });
+
+    });
+
+</script>
+
+
+
