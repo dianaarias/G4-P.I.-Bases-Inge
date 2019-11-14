@@ -171,10 +171,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
 <<<<<<< HEAD
+<<<<<<< HEAD
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
             return View();
 =======
+=======
+
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
 
             //Solo permite que se despliegue la vista de Create si se ha seleccionado un proyecto y un módulo en el index
             if (TempData.Peek("proyectoID") != null && TempData.Peek("moduloID") != null)
@@ -185,7 +189,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 return RedirectToAction("index");
             }
+<<<<<<< HEAD
 >>>>>>> master
+=======
+
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
         }
 
 
@@ -253,10 +261,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
 <<<<<<< HEAD
+<<<<<<< HEAD
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rEQUERIMIENTO.idProyectoPK);
             ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
 =======
 >>>>>>> master
+=======
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
             return View(rEQUERIMIENTO);
         }
 

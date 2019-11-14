@@ -6,6 +6,7 @@
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <a href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
@@ -16,12 +17,17 @@
 =======
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 >>>>>>> master
+=======
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
 
 @*Boton de atras*@
 <a id="atras" href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 @using (Html.BeginForm())
 {
@@ -78,6 +84,9 @@
             @Html.DropDownList("selection", new List<SelectListItem>() {new SelectListItem { Text = "1-Simple", Value = "1" }, new SelectListItem { Text = "2-Mediano", Value = "2" }, new SelectListItem { Text = "3-Complejo", Value = "3" }, new SelectListItem { Text = "4-Muy Complejo", Value = "4" } }, null, htmlAttributes: new { @class = "form-control" })
             @*@Html.EditorFor(model => model.complejidad, new { htmlAttributes = new { @class = "form-control" } })*@
 =======
+=======
+
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
 <h2>Crear Requerimiento</h2>
 
 @*Campos requeridos con asterisco*@
@@ -158,11 +167,15 @@
                     new SelectListItem() {Text = "complejo", Value="complejo"},
                     new SelectListItem() {Text = "muy complejo", Value="muy complejo"}
              })
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
             @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
         </div>
     </div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     <div class="form-group row offset-3 required">
         @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -171,12 +184,15 @@
 =======
 
 
+=======
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
     @*Duracion Estimada*@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @*@Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })*@
             @Html.EditorFor(model => model.duracionEstimada)
+<<<<<<< HEAD
 >>>>>>> master
             @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
         </div>
@@ -195,6 +211,13 @@
 =======
 
 
+=======
+
+            @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
     @*Desarrollador asignado al requerimiento*@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -207,7 +230,10 @@
 
 
     @*Boton de aceptar*@
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
     <div class="col text-center">
         <div class="form-group">
             <div class="col-md-auto" style="margin-top: 50px">
@@ -215,6 +241,7 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 </div>
 }
@@ -224,6 +251,12 @@
 
 </div>
 >>>>>>> master
+=======
+
+
+</div>
+
+>>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
 
 }
 
