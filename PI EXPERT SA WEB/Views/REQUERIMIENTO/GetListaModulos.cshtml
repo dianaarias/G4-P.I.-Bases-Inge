@@ -1,0 +1,90 @@
+﻿<@model IEnumerable<PI_EXPERT_SA_WEB.Models.REQUERIMIENTO>
+
+<body>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var moduloID;
+
+            $("#modulos").change(function () {
+                moduloID = $("#modulos").val();
+                proyectoID = $("#proyectos").val();
+                if (moduloID != null) {
+                    $("#tabla").hide();
+                } else {
+                    $("#tabla").show();
+                }
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientos', { idProyectoPK: proyectoID, idModuloPK: moduloID });
+            });
+        });
+    </script>
+
+
+    @*Lista de Módulos*@
+    <div class="form-group row offset-3">
+        @Html.Label("Módulo", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("modulos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+
+
+    @*tabla que despliega todos los requerimientos del proyecto*@
+
+    <table class="table table-bordered table-striped" id="tabla">
+        <tr>
+            <th>
+                Módulo
+            </th>
+            <th>
+                Requerimiento
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                Responsable
+            </th>
+            <th>
+                Ver más información
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MODULO.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
+            </td>
+            <td>
+                @*Detalles del requerimiento*@
+                <div class="col text-center">
+                    <a href="@Url.Action("Details","REQUERIMIENTO", new { idProyecto = item.idProyectoPK, idModulo = item.idModuloPK, idRequerimiento = item.idRequerimientoPK })" style="float:right">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
+                </div>
+            </td>
+        </tr>
+        }
+    </table>
+
+
+    @*Espacio para desplegar tabla de requerimientos*@
+    <div id="tablaRequerimientos"> </div>
+
+
+</body>

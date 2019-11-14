@@ -14,22 +14,28 @@ namespace PI_EXPERT_SA_WEB.Controllers
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
+
+
+
         // GET: MODULO
-        public ActionResult Index(string busqueda)
+        public ActionResult Index()
         {
-            List<MODULO> lmodulo = db.MODULO.Where(x => x.PROYECTO.nombre == busqueda || busqueda == null).ToList();
-            //ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            return View(lmodulo);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            return View();
         }
 
 
-        //// GET: MODULO
-        //public ActionResult Index()
-        //{
-        //    var mODULO = db.MODULO.Include(m => m.PROYECTO);
-        //    return View(mODULO.ToList());
-        //    //return View();
-        //}
+        public ActionResult ModuloPartialView(int? idProyectoPK) {
+
+            TempData.Remove("proyectoID");
+            TempData.Remove("nombreProyecto");
+            TempData.Add("proyectoID", idProyectoPK);
+            TempData.Add("nombreProyecto", db.PROYECTO.Find(idProyectoPK).nombre);
+
+            var mODULO = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK);
+            return View(mODULO.ToList());
+        }
+
 
 
 
@@ -52,8 +58,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO/Create
         public ActionResult Create()
         {
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            return View();
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            //return View();
+
+            if (TempData.Peek("proyectoID") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("index");
+            }
         }
 
 
@@ -62,10 +77,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idModuloPK,idProyectoPK,nombre,fechaInicio")] MODULO mODULO)
+        public ActionResult Create([Bind(Include = "idProyectoPK,idModuloPK,nombre,fechaInicio")] MODULO mODULO)
         {
+
+            var a = mODULO.idModuloPK;
+            var c = mODULO.idProyectoPK;
+
             if (ModelState.IsValid)
             {
+
+                var b = mODULO.idModuloPK;
+                var d = mODULO.idProyectoPK;
+
                 db.MODULO.Add(mODULO);
                 db.SaveChanges();
                 return RedirectToAction("Index");
