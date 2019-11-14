@@ -11,51 +11,7 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-<<<<<<< HEAD
-<<<<<<< HEAD
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    public partial class REQUERIMIENTO
-    {
-        
-        public int idRequerimientoPK { get; set; }
-        
-        
-        public int idModuloPK { get; set; }
-        
-        
-        public int idProyectoPK { get; set; }
-
-        [DisplayName("Estado")]
-        public string estado { get; set; }
-        
-        
-        [DisplayName("Fecha de Inicio")]
-        [Required(ErrorMessage = "Campo requerido")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime fecha { get; set; }
-
-        [DisplayName("Nombre de Requerimiento")]
-        [StringLength(maximumLength: 64, MinimumLength = 1, ErrorMessage = "No puede introducir nombres de m·s de 64 caracteres")]
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Caracteres inv·lidos")]
-        [Required(ErrorMessage = "Campo requerido")]
-        public string nombre { get; set; }
-
-        [DisplayName("Complejidad")]
-        public int complejidad { get; set; }
-
-        [DisplayName("DuraciÛn Estimada")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Caracteres inv·lidos")]
-        public Nullable<int> duracionEstimada { get; set; }
-
-        [DisplayName("Desarrollador Asignado")]
-        [Required(ErrorMessage = "Campo requerido")]
-=======
-=======
-
->>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     public partial class REQUERIMIENTO
@@ -92,12 +48,8 @@ namespace PI_EXPERT_SA_WEB.Models
         public Nullable<int> duracionEstimada { get; set; }
         [Display(Name = "Duraci√≥n real en horas")]
         public Nullable<int> duracionReal { get; set; }
-<<<<<<< HEAD
+
         [Display(Name = "CÈdula Desarrollador")]
->>>>>>> master
-=======
-        [Display(Name = "C√©dula Desarrollador")]
->>>>>>> 41870458fafde7fa5ea1de5c46f51ab9b837a178
         public string cedulaDesarrolladorFK { get; set; }
         [Display(Name = "Fecha inicio")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
