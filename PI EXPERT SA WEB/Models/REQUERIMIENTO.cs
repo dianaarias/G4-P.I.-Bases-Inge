@@ -11,6 +11,7 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
+
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     public partial class REQUERIMIENTO
@@ -32,22 +33,22 @@ namespace PI_EXPERT_SA_WEB.Models
         public int idProyectoPK { get; set; }
         [Display(Name = "Estado")]
         public string estado { get; set; }
-        [Display(Name = "Fecha de creaci髇")]
+        [Display(Name = "Fecha de creaci贸n")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public Nullable<System.DateTime> fechaCreacion { get; set; }
         [Display(Name = "Requerimiento")]
         [Required(ErrorMessage = "El campo nombre es requerido")]
-        [StringLength(64, ErrorMessage = "El campo nombre excede el n鷐ero de caracteres")]
+        [StringLength(64, ErrorMessage = "El campo nombre excede el n煤mero de caracteres")]
         public string nombre { get; set; }
         [Display(Name = "Complejidad")]
         [Required(ErrorMessage = "El campo complejidad es requerido")]
         public string complejidad { get; set; }
-        [RegularExpression("^[0-9]*$", ErrorMessage = "La Duraci髇 Estimada s髄o puede contener n鷐eros")]
-        [Display(Name = "Duraci髇 estimada en horas")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "La Duraci贸n Estimada s贸lo puede contener n煤meros")]
+        [Display(Name = "Duraci贸n estimada en horas")]
         public Nullable<int> duracionEstimada { get; set; }
-        [Display(Name = "Duraci髇 real en horas")]
+        [Display(Name = "Duraci贸n real en horas")]
         public Nullable<int> duracionReal { get; set; }
-        [Display(Name = "C閐ula Desarrollador")]
+        [Display(Name = "C茅dula Desarrollador")]
         public string cedulaDesarrolladorFK { get; set; }
         [Display(Name = "Fecha inicio")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
