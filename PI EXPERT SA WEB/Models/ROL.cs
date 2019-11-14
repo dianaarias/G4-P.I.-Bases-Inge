@@ -11,27 +11,12 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class ROL
     {
-        //La llave primaria de Rol está constituida por dos atributos, señalados por "[Key]", para verificar que estos sean únicos
-        //Estos atributos son el número de cédula y el ID del proyecto al que está asociado ese rol
-        [Key]
-        [Display(Name = "Cédula")]
-        [Required(ErrorMessage = "Campo requerido")]
         public string cedulaPK { get; set; }
-        [Key]
-        [Display(Name = "ID Proyecto")]
-        [Required(ErrorMessage = "Campo requerido")]
         public int idProyectoPK { get; set; }
-        [Display(Name = "Tipo de rol")]
-        [Required(ErrorMessage = "Campo requerido")]
         public string tipoRol { get; set; }
-        [Display(Name = "Número de equipo")]
-        [Required(ErrorMessage = "Campo requerido")]
         public int numEquipo { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }

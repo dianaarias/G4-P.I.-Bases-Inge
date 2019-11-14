@@ -10,20 +10,20 @@
         <EntityTypeShape EntityType="Gr02Proy4Model.HABILIDADES" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr02Proy4Model.MODULO" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr02Proy4Model.PROYECTO" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Gr02Proy4Model.ROL" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr02Proy4Model.LoginCliente" Width="1.5" PointX="6" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="Gr02Proy4Model.LoginEmpleado" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
         <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO_CLIENTE" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginCliente_Cedula_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_EMPLEADO_HABILIDADES" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO_EMPLEADO" ManuallyRouted="false" />
-        <AssociationConnector Association="Gr02Proy4Model.FK_ROL_EMPLEADO" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.Seguridad_LoginEmpleado_Cedula_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Gr02Proy4Model.FK_MODULO_PROYECTO" ManuallyRouted="false" />
-        <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Gr02Proy4Model.REQUERIMIENTO" Width="1.5" PointX="10.5" PointY="5" />
         <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" />
         <AssociationConnector Association="Gr02Proy4Model.FK_REQUERIMIENTO_MODULO" />
+        <EntityTypeShape EntityType="Gr02Proy4Model.ROL" Width="1.5" PointX="8.25" PointY="2.75" />
+        <AssociationConnector Association="Gr02Proy4Model.FK_ROL_EMPLEADO" />
+        <AssociationConnector Association="Gr02Proy4Model.FK_PROYECTO" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
