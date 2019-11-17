@@ -1,20 +1,40 @@
 ﻿@model PI_EXPERT_SA_WEB.Models.MODULO
 
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $("#jack").click(function () {
+                $("#tablaRequerimientos").load('/REQUERIMIENTO/MostrarRequerimientos', { idProyectoPK: @Model.idProyectoPK, idModuloPK: @Model.idModuloPK });
+                $("#tablaRequerimientos").toggle();
+            });
+        });
+</script>
+
+
+
+
+
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*Boton de borrado del módulo*@
 <a href="@Url.Action("Delete","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
+
+@*Boton de editado del módulo*@
 <a href="@Url.Action("Edit","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK})" class="boton-icono" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30" />
 </a>
 
+@*Boton para regresar al índice*@
 <a href="@Url.Action("Index","MODULO", new { idModuloPK = Model.idModuloPK, idProyectoPK = Model.idProyectoPK })" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
+
 
 <h2>Resumen de Módulo</h2>
 <div class="separador"></div>
@@ -24,39 +44,47 @@
 
 
     <d1 class="d1-horizontal">
-        <dt class>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
 
+        @*Nombre del proyecto*@
+        <dt>
+            Proyecto
+        </dt>
+        <dd>
+            @TempData.Peek("nombreProyecto")
+        </dd>
+
+
+        @*Nombre del módulo*@
+        <dt>
+            Modulo
+        </dt>
         <dd>
             @Html.DisplayFor(model => model.nombre)
         </dd>
 
+        @*Fecha de inicio del módulo*@
         <dt>
-            @Html.DisplayNameFor(model => model.idModuloPK)
+            Fecha de Inicio
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idModuloPK)
-        </dd>
-
-        <dt class>
-            @Html.DisplayNameFor(model => model.idProyectoPK)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.idProyectoPK)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaInicio)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaInicio)
         </dd>
 
+        <dt>
+            Requerimientos
+        </dt>
+        <dd>
+            <div class="col text-center">
+                <a id="jack" style="float:unset">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
+        </dd>
     </d1>
 </div>
+
+
+@*Espacio para desplegar tabla de requerimientos*@
+<div align="right" id="tablaRequerimientos"> </div>
 
 

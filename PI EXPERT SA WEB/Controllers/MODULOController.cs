@@ -20,6 +20,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO
         public ActionResult Index()
         {
+            //Al regresar al index se remueven los valores temporales para volverlos asignar
+            TempData.Remove("proyectoID");
+            TempData.Remove("nombreProyecto");
+
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
@@ -77,18 +81,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProyectoPK,idModuloPK,nombre,fechaInicio")] MODULO mODULO)
+        public ActionResult Create([Bind(Include = "nombre,fechaInicio")] MODULO mODULO)
         {
 
-            var a = mODULO.idModuloPK;
-            var c = mODULO.idProyectoPK;
+
+            mODULO.idProyectoPK = (int)TempData.Peek("proyectoID");
 
             if (ModelState.IsValid)
             {
-
-                var b = mODULO.idModuloPK;
-                var d = mODULO.idProyectoPK;
-
                 db.MODULO.Add(mODULO);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -106,12 +106,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
-            //List<MODULO> lmodulo = db.MODULO.Where(x => x.PROYECTO.idProyectoPK == idProyectoPK).ToList();
-
-            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "idModuloPK", mODULO.idProyectoPK);
             return View(mODULO);
-
-            //return View(lmodulo);
         }
 
         // POST: MODULO/Edit/5
