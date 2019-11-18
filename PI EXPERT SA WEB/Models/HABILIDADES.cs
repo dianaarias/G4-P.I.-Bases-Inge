@@ -18,5 +18,9 @@ namespace PI_EXPERT_SA_WEB.Models
         public string habilidadPK { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
+
+        public List<HABILIDADES> listaHabilidades { get; set; }
+
+        public HABILIDADES modeloHabilidades { get; set; }
     }
 }

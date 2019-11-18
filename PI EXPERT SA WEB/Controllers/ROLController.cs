@@ -40,7 +40,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Create()
         {
             ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             }
 
             ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", rOL.idProyectoPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
             return View(rOL);
         }
 
@@ -76,7 +76,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return HttpNotFound();
             }
             ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", rOL.idProyectoPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
             return View(rOL);
         }
 
@@ -94,7 +94,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "cedulaClienteFK", rOL.idProyectoPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
             return View(rOL);
         }
 

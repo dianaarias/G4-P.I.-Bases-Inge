@@ -2,62 +2,82 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
+@*Create permite al usuario crear un equipo, escogiendo sus miembros de acuerdo a sus habilidades, tras filtrar los empleados.*@
 
-@using (Html.BeginForm()) 
+@*Botón de atrás/volver*@
+<a href="@Url.Action("Index","ROL", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+<h2>Crear Equipo</h2>
+
+@*Campos requeridos con asterisco*@
+<div class="required-field-asterisk">
+    <p>*<span style="color:black">Campos requeridos</span> </p>
+</div>
+
+@*Se hace uso de forms para recopilar la información.*@
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>ROL</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.cedulaPK, "cedulaPK", htmlAttributes: new { @class = "control-label col-md-2" })
+
+        @*Se comenta el form de selección de líder dado que este ya debe haber sido asignado al proyecto para el momento en que se elige un equipo de trabajo*@
+        @*<div class="form-group required">
+            @Html.LabelFor(model => model.cedulaPK, "Líder Asignado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("cedulaPK", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.cedulaPK, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.idProyectoPK, "idProyectoPK", htmlAttributes: new { @class = "control-label col-md-2" })
+        @*Selección de proyecto cuyo equipo se desea crear*@
+        <div class="form-group required">
+            @Html.LabelFor(model => model.idProyectoPK, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
+        @*Se comenta el form de tipo de rol, dado que todos los empleados a seleccionar en esta pantalla contarán con el mismo rol dentro del equipo*@
+        @*<div class="form-group required">
             @Html.LabelFor(model => model.tipoRol, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.tipoRol, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tipoRol, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.numEquipo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.numEquipo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.numEquipo, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        @*Se comenta el form de número de equipo dado que este atributo ha sido modificado en la BD para ser un valor autogenerado*@
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.numEquipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.numEquipo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.numEquipo, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="col text-center">
+            <div class="form-group">
+                <div class="col-md-auto" style="margin-top: 50px">
+                    <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
