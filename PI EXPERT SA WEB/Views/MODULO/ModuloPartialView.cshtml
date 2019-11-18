@@ -13,41 +13,33 @@
 <table class="table table-bordered table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre Módulo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.fechaInicio)
+            Fecha de Inicio
         </th>
         <th>
             Mas Información
-        </th>
-        <th>
-            Requerimientos
         </th>
     </tr>
 
     @foreach (var item in Model)
     {
     <tr>
-
+        @*Muestra el nombre del requerimiento*@
         <td>
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
+
+        @*Muestra la fecha de Inicio del requerimiento*@
         <td>
             @Html.DisplayFor(modelItem => item.fechaInicio)
         </td>
 
+        @*Boton de más información*@
         <td>
             <div class="col text-center">
                 <a href="@Url.Action("Details","MODULO", new {idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK})" style="float:unset">
-                    <img src="~/images/more.svg" width="30" height="30" />
-                </a>
-            </div>
-        </td>
-
-        <td>
-            <div class="col text-center">
-                <a href="@Url.Action("MostrarRequerimientos","REQUERIMIENTO", new {idProyectoPK = item.idProyectoPK, idModuloPK = item.idModuloPK})" style="float:unset">
                     <img src="~/images/more.svg" width="30" height="30" />
                 </a>
             </div>
