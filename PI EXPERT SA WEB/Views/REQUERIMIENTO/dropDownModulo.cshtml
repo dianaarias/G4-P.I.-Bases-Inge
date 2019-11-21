@@ -1,11 +1,11 @@
-﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
+﻿
 
-
-
-<div class="form-group row offset-3 required">
-    @Html.LabelFor(model => model.idProyectoPK, "Módulos", htmlAttributes: new { @class = "control-label col-md-2" })
+@*<div class="form-group row offset-3">
+    @Html.Label("Módulos", new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        @Html.DropDownList("modulos", null, "--Seleccionar Módulo--",htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
+        @Html.DropDownList("modulos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })
     </div>
-</div>
+</div>*@
+
+
+@Html.DropDownList("modulos", null, "--Seleccionar Modulo--", htmlAttributes: new { @class = "form-control" })

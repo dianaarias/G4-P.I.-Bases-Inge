@@ -1,109 +1,129 @@
 ﻿@model PI_EXPERT_SA_WEB.Models.REQUERIMIENTO
 
+ 
+
 @{
     ViewBag.Title = "Details";
 }
 
+@*Botón de Borrado*@
 <a href="@Url.Action("Delete","REQUERIMIENTO", new { idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK })" class="boton-icono" style="float:right">
     <img src="~/images/deleteImg.svg" width="30" height="30" />
 </a>
-<a href="@Url.Action("Edit","PROYECTO", new { /* id=item.PrimaryKey */ })" class="boton-icono" style="float:right">
+
+
+@*Boton de Editado*@
+<a href="@Url.Action("Edit","REQUERIMIENTO", new { idProyecto = Model.idProyectoPK, idModulo = Model.idModuloPK, idRequerimiento = Model.idRequerimientoPK })" class="boton-icono" style="float:right">
     <img src="~/images/editImg.svg" width="30" height="30" />
 </a>
 
+
+@*Boton de regreso al index*@
 <a href="@Url.Action("Index","REQUERIMIENTO", new { })" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 
+
+
 <h2>Resumen de Requerimiento</h2>
 
+
+
+
+@*Listado de características del requerimiento*@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
 
+
+        @*Proyecto*@
+        <dt>
+            Nombre del Proyecto
+        </dt>
         <dd>
-            @Html.DisplayFor(model => model.nombre)
+            @TempData.Peek("proyectoDetalle")
         </dd>
 
+
+        @*Modulo*@
         <dt>
-            @Html.DisplayNameFor(model => model.PROYECTO.nombre)
+            Nombre de Módulo
         </dt>
-
-        <dd>
-            @*@ViewBag.proyecto*@
-            @Html.DropDownList("proyecto", null, htmlAttributes: new {})
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MODULO.nombre)
-        </dt>
-
         <dd>
             @Html.DisplayFor(model => model.MODULO.nombre)
         </dd>
 
+
+
+        @*Nombre del requerimiento*@
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+
+        @*Estado del requerimiento*@
         <dt>
             @Html.DisplayNameFor(model => model.estado)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.estado)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaEstado)
-        </dt>
 
+        @*Fecha de creacion*@
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaCreacion)
+        </dt>
         <dd>
-            @Html.DisplayFor(model => model.fechaEstado)
+            @Html.DisplayFor(model => model.fechaCreacion)
         </dd>
 
+        @*Complejidad*@
         <dt>
             @Html.DisplayNameFor(model => model.complejidad)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.complejidad)
         </dd>
 
+
+        @*Duración Estimada*@
         <dt>
             @Html.DisplayNameFor(model => model.duracionEstimada)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.duracionEstimada)
         </dd>
 
+
+        @*Desarrollador asociado al requerimiento*@
         <dt>
-            @*@Html.DisplayNameFor(model => model.EMPLEADO.nombre)*@
             Desarrollador
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.EMPLEADO.nombre)
         </dd>
 
+
+        @*Fecha de inicio del requerimiento*@
         <dt>
             @Html.DisplayNameFor(model => model.fechaInicio)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaInicio)
         </dd>
+
+
+        @*Fecha de finalización del requerimiento*@
         <dt>
             @Html.DisplayNameFor(model => model.fechaFin)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fechaFin)
         </dd>
 
     </dl>
 </div>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")*@
-</p>
