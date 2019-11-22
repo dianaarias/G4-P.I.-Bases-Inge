@@ -350,6 +350,7 @@
     <Content Include="Views\REQUERIMIENTO\IndexDevelopersRequirements.cshtml" />
     <Content Include="Views\REQUERIMIENTO\MostrarRequerimientosDesarrollador.cshtml" />
     <Content Include="Views\REQUERIMIENTO\dropDownModulo.cshtml" />
+    <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
