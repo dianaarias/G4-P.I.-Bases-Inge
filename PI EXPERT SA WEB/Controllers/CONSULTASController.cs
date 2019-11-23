@@ -29,13 +29,30 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        public ActionResult TotalHorasRequerimiento() {
+        public ActionResult ComparacionDuracionRequerimientos()
+        {
+
+            ViewBag.empleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+
             return View();
         }
 
-        public ActionResult HistorialDesarrollador() {
-            return View();
+        public PartialViewResult GetListaProyectos(string cedulaPK) {
+            
+            var CONSULTAS =
+                from req in db.REQUERIMIENTO
+                join mod in db.MODULO
+                on req.idModuloPK equals mod.idModuloPK
+                join proy in db.PROYECTO
+                on mod.idProyectoPK equals proy.idProyectoPK
+                where req.cedulaDesarrolladorFK == cedulaPK
+                select new CONSULTAS {modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy};
+
+
+            return PartialView(CONSULTAS);
         }
+
+        //public ActionResult TotalHorasRequerimiento() {
 
         public ActionResult PeriodosDesocupacion() {
             return View();
