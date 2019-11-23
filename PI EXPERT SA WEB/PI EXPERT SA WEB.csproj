@@ -353,6 +353,7 @@
     <Content Include="Views\REQUERIMIENTO\dropDownModulo.cshtml" />
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientoComplejidad.cshtml" />
+    <Content Include="Views\CONSULTAS\GetListaProyectos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
