@@ -25,9 +25,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        public ActionResult ComparacionDuracionRequerimientos() {
-            return View();
-        }
 
         public ActionResult ComparacionDuracionRequerimientos()
         {
