@@ -22,6 +22,10 @@
 
     @foreach (var item in Model)
     {
+
+
+        var diff = item.modeloRequerimiento.duracionReal - item.modeloRequerimiento.duracionEstimada;
+
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.modeloProyecto.nombre)
@@ -36,7 +40,7 @@
         @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => (item.modeloRequerimiento.duracionReal- item.modeloRequerimiento.duracionEstimada))
+        @Html.DisplayFor(modelItem => diff)
     </td>
 </tr>
     }
