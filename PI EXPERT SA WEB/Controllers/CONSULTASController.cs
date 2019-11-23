@@ -42,6 +42,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 on req.idModuloPK equals mod.idModuloPK
                 join proy in db.PROYECTO
                 on mod.idProyectoPK equals proy.idProyectoPK
+                where proy.fechaFin != null
                 where req.cedulaDesarrolladorFK == cedulaPK
                 select new CONSULTAS {modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy};
 
