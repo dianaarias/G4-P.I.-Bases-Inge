@@ -26,8 +26,25 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public ActionResult ComparacionDuracionRequerimientos()
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+
+            ViewBag.empleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+
             return View();
+        }
+
+        public PartialViewResult GetListaProyectos(string cedulaPK) {
+            
+            var CONSULTAS =
+                from req in db.REQUERIMIENTO
+                join mod in db.MODULO
+                on req.idModuloPK equals mod.idModuloPK
+                join proy in db.PROYECTO
+                on mod.idProyectoPK equals proy.idProyectoPK
+                where req.cedulaDesarrolladorFK == cedulaPK
+                select new CONSULTAS {modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy};
+
+
+            return PartialView(CONSULTAS);
         }
 
         //public ActionResult TotalHorasRequerimiento() {
