@@ -12,6 +12,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 {
     public class CONSULTASController : Controller
     {
+
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
         // GET: CONSULTAS
@@ -20,9 +21,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        //public ActionResult DesarrolladoresAsignadosDisponibles() {
+        public ActionResult DesarrolladoresAsignadosDisponibles() {
+            return View();
+        }
 
-        //}
+        public ActionResult ComparacionDuracionRequerimientos() {
+            return View();
+        }
 
         public ActionResult ComparacionDuracionRequerimientos()
         {
@@ -49,31 +54,28 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //public ActionResult TotalHorasRequerimiento() {
 
-        //}
+        public ActionResult PeriodosDesocupacion() {
+            return View();
+        }
 
-        //public ActionResult HistorialDesarrollador() {
+        public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
-        //}
 
-        //public ActionResult PeriodosDesocupacion() {
+            ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad");
+            return View();
+        }
 
-        //}
+        public ActionResult ConocimientosFrecuentes() {
+            return View();
+        }
 
-        //public ActionResult ComparacionDuracionRequerimientoComplejidad() {
+        public ActionResult EstadoResponsablesRequerimientos() {
+            return View();
+        }
 
-        //}
-
-        //public ActionResult ConocimientosFrecuentes() {
-
-        //}
-
-        //public ActionResult EstadoResponsablesRequerimientos() {
-
-        //}
-
-        //public ActionResult RequerimientosTerminadosEjecucion() {
-
-        //}
+        public ActionResult RequerimientosTerminadosEjecucion() {
+            return View();
+        }
 
 
 
