@@ -44,7 +44,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
 
-            ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad");
+            ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
             return View();
         }
 
