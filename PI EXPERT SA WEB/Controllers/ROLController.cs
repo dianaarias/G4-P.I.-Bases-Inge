@@ -24,8 +24,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 join rol in db.ROL on pro.idProyectoPK equals rol.idProyectoPK
                 select new { rol.idProyectoPK, pro.nombre };
 
-            var b = query.Distinct();
-            ViewBag.proyectos = new SelectList(b, "idProyectoPK", "nombre");
+            ViewBag.proyectos = new SelectList(query.Distinct(), "idProyectoPK", "nombre");
 
 
             return View();

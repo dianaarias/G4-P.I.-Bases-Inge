@@ -20,9 +20,11 @@
 
     @foreach (var item in Model)
     {
+        var nombreCompleto = item.modeloEmpleado.nombre + " " + item.modeloEmpleado.apellido1 + " " + item.modeloEmpleado.apellido2;
+
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.modeloEmpleado.nombre)
+            @Html.DisplayFor(modelItem => nombreCompleto)
         </td>
 
         <td>
