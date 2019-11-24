@@ -1,0 +1,43 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.CONSULTAS>
+
+
+@Html.Label("Líder del Equipo: ")
+@TempData.Peek("liderNombre").ToString()
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Integrantes
+        </th>
+        <th>
+            Rol en el Equipo
+        </th>
+        <th>
+            Mas Información
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.modeloEmpleado.nombre)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.modeloRol.tipoRol)
+        </td>
+
+        <td>
+            @*Boton de detalles del requerimiento*@
+            <div class="col text-center">
+                <a href="@Url.Action("Details","EMPLEADOes", new { cedulaPK = item.modeloEmpleado.cedulaPK})" style="float:initial">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
+        </td>
+    </tr>
+    }
+
+</table>

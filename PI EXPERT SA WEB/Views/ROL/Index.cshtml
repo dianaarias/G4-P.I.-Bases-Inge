@@ -1,0 +1,43 @@
+﻿@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.ROL>*@
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var proyectoID;
+        $("#proyectos").change(function () {
+            proyectoID = $("#proyectos").val();
+            $("#equipo").load('/ROL/Equipo', { idProyectoPK: proyectoID });
+        });
+
+        //$("#jack").mouseleave(function () {
+        //    alert("Debe seleccionar proyecto y módulo para poder crear el requerimiento");
+        //})
+    });
+</script>
+
+
+@*Boton para crear nuevo requerimiento*@
+<h2>
+    <a href="@Url.Action("Create", "ROL", new {})" style="float:right">
+        <img id="jack" src="~/images/plus.svg" width="30" height="30" />
+    </a>
+</h2>
+
+@*Lista de Proyectos*@
+<div class="form-group row offset-3">
+    @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+@*Espacio para desplegar la vista del equipo*@
+<div id="equipo"> </div>
