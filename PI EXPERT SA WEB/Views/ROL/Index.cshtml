@@ -2,18 +2,20 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Equipos</h2>
+<h2>Equipos
+    <a href="@Url.Action("Create","ROL", new { })" style="float:right">
+        <img src="~/images/plus.svg" width="30" height="30" />
+    </a>
+</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.tipoRol)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.numEquipo)
         </th>
@@ -23,14 +25,16 @@
         <th>
             @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
         </th>
-        <th></th>
+        <th>
+            Ver más información
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.tipoRol)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.numEquipo)
         </td>
@@ -41,9 +45,11 @@
             @Html.DisplayFor(modelItem => item.PROYECTO.cedulaClienteFK)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <div class="col text-center">
+                <a href="@Url.Action("Details","PROYECTO", new {id = item.idProyectoPK})" style="float:unset">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
         </td>
     </tr>
 }
