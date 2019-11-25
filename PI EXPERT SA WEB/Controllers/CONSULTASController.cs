@@ -35,7 +35,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         public PartialViewResult GetListaProyectos(string cedulaPK) {
-            
+
+            List<ROL> proyecto = db.ROL.Where(x => x.cedulaPK == cedulaPK).ToList();
+            ViewBag.proyectos = new SelectList(proyecto, "idProyectoPK", "idProyectoPK");
+
+            //List<EMPLEADO> empleado = db.EMPLEADO.Where(x => x.cedulaPK == cedulaPK).ToList();
+            //ViewBag.empleados = new SelectList(empleado, "cedulaPK", "nombre");
+
             var CONSULTAS =
                 from req in db.REQUERIMIENTO
                 join mod in db.MODULO
@@ -48,6 +54,22 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
             return PartialView(CONSULTAS);
+        }
+
+        public PartialViewResult MostrarComparacionDuraciones( string cedulaPk, int? idProyectoPK){
+
+            var CONSULTAS =
+               from req in db.REQUERIMIENTO
+               join mod in db.MODULO
+               on req.idModuloPK equals mod.idModuloPK
+               join proy in db.PROYECTO
+               on mod.idProyectoPK equals proy.idProyectoPK
+               where proy.fechaFin != null
+               where req.cedulaDesarrolladorFK == cedulaPk
+               where req.idProyectoPK == idProyectoPK
+               select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
+
+            return PartialView();
         }
 
         //public ActionResult TotalHorasRequerimiento() {

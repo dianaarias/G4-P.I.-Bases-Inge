@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<PI_EXPERT_SA_WEB.Models.CONSULTAS>
+
+@*Lista de requerimientos de un proyecto es especiifico*@
+
+<table class="table table-bordered table-striped" id="tabla">
+    <tr>
+        <th>
+            Nombre Requerimiento
+        </th>
+        <th>
+            Duración Estimada
+        </th>
+        <th>
+            Duración Real
+        </th>
+        <th>
+            Diferencia
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        var diff = item.modeloRequerimiento.duracionReal - item.modeloRequerimiento.duracionEstimada;
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => diff)
+            </td>
+        </tr>
+    }
+</table>
+

@@ -354,6 +354,7 @@
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientoComplejidad.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectos.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarComparacionDuraciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
