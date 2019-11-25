@@ -149,6 +149,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CONSULTAS.cs" />
     <Compile Include="Models\CLIENTE.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -349,6 +350,10 @@
     <Content Include="Views\REQUERIMIENTO\GetDevelopers.cshtml" />
     <Content Include="Views\REQUERIMIENTO\IndexDevelopersRequirements.cshtml" />
     <Content Include="Views\REQUERIMIENTO\MostrarRequerimientosDesarrollador.cshtml" />
+    <Content Include="Views\REQUERIMIENTO\dropDownModulo.cshtml" />
+    <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
+    <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientoComplejidad.cshtml" />
+    <Content Include="Views\CONSULTAS\GetListaProyectos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,116 +6,121 @@
 }
 
 
-<script>
-    $(document).ready(function () {
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-        $("#idProyectoPK").change(function () {
-            var proyectoID = $("#idProyectoPK").val();
-            $("#idModulo").load('/REQUERIMIENTO/DropDownModulo', { idProyectoPK: proyectoID });
-            $("#idModuloO").hide();
-        });
-    });
-</script>
-
-
-<a href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
+@*Boton de atras*@
+<a id="atras" href="@Url.Action("Index","REQUERIMIENTO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
+
+
 <h2>Crear Requerimiento</h2>
+
+@*Campos requeridos con asterisco*@
 <div class="required-field-asterisk">
     <p>*<span style="color:black">Campos requeridos</span> </p>
 </div>
 
 
+@*Lista de elementos para agregar a la tabla de requerimientos*@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+
+@Html.AntiForgeryToken()
 
 
 <div class="form-horizontal">
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-    <div class="form-group row offset-3 required">
+
+
+    @*ID del proyecto*@
+    <div class="form-group row offset-3">
         @Html.LabelFor(model => model.idProyectoPK, "Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idProyectoPK", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
-        </div>
+        @TempData.Peek("nombreProyecto").ToString()
+        @Html.HiddenFor(model => model.idProyectoPK, new { htmlAttributes = 1 })
+        @*@Html.EditorFor(model => model.idProyectoPK, new { htmlAttributes = TempData.Peek("proyectoID")})*@
+        @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
     </div>
 
-
-
-    <div class="form-group row offset-3 required" id="idModuloO">
+    @*ID del módulo*@
+    <div class="form-group row offset-3">
         @Html.LabelFor(model => model.idModuloPK, "Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idModuloPK", null, "--Seleccionar Módulo--", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
-        </div>
+        @TempData.Peek("nombreModulo").ToString()
+        @Html.HiddenFor(model => model.idModuloPK, new { htmlAttributes = 1 })
+        @*@Html.EditorFor(model => model.idModuloPK, new { htmlAttributes = TempData.Peek("moduloID") })*@
+        @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
     </div>
 
-    <div id="idModulo"></div>
 
 
+    @*Nombre del Requerimiento*@
     <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.fechaEstado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaEstado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaEstado, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.nombre, "Nombre Requerimiento", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
         </div>
     </div>
 
+
+    @*En la vista de Create no se debe habilitar la opcion de seleccionar estado, ya que este uniciamente puede ser "sin asignar" o "asignado" y de eso se encarga el trigger*@
+    @*Estado del requerimiento*@
+    @*<div class="form-group row offset-3 required">
+        @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.estado, new List<SelectListItem>
+            {
+                        new SelectListItem() {Text = "--Seleccionar estado--", Value=""},
+                        new SelectListItem() {Text = "Sin asignar", Value="Sin asignar"},
+                        new SelectListItem() {Text = "Asignado", Value="Asignado"},
+            })
+            @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+
+
+    @*Complejidad*@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.complejidad, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.complejidad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.complejidad, new List<SelectListItem>
+            {
+                    new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
+                    new SelectListItem() {Text = "simple", Value="simple"},
+                    new SelectListItem() {Text = "mediano", Value="mediano"},
+                    new SelectListItem() {Text = "complejo", Value="complejo"},
+                    new SelectListItem() {Text = "muy complejo", Value="muy complejo"}
+             })
             @Html.ValidationMessageFor(model => model.complejidad, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    @*Duracion Estimada*@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.duracionEstimada, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })
+            @*@Html.EditorFor(model => model.duracionEstimada, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.duracionEstimada)
+
             @Html.ValidationMessageFor(model => model.duracionEstimada, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    @*Desarrollador asignado al requerimiento*@
+    <div class="form-group row offset-3">
+        @Html.LabelFor(model => model.cedulaDesarrolladorFK, "Desarrollador", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("cedulaDesarrolladorFK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.fechaInicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.cedulaDesarrolladorFK, "cedulaDesarrolladorFK", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("cedulaDesarrolladorFK", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.cedulaDesarrolladorFK, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
+    @*Boton de aceptar*@
     <div class="col text-center">
         <div class="form-group">
             <div class="col-md-auto" style="margin-top: 50px">
@@ -126,6 +131,8 @@
 
 
 </div>
+
+
 }
 
 @section Scripts {

@@ -10,54 +10,41 @@
 }
 
 
-<h2>Módulos</h2>
-
-
 <table class="table table-bordered table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre Módulo
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idModuloPK)
+            Fecha de Inicio
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.idProyectoPK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaInicio)
+            Mas Información
         </th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.idModuloPK)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.idProyectoPK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaInicio)
-            </td>
+    <tr>
+        @*Muestra el nombre del requerimiento*@
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
 
-            @*<td>
-                    @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-                    @Html.ActionLink("Edit", "Edit", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-                    @Html.ActionLink("Details", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }) |
-                    @Html.ActionLink("Delete", "Delete", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK })
-                </td>*@
+        @*Muestra la fecha de Inicio del requerimiento*@
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaInicio)
+        </td>
 
-            <td>
-                <div class="col text-center">
-                    @Html.ActionLink("Más información", "Details", new { idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK }, new { @class = "btn btn-outline-secondary btn-sm text-center" })
-                </div>
-            </td>
-        </tr>
+        @*Boton de más información*@
+        <td>
+            <div class="col text-center">
+                <a href="@Url.Action("Details","MODULO", new {idModuloPK = item.idModuloPK, idProyectoPK = item.idProyectoPK})" style="float:unset">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
+        </td>
+    </tr>
     }
 
 </table>

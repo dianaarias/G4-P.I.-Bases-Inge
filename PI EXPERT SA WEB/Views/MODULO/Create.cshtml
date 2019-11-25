@@ -6,17 +6,23 @@
 }
 
 
+@*Boton para devolverse al index*@
 <a href="@Url.Action("Index","MODULO", new {})" class="boton-icono" style="float:left">
     <img src="~/images/left-arrow.svg" width="30" height="30" />
 </a>
 
 <h2>Crear Modulo</h2>
 
+
+
 <div class="required-field-asterisk">
     <p>*<span style="color:black">Campos requeridos</span> </p>
 </div>
 
 
+
+
+@*Formulario que envia el elemento Bind al post Create*@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -25,40 +31,37 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group row offset-3 required">
+
+    @*Despliega el nombre del proyecto donde se está creando el módulo*@
+    <div class="form-group row offset-3">
         @Html.LabelFor(model => model.idProyectoPK, "Nombre del Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
+            @TempData.Peek("nombreProyecto")
             @Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group row offset-3 required">
-        @Html.LabelFor(model => model.idModuloPK, "ID del módulo", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.idModuloPK, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.idModuloPK, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
+    @*Solicita el nombre del nuevo módulo*@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.nombre, "Nombre del Módulo", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
-            @*@Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })*@
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
 
         </div>
     </div>
 
+    @*Solicita la fecha de inicio del nuevo módulo*@
     <div class="form-group row offset-3">
         @Html.LabelFor(model => model.fechaInicio, "Fecha de Inicio", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-            @*@Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })*@
+            @Html.ValidationMessageFor(model => model.fechaInicio, "", new { @class = "text-danger" })
         </div>
     </div>
 
 
+    @*Boton de aceptar nuevo módulo*@
     <div class="col text-center">
         <div class="form-group">
             <div class="col-md-auto" style="margin-top: 50px">

@@ -20,12 +20,22 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO
         public ActionResult Index()
         {
+            //Al regresar al index se remueven los valores temporales para volverlos asignar
+            TempData.Remove("proyectoID");
+            TempData.Remove("nombreProyecto");
+
             ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
 
         public ActionResult ModuloPartialView(int? idProyectoPK) {
+
+            TempData.Remove("proyectoID");
+            TempData.Remove("nombreProyecto");
+            TempData.Add("proyectoID", idProyectoPK);
+            TempData.Add("nombreProyecto", db.PROYECTO.Find(idProyectoPK).nombre);
+
             var mODULO = db.MODULO.Where(x => x.idProyectoPK == idProyectoPK);
             return View(mODULO.ToList());
         }
@@ -52,8 +62,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: MODULO/Create
         public ActionResult Create()
         {
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            return View();
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            //return View();
+
+            if (TempData.Peek("proyectoID") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("index");
+            }
         }
 
 
@@ -62,8 +81,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProyectoPK,idModuloPK,nombre,fechaInicio")] MODULO mODULO)
+        public ActionResult Create([Bind(Include = "nombre,fechaInicio")] MODULO mODULO)
         {
+
+
+            mODULO.idProyectoPK = (int)TempData.Peek("proyectoID");
+
             if (ModelState.IsValid)
             {
                 db.MODULO.Add(mODULO);
@@ -83,12 +106,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             MODULO mODULO = db.MODULO.Find(idModuloPK, idProyectoPK);
-            //List<MODULO> lmodulo = db.MODULO.Where(x => x.PROYECTO.idProyectoPK == idProyectoPK).ToList();
-
-            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "idModuloPK", mODULO.idProyectoPK);
             return View(mODULO);
-
-            //return View(lmodulo);
         }
 
         // POST: MODULO/Edit/5

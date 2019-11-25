@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "ComparacionDuracionRequerimientos";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#empleados").change(function () {
+            var empleadoID = $("#empleados").val();
+            $("#dropdownproyectos").load('/CONSULTAS/GetListaProyectos', { cedulaPK: empleadoID })
+        });
+    });
+</script>
+
+
+
+@*Lista de proyectos*@
+<div class="form-group row offset-3">
+    @Html.Label("Empleado", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("empleados", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+
+
+
+@*Espacio para desplegar la lista de proyectos*@
+<div id="dropdownproyectos"> </div>

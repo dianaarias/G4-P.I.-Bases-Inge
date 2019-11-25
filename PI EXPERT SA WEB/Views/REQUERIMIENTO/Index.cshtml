@@ -5,38 +5,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<html>
+
+<body>
 
 
-<script>
-    $(document).ready(function () {
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-        $("#proyectos").change(function () {
-            var proyectoID = $("#proyectos").val();
-            $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID })
+
+    <script>
+        $(document).ready(function () {
+            var proyectoID;
+            $("#proyectos").change(function () {
+                proyectoID = $("#proyectos").val();
+                //alert("Hello! I am an alert box!");
+                $("#dropdownmodulo").load('/REQUERIMIENTO/GetListaModulos', { idProyectoPK: proyectoID });
+            });
+
+            $("#jack").mouseleave(function () {
+                alert("Debe seleccionar proyecto y módulo para poder crear el requerimiento");
+            })
         });
-    });
-</script>
+    </script>
 
 
 
-
-<h2>Requerimientos</h2>
-
-<h2>
-    <a href="@Url.Action("Create", "REQUERIMIENTO")" style="float:right">
-        <img src="~/images/plus.svg" width="30" height="30" />
-    </a>
-</h2>
+    <h2 >Listado de Requerimientos</h2>
 
 
+    @*Boton para crear nuevo requerimiento*@
+    <h2>
+        <a href="@Url.Action("Create", "REQUERIMIENTO", new {})" style="float:right">
+            <img id="jack" src="~/images/plus.svg" width="30" height="30" />
+        </a>
+    </h2>
 
-<div class="form-group row offset-3">
-    @Html.Label("Proyectos", new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+    @*Lista de proyectos*@
+    <div class="form-group row offset-3">
+        @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+        </div>
     </div>
-</div>
 
 
-<div id="dropdownmodulo"> </div>
+    @*Espacio para desplegar la lista de módulos*@
+    <div id="dropdownmodulo"> </div>
+
+
+</body>
+
+
+</html>
+

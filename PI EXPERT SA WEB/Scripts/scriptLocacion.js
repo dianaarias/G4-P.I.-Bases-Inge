@@ -54,3 +54,23 @@ function getDistrito() {
         }
     })
 };
+
+
+function getModul() {
+
+    var idProyectoPK = $("idProyectoPK").val();
+    $.ajax({
+        url: "/REQUERIMIENTO/DropDownModulo?"+idProyectoPK,
+        data: {},
+        success: function (data) {
+            var html = "";
+            for (key in data) {
+                html += '<option data-name="' + data[key] + '" value="' + key + '">' + data[key] + '</option>';
+            }
+            $("#idModuloO").empty();
+            $("#idModuloO").append(html);
+        }
+    });
+}
+
+

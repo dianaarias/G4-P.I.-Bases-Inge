@@ -13,7 +13,7 @@
 
         $("#proyectos").change(function () {
             var proyectoID = $("#proyectos").val();
-            $("#dropdownmodulo").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID })
+            $("#dropdownempleado").load('/REQUERIMIENTO/GetDevelopers', { idProyectoPK: proyectoID })
         });
     });
 </script>
@@ -29,4 +29,4 @@
 </div>
 
 
-<div id="dropdownmodulo"> </div>
+<div id="dropdownempleado"> </div>
