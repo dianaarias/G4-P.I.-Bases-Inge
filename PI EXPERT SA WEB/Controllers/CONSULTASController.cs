@@ -22,9 +22,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         public ActionResult DesarrolladoresAsignadosDisponibles() {
+            var query = from emp in db.EMPLEADO
+                        join equipo in db.ROL
+                        on emp.cedulaPK equals equipo.cedulaPK
+                        join req in db.REQUERIMIENTO
+                        on emp.cedulaPK equals req.cedulaDesarrolladorFK
+                        join proy in db.PROYECTO
+                        on equipo.idProyectoPK equals proy.idProyectoPK
+                        group req by req.cedulaDesarrolladorFK into grp
+                        where grp.Count() < 10
+                        select new  {grp.Key };
             return View();
         }
-
 
         public ActionResult ComparacionDuracionRequerimientos()
         {
@@ -68,7 +77,27 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         public ActionResult EstadoResponsablesRequerimientos() {
+            ViewBag.Cliente = new SelectList(db.CLIENTE, "cedulaPK", "nombre");
             return View();
+        }
+
+        public PartialViewResult GetListaProyectosCliente(string cedulaPK)
+        {
+            var query = from proy in db.PROYECTO
+                        where proy.cedulaClienteFK == cedulaPK
+                        select new { proy.idProyectoPK, proy.nombre };
+            ViewBag.Proyecto = query.ToList();
+            return PartialView();
+        }
+
+        public PartialViewResult GetListaDesarolladoresResp(int idProyecto)
+        {
+            var query = from req in db.REQUERIMIENTO
+                        join emp in db.EMPLEADO
+                        on req.cedulaDesarrolladorFK equals emp.cedulaPK
+                        where req.idProyectoPK == idProyecto
+                        select new { nombreReq = req.nombre, estadoReq = req.estado, apellidoEmp = emp.apellido1, nombreEmp = emp.nombre };
+            return PartialView(query);
         }
 
         public ActionResult RequerimientosTerminadosEjecucion() {

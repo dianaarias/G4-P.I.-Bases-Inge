@@ -100,7 +100,7 @@
           <Property Name="cedulaPK" Type="nchar" MaxLength="9" Nullable="false" />
           <Property Name="idProyectoPK" Type="int" Nullable="false" />
           <Property Name="tipoRol" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="numEquipo" Type="int" Nullable="false" />
+          <Property Name="numEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="LoginCliente">
           <Key>
@@ -244,6 +244,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_DesarrolladoresAsignadosDisponibles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_RecuperarRequerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombreProyecto" Type="nvarchar" Mode="In" />
           <Parameter Name="nombreModulo" Type="nvarchar" Mode="In" />
@@ -567,6 +568,7 @@
             <End Role="MODULO" EntitySet="MODULO" />
             <End Role="REQUERIMIENTO" EntitySet="REQUERIMIENTO" />
           </AssociationSet>
+          <FunctionImport Name="SP_DesarrolladoresAsignadosDisponibles" ReturnType="Collection(Gr02Proy4Model.SP_DesarrolladoresAsignadosDisponibles_Result)" />
           </EntityContainer>
         <ComplexType Name="SP_RecuperarRequerimientos_Result">
           <Property Type="Int32" Name="idRequerimientoPK" Nullable="false" />
@@ -626,6 +628,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_DesarrolladoresAsignadosDisponibles_Result">
+          <Property Type="String" Name="Nombre_desarollador" Nullable="true" MaxLength="194" />
+          <Property Type="String" Name="Nombre_proyecto" Nullable="false" MaxLength="64" />
+          <Property Type="DateTime" Name="Fecha_Inicio" Nullable="true" />
+          <Property Type="Int32" Name="Duracion_Estimada" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -764,6 +772,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_DesarrolladoresAsignadosDisponibles" FunctionName="Gr02Proy4Model.Store.SP_DesarrolladoresAsignadosDisponibles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy4Model.SP_DesarrolladoresAsignadosDisponibles_Result">
+                <ScalarProperty Name="Nombre_desarollador" ColumnName="Nombre desarollador" />
+                <ScalarProperty Name="Nombre_proyecto" ColumnName="Nombre proyecto" />
+                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha Inicio" />
+                <ScalarProperty Name="Duracion_Estimada" ColumnName="Duracion Estimada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

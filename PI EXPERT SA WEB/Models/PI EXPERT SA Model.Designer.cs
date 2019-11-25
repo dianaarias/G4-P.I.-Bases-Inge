@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\John\Source\Repos\dianaarias\G4-P.I.-Bases-Inge\PI EXPERT SA WEB\Models\PI EXPERT SA Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\b55522\source\repos\PI EXPERT SA WEB\PI EXPERT SA WEB\Models\PI EXPERT SA Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

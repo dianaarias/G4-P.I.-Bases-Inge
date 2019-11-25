@@ -194,6 +194,9 @@
     <Compile Include="Models\ROL.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_DesarrolladoresAsignadosDisponibles_Result.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_RecuperarRequerimientos_Result.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -354,6 +357,9 @@
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientoComplejidad.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectos.cshtml" />
+    <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
+    <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
+    <Content Include="Views\CONSULTAS\GetListaDesarolladoresResp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
