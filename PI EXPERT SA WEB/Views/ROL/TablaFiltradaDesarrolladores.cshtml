@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.CONSULTAS>
+@{
+    ViewBag.Title = "TablaFiltradaDesarrolladores";
+}
+
+<table align="left" id="tabla">
+    <tr>
+        <th>
+            Desarrolladores
+        </th>
+        <th>
+            Seleccionar/Eliminar
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var nombreCompleto = item.modeloEmpleado.nombre + " " + item.modeloEmpleado.apellido1 + " " + item.modeloEmpleado.apellido2;
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => nombreCompleto)
+            </td>
+
+            <td>
+                @*Boton de detalles del requerimiento*@
+                <div class="col text-center">
+                    <a href="@Url.Action("SeleccionarEliminarDesarrollador","ROL", new { cedulaPK = item.modeloEmpleado.cedulaPK})" style="float:initial">
+                        <img src="~/images/more.svg" width="30" height="30" />
+                    </a>
+                </div>
+            </td>
+
+        </tr>
+    }
+</table>

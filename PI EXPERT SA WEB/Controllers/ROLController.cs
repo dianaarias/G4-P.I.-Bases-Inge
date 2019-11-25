@@ -19,6 +19,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Index()
         {
             //Se crea una lista que contenga los proyectos en la tabla de rol con su respectivo nombre en la tabla de proyecto
+            //Se filtra para incluir solo los proyectos que tengan un equipo asignado
             var query =
                 from pro in db.PROYECTO
                 join rol in db.ROL on pro.idProyectoPK equals rol.idProyectoPK
@@ -59,6 +60,112 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
+        public PartialViewResult TablaFiltradaDesarrolladores(string habilidades) {
+
+            //modelo de rol y empleado
+            var query = from hab in db.HABILIDADES
+                        join emp in db.EMPLEADO on hab.cedulaEmpleadoPK equals emp.cedulaPK
+                        where hab.habilidadPK == habilidades
+                        select new CONSULTAS { modeloHabilidades = hab, modeloEmpleado = emp };
+
+
+            return PartialView(query);
+        }
+
+
+
+
+        //metodo que recibe el desarrollador seleccionado en la vista de ROL/Create
+        //Si se selecciona un desarrollador, este se almacena temporalmente.
+        //Si se vuelve a seleccionar el desarrollador, se elimina del almacenamiento temporal
+        public void SeleccionarEliminarDesarrollador(string cedulaPK) {
+
+
+            //Prueba, borrar luego
+            //TempData.Add("hilera", "123456789,");
+
+
+            //string local que toma el string almacenado en tempdata
+            string hilera = TempData.Peek("hilera").ToString();
+    
+            //array que separa las cédulas del string por ','
+            string[] array = hilera.Split(',');
+
+            //booleano para búsqueda de cédula
+            bool continua = true;
+
+            //valor para señalar la pocision del elemento en el array
+            int temp = 0;
+
+            //nuevaHilera que se guarda, en caso de que ya exista el elemento seleccionado
+            string nuevaHilera = "";
+
+            //Si existen elementos en la hilera
+            if (array.Length > 1) {
+                for (int i = 0; i < array.Length && continua; ++i) {
+                    //Si la cédula ya fue seleccionada
+                    if (array[i] == cedulaPK) {
+                        continua = false;
+                        temp = i;
+                    }
+                }
+
+                //si la cédula aun no ha sido seleccionada
+                if (continua)
+                {
+                    hilera += cedulaPK;
+                    hilera += ",";
+
+
+                    TempData.Remove("hilera");
+                    TempData.Add("hilera", hilera);
+                }
+                //la cédula ya fue seleccionada, por lo que se elimina de la hilera
+                else {
+
+                    for (int i = 0; i < array.Length; ++i) {
+                        if (i != temp) {
+
+                            nuevaHilera += array[i];
+
+                            if (nuevaHilera != "") {
+                                nuevaHilera += ",";
+                            }
+                        }
+                    }
+                    TempData.Remove("hilera");
+                    TempData.Add("hilera", nuevaHilera);
+                }
+            }
+
+            //prueba, borrar luego
+            //var f = TempData.Peek("hilera");
+            //var a = f;
+        }
+
+
+
+        public PartialViewResult ActualizarDesarrolladoresSeleccionados() {
+
+            //string local que toma el string almacenado en tempdata
+            string hilera = TempData.Peek("hilera").ToString();
+
+            //array que separa las cédulas del string por ','
+            string[] array = hilera.Split(',');
+
+            List<EMPLEADO> lista = null;
+            
+
+            for (int i = 0; i < array.Length; ++i)
+            {
+                lista.Add(db.EMPLEADO.Find(array[i]));
+            }
+
+
+            return PartialView(lista);
+        }
+
+
         // GET: ROL/Details/5
         public ActionResult Details(string id)
         {
@@ -77,9 +184,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: ROL/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            return View();
+            var query =
+                from hab in db.HABILIDADES
+                select new { hab.habilidadPK };
+
+            ViewBag.habilidades = new SelectList(query.Distinct(), "habilidadPK", "habilidadPK");
+            return View(db.EMPLEADO);
         }
 
         // POST: ROL/Create
