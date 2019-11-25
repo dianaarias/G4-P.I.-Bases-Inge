@@ -22,18 +22,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         public ActionResult DesarrolladoresAsignadosDisponibles() {
-            var query = from emp in db.EMPLEADO
-                        join equipo in db.ROL
-                        on emp.cedulaPK equals equipo.cedulaPK
-                        join req in db.REQUERIMIENTO
-                        on emp.cedulaPK equals req.cedulaDesarrolladorFK
-                        join proy in db.PROYECTO
-                        on equipo.idProyectoPK equals proy.idProyectoPK
-                        group req by req.cedulaDesarrolladorFK into grp
-                        where grp.Count() < 10
-                        select new  {grp.Key };
-            return View();
+            var queryAsig = db.SP_DesarrolladoresAsignadosDisponibles();
+            var desarolladores = queryAsig.ToList();
+            var queryDisp = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
+            ViewBag.disponibles = queryDisp;
+            return View(desarolladores);
         }
+        
 
         public ActionResult ComparacionDuracionRequerimientos()
         {

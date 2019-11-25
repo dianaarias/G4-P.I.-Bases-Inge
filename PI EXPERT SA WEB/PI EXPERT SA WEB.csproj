@@ -360,6 +360,8 @@
     <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaDesarolladoresResp.cshtml" />
+    <Content Include="Views\CONSULTAS\DesarrolladoresAsignadosDisponibles.cshtml" />
+    <Content Include="Views\CONSULTAS\DesarrolladoresDisponibls.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
