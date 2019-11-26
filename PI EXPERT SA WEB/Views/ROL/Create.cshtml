@@ -5,10 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
 @*Create permite al usuario crear un equipo, escogiendo sus miembros de acuerdo a sus habilidades, tras filtrar los empleados.*@
 
 @*Botón de atrás/volver*@
@@ -49,26 +45,86 @@
                 @*@Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })*@
             </div>
         </div>
+        @*<div class="form-group row">
+                @Html.Label("Desarrollador", htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownList("cedulaPK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+                    @foreach (var item in ViewBag.cedulaPK)
+                    {
+                        <ul id="empleados1" class="connectedSortable">
+                            <li>@item.Text</li>
+                        </ul>
 
-
-        <div class="form-group row">
-            @Html.Label("Desarrollador", htmlAttributes: new { @class = "control-label" }) 
-            <div class="col-md-10">
-                @*@Html.DropDownList("cedulaPK", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })*@
-                @foreach (var item in ViewBag.cedulaPK)
-                {
-                    <ul>
-                        <li>@item.Text</li>
-                    </ul>
-
-                }
-            </div>
-        </div>
-
-
+                    }
+                </div>
+            </div>*@
     </div>
 
 }
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<style>
+    #sortable1, #sortable2 {
+        border: 1px solid #eee;
+        width: auto;
+        min-height: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 10px 0 0 0;
+        /*float: left;*/
+        margin-right: 10px;
+    }
+
+    #sortable1 li, #sortable2 li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        font-size: 20px;
+        color: #08415c;
+        width: auto;
+        background-color: #eee;
+        border-color: #4d7ea8;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        background-color: #08415c;
+        padding: 10px;
+    }
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item">
+            @foreach (var item in ViewBag.cedulaPK)
+            {
+                <ul id="sortable1" class="connectedSortable">
+                    <li class="ui-state-highlight">@item.Text</li>
+                </ul>
+
+            }
+        </div>
+        <div class="grid-item">
+            <ul id="sortable2" class="connectedSortable">
+                <li class="ui-state-highlight">Item 1</li>
+                <li class="ui-state-highlight">Item 2</li>
+                <li class="ui-state-highlight">Item 3</li>
+                <li class="ui-state-highlight">Item 4</li>
+                <li class="ui-state-highlight">Item 5</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
 
 <div class="col text-center">
     <div class="form-group">
@@ -81,4 +137,13 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#sortable1, #sortable2").sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+        });
+    </script>
 }
