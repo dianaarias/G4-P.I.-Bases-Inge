@@ -11,7 +11,7 @@
 
         $("#empleados").change(function () {
             var empleadoID = $("#empleados").val();
-            $("#tablahistorial").load('/CONSULTAS/GetListaProyectos', { cedulaPK: empleadoID })
+            $("#tablahistorial").load('/CONSULTAS/MostrarHistorial', { cedulaPK: empleadoID })
         });
     });
 </script>
