@@ -27,8 +27,12 @@
             <tr>
                 <td>
                     @group.Key
+
                 </td>
-               
+                @foreach (var book in group.Values)
+                {
+                    <td>@book.modeloRol.tipoRol</td>
+                }
             </tr>
         }
     </table>

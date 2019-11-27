@@ -118,8 +118,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
                } into t1
                group t1 by t1.modeloProyecto.nombre into g
                select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
-
-
             return PartialView(CONSULTAS);
         }
 
