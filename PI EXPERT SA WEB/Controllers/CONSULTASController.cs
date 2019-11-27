@@ -25,7 +25,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-
+        //public ActionResult: ComparacionDuracionRequerimiento() 
+        //Comparacíón de las duraciones reales vs estimadas de los requerimientos de un desarrollador 
         public ActionResult ComparacionDuracionRequerimientos()
         {
 
@@ -38,9 +39,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             List<ROL> proyecto = db.ROL.Where(x => x.cedulaPK == cedulaPK).ToList();
             ViewBag.proyectos = new SelectList(proyecto, "idProyectoPK", "idProyectoPK");
-
-            //List<EMPLEADO> empleado = db.EMPLEADO.Where(x => x.cedulaPK == cedulaPK).ToList();
-            //ViewBag.empleados = new SelectList(empleado, "cedulaPK", "nombre");
 
             var CONSULTAS =
                 from req in db.REQUERIMIENTO
@@ -68,6 +66,35 @@ namespace PI_EXPERT_SA_WEB.Controllers
                where req.cedulaDesarrolladorFK == cedulaPk
                where req.idProyectoPK == idProyectoPK
                select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
+
+            return PartialView(CONSULTAS);
+        }
+
+        //public ActionResult  HistorialDesarrollador() {
+        public ActionResult HistorialDesarrollador()
+        {
+            ViewBag.empleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+            return View();
+        }
+
+        public PartialViewResult MostrarHistorial(string cedulaPk)
+        {
+            var CONSULTAS =
+               from req in db.REQUERIMIENTO
+               join mod in db.MODULO
+               on req.idModuloPK equals mod.idModuloPK
+               join proy in db.PROYECTO
+               on mod.idProyectoPK equals proy.idProyectoPK
+               join rol in db.ROL
+               on proy.idProyectoPK equals rol.idProyectoPK
+               join empl in db.EMPLEADO
+               on rol.cedulaPK equals empl.cedulaPK
+               where req.cedulaDesarrolladorFK == cedulaPk
+               where req.fechaFin == null
+               group proy by proy.nombre into g
+               //select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
+               select new Group<string, PROYECTO> { Key = g.Key, Values = g  };
+
 
             return PartialView(CONSULTAS);
         }

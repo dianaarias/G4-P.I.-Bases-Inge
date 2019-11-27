@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ComparacionDuracionRequerimientos";
+    ViewBag.Title = "HistorialDesarrollador";
 }
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -11,7 +11,7 @@
 
         $("#empleados").change(function () {
             var empleadoID = $("#empleados").val();
-            $("#dropdownproyectos").load('/CONSULTAS/GetListaProyectos', { cedulaPK: empleadoID })
+            $("#tablahistorial").load('/CONSULTAS/GetListaProyectos', { cedulaPK: empleadoID })
         });
     });
 </script>
@@ -30,4 +30,4 @@
 
 
 @*Espacio para desplegar dropdownlist de proyectos*@
-<div id="dropdownproyectos"> </div>
+<div id="tablahistorial"> </div>
