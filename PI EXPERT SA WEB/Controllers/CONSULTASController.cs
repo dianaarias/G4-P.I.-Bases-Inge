@@ -107,6 +107,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                join empl in db.EMPLEADO
                on rol.cedulaPK equals empl.cedulaPK
                where req.cedulaDesarrolladorFK == cedulaPk
+
                //where req.fechaFin == null
                select new CONSULTAS
                {
