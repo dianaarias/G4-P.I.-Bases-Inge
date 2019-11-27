@@ -24,26 +24,11 @@
         @foreach (var group in Model)
         {
 
-
-            //var diff = item.modeloRequerimiento.duracionReal - item.modeloRequerimiento.duracionEstimada;
-
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => group.Key)
                 </td>
-                @*@foreach (var book in group.Values)
-                {
-                    <tr><td>@book.</td><td>@book.Title</td><td>@book.Price.ToString("c")</td></tr>
-                }*@
-            @*<td>
-                @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => diff)
-            </td>*@
+               
             </tr>
         }
     </table>

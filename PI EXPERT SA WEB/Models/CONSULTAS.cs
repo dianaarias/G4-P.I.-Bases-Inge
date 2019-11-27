@@ -12,5 +12,6 @@ namespace PI_EXPERT_SA_WEB.Models
         public PROYECTO modeloProyecto { get; set; }
         public MODULO modeloModulo { get; set; }
         public REQUERIMIENTO modeloRequerimiento{ get; set; }
+        public ROL modeloRol { get; set; }
     }
 }

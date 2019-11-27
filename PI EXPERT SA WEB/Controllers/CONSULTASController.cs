@@ -79,7 +79,24 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public PartialViewResult MostrarHistorial(string cedulaPk)
         {
+            //var CONSULTAS =
+            //   from req in db.REQUERIMIENTO
+            //   join mod in db.MODULO
+            //   on req.idModuloPK equals mod.idModuloPK
+            //   join proy in db.PROYECTO
+            //   on mod.idProyectoPK equals proy.idProyectoPK
+            //   join rol in db.ROL
+            //   on proy.idProyectoPK equals rol.idProyectoPK
+            //   join empl in db.EMPLEADO
+            //   on rol.cedulaPK equals empl.cedulaPK
+            //   where req.cedulaDesarrolladorFK == cedulaPk
+            //   where req.fechaFin == null
+            //   group proy by proy.nombre into g
+            //   select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
+            //   select new Group<string, PROYECTO> { Key = g.Key, Values = g  };
+
             var CONSULTAS =
+
                from req in db.REQUERIMIENTO
                join mod in db.MODULO
                on req.idModuloPK equals mod.idModuloPK
@@ -91,9 +108,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
                on rol.cedulaPK equals empl.cedulaPK
                where req.cedulaDesarrolladorFK == cedulaPk
                where req.fechaFin == null
-               group proy by proy.nombre into g
-               //select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
-               select new Group<string, PROYECTO> { Key = g.Key, Values = g  };
+               select new CONSULTAS
+               {
+                   modeloRequerimiento = req,
+                   modeloModulo = mod,
+                   modeloProyecto = proy,
+                   modeloRol = rol,
+                   modeloEmpleado = empl 
+               } into t1
+               group t1 by t1.modeloProyecto.nombre into g
+               select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
 
 
             return PartialView(CONSULTAS);
