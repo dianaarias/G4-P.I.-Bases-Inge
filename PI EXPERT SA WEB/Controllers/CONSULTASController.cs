@@ -106,7 +106,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                on proy.idProyectoPK equals rol.idProyectoPK
                join empl in db.EMPLEADO
                on rol.cedulaPK equals empl.cedulaPK
-               where req.cedulaDesarrolladorFK == cedulaPk
+               where rol.cedulaPK == cedulaPk
                //where req.fechaFin == null
                select new CONSULTAS
                {
