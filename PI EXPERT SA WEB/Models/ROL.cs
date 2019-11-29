@@ -17,7 +17,6 @@ namespace PI_EXPERT_SA_WEB.Models
         public string cedulaPK { get; set; }
         public int idProyectoPK { get; set; }
         public string tipoRol { get; set; }
-        public int numEquipo { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
