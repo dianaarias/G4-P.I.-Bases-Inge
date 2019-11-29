@@ -268,7 +268,6 @@
           <Property Name="canton" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="distrito" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PROYECTO" Relationship="Self.FK_PROYECTO_CLIENTE" FromRole="CLIENTE" ToRole="PROYECTO" />
-          <NavigationProperty Name="LoginCliente" Relationship="Self.Seguridad_LoginCliente_Cedula_FK" FromRole="CLIENTE" ToRole="LoginCliente" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -290,7 +289,6 @@
           <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="HABILIDADES" Relationship="Self.FK_EMPLEADO_HABILIDADES" FromRole="EMPLEADO" ToRole="HABILIDADES" />
           <NavigationProperty Name="PROYECTO" Relationship="Self.FK_PROYECTO_EMPLEADO" FromRole="EMPLEADO" ToRole="PROYECTO" />
-          <NavigationProperty Name="LoginEmpleado" Relationship="Self.Seguridad_LoginEmpleado_Cedula_FK" FromRole="EMPLEADO" ToRole="LoginEmpleado" />
           <NavigationProperty Name="REQUERIMIENTO" Relationship="Gr02Proy4Model.FK_REQUERIMIENTO_EMPLEADO" FromRole="EMPLEADO" ToRole="REQUERIMIENTO" />
           <NavigationProperty Name="ROL" Relationship="Gr02Proy4Model.FK_ROL_EMPLEADO" FromRole="EMPLEADO" ToRole="ROL" />
         </EntityType>
@@ -336,24 +334,6 @@
           <NavigationProperty Name="MODULO" Relationship="Self.FK_MODULO_PROYECTO" FromRole="PROYECTO" ToRole="MODULO" />
           <NavigationProperty Name="ROL" Relationship="Gr02Proy4Model.FK_PROYECTO" FromRole="PROYECTO" ToRole="ROL" />
         </EntityType>
-        <EntityType Name="LoginCliente">
-          <Key>
-            <PropertyRef Name="cedulaClientePK" />
-          </Key>
-          <Property Name="cedulaClientePK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.Seguridad_LoginCliente_Cedula_FK" FromRole="LoginCliente" ToRole="CLIENTE" />
-        </EntityType>
-        <EntityType Name="LoginEmpleado">
-          <Key>
-            <PropertyRef Name="cedulaEmpleadoPK" />
-          </Key>
-          <Property Name="cedulaEmpleadoPK" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="EMPLEADO" Relationship="Self.Seguridad_LoginEmpleado_Cedula_FK" FromRole="LoginEmpleado" ToRole="EMPLEADO" />
-        </EntityType>
         <Association Name="FK_PROYECTO_CLIENTE">
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
           <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="*" />
@@ -363,18 +343,6 @@
             </Principal>
             <Dependent Role="PROYECTO">
               <PropertyRef Name="cedulaClienteFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Seguridad_LoginCliente_Cedula_FK">
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-          <End Role="LoginCliente" Type="Self.LoginCliente" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="cedulaPK" />
-            </Principal>
-            <Dependent Role="LoginCliente">
-              <PropertyRef Name="cedulaClientePK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -404,18 +372,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Seguridad_LoginEmpleado_Cedula_FK">
-          <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="1" />
-          <End Role="LoginEmpleado" Type="Self.LoginEmpleado" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="EMPLEADO">
-              <PropertyRef Name="cedulaPK" />
-            </Principal>
-            <Dependent Role="LoginEmpleado">
-              <PropertyRef Name="cedulaEmpleadoPK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MODULO_PROYECTO">
           <End Role="PROYECTO" Type="Self.PROYECTO" Multiplicity="1" />
           <End Role="MODULO" Type="Self.MODULO" Multiplicity="*" />
@@ -434,15 +390,9 @@
           <EntitySet Name="HABILIDADES" EntityType="Self.HABILIDADES" />
           <EntitySet Name="MODULO" EntityType="Self.MODULO" />
           <EntitySet Name="PROYECTO" EntityType="Self.PROYECTO" />
-          <EntitySet Name="LoginCliente" EntityType="Self.LoginCliente" />
-          <EntitySet Name="LoginEmpleado" EntityType="Self.LoginEmpleado" />
           <AssociationSet Name="FK_PROYECTO_CLIENTE" Association="Self.FK_PROYECTO_CLIENTE">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="PROYECTO" EntitySet="PROYECTO" />
-          </AssociationSet>
-          <AssociationSet Name="Seguridad_LoginCliente_Cedula_FK" Association="Self.Seguridad_LoginCliente_Cedula_FK">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="LoginCliente" EntitySet="LoginCliente" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPLEADO_HABILIDADES" Association="Self.FK_EMPLEADO_HABILIDADES">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
@@ -451,10 +401,6 @@
           <AssociationSet Name="FK_PROYECTO_EMPLEADO" Association="Self.FK_PROYECTO_EMPLEADO">
             <End Role="EMPLEADO" EntitySet="EMPLEADO" />
             <End Role="PROYECTO" EntitySet="PROYECTO" />
-          </AssociationSet>
-          <AssociationSet Name="Seguridad_LoginEmpleado_Cedula_FK" Association="Self.Seguridad_LoginEmpleado_Cedula_FK">
-            <End Role="EMPLEADO" EntitySet="EMPLEADO" />
-            <End Role="LoginEmpleado" EntitySet="LoginEmpleado" />
           </AssociationSet>
           <AssociationSet Name="FK_MODULO_PROYECTO" Association="Self.FK_MODULO_PROYECTO">
             <End Role="PROYECTO" EntitySet="PROYECTO" />
