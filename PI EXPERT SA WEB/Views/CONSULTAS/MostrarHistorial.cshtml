@@ -1,0 +1,33 @@
+﻿@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.Group<string, CONSULTA  >>*@
+
+@using  PI_EXPERT_SA_WEB.Models
+@model List<Group<string, CONSULTAS>>
+
+@*Lista de requerimientos de un proyecto es especiifico*@
+
+    <table>
+        <tr>
+            <th>
+                Nombre Proyecto
+            </th>
+        </tr>
+
+        @foreach (var group in Model)
+        {
+
+            <tr>
+                <td>
+                    @group.Key
+
+                </td>
+                @foreach (var book in group.Values)
+                {
+                    <td>@book.modeloRol.tipoRol</td>
+                }
+            </tr>
+        }
+    </table>
+
+    <h2>hierro</h2>
+
+
