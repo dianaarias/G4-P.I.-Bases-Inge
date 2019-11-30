@@ -20,6 +20,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             //Se usa el atributo busqueda para filtrar por nombre a los empleados
             return View(db.EMPLEADO.Where(x => x.nombre.Contains(busqueda) || busqueda == null).ToList());
+
+            //return View(db.EMPLEADO);
+        }
+
+        public ActionResult prueba() {
+            return View();
         }
 
         // GET: EMPLEADOes/Details/5

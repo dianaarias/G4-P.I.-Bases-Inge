@@ -131,6 +131,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
 
+
+
+
+
+
         //-------------------------JOHN COMIENZO-------------------------
 
 
@@ -153,14 +158,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
             group t1 by t1.modeloRequerimiento.complejidad into g
             select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
 
-
-            if (complex == "Todas") {
-
-
-            }
-            else {
-
-            }
             return PartialView(CONSULTAS.ToList());
         }
 
@@ -176,9 +173,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
 
-
-
-
         public ActionResult ConocimientosFrecuentes() {
             return View();
         }
@@ -186,15 +180,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult EstadoResponsablesRequerimientos() {
             return View();
         }
-
-        public ActionResult RequerimientosTerminadosEjecucion() {
-            return View();
-        }
-
-
-
-
-
 
 
     }

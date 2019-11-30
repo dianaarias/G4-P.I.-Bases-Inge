@@ -8,23 +8,33 @@
 <table>
     <tr>
         <th>
-            Nombre Proyecto
+            Complejidad
+        </th>
+        <th>
+            Total de Requerimientos
+        </th>
+        <th>
+            Valor mínimo
+        </th>
+        <th>
+            Valor máximo
+        </th>
+        <th>
+            Promedio Duración Real
         </th>
     </tr>
 
     @foreach (var group in Model)
     {
 
-        <tr>
-            <td>
-                @group.Key
-
-            </td>
-            @foreach (var book in group.Values)
-            {
-                <td>@book.modeloRol.tipoRol</td>
-            }
-        </tr>
+    <tr>
+        <td>
+            @group.Key
+        </td>
+        <td>
+            @group.Values
+        </td>
+    </tr>
     }
 </table>
 
