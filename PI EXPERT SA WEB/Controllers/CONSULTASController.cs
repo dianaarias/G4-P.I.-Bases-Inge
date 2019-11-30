@@ -116,9 +116,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
                    modeloRol = rol,
                    modeloEmpleado = empl
                } into t1
-               group t1 by t1.modeloProyecto.nombre into g
+               group t1 by t1.modeloProyecto.nombre into g 
                select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
 
+            
 
             return PartialView(CONSULTAS.ToList());
         }
@@ -129,12 +130,55 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+
+
+        //-------------------------JOHN COMIENZO-------------------------
+
+
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
 
             ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
             return View();
         }
+
+
+        public PartialViewResult GetRequerimientoComplejidad(string complex) {
+
+            var CONSULTAS =
+            from req in db.REQUERIMIENTO
+            select new CONSULTAS
+            {
+                modeloRequerimiento = req,
+            } into t1
+            group t1 by t1.modeloRequerimiento.complejidad into g
+            select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
+
+
+            if (complex == "Todas") {
+
+
+            }
+            else {
+
+            }
+            return PartialView(CONSULTAS.ToList());
+        }
+
+        public ActionResult RequerimientosTerminadosEjecucion()
+        {
+            return View();
+        }
+
+
+
+        //-------------------------JOHN FIN-------------------------
+
+
+
+
+
+
 
         public ActionResult ConocimientosFrecuentes() {
             return View();
@@ -144,9 +188,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        public ActionResult RequerimientosTerminadosEjecucion() {
-            return View();
-        }
+
 
 
 

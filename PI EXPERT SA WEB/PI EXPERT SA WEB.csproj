@@ -358,6 +358,7 @@
     <Content Include="Views\CONSULTAS\MostrarComparacionDuraciones.cshtml" />
     <Content Include="Views\CONSULTAS\HistorialDesarrollador.cshtml" />
     <Content Include="Views\CONSULTAS\MostrarHistorial.cshtml" />
+    <Content Include="Views\CONSULTAS\GetRequerimientoComplejidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
