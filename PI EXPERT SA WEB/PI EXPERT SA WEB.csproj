@@ -146,9 +146,11 @@
     <Compile Include="Controllers\MODULOController.cs" />
     <Compile Include="Controllers\REQUERIMIENTOController.cs" />
     <Compile Include="Controllers\RHVersion2Controller.cs" />
+    <Compile Include="Controllers\ROLController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GROUPBY.cs" />
     <Compile Include="Models\CONSULTAS.cs" />
     <Compile Include="Models\CLIENTE.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
@@ -157,12 +159,6 @@
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HABILIDADES.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoginCliente.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoginEmpleado.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModeloIntermedio.cs" />
@@ -192,9 +188,6 @@
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ROL.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SP_DesarrolladoresAsignadosDisponibles_Result.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_RecuperarRequerimientos_Result.cs">
@@ -357,11 +350,14 @@
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientoComplejidad.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectos.cshtml" />
-    <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
-    <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
-    <Content Include="Views\CONSULTAS\GetListaDesarolladoresResp.cshtml" />
-    <Content Include="Views\CONSULTAS\DesarrolladoresAsignadosDisponibles.cshtml" />
-    <Content Include="Views\CONSULTAS\DesarrolladoresDisponibls.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarComparacionDuraciones.cshtml" />
+    <Content Include="Views\CONSULTAS\HistorialDesarrollador.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarHistorial.cshtml" />
+    <Content Include="Views\ROL\Create.cshtml" />
+    <Content Include="Views\ROL\Delete.cshtml" />
+    <Content Include="Views\ROL\Details.cshtml" />
+    <Content Include="Views\ROL\Edit.cshtml" />
+    <Content Include="Views\ROL\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

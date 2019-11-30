@@ -1,48 +1,86 @@
 ﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.CONSULTAS>
 
 
-<table class="table table-bordered table-striped" id="tabla">
-    <tr>
-        <th>
-            Nombre proyecto
-        </th>
-        <th>
-            Nombre Requerimiento
-        </th>
-        <th>
-            Duración Estimada
-        </th>
-        <th>
-            Duración Real
-        </th>
-        <th>
-            Diferencia
-        </th>
-    </tr>
+<body>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
-    @foreach (var item in Model)
-    {
+            var proyectoID;
+
+            $("#proyectos").change(function () {
+                proyectoID = $("#proyectos").val();
+                empleadoID = $("#empleados").val();
+                if (proyectoID != null) {
+                    $("#tabla").hide();
+                } else {
+                    $("#tabla").show();
+                }
+                $("#tablaRequerimientos").load('/CONSULTAS/MostrarComparacionDuraciones', { cedulaPk: empleadoID, idProyectoPK: proyectoID });
+            });
+        });
+    </script>
+
+    @*Lista de los proyectos del desarrollador*@
+    <div class="form-group row offset-3">
+        @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    @*Lista de requerimientos de todos los proyectos*@
+    <table class="table table-bordered table-striped" id="tabla">
+        <tr>
+            <th>
+                Nombre proyecto
+            </th>
+            <th>
+                Nombre Requerimiento
+            </th>
+            <th>
+                Duración Estimada
+            </th>
+            <th>
+                Duración Real
+            </th>
+            <th>
+                Diferencia
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
 
 
-        var diff = item.modeloRequerimiento.duracionReal - item.modeloRequerimiento.duracionEstimada;
+            var diff = item.modeloRequerimiento.duracionReal - item.modeloRequerimiento.duracionEstimada;
 
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.modeloProyecto.nombre)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.modeloRequerimiento.nombre)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => diff)
-    </td>
-</tr>
-    }
-</table>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modeloProyecto.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modeloRequerimiento.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => diff)
+                </td>
+            </tr>
+        }
+    </table>
 
+
+    @*Espacio para desplegar los requerimientos con duracion real vs estimada de un proyecto especifico*@
+    <div id="tablaRequerimientos"> </div>
+
+
+</body>
+
+
+   
