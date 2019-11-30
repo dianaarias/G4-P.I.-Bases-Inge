@@ -25,6 +25,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+        //-------------------------Celeste COMIENZO-------------------------
+
         //public ActionResult: ComparacionDuracionRequerimiento() 
         //Comparacíón de las duraciones reales vs estimadas de los requerimientos de un desarrollador 
         public ActionResult ComparacionDuracionRequerimientos()
@@ -54,7 +56,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         public PartialViewResult MostrarComparacionDuraciones( string cedulaPk, int? idProyectoPK){
-
             var CONSULTAS =
                from req in db.REQUERIMIENTO
                join mod in db.MODULO
@@ -78,23 +79,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public PartialViewResult MostrarHistorial(string cedulaPk)
         {
-            //var CONSULTAS =
-            //   from req in db.REQUERIMIENTO
-            //   join mod in db.MODULO
-            //   on req.idModuloPK equals mod.idModuloPK
-            //   join proy in db.PROYECTO
-            //   on mod.idProyectoPK equals proy.idProyectoPK
-            //   join rol in db.ROL
-            //   on proy.idProyectoPK equals rol.idProyectoPK
-            //   join empl in db.EMPLEADO
-            //   on rol.cedulaPK equals empl.cedulaPK
-            //   where req.cedulaDesarrolladorFK == cedulaPk
-            //   where req.fechaFin == null
-            //   group proy by proy.nombre into g
-            //   select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
-            //   select new Group<string, PROYECTO> { Key = g.Key, Values = g  };
-
-            var CONSULTAS =
+     var CONSULTAS =
 
                from proy in db.PROYECTO
                join rol in db.ROL
@@ -114,13 +99,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
                    modeloRequerimiento = req
        
                } into t1
-               group t1 by t1.modeloProyecto.nombre into g 
-               select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
-
-            
+               group t1 by t1.modeloProyecto.nombre  into g
+               select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x=>  x.modeloRequerimiento.duracionReal) };
 
             return PartialView(CONSULTAS.ToList());
         }
+
+        //-------------------------Celeste fin-------------------------
 
         //public ActionResult TotalHorasRequerimiento() {
 
