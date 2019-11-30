@@ -31,7 +31,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
 
             ViewBag.empleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-
             return View();
         }
 
