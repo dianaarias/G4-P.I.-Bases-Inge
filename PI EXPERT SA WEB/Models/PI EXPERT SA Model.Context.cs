@@ -47,10 +47,5 @@ namespace PI_EXPERT_SA_WEB.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_RecuperarRequerimientos_Result>("SP_RecuperarRequerimientos", nombreProyectoParameter, nombreModuloParameter);
         }
-    
-        public virtual ObjectResult<SP_DesarrolladoresAsignadosDisponibles_Result> SP_DesarrolladoresAsignadosDisponibles()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DesarrolladoresAsignadosDisponibles_Result>("SP_DesarrolladoresAsignadosDisponibles");
-        }
     }
 }
