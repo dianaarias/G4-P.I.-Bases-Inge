@@ -11,11 +11,21 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class ROL
     {
+        [Key]
+        [Display(Name = "Cédula Líder")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string cedulaPK { get; set; }
+        [Key]
+        [Display(Name = "ID Proyecto")]
         public int idProyectoPK { get; set; }
+        [Display(Name = "Tipo de rol")]
+        [Required(ErrorMessage = "Campo requerido")]
         public string tipoRol { get; set; }
     
         public virtual EMPLEADO EMPLEADO { get; set; }
