@@ -153,12 +153,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
             from req in db.REQUERIMIENTO
             select new CONSULTAS
             {
-                modeloRequerimiento = req,
+                modeloRequerimiento = req
             } into t1
             group t1 by t1.modeloRequerimiento.complejidad into g
             select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
 
-            return PartialView(CONSULTAS.ToList());
+            return PartialView(CONSULTAS);
         }
 
         public ActionResult RequerimientosTerminadosEjecucion()
