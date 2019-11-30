@@ -150,6 +150,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GROUPBY.cs" />
+    <Compile Include="Models\CONSULTAS.cs" />
     <Compile Include="Models\CLIENTE.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -157,12 +159,6 @@
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HABILIDADES.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoginCliente.cs">
-      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LoginEmpleado.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModeloIntermedio.cs" />
@@ -351,6 +347,12 @@
     <Content Include="Views\REQUERIMIENTO\IndexDevelopersRequirements.cshtml" />
     <Content Include="Views\REQUERIMIENTO\MostrarRequerimientosDesarrollador.cshtml" />
     <Content Include="Views\REQUERIMIENTO\dropDownModulo.cshtml" />
+    <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientos.cshtml" />
+    <Content Include="Views\CONSULTAS\ComparacionDuracionRequerimientoComplejidad.cshtml" />
+    <Content Include="Views\CONSULTAS\GetListaProyectos.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarComparacionDuraciones.cshtml" />
+    <Content Include="Views\CONSULTAS\HistorialDesarrollador.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarHistorial.cshtml" />
     <Content Include="Views\ROL\Create.cshtml" />
     <Content Include="Views\ROL\Delete.cshtml" />
     <Content Include="Views\ROL\Details.cshtml" />

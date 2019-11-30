@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "HistorialDesarrollador";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#empleados").change(function () {
+            var empleadoID = $("#empleados").val();
+            $("#tablahistorial").load('/CONSULTAS/MostrarHistorial', { cedulaPK: empleadoID })
+        });
+    });
+</script>
+
+
+
+@*Lista desarrolladores*@
+<div class="form-group row offset-3">
+    @Html.Label("Desarrollador", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("empleados", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+
+
+
+@*Espacio para desplegar dropdownlist de proyectos*@
+<div id="tablahistorial"> </div>

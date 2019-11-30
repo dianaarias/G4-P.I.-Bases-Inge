@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ComparacionDuracionRequerimientoComplejidad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+
+<body>
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var complex;
+            $("#complejidad").change(function () {
+                complex = $("#complejidad").val();
+                $("#resultado").load('/CONSULTAS/GetListaModulos', { complejidad: complex });
+            });
+        });
+    </script>
+
+
+
+    @*Lista de complejidad*@
+    <div class="form-group row offset-3">
+        @Html.Label("Complejidad", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("complejidad", new List<SelectListItem>
+            {
+                    new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
+                    new SelectListItem() {Text = "Todas", Value="todas"},
+                    new SelectListItem() {Text = "simple", Value="simple"},
+                    new SelectListItem() {Text = "mediano", Value="mediano"},
+                    new SelectListItem() {Text = "complejo", Value="complejo"},
+                    new SelectListItem() {Text = "muy complejo", Value="muy complejo"}
+             })
+        </div>
+    </div>
+
+
+    @*Espacio para desplegar los resultados de la consulta*@
+    <div id="resultado"> </div>
+
+
+</body>
+
+
+</html>
+
+
+
