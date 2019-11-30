@@ -97,24 +97,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             var CONSULTAS =
 
-               from req in db.REQUERIMIENTO
-               join mod in db.MODULO
-               on req.idModuloPK equals mod.idModuloPK
-               join proy in db.PROYECTO
-               on mod.idProyectoPK equals proy.idProyectoPK
+               from proy in db.PROYECTO
                join rol in db.ROL
                on proy.idProyectoPK equals rol.idProyectoPK
-               join empl in db.EMPLEADO
-               on rol.cedulaPK equals empl.cedulaPK
+               join emp in db.EMPLEADO
+               on rol.cedulaPK equals emp.cedulaPK
+               join req in db.REQUERIMIENTO 
+               on emp.cedulaPK equals req.cedulaDesarrolladorFK
+               where req.idProyectoPK == proy.idProyectoPK
+               //where req.fechaFin != null
                where rol.cedulaPK == cedulaPk
-               //where req.fechaFin == null
                select new CONSULTAS
                {
-                   modeloRequerimiento = req,
-                   modeloModulo = mod,
                    modeloProyecto = proy,
                    modeloRol = rol,
-                   modeloEmpleado = empl
+                   modeloEmpleado = emp,
+                   modeloRequerimiento = req
+       
                } into t1
                group t1 by t1.modeloProyecto.nombre into g 
                select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
@@ -188,7 +187,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-
+        public ActionResult RequerimientosTerminadosEjecucion() {
+            return View();
+        }
 
 
 
