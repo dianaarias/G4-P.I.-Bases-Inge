@@ -79,7 +79,22 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public PartialViewResult MostrarHistorial(string cedulaPk)
         {
-         
+            //var CONSULTAS =
+            //   from req in db.REQUERIMIENTO
+            //   join mod in db.MODULO
+            //   on req.idModuloPK equals mod.idModuloPK
+            //   join proy in db.PROYECTO
+            //   on mod.idProyectoPK equals proy.idProyectoPK
+            //   join rol in db.ROL
+            //   on proy.idProyectoPK equals rol.idProyectoPK
+            //   join empl in db.EMPLEADO
+            //   on rol.cedulaPK equals empl.cedulaPK
+            //   where req.cedulaDesarrolladorFK == cedulaPk
+            //   where req.fechaFin == null
+            //   group proy by proy.nombre into g
+            //   select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
+            //   select new Group<string, PROYECTO> { Key = g.Key, Values = g  };
+
             var CONSULTAS =
 
                from proy in db.PROYECTO
@@ -100,9 +115,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
                    modeloRequerimiento = req
        
                } into t1
-               group t1 by t1.modeloProyecto.nombre  into g
-               select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x=>  x.modeloRequerimiento.duracionReal) };
+               group t1 by t1.modeloProyecto.nombre into g 
+               select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
 
+            
 
             return PartialView(CONSULTAS.ToList());
         }
@@ -113,12 +129,49 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+
+
+
+
+
+
+
+        //-------------------------JOHN COMIENZO-------------------------
+
+
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
 
             ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
             return View();
         }
+
+
+        public PartialViewResult GetRequerimientoComplejidad(string complex) {
+
+            var CONSULTAS =
+            from req in db.REQUERIMIENTO
+            select new CONSULTAS
+            {
+                modeloRequerimiento = req,
+            } into t1
+            group t1 by t1.modeloRequerimiento.complejidad into g
+            select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
+
+            return PartialView(CONSULTAS.ToList());
+        }
+
+        public ActionResult RequerimientosTerminadosEjecucion()
+        {
+            return View();
+        }
+
+
+
+        //-------------------------JOHN FIN-------------------------
+
+
+
 
         public ActionResult ConocimientosFrecuentes() {
             return View();
@@ -127,15 +180,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult EstadoResponsablesRequerimientos() {
             return View();
         }
-
-        public ActionResult RequerimientosTerminadosEjecucion() {
-            return View();
-        }
-
-
-
-
-
 
 
     }
