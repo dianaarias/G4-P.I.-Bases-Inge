@@ -3,31 +3,44 @@
 @using  PI_EXPERT_SA_WEB.Models
 @model List<Group<string, CONSULTAS>>
 
+
 @*Lista de requerimientos de un proyecto es especiifico*@
 
-    <table>
+    <table class="table table-bordered table-striped" id="tabla">
         <tr>
             <th>
-                Nombre Proyecto
+                Proyecto
+            </th>
+            <th>
+                Rol
+            </th>
+            <th>
+                Total de horas dedicadas
             </th>
         </tr>
 
         @foreach (var group in Model)
         {
 
-            <tr>
-                <td>
-                    @group.Key
+         <tr>
+            <td>
+                @group.Key
+            </td>
 
-                </td>
-                @foreach (var book in group.Values)
+            @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+            {
+                if (item.i == 0)
                 {
-                    <td>@book.modeloRol.tipoRol</td>
+                    <td>@item.value.modeloRol.tipoRol</td>
                 }
-            </tr>
+             }
+            <td>
+                 @group.suma
+            </td>
+            
+        </tr>
         }
     </table>
 
-    <h2>hierro</h2>
 
 
