@@ -150,8 +150,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
           {
               modeloRequerimiento = req
           } into t1
-          group t1 by t1.modeloProyecto.nombre into g
-          select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x => x.modeloRequerimiento.duracionReal) };
+          group t1 by t1.modeloRequerimiento.complejidad into g
+          select new Group<string, CONSULTAS> {
+              Key = g.Key, Values = g,
+              suma = g.Sum(x => x.modeloRequerimiento.duracionReal),
+              minimo = g.Min(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+              maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+              promedio = g.Average(x => x.modeloRequerimiento.duracionReal)
+          };
 
 
 
