@@ -26,22 +26,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public ActionResult DesarrolladoresAsignadosDisponibles() {
             var queryAsig = from req in db.REQUERIMIENTO
-                           join emp in db.EMPLEADO
-                           on req.cedulaDesarrolladorFK equals emp.cedulaPK
-                           join equipo in db.ROL
-                           on emp.cedulaPK equals equipo.cedulaPK
-                           join proy in db.PROYECTO
-                           on equipo.idProyectoPK equals proy.idProyectoPK
-                           where proy.fechaFin != null
-                           select new { nombreEmpleado = emp.nombre + ' ' + emp.apellido1 + ' ' + emp.apellido2, nombreProyecto = proy.nombre, 
-                               fechaInicioEmp = proy.fechaInicio, fechaDesocupEst = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada/8) };
+                            join emp in db.EMPLEADO
+                            on req.cedulaDesarrolladorFK equals emp.cedulaPK
+                            join equipo in db.ROL
+                            on emp.cedulaPK equals equipo.cedulaPK
+                            join proy in db.PROYECTO
+                            on equipo.idProyectoPK equals proy.idProyectoPK
+                            where proy.fechaFin != null
+                            select new DesarrolladoresAsigDisp { NombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, NombreProy = proy.nombre, 
+                               FechaInicio = proy.fechaInicio, FechaEstDesocup = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada/8) };
             ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true);
-            return View(queryAsig.ToList());
+            
+            return View(queryAsig.Distinct().AsEnumerable());
         }
 
         public ActionResult HorasEstRealProy()
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x =>x.fechaFin != null), "idProyectoPK", "nombre");
             var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
                                       .Join(db.MODULO,
                                                 proy => proy.idProyectoPK,
@@ -52,13 +53,35 @@ namespace PI_EXPERT_SA_WEB.Controllers
                                               req => new { req.idModuloPK, req.idProyectoPK },
                                               (modu, req) => new { modu, req })
                                       .GroupBy(s => new { s.modu.proy.nombre })
-                                      .Select(g => new {
-                                          Nombre = g.Key.nombre,
-                                          duracionEst = g.Sum(x => x.req.duracionEstimada),
-                                          duracionTot = g.Sum(x => x.req.duracionReal),
-                                          diffDuracion = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
+                                      .Select(g => new HorasEstRealProy {
+                                          NombreProy = g.Key.nombre,
+                                          HorasEst = g.Sum(x => x.req.duracionEstimada),
+                                          HorasReal = g.Sum(x => x.req.duracionReal),
+                                          DiffHoras = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
                                       });
-            return View(horasTot.ToList());
+            return View(horasTot.Distinct().AsEnumerable());
+        }
+        public PartialViewResult HorasEstReal(int? idProyectoPK)
+        {
+            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
+                                      .Where(x=> x.idProyectoPK == idProyectoPK)
+                                      .Join(db.MODULO,
+                                                proy => proy.idProyectoPK,
+                                                modu => modu.idProyectoPK,
+                                                (proy, modu) => new { proy, modu })
+                                      .Join(db.REQUERIMIENTO,
+                                              modu => new { modu.modu.idModuloPK, modu.modu.idProyectoPK },
+                                              req => new { req.idModuloPK, req.idProyectoPK },
+                                              (modu, req) => new { modu, req })
+                                      .GroupBy(s => new { s.modu.proy.nombre })
+                                      .Select(g => new HorasEstRealProy
+                                      {
+                                          NombreProy = g.Key.nombre,
+                                          HorasEst = g.Sum(x => x.req.duracionEstimada),
+                                          HorasReal = g.Sum(x => x.req.duracionReal),
+                                          DiffHoras = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
+                                      });
+            return PartialView(horasTot.Distinct().AsEnumerable());
         }
 
         public PartialViewResult GetListaProyectosCliente(string cedulaPK)

@@ -150,6 +150,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DesarrolladoresAsigDisp.cs" />
     <Compile Include="Models\GROUPBY.cs" />
     <Compile Include="Models\CONSULTAS.cs" />
     <Compile Include="Models\CLIENTE.cs">
@@ -161,6 +162,7 @@
     <Compile Include="Models\HABILIDADES.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HorasEstRealProy.cs" />
     <Compile Include="Models\ModeloIntermedio.cs" />
     <Compile Include="Models\ModeloLogin.cs" />
     <Compile Include="Models\MODULO.cs">
@@ -361,6 +363,8 @@
     <Content Include="Views\ROL\Index.cshtml" />
     <Content Include="Views\EMPLEADOes\prueba.cshtml" />
     <Content Include="Views\CONSULTAS\DesarrolladoresAsignadosDisponibles.cshtml" />
+    <Content Include="Views\CONSULTAS\HorasEstRealProy.cshtml" />
+    <Content Include="Views\CONSULTAS\HorasEstReal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
