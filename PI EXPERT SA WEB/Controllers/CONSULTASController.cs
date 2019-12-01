@@ -125,30 +125,81 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
-
-            ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
+            //ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
             return View();
         }
 
 
         public PartialViewResult GetRequerimientoComplejidad(string complex) {
 
-            var CONSULTAS =
-            from req in db.REQUERIMIENTO
-            select new CONSULTAS
-            {
-                modeloRequerimiento = req
-            } into t1
-            group t1 by t1.modeloRequerimiento.complejidad into g
-            select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
+            //var ss = db.REQUERIMIENTO.GroupBy(s => new { s.complejidad })
+            //    .Select(g => new
+            //    {
+            //        complejidad = g.Key.complejidad,
+            //        totalRequerimientos = g.Count(x => x.complejidad == x.complejidad),
+            //        minimo = g.Min(x => (x.duracionReal - x.duracionEstimada)),
+            //        maximo = g.Max(x => (x.duracionReal - x.duracionEstimada)),
+            //        promedio = g.Average(x => x.duracionReal)
+            //    });
 
-            return PartialView(CONSULTAS);
+
+            var CONSULTAS =
+
+          from req in db.REQUERIMIENTO
+          select new CONSULTAS
+          {
+              modeloRequerimiento = req
+          } into t1
+          group t1 by t1.modeloProyecto.nombre into g
+          select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x => x.modeloRequerimiento.duracionReal) };
+
+
+
+
+
+
+
+            return PartialView();
         }
 
         public ActionResult RequerimientosTerminadosEjecucion()
         {
+
+
+
             return View();
         }
+
+
+
+
+
+
+        public ActionResult HorasEstRealProy()
+        {
+            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+
+            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
+            .Join(db.MODULO,
+                    proy => proy.idProyectoPK,
+                    modu => modu.idProyectoPK,
+                    (proy, modu) => new { proy, modu })
+            .Join(db.REQUERIMIENTO,
+                    modu => new {modu.modu.idModuloPK, modu.modu.idProyectoPK },
+                    req => new { req.idModuloPK, req.idProyectoPK },
+                    (modu, req) => new { modu, req })
+            .GroupBy(s => new { s.modu.proy.nombre })
+            .Select(g => new {
+                Nombre = g.Key.nombre,
+                duracionEst = g.Sum(x => x.req.duracionEstimada),
+                duracionTot = g.Sum(x => x.req.duracionReal),
+                diffDuracion = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
+            });
+
+
+            return View(horasTot.ToList());
+        }
+
 
 
 

@@ -1,9 +1,10 @@
 ﻿@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.Group<string, CONSULTA  >>*@
 
 @using PI_EXPERT_SA_WEB.Models
-@model List<Group<string, CONSULTAS>>
+    @model List<Group<string, CONSULTAS>>
 
-@*Lista de requerimientos de un proyecto es especiifico*@
+
+@*Lista de requerimientos de un proyecto es especifico*@
 
 <table>
     <tr>
@@ -31,8 +32,25 @@
         <td>
             @group.Key
         </td>
+
+        @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+        {
+            if (item.i == 0)
+            {
+                <td>@item.value.modeloRol.tipoRol</td>
+            }
+        }
         <td>
-            
+            @group.suma
+        </td>
+        <td>
+            @group.minimo
+        </td>
+        <td>
+            @group.maximo
+        </td>
+        <td>
+            @group.promedio
         </td>
     </tr>
     }
