@@ -35,6 +35,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
             ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true);
             return View(queryAsig);
         }
+
+        //-------------------------Celeste COMIENZO-------------------------
+
+        //public ActionResult: ComparacionDuracionRequerimiento() 
+        //Comparacíón de las duraciones reales vs estimadas de los requerimientos de un desarrollador 
         public ActionResult ComparacionDuracionRequerimientos()
         {
 
@@ -58,7 +63,24 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             return PartialView(CONSULTAS);
         }
-        public ActionResult HorasEstRealProy()
+
+        public PartialViewResult MostrarComparacionDuraciones( string cedulaPk, int? idProyectoPK){
+            var CONSULTAS =
+               from req in db.REQUERIMIENTO
+               join mod in db.MODULO
+               on req.idModuloPK equals mod.idModuloPK
+               join proy in db.PROYECTO
+               on mod.idProyectoPK equals proy.idProyectoPK
+               where proy.fechaFin == null
+               where req.cedulaDesarrolladorFK == cedulaPk
+               where req.idProyectoPK == idProyectoPK
+               select new CONSULTAS { modeloRequerimiento = req, modeloModulo = mod, modeloProyecto = proy };
+
+            return PartialView(CONSULTAS);
+        }
+
+        //public ActionResult  HistorialDesarrollador() {
+        public ActionResult HistorialDesarrollador()
         {
             ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
@@ -78,12 +100,51 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View(horasTot);
         }
 
+        public PartialViewResult MostrarHistorial(string cedulaPk)
+        {
+     var CONSULTAS =
+
+               from proy in db.PROYECTO
+               join rol in db.ROL
+               on proy.idProyectoPK equals rol.idProyectoPK
+               join emp in db.EMPLEADO
+               on rol.cedulaPK equals emp.cedulaPK
+               join req in db.REQUERIMIENTO 
+               on emp.cedulaPK equals req.cedulaDesarrolladorFK
+               where req.idProyectoPK == proy.idProyectoPK
+               //where req.fechaFin != null
+               where rol.cedulaPK == cedulaPk
+               select new CONSULTAS
+               {
+                   modeloProyecto = proy,
+                   modeloRol = rol,
+                   modeloEmpleado = emp,
+                   modeloRequerimiento = req
+       
+               } into t1
+               group t1 by t1.modeloProyecto.nombre  into g
+               select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x=>  x.modeloRequerimiento.duracionReal) };
+
+            return PartialView(CONSULTAS.ToList());
+        }
+
+        //-------------------------Celeste fin-------------------------
 
         //public ActionResult TotalHorasRequerimiento() {
 
         public ActionResult PeriodosDesocupacion() {
             return View();
         }
+
+
+
+
+
+
+
+
+        //-------------------------JOHN COMIENZO-------------------------
+
 
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
@@ -92,12 +153,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        public ActionResult ConocimientosFrecuentes() {
-            return View();
+
+        public PartialViewResult GetRequerimientoComplejidad(string complex) {
+
+            var CONSULTAS =
+            from req in db.REQUERIMIENTO
+            select new CONSULTAS
+            {
+                modeloRequerimiento = req,
+            } into t1
+            group t1 by t1.modeloRequerimiento.complejidad into g
+            select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
+
+            return PartialView(CONSULTAS.ToList());
         }
 
-        public ActionResult EstadoResponsablesRequerimientos() {
-            ViewBag.Cliente = new SelectList(db.CLIENTE, "cedulaPK", "nombre");
+        public ActionResult RequerimientosTerminadosEjecucion()
+        {
             return View();
         }
 
@@ -137,10 +209,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+        //-------------------------JOHN FIN-------------------------
 
 
 
 
+        public ActionResult ConocimientosFrecuentes() {
+            return View();
+        }
+
+        public ActionResult EstadoResponsablesRequerimientos() {
+            return View();
+        }
 
 
     }
