@@ -18,7 +18,7 @@
             var complex;
             $("#complejidad").change(function () {
                 complex = $("#complejidad").val();
-                $("#resultado").load('/CONSULTAS/GetListaModulos', { complejidad: complex });
+                $("#resultado").load('/CONSULTAS/GetRequerimientosComplejidad', { complejidad: complex });
             });
         });
     </script>
@@ -32,11 +32,11 @@
             @Html.DropDownList("complejidad", new List<SelectListItem>
             {
                     new SelectListItem() {Text = "--Seleccionar complejidad--", Value=""},
-                    new SelectListItem() {Text = "Todas", Value="todas"},
-                    new SelectListItem() {Text = "simple", Value="simple"},
-                    new SelectListItem() {Text = "mediano", Value="mediano"},
-                    new SelectListItem() {Text = "complejo", Value="complejo"},
-                    new SelectListItem() {Text = "muy complejo", Value="muy complejo"}
+                    new SelectListItem() {Text = "Todas", Value="Todas"},
+                    new SelectListItem() {Text = "Simple", Value="Simple"},
+                    new SelectListItem() {Text = "Mediano", Value="Mediano"},
+                    new SelectListItem() {Text = "Complejo", Value="Complejo"},
+                    new SelectListItem() {Text = "Muy Complejo", Value="Muy Complejo"}
              })
         </div>
     </div>
