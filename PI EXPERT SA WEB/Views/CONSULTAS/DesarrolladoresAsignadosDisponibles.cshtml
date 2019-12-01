@@ -1,84 +1,52 @@
-﻿@model List<PI_EXPERT_SA_WEB.Models.SP_DesarrolladoresAsignadosDisponibles_Result>
-@{
-    ViewBag.Title = "DesarrolladoresAsignadosDisponibles";
-}
+﻿@model  List<IQueryable>
 
-
-<h2>Desarrolladores asignados a proyectos y disponibles</h2>
-<div>
-    <table id="Asignados" style="width:50%; float:left" class="table table-bordered table-striped float-left">
-        <tr>
-            <th>
-                Nombre Empleado
-            </th>
-            <th>
-                Nombre Proyecto
-            </th>
-            <th>
-                Fecha Inicio
-            </th>
-            <th>
-                Duracion Estimada
-            </th>
-        </tr>
-        @if (Model.Count() == 0)
-        {
+    <div>
+        <table class="table table-bordered table-striped">
             <tr>
-                <td colspan="3" style="color:red">
-                    No hay resultados
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.apellido1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.correo)
+                </th>
+                <th>
+                    Ver más información
+                </th>
             </tr>
-        }
-        else
-        {
-            foreach (var item in Model)
+            @if (Model.Count() == 0)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(ModelItem => item.Nombre_desarollador)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(ModelItem => item.Nombre_proyecto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(ModelItem => item.Fecha_Inicio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(ModelItem => item.Duracion_Estimada)
+                    <td colspan="3" style="color:red">
+                        No hay resultados
                     </td>
                 </tr>
             }
-        }
-    </table>
-    <table id="Disponibles" style="width:50%; float:right" class="table table-bordered table-striped float-left">
-        <tr>
-            <th>
-                Nombre Empleado
-            </th>
-        </tr>
-        @if (ViewBag.desarrolladores.Count() == 0)
-        {
-            <tr>
-                <td colspan="3" style="color:red">
-                    No hay resultados
-                </td>
-            </tr>
-        }
-        else
-        {
-            foreach (var item in ViewBag.disponibles)
+            else
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(ModelItem => item.nombre) @Html.DisplayFor(ModelItem => item.apellido1) @Html.DisplayFor(ModelItem => item.apellido2)
-                </td>
-            </tr>
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.apellido1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.correo)
+                        </td>
+                        <td>
+                            @*Aqui se muestra el boton para buscar detalles*@
+                            <a href="@Url.Action("Details", "CLIENTE", new { id = item.cedulaPK })" style="float:unset">
+                                <img src="~/images/more.svg" width="30" height="30" />
+                            </a>
+                        </td>
+                    </tr>
+                }
             }
-        }
-    </table>
-</div>
 
-
-<div>
-    table
-</div>
+        </table>
+    </div>

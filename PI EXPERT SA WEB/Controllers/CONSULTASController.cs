@@ -21,6 +21,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+
+        //-------------------------Fitzberth COMIENZO-------------------------
+
         public ActionResult DesarrolladoresAsignadosDisponibles() {
             var queryAsig = from req in db.REQUERIMIENTO
                            join emp in db.EMPLEADO
@@ -33,8 +36,70 @@ namespace PI_EXPERT_SA_WEB.Controllers
                            select new { nombreEmpleado = emp.nombre + ' ' + emp.apellido1 + ' ' + emp.apellido2, nombreProyecto = proy.nombre, 
                                fechaInicioEmp = proy.fechaInicio, fechaDesocupEst = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada/8) };
             ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true);
-            return View(queryAsig);
+            return View(queryAsig.ToList());
         }
+
+        public ActionResult HorasEstRealProy()
+        {
+            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
+                                      .Join(db.MODULO,
+                                                proy => proy.idProyectoPK,
+                                                modu => modu.idProyectoPK,
+                                                (proy, modu) => new { proy, modu })
+                                      .Join(db.REQUERIMIENTO,
+                                              modu => new { modu.modu.idModuloPK, modu.modu.idProyectoPK },
+                                              req => new { req.idModuloPK, req.idProyectoPK },
+                                              (modu, req) => new { modu, req })
+                                      .GroupBy(s => new { s.modu.proy.nombre })
+                                      .Select(g => new {
+                                          Nombre = g.Key.nombre,
+                                          duracionEst = g.Sum(x => x.req.duracionEstimada),
+                                          duracionTot = g.Sum(x => x.req.duracionReal),
+                                          diffDuracion = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
+                                      });
+            return View(horasTot.ToList());
+        }
+
+        public PartialViewResult GetListaProyectosCliente(string cedulaPK)
+        {
+            var query = from proy in db.PROYECTO
+                        where proy.cedulaClienteFK == cedulaPK
+                        select new { proy.idProyectoPK, proy.nombre };
+            var queryEmp = from req in db.REQUERIMIENTO
+                           join emp in db.EMPLEADO
+                           on req.cedulaDesarrolladorFK equals emp.cedulaPK
+                           join equipo in db.ROL
+                           on emp.cedulaPK equals equipo.cedulaPK
+                           join proy in db.PROYECTO
+                           on equipo.idProyectoPK equals proy.idProyectoPK
+                           join cli in db.CLIENTE
+                           on proy.cedulaClienteFK equals cli.cedulaPK
+                           where cli.cedulaPK == cedulaPK
+                           select new
+                           {
+                               nombreProy = proy.nombre,
+                               nombreReq = req.nombre,
+                               estadoReq = req.estado,
+                               nombreEmp = emp.nombre + ' ' + emp.apellido1 + ' ' + emp.apellido2
+                           };
+
+            ViewBag.Proyecto = query.ToList();
+            return PartialView(queryEmp);
+        }
+
+        public PartialViewResult GetListaDesarolladoresResp(int idProyecto)
+        {
+            var query = from req in db.REQUERIMIENTO
+                        join emp in db.EMPLEADO
+                        on req.cedulaDesarrolladorFK equals emp.cedulaPK
+                        where req.idProyectoPK == idProyecto
+                        select new { nombreReq = req.nombre, estadoReq = req.estado, apellidoEmp = emp.apellido1, nombreEmp = emp.nombre };
+            return PartialView(query);
+        }
+
+        //-------------------------Fitzberth fin-------------------------
+
 
         //-------------------------Celeste COMIENZO-------------------------
 
@@ -82,22 +147,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //public ActionResult  HistorialDesarrollador() {
         public ActionResult HistorialDesarrollador()
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
-                                      .Join(db.MODULO,
-                                                proy => proy.idProyectoPK,
-                                                modu => modu.idProyectoPK,
-                                                (proy, modu) => new { proy,  modu })
-                                      .Join(db.REQUERIMIENTO,
-                                              modu => new { modu.modu.idModuloPK, modu.modu.idProyectoPK },
-                                              req => new { req.idModuloPK, req.idProyectoPK },
-                                              (modu , req) => new { modu, req })
-                                      .GroupBy(s => new {s.modu.proy.nombre })
-                                      .Select(g => new {Nombre = g.Key.nombre, 
-                                                        duracionEst = g.Sum(x => x.req.duracionEstimada), 
-                                                        duracionTot = g.Sum(x => x.req.duracionReal),
-                                                        diffDuracion = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)});
-            return View(horasTot);
+             return View();
         }
 
         public PartialViewResult MostrarHistorial(string cedulaPk)
@@ -173,41 +223,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        public PartialViewResult GetListaProyectosCliente(string cedulaPK)
-        {
-            var query = from proy in db.PROYECTO
-                        where proy.cedulaClienteFK == cedulaPK
-                        select new { proy.idProyectoPK, proy.nombre };
-            var queryEmp =  from req in db.REQUERIMIENTO
-                            join emp in db.EMPLEADO
-                            on req.cedulaDesarrolladorFK equals emp.cedulaPK
-                            join equipo in db.ROL
-                            on emp.cedulaPK equals equipo.cedulaPK
-                            join proy in db.PROYECTO
-                            on equipo.idProyectoPK equals proy.idProyectoPK
-                            join cli in db.CLIENTE 
-                            on proy.cedulaClienteFK equals cli.cedulaPK
-                            where cli.cedulaPK == cedulaPK
-                            select new {nombreProy = proy.nombre,  nombreReq = req.nombre, estadoReq = req.estado,
-                                nombreEmp = emp.nombre +' '+ emp.apellido1+' '+emp.apellido2};
+        
 
-            ViewBag.Proyecto = query.ToList();
-            return PartialView(queryEmp);
-        }
-
-        public PartialViewResult GetListaDesarolladoresResp(int idProyecto)
-        {
-            var query = from req in db.REQUERIMIENTO
-                        join emp in db.EMPLEADO
-                        on req.cedulaDesarrolladorFK equals emp.cedulaPK
-                        where req.idProyectoPK == idProyecto
-                        select new { nombreReq = req.nombre, estadoReq = req.estado, apellidoEmp = emp.apellido1, nombreEmp = emp.nombre };
-            return PartialView(query);
-        }
-
-        public ActionResult RequerimientosTerminadosEjecucion() {
-            return View();
-        }
+       
 
         //-------------------------JOHN FIN-------------------------
 
