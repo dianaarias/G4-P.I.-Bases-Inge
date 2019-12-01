@@ -39,8 +39,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: ROL/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            //Lista de empleados que están disponibles, es decir, que no forman parte de ningún equipo 
+            List<EMPLEADO> empleadosDisponibles;
+            empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
+            ViewBag.cedulaPK = new SelectList(empleadosDisponibles, "cedulaPK", "nombre");
+
+            //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
+            var query = (from proyecto in db.PROYECTO
+                           where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
+                           select proyecto);
+
+            ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
@@ -49,7 +59,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
+        public ActionResult Create([Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +68,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
+            List<EMPLEADO> empleadosDisponibles;
+            empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
+            ViewBag.cedulaPK = new SelectList(empleadosDisponibles, "cedulaPK", "nombre");
+
+            //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
+            var query = (from proyecto in db.PROYECTO
+                         where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
+                         select proyecto);
+
+            ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
             return View(rOL);
         }
 
@@ -85,7 +104,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
+        public ActionResult Edit([Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
