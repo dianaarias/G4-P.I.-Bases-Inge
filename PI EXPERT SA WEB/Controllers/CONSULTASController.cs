@@ -321,38 +321,129 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //-------------------------JOHN COMIENZO-------------------------
 
-
+        //Vista principal de la consulta que compara duración requerimiento por complejidad. Despliega dropdown donde se selecciona la complejidad
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
-
-            ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
+            //ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
             return View();
         }
 
-
+        //Vista parcial que se despliega de acuerdo a la complejidad elegida, ya sea que se eligieran todas, o alguna en específico
         public PartialViewResult GetRequerimientoComplejidad(string complex) {
 
-            var CONSULTAS =
-            from req in db.REQUERIMIENTO
-            select new CONSULTAS
-            {
-                modeloRequerimiento = req,
-            } into t1
-            group t1 by t1.modeloRequerimiento.complejidad into g
-            select new Group<string, CONSULTAS> { Key = g.Key, Values = g };
+            IQueryable<Group<string, CONSULTAS>> consulta;
 
-            return PartialView(CONSULTAS.ToList());
+            if (complex == "Todas")
+            {
+                consulta =
+                from req in db.REQUERIMIENTO
+                select new CONSULTAS
+                {
+                    modeloRequerimiento = req
+                } into t1
+                group t1 by t1.modeloRequerimiento.complejidad into g
+                select new Group<string, CONSULTAS>
+                {
+                    Key = g.Key,
+                    Values = g,
+                    suma = g.Count(x => x.modeloRequerimiento.complejidad == x.modeloRequerimiento.complejidad),
+                    minimo = g.Min(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                    maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                    promedio = (int)g.Average(x => x.modeloRequerimiento.duracionReal)
+                };
+            }
+            else
+            {
+                consulta =
+                    from req in db.REQUERIMIENTO
+                    where req.complejidad == complex
+                    select new CONSULTAS
+                    {
+                        modeloRequerimiento = req
+                    } into t1
+                    group t1 by t1.modeloRequerimiento.complejidad into g
+                    select new Group<string, CONSULTAS>
+                    {
+                        Key = g.Key,
+                        Values = g,
+                        suma = g.Count(x => x.modeloRequerimiento.complejidad == complex),
+                        minimo = g.Min(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                        maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                        promedio = (int)g.Average(x => x.modeloRequerimiento.duracionReal)
+                    };
+            }
+
+            return PartialView(consulta.ToList());
         }
 
+
+        //Vista principal de la consulta que despliega los requerimientos terminados y en ejecución
         public ActionResult RequerimientosTerminadosEjecucion()
         {
+            var query =
+                from cli in db.CLIENTE
+                select new { nombreCli = cli.name + " " + cli.apellido1 + " " + cli.apellido2, cli.cedulaPK };
+
+            ViewBag.clientes = new SelectList(query, "cedulaPK", "nombreCli");
+
             return View();
+        }
+
+        //Primera vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente seleccionado
+        public PartialViewResult GetProyectoForCliente(string cliente)
+        {
+
+            var a = db.PROYECTO.Where(x => x.cedulaClienteFK == cliente);
+            ViewBag.proyectos = new SelectList(a, "idProyectoPK", "nombre");
+
+            TempData.Remove("cliente");
+            TempData.Add("cliente", cliente);
+
+            return PartialView();
+        }
+
+
+        public PartialViewResult GetRequerimientoForCliente(int? proyecto) {
+
+
+            var cliente = TempData.Peek("cliente");
+
+            var consultas =
+                from proy in db.PROYECTO
+                join mod in db.MODULO
+                on proy.idProyectoPK equals mod.idProyectoPK
+                join req in db.REQUERIMIENTO
+                on mod.idModuloPK equals req.idModuloPK
+                where proy.cedulaClienteFK == (string)cliente
+                            //where proy.idProyectoPK == proyecto
+                            select new CONSULTAS
+                {
+                    modeloProyecto = proy,
+                    modeloModulo = mod,
+                    modeloRequerimiento = req
+                } into t1
+                group t1 by t1.modeloRequerimiento.estado into g
+                select new Group<string, CONSULTAS>
+                {
+                    Key = g.Key,
+                    Values = g,
+                    suma = g.Count(), //suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
+                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada / 8), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
+                };
+
+                var b = consultas.Where(x => x.Key == "En Ejecución" || x.Key == "Finalizado");
+
+                return PartialView(b.ToList());
         }
 
 
         //-------------------------JOHN FIN-------------------------
 
+
+
         //-------------------------DIANA COMIENZO-------------------------
+
+
 
         //Esta consulta retorna los periodos de desocupación de los empleados de la empresa en un rango
         //específico de tiempo, junto con la cantidad total de días de desocupación.
@@ -386,11 +477,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         //-------------------------DIANA FIN------------------------------
-
-
-
-
-
 
     }
 }

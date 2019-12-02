@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "RequerimientosTerminadosEjecucion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+
+<body>
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var clientes;
+            $("#clientes").change(function () {
+                clientes = $("#clientes").val();
+                $("#proyectos").load('/CONSULTAS/GetProyectoForCliente', { cliente: clientes });
+            });
+        });
+    </script>
+
+
+    @*Lista de proyectos*@
+    <div class="form-group row offset-3">
+        @Html.Label("cliente", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("clientes", null, "--Seleccionar Cliente--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+    @*Espacio para desplegar los resultados de la consulta*@
+    <div id="proyectos"> </div>
+
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>
+
