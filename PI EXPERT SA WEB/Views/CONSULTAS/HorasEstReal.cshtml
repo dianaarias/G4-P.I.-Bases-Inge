@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.HorasEstRealProy>
+
+
+<table class="table table-bordered table-striped" width="80%" align="left" border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasEst)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiffHoras)
+        </th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" style="color:red">
+                No hay resultados
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasEst)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasReal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiffHoras)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
