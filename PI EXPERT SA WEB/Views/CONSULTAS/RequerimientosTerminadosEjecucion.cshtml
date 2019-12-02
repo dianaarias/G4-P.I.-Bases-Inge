@@ -15,10 +15,10 @@
 
     <script>
         $(document).ready(function () {
-            var cliente;
-            $("#cliente").change(function () {
-                cliente = $("#cliente").val();
-                $("#proyectos").load('/CONSULTAS/GetProyectoForCliente', { cliente: cliente });
+            var clientes;
+            $("#clientes").change(function () {
+                clientes = $("#clientes").val();
+                $("#proyectos").load('/CONSULTAS/GetProyectoForCliente', { cliente: clientes });
             });
         });
     </script>
@@ -37,6 +37,13 @@
 
     @*Espacio para desplegar los resultados de la consulta*@
     <div id="proyectos"> </div>
+
+
+
+
+
+
+
 
 
 </body>

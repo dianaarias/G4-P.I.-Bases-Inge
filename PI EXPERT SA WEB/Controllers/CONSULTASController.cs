@@ -321,28 +321,16 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //-------------------------JOHN COMIENZO-------------------------
 
-
+        //Vista principal de la consulta que compara duración requerimiento por complejidad. Despliega dropdown donde se selecciona la complejidad
         public ActionResult ComparacionDuracionRequerimientoComplejidad() {
 
             //ViewBag.complejidad = new SelectList(db.REQUERIMIENTO, "complejidad", "complejidad");
             return View();
         }
 
-
+        //Vista parcial que se despliega de acuerdo a la complejidad elegida, ya sea que se eligieran todas, o alguna en específico
         public PartialViewResult GetRequerimientoComplejidad(string complex) {
 
-            //var ss = db.REQUERIMIENTO.GroupBy(s => new { s.complejidad })
-            //    .Select(g => new
-            //    {
-            //        complejidad = g.Key.complejidad,
-            //        totalRequerimientos = g.Count(x => x.complejidad == x.complejidad),
-            //        minimo = g.Min(x => (x.duracionReal - x.duracionEstimada)),
-            //        maximo = g.Max(x => (x.duracionReal - x.duracionEstimada)),
-            //        promedio = g.Average(x => x.duracionReal)
-            //    });
-
-
-            //System.Linq.IQueryable<PI_EXPERT_SA_WEB.Models.Group<string, PI_EXPERT_SA_WEB.Models.CONSULTAS>> consulta;
             IQueryable<Group<string, CONSULTAS>> consulta;
 
             if (complex == "Todas")
@@ -383,42 +371,54 @@ namespace PI_EXPERT_SA_WEB.Controllers
                         maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
                         promedio = (int)g.Average(x => x.modeloRequerimiento.duracionReal)
                     };
-
-                var a = !(consulta.Any());
             }
 
             return PartialView(consulta.ToList());
         }
 
 
-
+        //Vista principal de la consulta que despliega los requerimientos terminados y en ejecución
         public ActionResult RequerimientosTerminadosEjecucion()
         {
-            ViewBag.clientes = new SelectList(db.CLIENTE, "cedulaPK", "name");
+            var query =
+                from cli in db.CLIENTE
+                select new { nombreCli = cli.name + " " + cli.apellido1 + " " + cli.apellido2, cli.cedulaPK };
+
+            ViewBag.clientes = new SelectList(query, "cedulaPK", "nombreCli");
+
             return View();
         }
 
+
+        //Primera vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente seleccionado
         public PartialViewResult GetProyectoForCliente(string cliente) {
 
-            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cliente));
+            var a = db.PROYECTO.Where(x => x.cedulaClienteFK  == cliente);
+            ViewBag.proyectos = new SelectList(a, "idProyectoPK", "nombre");
+
+            TempData.Remove("cliente");
+            TempData.Add("cliente", cliente);
+
             return PartialView();
         }
 
+        //Segunda vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente y además por proyecto
+        public PartialViewResult GetRequerimientosForCliente(int? proyecto) {
 
-        public PartialViewResult GetRequerimientosForCliente(string cliente, string proyecto) {
+            IQueryable<Group<string, CONSULTAS>> consultas;
+            var a = 0;
+            //DateTime today = DateTime.Now.Date;
 
-            var a = db.REQUERIMIENTO;
+            var cliente = TempData.Peek("cliente");
 
-            DateTime today = DateTime.Now.Date;
-
-            var CONSULTAS =
+            consultas =
                 from proy in db.PROYECTO
                 join mod in db.MODULO
                 on proy.idProyectoPK equals mod.idProyectoPK
                 join req in db.REQUERIMIENTO
                 on mod.idModuloPK equals req.idModuloPK
-                where proy.cedulaClienteFK == cliente
-                where req.estado == "En Ejecución"
+                where proy.cedulaClienteFK == (string)cliente
+                //where proy.idProyectoPK == proyecto
                 select new CONSULTAS
                 {
                     modeloProyecto = proy,
@@ -429,30 +429,17 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 select new Group<string, CONSULTAS>
                 {
                     Key = g.Key,
-                    Values = g                    
-
-                    suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
-                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada) - g.Sum(x => today.Date - x.modeloRequerimiento.fechaInicio) /g.Count(), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
+                    Values = g,
+                    suma = g.Count(), //suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
+                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada / 8), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
                 };
 
+            var b = consultas.Where(x => x.Key == "En Ejecución" || x.Key == "Finalizado");
 
-            fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", 5, System.Data.Entity.SqlServer.SqlFunctions.GetDate()),
-
-            return PartialView();
+            return PartialView(b.ToList());
         }
 
-        
-
-       
-
         //-------------------------JOHN FIN-------------------------
-
-
-
-
-       
-
-
 
     }
 }

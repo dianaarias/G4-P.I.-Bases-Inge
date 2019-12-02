@@ -16,5 +16,6 @@ namespace PI_EXPERT_SA_WEB.Models
         public int? maximo;
         public int? promedio;
         public DateTime? fecha;
+
     }
 }

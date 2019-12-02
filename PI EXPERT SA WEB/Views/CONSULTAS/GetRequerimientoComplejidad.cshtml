@@ -33,13 +33,6 @@
             @group.Key
         </td>
 
-        @*@foreach (var item in group.Values.Select((value, i) => new { i, value }))
-        {
-            if (item.i == 0)
-            {
-                <td>@item.value.modeloRequerimiento.complejidad</td>
-            }
-        }*@
         <td>
             @group.suma
         </td>

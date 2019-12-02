@@ -29,6 +29,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
+        public PartialViewResult filtroHabilidad() {
+
+            return PartialView();
+        }
+
+
+
         public PartialViewResult Equipo(int idProyectoPK) {
             var query = db.ROL.Where(x => x.idProyectoPK == idProyectoPK);
             return PartialView(query.ToList());

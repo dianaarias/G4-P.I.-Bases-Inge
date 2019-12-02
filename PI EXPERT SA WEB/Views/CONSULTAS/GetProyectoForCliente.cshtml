@@ -1,9 +1,9 @@
-﻿
+﻿@using PI_EXPERT_SA_WEB.Models
+@model List<Group<string, CONSULTAS>>
 
 @{
     ViewBag.Title = "GetProyectoForCliente";
 }
-
 
 <html>
 
@@ -18,7 +18,7 @@
             var proyecto;
             $("#proyectos").change(function () {
                 proyecto = $("#proyectos").val();
-                $("#requerimientos").load('/CONSULTAS/GetRequerimientosForCliente', { proyecto: proyecto, cliente: cliente });
+                $("#requerimientos").load('/CONSULTAS/GetRequerimientosForCliente', { proyecto: proyecto });
             });
         });
     </script>
@@ -28,7 +28,7 @@
     <div class="form-group row offset-3">
         @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("proyectos", null, "--Seleccionar Cliente--", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
 
