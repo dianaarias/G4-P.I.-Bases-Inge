@@ -1,0 +1,92 @@
+﻿@model  IEnumerable<PI_EXPERT_SA_WEB.Models.DesarrolladoresAsigDisp>
+@using PI_EXPERT_SA_WEB.Models
+@{
+    ViewBag.Title = "DesarrolladoresAsignadosDisponibles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*Devolverse al index de consultas*@
+<a href="@Url.Action("Index","CONSULTAS", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+<h2>Desarrolladores Asignados</h2>
+
+
+<div>
+    <table class="table table-bordered table-striped" width="80%" align="left" border="1">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreEmp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEstDesocup)
+            </th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    No hay resultados
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreEmp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreProy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaEstDesocup)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+
+</div>
+<h2>Desarrolladores Disponibles</h2>
+<div>
+    <table class="table table-bordered table-striped" width="30%" align="right" border="1">
+        <tr>
+            <th>
+                Nombre Empleado
+            </th>
+        </tr>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    No hay resultados
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in ViewBag.EmpDesoc)
+            {
+                <tr>
+                    <td>
+                        @item.nombre @item.apellido1 @item.apellido2
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

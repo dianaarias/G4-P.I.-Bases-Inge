@@ -1,0 +1,38 @@
+﻿@using PI_EXPERT_SA_WEB.Models
+@model List<Group<string, CONSULTAS>>
+
+@*Esta vista muestra la cantidad de desarrolladores de todas las habilidades y el promedio 
+  de antiguedad entre los desarrolladores*@
+
+<table class="table table-bordered table-striped" id="tabla">
+    <tr>
+        <th>
+            Habilidad
+        </th>
+        <th>
+            Cantidad desarrolladores
+        </th>
+        <th>
+            Promedio antiguedad (años)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @item.Key
+            </td>
+            <td>
+                @item.suma
+            </td>
+            <td>
+                @item.avg
+            </td>
+
+        </tr>
+    }
+</table>
+
+
