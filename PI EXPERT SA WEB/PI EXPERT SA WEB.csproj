@@ -363,15 +363,12 @@
     <Content Include="Views\ROL\Edit.cshtml" />
     <Content Include="Views\ROL\Index.cshtml" />
     <Content Include="Views\EMPLEADOes\prueba.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\ROL\Equipo.cshtml" />
-=======
     <Content Include="Views\CONSULTAS\DesarrolladoresAsignadosDisponibles.cshtml" />
     <Content Include="Views\CONSULTAS\HorasEstRealProy.cshtml" />
     <Content Include="Views\CONSULTAS\HorasEstReal.cshtml" />
     <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
->>>>>>> master
+    <Content Include="Views\ROL\Equipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
