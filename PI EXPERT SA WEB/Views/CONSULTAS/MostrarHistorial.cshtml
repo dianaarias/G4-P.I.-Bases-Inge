@@ -1,28 +1,28 @@
 ﻿@*@model IEnumerable<PI_EXPERT_SA_WEB.Models.Group<string, CONSULTA  >>*@
 
-@using  PI_EXPERT_SA_WEB.Models
+@using PI_EXPERT_SA_WEB.Models
 @model List<Group<string, CONSULTAS>>
 
 
-@*Lista de requerimientos de un proyecto es especiifico*@
+@*Lista de proyectos del historial de un desarrollador*@
 
-    <table class="table table-bordered table-striped" id="tabla">
+<table class="table table-bordered table-striped" id="tabla">
+    <tr>
+        <th>
+            Proyecto
+        </th>
+        <th>
+            Rol
+        </th>
+        <th>
+            Tiempo dedicado (h)
+        </th>
+    </tr>
+
+    @foreach (var group in Model)
+    {
+
         <tr>
-            <th>
-                Proyecto
-            </th>
-            <th>
-                Rol
-            </th>
-            <th>
-                Total de horas dedicadas
-            </th>
-        </tr>
-
-        @foreach (var group in Model)
-        {
-
-         <tr>
             <td>
                 @group.Key
             </td>
@@ -33,14 +33,14 @@
                 {
                     <td>@item.value.modeloRol.tipoRol</td>
                 }
-             }
-            <td>
-                 @group.suma
-            </td>
-            
+            }
+        <td>
+            @group.suma
+        </td>
+
         </tr>
-        }
-    </table>
+    }
+</table>
 
 
 

@@ -10,122 +10,116 @@ using PI_EXPERT_SA_WEB.Models;
 
 namespace PI_EXPERT_SA_WEB.Controllers
 {
-    public class EMPLEADOesController : Controller
+    public class ROLController : Controller
     {
         private Gr02Proy4Entities db = new Gr02Proy4Entities();
 
-        // GET: EMPLEADOes
-        // Genera la vista index con todos los empleados o con el nombre del empleado a buscar
-        public ActionResult Index(string busqueda)
+        // GET: ROL
+        public ActionResult Index()
         {
-            //Se usa el atributo busqueda para filtrar por nombre a los empleados
-            return View(db.EMPLEADO.Where(x => x.nombre.Contains(busqueda) || busqueda == null).ToList());
-
-            //return View(db.EMPLEADO);
+            var rOL = db.ROL.Include(r => r.EMPLEADO).Include(r => r.PROYECTO);
+            return View(rOL.ToList());
         }
 
-        public ActionResult prueba() {
-            return View();
-        }
-
-        // GET: EMPLEADOes/Details/5
+        // GET: ROL/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            if (eMPLEADO == null)
+            ROL rOL = db.ROL.Find(id);
+            if (rOL == null)
             {
                 return HttpNotFound();
             }
-            return View(eMPLEADO);
+            return View(rOL);
         }
 
-        // GET: EMPLEADOes/Create
+        // GET: ROL/Create
         public ActionResult Create()
         {
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
-        // POST: EMPLEADOes/Create
+        // POST: ROL/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,nombre,apellido1,apellido2,correo,telefono,fechaContratacion,fechaDespido,tipoUsuario,disponibilidad,provincia,canton,distrito,fechaNacimiento")] EMPLEADO eMPLEADO)
+        public ActionResult Create([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
-                if (!db.EMPLEADO.Any(model => model.cedulaPK == eMPLEADO.cedulaPK))
-                {
-                    db.EMPLEADO.Add(eMPLEADO);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("cedulaPK", "La cédula ya se encuentra en el sistema");
-                }
+                db.ROL.Add(rOL);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View(eMPLEADO);
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
+            return View(rOL);
         }
 
-        // GET: EMPLEADOes/Edit/5
+        // GET: ROL/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            if (eMPLEADO == null)
+            ROL rOL = db.ROL.Find(id);
+            if (rOL == null)
             {
                 return HttpNotFound();
             }
-            return View(eMPLEADO);
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
+            return View(rOL);
         }
 
-        // POST: EMPLEADOes/Edit/5
+        // POST: ROL/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,nombre,apellido1,apellido2,correo,telefono,fechaContratacion,fechaDespido,tipoUsuario,disponibilidad,provincia,canton,distrito,fechaNacimiento")] EMPLEADO eMPLEADO)
+        public ActionResult Edit([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(eMPLEADO).State = EntityState.Modified;
+                db.Entry(rOL).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(eMPLEADO);
+            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
+            return View(rOL);
         }
 
-        // GET: EMPLEADOes/Delete/5
+        // GET: ROL/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            if (eMPLEADO == null)
+            ROL rOL = db.ROL.Find(id);
+            if (rOL == null)
             {
                 return HttpNotFound();
             }
-            return View(eMPLEADO);
+            return View(rOL);
         }
 
-        // POST: EMPLEADOes/Delete/5
+        // POST: ROL/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            EMPLEADO eMPLEADO = db.EMPLEADO.Find(id);
-            db.EMPLEADO.Remove(eMPLEADO);
+            ROL rOL = db.ROL.Find(id);
+            db.ROL.Remove(rOL);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

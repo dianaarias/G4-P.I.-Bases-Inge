@@ -171,6 +171,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
 
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre");
+            return View();
+
 
             //Solo permite que se despliegue la vista de Create si se ha seleccionado un proyecto y un módulo en el index
             if (TempData.Peek("proyectoID") != null && TempData.Peek("moduloID") != null)
@@ -248,11 +252,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
             ViewBag.cedulaDesarrolladorFK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rEQUERIMIENTO.cedulaDesarrolladorFK);
+
+            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rEQUERIMIENTO.idProyectoPK);
+            ViewBag.idModuloPK = new SelectList(db.MODULO, "idModuloPK", "nombre", rEQUERIMIENTO.idModuloPK);
             return View(rEQUERIMIENTO);
         }
-
-
-
 
 
         // POST: REQUERIMIENTO/Edit/5

@@ -93,14 +93,13 @@ namespace PI_EXPERT_SA_WEB.Models
         [Required(ErrorMessage = "El campo fecha de nacimiento es requerido")]
         [Display(Name = "Fecha de nacimiento")]
         public Nullable<System.DateTime> fechaNacimiento { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HABILIDADES> HABILIDADES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROYECTO> PROYECTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROL> ROL { get; set; }
-        //public virtual LoginEmpleado LoginEmpleado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }
     }

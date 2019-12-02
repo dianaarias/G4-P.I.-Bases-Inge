@@ -1,0 +1,44 @@
+﻿@using PI_EXPERT_SA_WEB.Models
+@model List<Group<string, CONSULTAS>>
+
+@{
+    ViewBag.Title = "HabilidadesFrecuentes";
+}
+
+@*Devolverse al index de consultas*@
+<a href="@Url.Action("Index","CONSULTAS", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+
+@*.Este script recibi el parametro del dropdownlis de habilidades, ya sea que se escoja una habilidad especifica o todas las habilidades*@
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#habilidades").change(function () {
+            var habilidadID = $("#habilidades").val();
+            if (habilidadID == "Todas") {
+                $("#tablahabilidades").load('/CONSULTAS/MostrarResultadoHabilidades', {})
+            } else {
+                $("#tablahabilidades").load('/CONSULTAS/MostrarResultadoHabilidad',{ habilidadPK: habilidadID })
+            }
+        });
+    });
+</script>
+
+
+@*Lista habilidades*@
+<div class="form-group row offset-3">
+    @Html.Label("Habilidad", new { @class = "control-label col-md-2 " })
+    <div class="col-md-10">
+        @Html.DropDownList("habilidades", null, "--Seleccionar Habilidad--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+
+
+@*Espacio para desplegar consulta habilidad(es) *@
+<div id="tablahabilidades"> </div>
+

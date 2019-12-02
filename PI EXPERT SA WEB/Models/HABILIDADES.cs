@@ -11,7 +11,6 @@ namespace PI_EXPERT_SA_WEB.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class HABILIDADES
     {
@@ -23,8 +22,5 @@ namespace PI_EXPERT_SA_WEB.Models
         public List<HABILIDADES> listaHabilidades { get; set; }
 
         public HABILIDADES modeloHabilidades { get; set; }
-
-
-
     }
 }

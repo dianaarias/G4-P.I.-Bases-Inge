@@ -146,6 +146,7 @@
     <Compile Include="Controllers\MODULOController.cs" />
     <Compile Include="Controllers\REQUERIMIENTOController.cs" />
     <Compile Include="Controllers\RHVersion2Controller.cs" />
+    <Compile Include="Controllers\ROLController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -352,6 +353,17 @@
     <Content Include="Views\CONSULTAS\MostrarComparacionDuraciones.cshtml" />
     <Content Include="Views\CONSULTAS\HistorialDesarrollador.cshtml" />
     <Content Include="Views\CONSULTAS\MostrarHistorial.cshtml" />
+    <Content Include="Views\CONSULTAS\GetRequerimientoComplejidad.cshtml" />
+    <Content Include="Views\ROL\Create.cshtml" />
+    <Content Include="Views\ROL\Delete.cshtml" />
+    <Content Include="Views\ROL\Details.cshtml" />
+    <Content Include="Views\ROL\Edit.cshtml" />
+    <Content Include="Views\ROL\Index.cshtml" />
+    <Content Include="Views\EMPLEADOes\prueba.cshtml" />
+    <Content Include="Views\CONSULTAS\HabilidadesFrecuentes.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarResultadoHabilidades.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarResultadoHabilidad.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarComparacionDuracionesProyectos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

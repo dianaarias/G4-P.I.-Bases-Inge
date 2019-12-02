@@ -10,5 +10,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public K Key;
         public IEnumerable<T> Values;
         public int? suma ;
+        public double? avg;
+        
     }
 }
