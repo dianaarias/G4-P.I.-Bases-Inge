@@ -29,6 +29,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
+        public PartialViewResult filtroHabilidad() {
+
+            return PartialView();
+        }
+
+
+
         public PartialViewResult Equipo(int idProyectoPK) {
             var query = db.ROL.Where(x => x.idProyectoPK == idProyectoPK);
             return PartialView(query.ToList());
@@ -55,9 +62,20 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult Create()
         {
             //Lista de empleados que están disponibles, es decir, que no forman parte de ningún equipo 
-            List<EMPLEADO> empleadosDisponibles;
-            empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
-            ViewBag.cedulaPK = new SelectList(empleadosDisponibles, "cedulaPK", "nombre");
+            
+            //List<EMPLEADO> empleadosDisponibles;
+            //empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
+
+
+            var eem =
+              from emp in db.EMPLEADO
+              where emp.disponibilidad == true
+              select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
+
+
+
+
+            ViewBag.cedulaPK = new SelectList(eem, "cedulaPK", "nombreEmp");
 
             //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
             var query = (from proyecto in db.PROYECTO
