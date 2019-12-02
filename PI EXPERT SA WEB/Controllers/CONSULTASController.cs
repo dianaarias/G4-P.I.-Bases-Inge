@@ -91,7 +91,24 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public ActionResult EstadoResponsablesRequerimientos()
         {
             ViewBag.clientes = new SelectList(db.CLIENTE, "cedulaPK", "name"); //Viewbag con la lista de clientes
-            return View();
+            var query = from req in db.REQUERIMIENTO
+                        join emp in db.EMPLEADO
+                        on req.cedulaDesarrolladorFK equals emp.cedulaPK
+                        join equipo in db.ROL
+                        on emp.cedulaPK equals equipo.cedulaPK
+                        join proy in db.PROYECTO
+                        on equipo.idProyectoPK equals proy.idProyectoPK
+                        join cli in db.CLIENTE
+                        on proy.cedulaClienteFK equals cli.cedulaPK
+                        select new ListaDesResp
+                        {
+                            NombreCli = cli.name + " " + cli.apellido1 + " " + cli.apellido2,
+                            NombreProy = proy.nombre,
+                            NombreReq = req.nombre,
+                            NombreResp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2,
+                            EstadoReq = req.estado
+                        };
+            return View(query.Distinct().AsEnumerable());
         }
         //Vista parcial para desplegar los proyectos de un cliente en especifico
         public PartialViewResult GetListaProyectosCliente(string cedulaPK)
@@ -115,7 +132,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                                NombreResp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2 //Responsable del requerimiento
                            };
 
-            return PartialView(queryEmp.Distinct().AsEnumerable());
+            return PartialView(queryEmp);
         }
         //Vista parcial con la lista de desarrolladores de un proyecto en especifico despues de haber filtrado el cliente.
         public PartialViewResult GetListaDesarolladoresResp(int idProyecto)

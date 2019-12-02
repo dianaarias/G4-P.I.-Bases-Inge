@@ -1,18 +1,19 @@
-﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.ListaDesResp>
+﻿
+@model IEnumerable<PI_EXPERT_SA_WEB.Models.ListaDesResp>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-
+<H2>Prueba</H2>
 <script>
-        $(document).ready(function () {
-            var proyectoID;
-            $("#proyectos").change(function () {
-                proyectoID = $("#proyectos").val();
-                //alert("Hello! I am an alert box!");
-                $("#listaFiltrada").load('/CONSULTAS/HorasEstReal', { idProyectoPK: proyectoID });
-            });
-
+    $(document).ready(function () {
+        var proyectoID;
+        $("#proyectos").change(function () {
+            proyectoID = $("#proyectos").val();
+            //alert("Hello! I am an alert box!");
+            $("#listaFiltrada").load('/CONSULTAS/HorasEstReal', { idProyectoPK: proyectoID });
         });
+
+    });
 </script>
 
 <div class="form-group row offset-3">

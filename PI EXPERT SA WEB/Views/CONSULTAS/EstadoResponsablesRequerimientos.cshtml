@@ -1,26 +1,80 @@
-﻿
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.ListaDesResp>
+@using PI_EXPERT_SA_WEB.Models
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<h2>Lista de desarrolladores responsables</h2>
+
+<table id="tablaPrincipal" class="table table-bordered table-striped" width="80%" align="left" border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreCli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreResp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreReq)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoReq)
+        </th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" style="color:red">
+                No hay resultados
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreResp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreReq)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoReq)
+                </td>
+            </tr>
+        }
+    }
+    </table>
 
 
-<script>
-        $(document).ready(function () {
-            var cedulaPK;
-            $("#clientes").change(function () {
-                proyectoID = $("#clientes").val();
-                //alert("Hello! I am an alert box!");
-                $("#dropdownproyectos").load('CONSULTAS/GetListaProyectosCliente', { cedulaPK: cedulaPK });
-            });
 
-        });
-</script>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-<div class="form-group row offset-3">
-    @Html.Label("Cliente", new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownList("clientes", null, "--Seleccionar cliente--", htmlAttributes: new { @class = "form-control" })
-    </div>
-</div>
-@*Espacio para mostrar la nueva Tabla*@
-<div id="dropdownproyectos"></div>
+
+        <script>
+                $(document).ready(function () {
+                    var cedulaPK;
+                    $("#clientes").change(function () {
+                        cedulaPK = $("#clientes").val();
+                        console.log(cedulaPK)
+                        $("#dropdownproyectos").load("CONSULTAS/GetListaProyectosCliente", { cedulaPK: cedulaPK }); //CONSULTAS/
+                    });
+                });
+        </script>
+
+        <div class="form-group row offset-3">
+            @Html.Label("Cliente", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("clientes", null, "--Seleccionar cliente--", htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>*@
+
 
