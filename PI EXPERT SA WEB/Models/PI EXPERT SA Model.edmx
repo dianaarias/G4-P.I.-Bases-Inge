@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
@@ -205,6 +205,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_PeriodosDesocupacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="int" Mode="In" />
+          <Parameter Name="fechaInicioR" Type="date" Mode="In" />
+          <Parameter Name="fechaFinR" Type="date" Mode="In" />
+        </Function>
         <Function Name="SP_RecuperarRequerimientos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombreProyecto" Type="nvarchar" Mode="In" />
           <Parameter Name="nombreModulo" Type="nvarchar" Mode="In" />
@@ -428,6 +433,11 @@
             <End Role="PROYECTO" EntitySet="PROYECTO" />
             <End Role="ROL" EntitySet="ROL" />
           </AssociationSet>
+          <FunctionImport Name="SP_PeriodosDesocupacion" ReturnType="Collection(Gr02Proy4Model.SP_PeriodosDesocupacion_Result)">
+            <Parameter Name="cedula" Mode="In" Type="Int32" />
+            <Parameter Name="fechaInicioR" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFinR" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SP_RecuperarRequerimientos_Result">
           <Property Type="Int32" Name="idRequerimientoPK" Nullable="false" />
@@ -522,6 +532,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_PeriodosDesocupacion_Result">
+          <Property Type="DateTime" Name="Inicio_rango_desocupación" Nullable="true" />
+          <Property Type="DateTime" Name="Fin_rango_desocupación" Nullable="true" />
+          <Property Type="Int32" Name="Días_de_desocupación" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -641,6 +656,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_PeriodosDesocupacion" FunctionName="Gr02Proy4Model.Store.SP_PeriodosDesocupacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gr02Proy4Model.SP_PeriodosDesocupacion_Result">
+                <ScalarProperty Name="Inicio_rango_desocupación" ColumnName="Inicio rango desocupación" />
+                <ScalarProperty Name="Fin_rango_desocupación" ColumnName="Fin rango desocupación" />
+                <ScalarProperty Name="Días_de_desocupación" ColumnName="Días de desocupación" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
