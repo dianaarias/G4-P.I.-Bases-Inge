@@ -74,14 +74,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(string[] miembrosEquipo, int proyectoEquipo)//[Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(string[] miembrosEquipo, string proyectoEquipo)//[Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
 
-            var a = miembrosEquipo[0];
-            var b = miembrosEquipo[1];
-            var c = miembrosEquipo[2];
-
+            //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
+            int idProject = Int32.Parse(proyectoEquipo);
 
 
             if (ModelState.IsValid)
@@ -92,32 +90,21 @@ namespace PI_EXPERT_SA_WEB.Controllers
                     db.ROL.Add(new ROL
                     {
                         cedulaPK = developer,
-                        idProyectoPK = proyectoEquipo,
+                        idProyectoPK = idProject,
                         tipoRol = "Desarrollador"
                     });
                 }
+
                 db.SaveChanges();
                 return Json(new
                 {
-                    isRedirect = false
+                    isRedirect = false,
+                    url = @Url.Action("Index","ROL"),
                 });
-                
+
             }
+
             return RedirectToAction("Index");
-
-            List<EMPLEADO> empleadosDisponibles;
-            empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
-            ViewBag.cedulaPK = new SelectList(empleadosDisponibles, "cedulaPK", "nombre");
-
-            //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
-            var query = (from proyecto in db.PROYECTO
-                         where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
-                         select proyecto);
-
-            ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
-            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
-            //return View(rOL);
-            return View();
         }
 
         // GET: ROL/Edit/5
