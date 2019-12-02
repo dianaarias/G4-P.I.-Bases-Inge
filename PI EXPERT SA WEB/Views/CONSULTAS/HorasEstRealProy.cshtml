@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.HorasEstRealProy>
+@using PI_EXPERT_SA_WEB.Models
+@{
+    ViewBag.Title = "HorasEstRealProy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HorasEstRealProy</h2>
+<body>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+        $(document).ready(function () {
+            var proyectoID;
+            $("#proyectos").change(function () {
+                proyectoID = $("#proyectos").val();
+                //alert("Hello! I am an alert box!");
+                $("#listaFiltrada").load('/CONSULTAS/HorasEstReal', { idProyectoPK: proyectoID });
+            });
+
+        });
+</script>
+
+    <div class="form-group row offset-3" >
+        @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    @*Espacio para mostrar la nueva Tabla*@
+    <div id="listaFiltrada"></div>
+
+<table id="tablaPrincipal" class="table table-bordered table-striped" width="80%" align="left" border="1">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasEst)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HorasReal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiffHoras)
+        </th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3" style="color:red">
+                No hay resultados
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasEst)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasReal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiffHoras)
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+    </body>
