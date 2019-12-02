@@ -40,36 +40,3 @@
 @*Espacio para desplegar la vista del equipo*@
 <div id="equipo"> </div>
 
-@*<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
-        </th>
-        <th>
-            Ver más información
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PROYECTO.cedulaClienteFK)
-            </td>
-            <td>
-                <div class="col text-center">
-                    <a href="@Url.Action("Details","PROYECTO", new {id = item.idProyectoPK})" style="float:unset">
-                        <img src="~/images/more.svg" width="30" height="30" />
-                    </a>
-                </div>
-            </td>
-        </tr>
-    }*@
-
-</table>

@@ -28,6 +28,14 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+
+        public PartialViewResult Equipo(int idProyectoPK) {
+            var query = db.ROL.Where(x => x.idProyectoPK == idProyectoPK);
+            return PartialView(query.ToList());
+        }
+
+
+
         // GET: ROL/Details/5
         public ActionResult Details(string id)
         {
@@ -69,6 +77,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(string[] miembrosEquipo, int proyectoEquipo)//[Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
+
+            var a = miembrosEquipo[0];
+            var b = miembrosEquipo[1];
+            var c = miembrosEquipo[2];
+
+
+
             if (ModelState.IsValid)
             {
                 //db.ROL.Add(rOL);

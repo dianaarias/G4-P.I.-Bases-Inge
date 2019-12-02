@@ -1,0 +1,44 @@
+﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.ROL>
+
+@{
+    ViewBag.Title = "Equipo";
+}
+
+
+@*tabla que despliega todos los requerimientos del proyecto*@
+
+<table class="table table-bordered table-striped" id="tabla">
+    <tr>
+        <th>
+            Desarrollador
+        </th>
+        <th>
+            Rol
+        </th>
+        <th>
+            Mas información
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        var nombreCompleto = item.EMPLEADO.nombre + " " + item.EMPLEADO.apellido1 + " " + item.EMPLEADO.apellido2;
+    <tr>
+        <td>
+            @nombreCompleto
+        </td>
+        <td>
+            @item.tipoRol
+        </td>
+        <td>
+            @*Boton de detalles del requerimiento*@
+            <div class="col text-center">
+                <a href="@Url.Action("Details","EMPLEADO", new { cedulaPk = item.EMPLEADO.cedulaPK })" style="float:right">
+                    <img src="~/images/more.svg" width="30" height="30" />
+                </a>
+            </div>
+        </td>
+    </tr>
+    }
+</table>
