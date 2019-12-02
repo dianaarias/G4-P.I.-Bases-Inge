@@ -121,7 +121,7 @@
 <div class="col text-center">
     <div class="form-group">
         <div class="col-md-auto" style="margin-top: 50px">
-            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" onclick = "myFunction()"/>
         </div>
     </div>
 </div>
@@ -150,18 +150,18 @@
                     list.push(aux);
                 });
             var p = document.getElementById("proyectosSinEquipo");
-            var project = p.options[p.selectedIndex].getAttribute("value");
+            var project = p.options[p.selectedIndex].getAttribute(p.idProyectoPK);
             console.log(project);
             console.log(list);
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: '@Url.Action("Create", "ROLController.cs")',
+                url: '@Url.Action("Create", "ROLController")',
                 traditional: true,
                 async: false,
                 data: {
-                    teamMembers: list,
-                    currentProject: project
+                    miembrosEquipo: list,
+                    proyectoEquipo: project
                 },
                 success: function (json) {
                     if (!json.isRedirect) {

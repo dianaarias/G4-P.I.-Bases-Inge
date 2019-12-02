@@ -17,8 +17,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: ROL
         public ActionResult Index()
         {
-            var rOL = db.ROL.Include(r => r.EMPLEADO).Include(r => r.PROYECTO);
-            return View(rOL.ToList());
+            //Se crea una lista que contenga los proyectos en la tabla de rol con su respectivo nombre en la tabla de proyecto
+            //Se filtra para incluir solo los proyectos que tengan un equipo asignado
+            var query =
+                from pro in db.PROYECTO
+                join rol in db.ROL on pro.idProyectoPK equals rol.idProyectoPK
+                select new { rol.idProyectoPK, pro.nombre };
+
+            ViewBag.proyectos = new SelectList(query.Distinct(), "idProyectoPK", "nombre");
+            return View();
         }
 
         // GET: ROL/Details/5
@@ -54,19 +61,34 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+    
         // POST: ROL/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
+        public ActionResult Create(string[] miembrosEquipo, int proyectoEquipo)//[Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
             if (ModelState.IsValid)
             {
-                db.ROL.Add(rOL);
+                //db.ROL.Add(rOL);
+                foreach (var developer in miembrosEquipo)
+                {
+                    db.ROL.Add(new ROL
+                    {
+                        cedulaPK = developer,
+                        idProyectoPK = proyectoEquipo,
+                        tipoRol = "Desarrollador"
+                    });
+                }
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new
+                {
+                    isRedirect = false
+                });
+                
             }
+            return RedirectToAction("Index");
 
             List<EMPLEADO> empleadosDisponibles;
             empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
@@ -79,7 +101,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
             //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
-            return View(rOL);
+            //return View(rOL);
+            return View();
         }
 
         // GET: ROL/Edit/5
