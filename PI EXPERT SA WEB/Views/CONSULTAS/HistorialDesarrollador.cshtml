@@ -3,9 +3,14 @@
     ViewBag.Title = "HistorialDesarrollador";
 }
 
+@*Devolverse al index de consultas*@
+<a href="@Url.Action("Index","CONSULTAS", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+
+@*.Este script recibi de parametro el id de empleado y llama la consulta de mostrar historial*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
-
 <script>
     $(document).ready(function () {
 
@@ -25,7 +30,6 @@
         @Html.DropDownList("empleados", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
     </div>
 </div>
-
 
 
 

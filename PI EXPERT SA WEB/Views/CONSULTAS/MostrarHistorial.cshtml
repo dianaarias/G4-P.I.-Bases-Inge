@@ -4,7 +4,7 @@
 @model List<Group<string, CONSULTAS>>
 
 
-@*Lista de requerimientos de un proyecto es especiifico*@
+@*Lista de proyectos del historial de un desarrollador*@
 
 <table class="table table-bordered table-striped" id="tabla">
     <tr>
@@ -15,30 +15,41 @@
             Rol
         </th>
         <th>
-            Total de horas dedicadas
+            Tiempo dedicado (h)
         </th>
     </tr>
 
     @foreach (var group in Model)
     {
 
-        <tr>
-            <td>
-                @group.Key
-            </td>
+<tr>
+    <td>
+        @group.Key
+    </td>
 
-            @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+    @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+    {
+        if (item.i == 0)
+        {
+            <td>@item.value.modeloRol.tipoRol</td>
+        }
+    }
+
+    @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+    {
+        if (item.i == 0)
+        {
+            if (item.value.modeloRol.tipoRol == "Lider")
             {
-                if (item.i == 0)
-                {
-                    <td>@item.value.modeloRol.tipoRol</td>
-                }
+                <td>N/A</td>
             }
-            <td>
-                @group.suma
-            </td>
-
-        </tr>
+            else
+            {
+               <td>@group.suma</td>
+            }
+        }
+    }
+</tr>
     }
 </table>
 
