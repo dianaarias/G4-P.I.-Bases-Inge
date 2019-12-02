@@ -210,6 +210,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
             var a = db.REQUERIMIENTO;
 
+            DateTime today = DateTime.Now.Date;
+
             var CONSULTAS =
                 from proy in db.PROYECTO
                 join mod in db.MODULO
@@ -231,9 +233,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                     Values = g                    
 
                     suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
-                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", (g.Sum(x => x.modeloRequerimiento.duracionEstimada) - 
-                    g.Sum(x => System.Data.Entity.SqlServer.SqlFunctions.DateDiff("DAY",x.modeloRequerimiento.fechaInicio, System.Data.Entity.SqlServer.SqlFunctions.GetDate())), 
-                    System.Data.Entity.SqlServer.SqlFunctions, System.Data.Entity.SqlServer.SqlFunctions.GetDate())
+                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada) - g.Sum(x => today.Date - x.modeloRequerimiento.fechaInicio) /g.Count(), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
                 };
 
 
