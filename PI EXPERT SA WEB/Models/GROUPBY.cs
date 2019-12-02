@@ -12,6 +12,7 @@ namespace PI_EXPERT_SA_WEB.Models
         public int? suma ;
         public int? minimo;
         public int? maximo;
-        public double? promedio;
+        public int? promedio;
+        public DateTime? fecha;
     }
 }

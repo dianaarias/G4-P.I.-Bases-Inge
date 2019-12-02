@@ -1,0 +1,45 @@
+﻿
+
+@{
+    ViewBag.Title = "GetProyectoForCliente";
+}
+
+
+<html>
+
+<body>
+
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var proyecto;
+            $("#proyectos").change(function () {
+                proyecto = $("#proyectos").val();
+                $("#requerimientos").load('/CONSULTAS/GetRequerimientosForCliente', { proyecto: proyecto, cliente: cliente });
+            });
+        });
+    </script>
+
+
+    @*Lista de proyectos*@
+    <div class="form-group row offset-3">
+        @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("proyectos", null, "--Seleccionar Cliente--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+    @*Espacio para desplegar los resultados de la consulta*@
+    <div id="requerimientos"> </div>
+
+
+</body>
+
+
+</html>

@@ -4,9 +4,9 @@
     @model List<Group<string, CONSULTAS>>
 
 
-@*Lista de requerimientos de un proyecto es especifico*@
+@*Lista de agrupación por complejidad en requerimiento*@
 
-<table>
+<table class="table table-bordered table-striped" id="tabla">
     <tr>
         <th>
             Complejidad
@@ -33,13 +33,13 @@
             @group.Key
         </td>
 
-        @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+        @*@foreach (var item in group.Values.Select((value, i) => new { i, value }))
         {
             if (item.i == 0)
             {
-                <td>@item.value.modeloRol.tipoRol</td>
+                <td>@item.value.modeloRequerimiento.complejidad</td>
             }
-        }
+        }*@
         <td>
             @group.suma
         </td>
@@ -56,4 +56,3 @@
     }
 </table>
 
-<h2>hierro</h2>

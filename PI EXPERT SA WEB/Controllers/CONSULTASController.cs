@@ -79,7 +79,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public PartialViewResult MostrarHistorial(string cedulaPk)
         {
-     var CONSULTAS =
+            var CONSULTAS =
 
                from proy in db.PROYECTO
                join rol in db.ROL
@@ -143,68 +143,107 @@ namespace PI_EXPERT_SA_WEB.Controllers
             //    });
 
 
+            //System.Linq.IQueryable<PI_EXPERT_SA_WEB.Models.Group<string, PI_EXPERT_SA_WEB.Models.CONSULTAS>> consulta;
+            IQueryable<Group<string, CONSULTAS>> consulta;
+
+            if (complex == "Todas")
+            {
+                consulta =
+                from req in db.REQUERIMIENTO
+                select new CONSULTAS
+                {
+                    modeloRequerimiento = req
+                } into t1
+                group t1 by t1.modeloRequerimiento.complejidad into g
+                select new Group<string, CONSULTAS>
+                {
+                    Key = g.Key,
+                    Values = g,
+                    suma = g.Count(x => x.modeloRequerimiento.complejidad == x.modeloRequerimiento.complejidad),
+                    minimo = g.Min(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                    maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                    promedio = (int)g.Average(x => x.modeloRequerimiento.duracionReal)
+                };
+            }
+            else
+            {
+                consulta =
+                    from req in db.REQUERIMIENTO
+                    where req.complejidad == complex
+                    select new CONSULTAS
+                    {
+                        modeloRequerimiento = req
+                    } into t1
+                    group t1 by t1.modeloRequerimiento.complejidad into g
+                    select new Group<string, CONSULTAS>
+                    {
+                        Key = g.Key,
+                        Values = g,
+                        suma = g.Count(x => x.modeloRequerimiento.complejidad == complex),
+                        minimo = g.Min(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                        maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
+                        promedio = (int)g.Average(x => x.modeloRequerimiento.duracionReal)
+                    };
+
+                var a = !(consulta.Any());
+            }
+
+            return PartialView(consulta.ToList());
+        }
+
+
+
+        public ActionResult RequerimientosTerminadosEjecucion()
+        {
+            ViewBag.clientes = new SelectList(db.CLIENTE, "cedulaPK", "name");
+            return View();
+        }
+
+        public PartialViewResult GetProyectoForCliente(string cliente) {
+
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cliente));
+            return PartialView();
+        }
+
+
+        public PartialViewResult GetRequerimientosForCliente(string cliente, string proyecto) {
+
+            var a = db.REQUERIMIENTO;
+
             var CONSULTAS =
+                from proy in db.PROYECTO
+                join mod in db.MODULO
+                on proy.idProyectoPK equals mod.idProyectoPK
+                join req in db.REQUERIMIENTO
+                on mod.idModuloPK equals req.idModuloPK
+                where proy.cedulaClienteFK == cliente
+                where req.estado == "En Ejecución"
+                select new CONSULTAS
+                {
+                    modeloProyecto = proy,
+                    modeloModulo = mod,
+                    modeloRequerimiento = req
+                } into t1
+                group t1 by t1.modeloRequerimiento.estado into g
+                select new Group<string, CONSULTAS>
+                {
+                    Key = g.Key,
+                    Values = g                    
 
-          from req in db.REQUERIMIENTO
-          select new CONSULTAS
-          {
-              modeloRequerimiento = req
-          } into t1
-          group t1 by t1.modeloRequerimiento.complejidad into g
-          select new Group<string, CONSULTAS> {
-              Key = g.Key, Values = g,
-              suma = g.Sum(x => x.modeloRequerimiento.duracionReal),
-              minimo = g.Min(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
-              maximo = g.Max(x => (x.modeloRequerimiento.duracionReal - x.modeloRequerimiento.duracionEstimada)),
-              promedio = g.Average(x => x.modeloRequerimiento.duracionReal)
-          };
+                    suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
+                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", (g.Sum(x => x.modeloRequerimiento.duracionEstimada) - 
+                    g.Sum(x => System.Data.Entity.SqlServer.SqlFunctions.DateDiff("DAY",x.modeloRequerimiento.fechaInicio, System.Data.Entity.SqlServer.SqlFunctions.GetDate())), 
+                    System.Data.Entity.SqlServer.SqlFunctions, System.Data.Entity.SqlServer.SqlFunctions.GetDate())
+                };
 
 
-
-
-
-
+            fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", 5, System.Data.Entity.SqlServer.SqlFunctions.GetDate()),
 
             return PartialView();
         }
 
-        public ActionResult RequerimientosTerminadosEjecucion()
-        {
 
 
-
-            return View();
-        }
-
-
-
-
-
-
-        public ActionResult HorasEstRealProy()
-        {
-            ViewBag.proyectos = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
-
-            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
-            .Join(db.MODULO,
-                    proy => proy.idProyectoPK,
-                    modu => modu.idProyectoPK,
-                    (proy, modu) => new { proy, modu })
-            .Join(db.REQUERIMIENTO,
-                    modu => new {modu.modu.idModuloPK, modu.modu.idProyectoPK },
-                    req => new { req.idModuloPK, req.idProyectoPK },
-                    (modu, req) => new { modu, req })
-            .GroupBy(s => new { s.modu.proy.nombre })
-            .Select(g => new {
-                Nombre = g.Key.nombre,
-                duracionEst = g.Sum(x => x.req.duracionEstimada),
-                duracionTot = g.Sum(x => x.req.duracionReal),
-                diffDuracion = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
-            });
-
-
-            return View(horasTot.ToList());
-        }
 
 
 
