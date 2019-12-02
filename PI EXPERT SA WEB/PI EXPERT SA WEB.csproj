@@ -193,6 +193,9 @@
     <Compile Include="Models\ROL.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_PeriodosDesocupacion_Result.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_RecuperarRequerimientos_Result.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
@@ -368,6 +371,11 @@
     <Content Include="Views\CONSULTAS\HorasEstReal.cshtml" />
     <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
+    <Content Include="Views\ROL\Equipo.cshtml" />
+    <Content Include="Views\CONSULTAS\HabilidadesFrecuentes.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarResultadoHabilidades.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarResultadoHabilidad.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarComparacionDuracionesProyectos.cshtml" />
     <Content Include="Views\CONSULTAS\RequerimientosTerminadosEjecucion.cshtml" />
     <Content Include="Views\CONSULTAS\GetProyectoForCliente.cshtml" />
     <Content Include="Views\ROL\Equipo.cshtml" />

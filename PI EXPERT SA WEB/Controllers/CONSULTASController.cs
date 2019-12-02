@@ -160,7 +160,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var query =
                from emp in db.EMPLEADO
-               select new { nombreEmp = emp.nombre +" " + emp.apellido1, emp.cedulaPK, emp.apellido1};
+               select new { nombreEmp = emp.nombre +" " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1};
             
             ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
             return View();
@@ -222,7 +222,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var query =
                from emp in db.EMPLEADO
-               select new { nombreEmp = emp.nombre + " " + emp.apellido1, emp.cedulaPK, emp.apellido1 };
+               select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
 
             ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
             return View();
@@ -390,26 +390,41 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
+        //-------------------------JOHN FIN-------------------------
+
+        //-------------------------DIANA COMIENZO-------------------------
+
         //Primera vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente seleccionado
         public PartialViewResult GetProyectoForCliente(string cliente) {
 
+        //Esta consulta retorna los periodos de desocupación de los empleados de la empresa en un rango
+        //específico de tiempo, junto con la cantidad total de días de desocupación.
+        //Es una consulta avanzada de baja frecuencia, cuyo objetivo es el de realizar una comparación
+        //entre los periodos de desocupación de los empleados de manera que la empresa pueda determinar si
+        //existen empleados que estén generando pérdidas económicas para la empresa.
+        public ActionResult getPeriodosDesocupacion() {
+
+            //Lista de empleados sobre la que se iterará 
+            List<EMPLEADO> empleados = db.EMPLEADO.ToList();
+            List<SP_PeriodosDesocupacion_Result> resultados = new List<SP_PeriodosDesocupacion_Result>();
+            DateTime fechaInicioR = new DateTime();
+            DateTime fechaFinR = new DateTime();
+            for (int i = 0; i < empleados.Count(); ++i)
+            {
+                //resultados.Add(db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR));
+            }
             var a = db.PROYECTO.Where(x => x.cedulaClienteFK  == cliente);
             ViewBag.proyectos = new SelectList(a, "idProyectoPK", "nombre");
 
             TempData.Remove("cliente");
             TempData.Add("cliente", cliente);
 
-            return PartialView();
+            
+            return View();
         }
 
-        //Segunda vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente y además por proyecto
-        public PartialViewResult GetRequerimientosForCliente(int? proyecto) {
+        //-------------------------DIANA FIN------------------------------
 
-            IQueryable<Group<string, CONSULTAS>> consultas;
-            var a = 0;
-            //DateTime today = DateTime.Now.Date;
-
-            var cliente = TempData.Peek("cliente");
 
             consultas =
                 from proy in db.PROYECTO
