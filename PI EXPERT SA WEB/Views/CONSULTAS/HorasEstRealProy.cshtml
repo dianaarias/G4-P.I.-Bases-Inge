@@ -19,9 +19,6 @@
                 $("#listaFiltrada").load('/CONSULTAS/HorasEstReal', { idProyectoPK: proyectoID });
             });
 
-            $("#jack").mouseleave(function () {
-                alert("Debe seleccionar proyecto y módulo para poder crear el requerimiento");
-            })
         });
 </script>
 
@@ -34,7 +31,7 @@
     @*Espacio para mostrar la nueva Tabla*@
     <div id="listaFiltrada"></div>
 
-<table class="table table-bordered table-striped" width="80%" align="left" border="1">
+<table id="tablaPrincipal" class="table table-bordered table-striped" width="80%" align="left" border="1">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.NombreProy)

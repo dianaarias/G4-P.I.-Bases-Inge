@@ -163,6 +163,7 @@
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HorasEstRealProy.cs" />
+    <Compile Include="Models\ListaDesResp.cs" />
     <Compile Include="Models\ModeloIntermedio.cs" />
     <Compile Include="Models\ModeloLogin.cs" />
     <Compile Include="Models\MODULO.cs">
@@ -365,6 +366,8 @@
     <Content Include="Views\CONSULTAS\DesarrolladoresAsignadosDisponibles.cshtml" />
     <Content Include="Views\CONSULTAS\HorasEstRealProy.cshtml" />
     <Content Include="Views\CONSULTAS\HorasEstReal.cshtml" />
+    <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
+    <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

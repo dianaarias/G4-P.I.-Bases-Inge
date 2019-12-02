@@ -1,7 +1,26 @@
 ﻿
-@{
-    ViewBag.Title = "EstadoResponsablesRequerimientos";
-}
 
-<h2>EstadoResponsablesRequerimientos</h2>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+<script>
+        $(document).ready(function () {
+            var cedulaPK;
+            $("#clientes").change(function () {
+                proyectoID = $("#clientes").val();
+                //alert("Hello! I am an alert box!");
+                $("#dropdownproyectos").load('/CONSULTAS/HorasEstReal', { cedulaPK: cedulaPK });
+            });
+
+        });
+</script>
+
+<div class="form-group row offset-3">
+    @Html.Label("Cliente", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("clientes", null, "--Seleccionar cliente--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+@*Espacio para mostrar la nueva Tabla*@
+<div id="dropdownproyectos"></div>
 

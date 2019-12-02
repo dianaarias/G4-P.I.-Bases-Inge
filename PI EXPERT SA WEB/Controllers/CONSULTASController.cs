@@ -42,7 +42,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public ActionResult HorasEstRealProy()
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x =>x.fechaFin != null), "idProyectoPK", "nombre");
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x =>x.fechaFin != null ), "idProyectoPK", "nombre");
             var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
                                       .Join(db.MODULO,
                                                 proy => proy.idProyectoPK,
@@ -84,11 +84,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return PartialView(horasTot.Distinct().AsEnumerable());
         }
 
+
+        public ActionResult EstadoResponsablesRequerimientos()
+        {
+            ViewBag.clientes = new SelectList(db.CLIENTE, "cedulaPK", "name");
+            return View();
+        }
         public PartialViewResult GetListaProyectosCliente(string cedulaPK)
         {
-            var query = from proy in db.PROYECTO
-                        where proy.cedulaClienteFK == cedulaPK
-                        select new { proy.idProyectoPK, proy.nombre };
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cedulaPK),"idProyectoPK","nombre");
             var queryEmp = from req in db.REQUERIMIENTO
                            join emp in db.EMPLEADO
                            on req.cedulaDesarrolladorFK equals emp.cedulaPK
@@ -99,16 +103,15 @@ namespace PI_EXPERT_SA_WEB.Controllers
                            join cli in db.CLIENTE
                            on proy.cedulaClienteFK equals cli.cedulaPK
                            where cli.cedulaPK == cedulaPK
-                           select new
+                           select new ListaDesResp
                            {
-                               nombreProy = proy.nombre,
-                               nombreReq = req.nombre,
-                               estadoReq = req.estado,
-                               nombreEmp = emp.nombre + ' ' + emp.apellido1 + ' ' + emp.apellido2
+                               NombreProy = proy.nombre,
+                               NombreReq = req.nombre,
+                               EstadoReq = req.estado,
+                               NombreResp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2
                            };
 
-            ViewBag.Proyecto = query.ToList();
-            return PartialView(queryEmp);
+            return PartialView(queryEmp.Distinct().AsEnumerable());
         }
 
         public PartialViewResult GetListaDesarolladoresResp(int idProyecto)
@@ -117,8 +120,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
                         join emp in db.EMPLEADO
                         on req.cedulaDesarrolladorFK equals emp.cedulaPK
                         where req.idProyectoPK == idProyecto
-                        select new { nombreReq = req.nombre, estadoReq = req.estado, apellidoEmp = emp.apellido1, nombreEmp = emp.nombre };
-            return PartialView(query);
+                        select new ListaDesResp { NombreReq = req.nombre, EstadoReq = req.estado,
+                            NombreResp = emp.nombre+" " + emp.apellido1 + " "+ emp.apellido2};
+            return PartialView(query.Distinct().AsEnumerable());
         }
 
         //-------------------------Fitzberth fin-------------------------
@@ -259,9 +263,6 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-        public ActionResult EstadoResponsablesRequerimientos() {
-            return View();
-        }
 
 
     }
