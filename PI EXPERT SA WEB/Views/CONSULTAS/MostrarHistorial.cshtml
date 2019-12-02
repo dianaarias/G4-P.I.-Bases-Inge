@@ -4,7 +4,7 @@
 @model List<Group<string, CONSULTAS>>
 
 
-@*Lista de requerimientos de un proyecto es especiifico*@
+@*Lista de proyectos del historial de un desarrollador*@
 
 <table class="table table-bordered table-striped" id="tabla">
     <tr>
@@ -15,7 +15,7 @@
             Rol
         </th>
         <th>
-            Total de horas dedicadas
+            Tiempo dedicado (h)
         </th>
     </tr>
 
@@ -34,9 +34,9 @@
                     <td>@item.value.modeloRol.tipoRol</td>
                 }
             }
-            <td>
-                @group.suma
-            </td>
+        <td>
+            @group.suma
+        </td>
 
         </tr>
     }
