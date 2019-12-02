@@ -158,9 +158,11 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //___________________________________________________________________________________________________________
         public ActionResult ComparacionDuracionRequerimientos()
         {
-
-            ViewBag.empleados = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-
+            var query =
+               from emp in db.EMPLEADO
+               select new { nombreEmp = emp.nombre +" " + emp.apellido1, emp.cedulaPK, emp.apellido1};
+            
+            ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
             return View();
         }
 
@@ -218,7 +220,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //________________________________________________________________________________________________________________________
         public ActionResult HistorialDesarrollador()
         {
-             return View();
+            var query =
+               from emp in db.EMPLEADO
+               select new { nombreEmp = emp.nombre + " " + emp.apellido1, emp.cedulaPK, emp.apellido1 };
+
+            ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
+            return View();
         }
 
         //Consulta para mostrar resultados del historial de un desarrollador
@@ -233,7 +240,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                join req in db.REQUERIMIENTO 
                on emp.cedulaPK equals req.cedulaDesarrolladorFK
                where req.idProyectoPK == proy.idProyectoPK
-               //where req.fechaFin != null
+               where req.fechaFin != null
                where rol.cedulaPK == cedulaPk
                select new CONSULTAS
                {
@@ -309,17 +316,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //-------------------------Celeste fin-------------------------
 
-        //public ActionResult TotalHorasRequerimiento() {
-
-        public ActionResult PeriodosDesocupacion() {
-            return View();
-        }
-
-
-
-
-
-
+     
 
 
         //-------------------------JOHN COMIENZO-------------------------
