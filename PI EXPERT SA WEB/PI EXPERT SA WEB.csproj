@@ -368,6 +368,7 @@
     <Content Include="Views\CONSULTAS\HorasEstReal.cshtml" />
     <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
+    <Content Include="Views\ROL\Equipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
