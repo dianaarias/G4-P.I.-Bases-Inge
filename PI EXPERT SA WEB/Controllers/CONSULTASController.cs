@@ -359,20 +359,23 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //Es una consulta avanzada de baja frecuencia, cuyo objetivo es el de realizar una comparación
         //entre los periodos de desocupación de los empleados de manera que la empresa pueda determinar si
         //existen empleados que estén generando pérdidas económicas para la empresa.
-        public ActionResult getPeriodosDesocupacion() {
+        
+        
+        public ActionResult getPeriodosDesocupacion(DateTime fechaInicioR, DateTime fechaFinR) {
 
             //Lista de empleados sobre la que se iterará 
             List<EMPLEADO> empleados = db.EMPLEADO.ToList();
-            List<SP_PeriodosDesocupacion_Result> resultados = new List<SP_PeriodosDesocupacion_Result>();
-            DateTime fechaInicioR = new DateTime();
-            DateTime fechaFinR = new DateTime();
+            List <SP_PeriodosDesocupacion_Result> resultados = new List<SP_PeriodosDesocupacion_Result>();
+            //DateTime fechaInicioR = new DateTime();
+            //DateTime fechaFinR = new DateTime();
             for (int i = 0; i < empleados.Count(); ++i)
             {
-                //resultados.Add(db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR));
+                var result = db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR).Single();
+                resultados.Add(result);
             }
 
-            
-            return View();
+
+            return View(resultados.Distinct().AsEnumerable());
         }
 
         //-------------------------DIANA FIN------------------------------
