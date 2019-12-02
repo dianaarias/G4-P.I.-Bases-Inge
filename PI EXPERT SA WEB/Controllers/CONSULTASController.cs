@@ -24,76 +24,80 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //-------------------------Fitzberth COMIENZO-------------------------
 
+
+        //Consulta Desarrolladores Asginados y Disponibles
         public ActionResult DesarrolladoresAsignadosDisponibles() {
-            var queryAsig = from req in db.REQUERIMIENTO
+            var queryAsig = from req in db.REQUERIMIENTO // lista de desarrolladores asignados y su fecha pronta a desocupar
                             join emp in db.EMPLEADO
                             on req.cedulaDesarrolladorFK equals emp.cedulaPK
                             join equipo in db.ROL
                             on emp.cedulaPK equals equipo.cedulaPK
                             join proy in db.PROYECTO
-                            on equipo.idProyectoPK equals proy.idProyectoPK
-                            where proy.fechaFin != null
+                            on equipo.idProyectoPK equals proy.idProyectoPK 
+                            where proy.fechaFin != null //solo proyectos sin terminar
                             select new DesarrolladoresAsigDisp { NombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, NombreProy = proy.nombre, 
                                FechaInicio = proy.fechaInicio, FechaEstDesocup = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada/8) };
-            ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true);
+            ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true); //Lista de desarrolladores disponibles
             
             return View(queryAsig.Distinct().AsEnumerable());
         }
-
+        //Consulta ehoras estimadas y reales de todos los proyectos
         public ActionResult HorasEstRealProy()
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x =>x.fechaFin != null ), "idProyectoPK", "nombre");
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x =>x.fechaFin != null ), "idProyectoPK", "nombre"); //Viewbag que contiene todos los proyectos finalizados
             var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
-                                      .Join(db.MODULO,
+                                      .Join(db.MODULO, //Join tabla proyecto con modulo
                                                 proy => proy.idProyectoPK,
                                                 modu => modu.idProyectoPK,
                                                 (proy, modu) => new { proy, modu })
-                                      .Join(db.REQUERIMIENTO,
+                                      .Join(db.REQUERIMIENTO, //Join tabla modulo con requerimiento
                                               modu => new { modu.modu.idModuloPK, modu.modu.idProyectoPK },
                                               req => new { req.idModuloPK, req.idProyectoPK },
                                               (modu, req) => new { modu, req })
-                                      .GroupBy(s => new { s.modu.proy.nombre })
+                                      .GroupBy(s => new { s.modu.proy.nombre }) //group by por nombre de proyecto
                                       .Select(g => new HorasEstRealProy {
-                                          NombreProy = g.Key.nombre,
-                                          HorasEst = g.Sum(x => x.req.duracionEstimada),
-                                          HorasReal = g.Sum(x => x.req.duracionReal),
-                                          DiffHoras = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
+                                          NombreProy = g.Key.nombre, // selecciona nombre
+                                          HorasEst = g.Sum(x => x.req.duracionEstimada), //suma de duracion estimada  de todos los req
+                                          HorasReal = g.Sum(x => x.req.duracionReal), //suma de duracion real de todos los req
+                                          DiffHoras = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal) //diferencia entre duracion estimada y real
                                       });
             return View(horasTot.Distinct().AsEnumerable());
         }
+        //horas estimadas y reales de un proyecto en especifico.
         public PartialViewResult HorasEstReal(int? idProyectoPK)
         {
-            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
-                                      .Where(x=> x.idProyectoPK == idProyectoPK)
-                                      .Join(db.MODULO,
+            var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)// solo proyectos finalizados
+                                      .Where(x=> x.idProyectoPK == idProyectoPK) // el proyecto debe ser el seleccionado anteriormente
+                                      .Join(db.MODULO, //join de proyecto con modulo
                                                 proy => proy.idProyectoPK,
                                                 modu => modu.idProyectoPK,
                                                 (proy, modu) => new { proy, modu })
-                                      .Join(db.REQUERIMIENTO,
+                                      .Join(db.REQUERIMIENTO,// join de modulo con requerimiento
                                               modu => new { modu.modu.idModuloPK, modu.modu.idProyectoPK },
                                               req => new { req.idModuloPK, req.idProyectoPK },
                                               (modu, req) => new { modu, req })
-                                      .GroupBy(s => new { s.modu.proy.nombre })
+                                      .GroupBy(s => new { s.modu.proy.nombre })// group by por el nombre de proyecto
                                       .Select(g => new HorasEstRealProy
                                       {
-                                          NombreProy = g.Key.nombre,
-                                          HorasEst = g.Sum(x => x.req.duracionEstimada),
-                                          HorasReal = g.Sum(x => x.req.duracionReal),
-                                          DiffHoras = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal)
+                                          NombreProy = g.Key.nombre, // nombre del proyecto
+                                          HorasEst = g.Sum(x => x.req.duracionEstimada), // suma de duraciones estimadas
+                                          HorasReal = g.Sum(x => x.req.duracionReal), //suma de duraciones reales
+                                          DiffHoras = g.Sum(x => x.req.duracionEstimada) - g.Sum(x => x.req.duracionReal) //diferencia de las duraciones totales
                                       });
             return PartialView(horasTot.Distinct().AsEnumerable());
         }
 
-
+        //Consulta Estado y Responsables para cada requerimiento del proyecto de un cliente.
         public ActionResult EstadoResponsablesRequerimientos()
         {
-            ViewBag.clientes = new SelectList(db.CLIENTE, "cedulaPK", "name");
+            ViewBag.clientes = new SelectList(db.CLIENTE, "cedulaPK", "name"); //Viewbag con la lista de clientes
             return View();
         }
+        //Vista parcial para desplegar los proyectos de un cliente en especifico
         public PartialViewResult GetListaProyectosCliente(string cedulaPK)
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cedulaPK),"idProyectoPK","nombre");
-            var queryEmp = from req in db.REQUERIMIENTO
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cedulaPK),"idProyectoPK","nombre"); // Viewbag con los proyectos que posee el cliente con propositos de filtrado
+            var queryEmp = from req in db.REQUERIMIENTO //Query para la lista de desarrolladores responsables
                            join emp in db.EMPLEADO
                            on req.cedulaDesarrolladorFK equals emp.cedulaPK
                            join equipo in db.ROL
@@ -105,23 +109,26 @@ namespace PI_EXPERT_SA_WEB.Controllers
                            where cli.cedulaPK == cedulaPK
                            select new ListaDesResp
                            {
-                               NombreProy = proy.nombre,
-                               NombreReq = req.nombre,
-                               EstadoReq = req.estado,
-                               NombreResp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2
+                               NombreProy = proy.nombre, // Nombre de proyectos
+                               NombreReq = req.nombre,  // Nombre de requerimientos
+                               EstadoReq = req.estado, // Estado del requerimiento
+                               NombreResp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2 //Responsable del requerimiento
                            };
 
             return PartialView(queryEmp.Distinct().AsEnumerable());
         }
-
+        //Vista parcial con la lista de desarrolladores de un proyecto en especifico despues de haber filtrado el cliente.
         public PartialViewResult GetListaDesarolladoresResp(int idProyecto)
         {
-            var query = from req in db.REQUERIMIENTO
+            var query = from req in db.REQUERIMIENTO //query que busca todos los responsables en un equipo en especifico
                         join emp in db.EMPLEADO
                         on req.cedulaDesarrolladorFK equals emp.cedulaPK
                         where req.idProyectoPK == idProyecto
-                        select new ListaDesResp { NombreReq = req.nombre, EstadoReq = req.estado,
-                            NombreResp = emp.nombre+" " + emp.apellido1 + " "+ emp.apellido2};
+                        select new ListaDesResp 
+                        {   NombreReq = req.nombre, //nombre del requerimiento 
+                            EstadoReq = req.estado, //estado del requerimiento
+                            NombreResp = emp.nombre+" " + emp.apellido1 + " "+ emp.apellido2 //Nombre del responsable del requerimiento
+                        };
             return PartialView(query.Distinct().AsEnumerable());
         }
 

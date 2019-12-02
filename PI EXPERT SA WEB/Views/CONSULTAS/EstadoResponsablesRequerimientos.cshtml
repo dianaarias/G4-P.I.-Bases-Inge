@@ -9,7 +9,7 @@
             $("#clientes").change(function () {
                 proyectoID = $("#clientes").val();
                 //alert("Hello! I am an alert box!");
-                $("#dropdownproyectos").load('/CONSULTAS/HorasEstReal', { cedulaPK: cedulaPK });
+                $("#dropdownproyectos").load('CONSULTAS/GetListaProyectosCliente', { cedulaPK: cedulaPK });
             });
 
         });
