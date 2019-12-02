@@ -160,7 +160,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var query =
                from emp in db.EMPLEADO
-               select new { nombreEmp = emp.nombre +" " + emp.apellido1, emp.cedulaPK, emp.apellido1};
+               select new { nombreEmp = emp.nombre +" " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1};
             
             ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
             return View();
@@ -222,7 +222,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var query =
                from emp in db.EMPLEADO
-               select new { nombreEmp = emp.nombre + " " + emp.apellido1, emp.cedulaPK, emp.apellido1 };
+               select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
 
             ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
             return View();
