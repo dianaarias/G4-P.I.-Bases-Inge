@@ -9,13 +9,13 @@
             Nombre Requerimiento
         </th>
         <th>
-            Duración Estimada
+            Duración Estimada (h)
         </th>
         <th>
-            Duración Real
+            Duración Real (h)
         </th>
         <th>
-            Diferencia
+            Diferencia (h)
         </th>
     </tr>
 
@@ -23,7 +23,7 @@
     {
 
 
-        var diff = item.modeloRequerimiento.duracionReal - item.modeloRequerimiento.duracionEstimada;
+        var diff = item.modeloRequerimiento.duracionEstimada - item.modeloRequerimiento.duracionReal;
 
         <tr>
             <td>
