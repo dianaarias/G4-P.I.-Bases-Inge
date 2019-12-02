@@ -3,9 +3,15 @@
     ViewBag.Title = "ComparacionDuracionRequerimientos";
 }
 
+
+@*Devolverse al index de consultas*@
+<a href="@Url.Action("Index","CONSULTAS", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+
+@*.Este script recibi el parametro del dropdownlist de empleados y llama vista parcial con lista de proyectos de ese empleado*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
-
 <script>
     $(document).ready(function () {
 
@@ -20,7 +26,7 @@
 
 @*Lista desarrolladores*@
 <div class="form-group row offset-3">
-    @Html.Label("Empleado", new { @class = "control-label col-md-2" })
+    @Html.Label("Desarrollador", new { @class = "control-label col-md-2" })
     <div class="col-md-10">
         @Html.DropDownList("empleados", null, "--Seleccionar Desarrollador--", htmlAttributes: new { @class = "form-control" })
     </div>
