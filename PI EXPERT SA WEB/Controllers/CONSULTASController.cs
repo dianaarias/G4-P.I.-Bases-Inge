@@ -361,7 +361,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //existen empleados que estén generando pérdidas económicas para la empresa.
         
         
-        public ActionResult getPeriodosDesocupacion(DateTime fechaInicioR, DateTime fechaFinR) {
+        public ActionResult getPeriodosDesocupacion(DateTime? fechaInicioR, DateTime? fechaFinR) {
 
             //Lista de empleados sobre la que se iterará 
             List<EMPLEADO> empleados = db.EMPLEADO.ToList();
@@ -376,6 +376,13 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
 
             return View(resultados.Distinct().AsEnumerable());
+        }
+
+        public ActionResult getFechas()
+        {
+
+
+            return View();
         }
 
         //-------------------------DIANA FIN------------------------------

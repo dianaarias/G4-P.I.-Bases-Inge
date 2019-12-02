@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "getFechas";
+}
+
+<!-- jQuery UI CSS Reference -->
+<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" />
+<!-- Required jQuery and jQuery UI Javascript references -->
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+
+<!-- Code to wire up your DatePicker -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        //$('.date-picker').datepicker();
+        $("#fechaInicio").change(function () {
+            var a = $("#fechaInicio").val();
+            console.log(a);
+        })
+        $("#fechaFin").change(function () {
+            var b = $("#fechaFin").val();
+            console.log(b);
+        })
+        $("#boton").click(function () {
+            var a = $("#fechaInicio").val();
+            var b = $("#fechaFin").val();
+            $("#despliegue").load('/CONSULTAS/getPeriodosDesocupacion', { fechaInicioR : a, fechaFinR : b });
+        })
+
+        //
+
+    })
+</script>
+
+@Html.Editor("fechaInicio", new { htmlAttributes = new { @class = "form-control", type = "date" } })
+@Html.Editor("fechaFin", new { htmlAttributes = new { @class = "form-control", type = "date" } })
+
+<button id="boton">buscar</button>
+
+<div id="despliegue"></div>
+
+
+
+<!-- Examples of creating a Datepicker -->
+@*<input class="date-picker" />
+    @Html.TextBox("YourTextBox", "", new { @class = "date-picker" })*@
