@@ -360,6 +360,7 @@
     <Content Include="Views\ROL\Edit.cshtml" />
     <Content Include="Views\ROL\Index.cshtml" />
     <Content Include="Views\EMPLEADOes\prueba.cshtml" />
+    <Content Include="Views\ROL\Equipo.cshtml" />
     <Content Include="Views\CONSULTAS\RequerimientosTerminadosEjecucion.cshtml" />
     <Content Include="Views\CONSULTAS\GetProyectoForCliente.cshtml" />
   </ItemGroup>

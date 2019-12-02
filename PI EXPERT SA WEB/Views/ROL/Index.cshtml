@@ -5,53 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Equipos
+@*Script para filtrar equipos por proyecto*@
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var proyectoID;
+        $("#proyectos").change(function () {
+            proyectoID = $("#proyectos").val();
+            $("#equipo").load('/ROL/Equipo', { idProyectoPK: proyectoID });
+        });
+        //$("#jack").mouseleave(function () {
+        //    alert("Debe seleccionar proyecto y módulo para poder crear el requerimiento");
+        //})
+    });
+</script>
+
+@*Botón para crear un nuevo equipo*@
+<h2>
+    Equipos
     <a href="@Url.Action("Create","ROL", new { })" style="float:right">
         <img src="~/images/plus.svg" width="30" height="30" />
     </a>
 </h2>
 
-<table class="table table-bordered table-striped">
-    <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.tipoRol)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.numEquipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMPLEADO.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PROYECTO.cedulaClienteFK)
-        </th>
-        <th>
-            Ver más información
-        </th>
-    </tr>
+@*Lista de Proyectos*@
+<div class="form-group row offset-3">
+    @Html.Label("Proyecto", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("proyectos", null, "--Seleccionar Proyecto--", htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.tipoRol)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.numEquipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMPLEADO.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PROYECTO.cedulaClienteFK)
-        </td>
-        <td>
-            <div class="col text-center">
-                <a href="@Url.Action("Details","PROYECTO", new {id = item.idProyectoPK})" style="float:unset">
-                    <img src="~/images/more.svg" width="30" height="30" />
-                </a>
-            </div>
-        </td>
-    </tr>
-}
+@*Espacio para desplegar la vista del equipo*@
+<div id="equipo"> </div>
 
-</table>
