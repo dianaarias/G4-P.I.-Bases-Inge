@@ -17,9 +17,24 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: ROL
         public ActionResult Index()
         {
-            var rOL = db.ROL.Include(r => r.EMPLEADO).Include(r => r.PROYECTO);
-            return View(rOL.ToList());
+            //Se crea una lista que contenga los proyectos en la tabla de rol con su respectivo nombre en la tabla de proyecto
+            //Se filtra para incluir solo los proyectos que tengan un equipo asignado
+            var query =
+                from pro in db.PROYECTO
+                join rol in db.ROL on pro.idProyectoPK equals rol.idProyectoPK
+                select new { rol.idProyectoPK, pro.nombre };
+
+            ViewBag.proyectos = new SelectList(query.Distinct(), "idProyectoPK", "nombre");
+            return View();
         }
+
+
+        public PartialViewResult Equipo(int idProyectoPK) {
+            var query = db.ROL.Where(x => x.idProyectoPK == idProyectoPK);
+            return PartialView(query.ToList());
+        }
+
+
 
         // GET: ROL/Details/5
         public ActionResult Details(string id)
@@ -39,28 +54,59 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // GET: ROL/Create
         public ActionResult Create()
         {
-            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre");
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+            //Lista de empleados que están disponibles, es decir, que no forman parte de ningún equipo 
+            List<EMPLEADO> empleadosDisponibles;
+            empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
+            ViewBag.cedulaPK = new SelectList(empleadosDisponibles, "cedulaPK", "nombre");
+
+            //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
+            var query = (from proyecto in db.PROYECTO
+                           where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
+                           select proyecto);
+
+            ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
+            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
             return View();
         }
 
+    
         // POST: ROL/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(string[] miembrosEquipo, string proyectoEquipo)//[Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
+
+            //Recibimos el id del proyecto como un string desde la vista, hay que pasarlo a int
+            int idProject = Int32.Parse(proyectoEquipo);
+
+
             if (ModelState.IsValid)
             {
-                db.ROL.Add(rOL);
+                //db.ROL.Add(rOL);
+                //Por cada elemento devuelto por el script por POST se crea una tupla con la información necesario
+                foreach (var developer in miembrosEquipo)
+                {
+                    db.ROL.Add(new ROL
+                    {
+                        cedulaPK = developer,
+                        idProyectoPK = idProject,
+                        tipoRol = "Desarrollador"
+                    });
+                }
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //Retorna json a script de ajax (el de post) 
+                return Json(new
+                {
+                    isRedirect = false,
+                    url = @Url.Action("Index","ROL"),
+                });
+
             }
 
-            ViewBag.cedulaPK = new SelectList(db.EMPLEADO, "cedulaPK", "nombre", rOL.cedulaPK);
-            ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre", rOL.idProyectoPK);
-            return View(rOL);
+            return RedirectToAction("Index");
         }
 
         // GET: ROL/Edit/5
@@ -85,7 +131,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cedulaPK,idProyectoPK,tipoRol,numEquipo")] ROL rOL)
+        public ActionResult Edit([Bind(Include = "cedulaPK,idProyectoPK,tipoRol")] ROL rOL)
         {
             if (ModelState.IsValid)
             {

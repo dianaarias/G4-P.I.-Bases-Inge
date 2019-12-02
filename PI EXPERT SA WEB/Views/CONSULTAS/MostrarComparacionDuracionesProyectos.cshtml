@@ -1,47 +1,48 @@
 ﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.CONSULTAS>
 
 @*Lista de requerimientos de todos los proyectos*@
-    <table class="table table-bordered table-striped" id="tabla">
+<table class="table table-bordered table-striped" id="tabla">
+    <tr>
+        <th>
+            Nombre proyecto
+        </th>
+        <th>
+            Nombre Requerimiento
+        </th>
+        <th>
+            Duración Estimada (h)
+        </th>
+        <th>
+            Duración Real (h)
+        </th>
+        <th>
+            Diferencia (h)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        var diff = item.modeloRequerimiento.duracionEstimada - item.modeloRequerimiento.duracionReal;
+
         <tr>
-            <th>
-                Nombre proyecto
-            </th>
-            <th>
-                Nombre Requerimiento
-            </th>
-            <th>
-                Duración Estimada (h)
-            </th>
-            <th>
-                Duración Real (h)
-            </th>
-            <th>
-                Diferencia (h)
-            </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloProyecto.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => diff)
+            </td>
         </tr>
+    }
+</table>
 
-        @foreach (var item in Model)
-        {
-
-
-            var diff = item.modeloRequerimiento.duracionEstimada - item.modeloRequerimiento.duracionReal;
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.modeloProyecto.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.modeloRequerimiento.nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionReal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => diff)
-                </td>
-            </tr>
-        }
-    </table>

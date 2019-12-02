@@ -41,7 +41,7 @@
         <div class="form-group required">
             @Html.Label("Proyecto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("idProyectoPK", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("proyectosSinEquipo", null, htmlAttributes: new { @class = "form-control", @id = "proyecto" })
                 @*@Html.ValidationMessageFor(model => model.idProyectoPK, "", new { @class = "text-danger" })*@
             </div>
         </div>
@@ -65,23 +65,24 @@
         margin-right: 10px;
     }
 
-    #sortable1 li, #sortable2 li {
-        margin: 0 5px 5px 5px;
-        padding: 5px;
-        font-size: 20px;
-        color: #08415c;
-        width: auto;
-        background-color: #eee;
-        border-color: #4d7ea8;
-    }
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 20px;
+            color: #08415c;
+            width: auto;
+            background-color: #eee;
+            border-color: #4d7ea8;
+        }
 
-    /*Formato de contenedor y elementos del grid que contiene las listas utilizadas en el drag-and-drop*/ 
+    /*Formato de contenedor y elementos del grid que contiene las listas utilizadas en el drag-and-drop*/
     .grid-container {
         display: grid;
         grid-template-columns: auto auto;
         background-color: #08415c;
         padding: 10px;
     }
+
     .grid-item {
         background-color: rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(0, 0, 0, 0.8);
@@ -99,7 +100,7 @@
             @foreach (var item in ViewBag.cedulaPK)
             {
                 <ul id="sortable1" class="connectedSortable">
-                    <li class="ui-state-highlight">@item.Text</li>
+                    <li id=@item.Value class="ui-state-highlight">@item.Text</li>
                 </ul>
 
             }
@@ -121,11 +122,10 @@
 <div class="col text-center">
     <div class="form-group">
         <div class="col-md-auto" style="margin-top: 50px">
-            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" />
+            <input type="image" src="~/images/success.svg" alt=”submit” name=”submit” width="50" height="50" style="float: unset" onclick="myFunction()" />
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -140,4 +140,46 @@
             }).disableSelection();
         });
     </script>
+
+
+    <script type="text/javascript">
+        function myFunction() {
+
+
+            var projectIndex = document.getElementById("proyecto").selectedIndex;
+            var list = [];
+            document.querySelectorAll("#sortable2 li")
+                .forEach(function (item) {
+                    var aux = item.id;
+                    list.push(aux);
+                });
+            var p = document.getElementById('proyecto');
+            var project = p.options[p.selectedIndex].value; //p.idProyectoPK //.getAttribute("value")
+
+            console.log(project);
+            console.log(list);
+           $.ajax({
+                type: "post",
+                dataType: "json",
+                url: '@Url.Action("Create","ROL")',
+                traditional: true,
+                async: false,
+                data: {
+                    miembrosEquipo: list,
+                    proyectoEquipo: project
+                },
+                success: function (json) {
+                    if (!json.isRedirect) {
+                        console.log('Exito');
+                        window.location.href = json.url;
+                    }
+                },
+                error: function (errorList) {
+                    console.log(errorList);
+                    console.log("error");
+                }
+            })
+        }
+    </script>
+
 }
