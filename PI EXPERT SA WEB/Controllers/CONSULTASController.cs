@@ -368,7 +368,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             DateTime fechaFinR = new DateTime();
             for (int i = 0; i < empleados.Count(); ++i)
             {
-                resultados.Add(db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR));
+                //resultados.Add(db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR));
             }
 
             

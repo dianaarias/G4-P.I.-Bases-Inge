@@ -372,6 +372,9 @@
     <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
     <Content Include="Views\ROL\Equipo.cshtml" />
+    <Content Include="Views\CONSULTAS\HabilidadesFrecuentes.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarResultadoHabilidades.cshtml" />
+    <Content Include="Views\CONSULTAS\MostrarResultadoHabilidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
