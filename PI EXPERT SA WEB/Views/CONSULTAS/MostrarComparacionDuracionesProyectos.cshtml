@@ -10,6 +10,9 @@
             Nombre Requerimiento
         </th>
         <th>
+            Complijidad
+        </th>
+        <th>
             Duración Estimada (h)
         </th>
         <th>
@@ -32,6 +35,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.modeloRequerimiento.nombre)
+            </td>
+              <td>
+                @Html.DisplayFor(modelItem => item.modeloRequerimiento.complejidad)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.modeloRequerimiento.duracionEstimada)

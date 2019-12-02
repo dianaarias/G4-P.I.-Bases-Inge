@@ -9,6 +9,9 @@
 <table class="table table-bordered table-striped" id="tabla">
     <tr>
         <th>
+            Nombre Proyecto
+        </th>
+        <th>
             Estado
         </th>
         <th>
@@ -22,16 +25,27 @@
     @foreach (var group in Model)
     {
 
-        <tr>
-            <td>
-                @group.Key
-            </td>
-            <td>
-                @group.suma
-            </td>
-            <td>
-                @group.fecha
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @group.Values.ElementAt(0).modeloProyecto.nombre
+        </td>
+
+        @*@foreach (var item in group.Values.Select((value, i) => new { i, value }))
+        {
+            if (item.i == 0)
+            {
+                <td>@item.value.m</td>
+            }
+        }*@
+        <td>
+            @group.Key
+        </td>
+        <td>
+            @group.suma
+        </td>
+        <td>
+            @group.fecha
+        </td>
+    </tr>
     }
 </table>
