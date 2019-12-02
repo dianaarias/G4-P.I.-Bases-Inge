@@ -206,7 +206,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="SP_PeriodosDesocupacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="cedula" Type="int" Mode="In" />
+          <Parameter Name="cedula" Type="nchar" Mode="In" />
           <Parameter Name="fechaInicioR" Type="date" Mode="In" />
           <Parameter Name="fechaFinR" Type="date" Mode="In" />
         </Function>
@@ -434,7 +434,7 @@
             <End Role="ROL" EntitySet="ROL" />
           </AssociationSet>
           <FunctionImport Name="SP_PeriodosDesocupacion" ReturnType="Collection(Gr02Proy4Model.SP_PeriodosDesocupacion_Result)">
-            <Parameter Name="cedula" Mode="In" Type="Int32" />
+            <Parameter Name="cedula" Mode="In" Type="String" />
             <Parameter Name="fechaInicioR" Mode="In" Type="DateTime" />
             <Parameter Name="fechaFinR" Mode="In" Type="DateTime" />
           </FunctionImport>

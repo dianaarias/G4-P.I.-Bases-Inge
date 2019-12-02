@@ -48,11 +48,11 @@ namespace PI_EXPERT_SA_WEB.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_RecuperarRequerimientos_Result>("SP_RecuperarRequerimientos", nombreProyectoParameter, nombreModuloParameter);
         }
     
-        public virtual ObjectResult<SP_PeriodosDesocupacion_Result> SP_PeriodosDesocupacion(Nullable<int> cedula, Nullable<System.DateTime> fechaInicioR, Nullable<System.DateTime> fechaFinR)
+        public virtual ObjectResult<SP_PeriodosDesocupacion_Result> SP_PeriodosDesocupacion(string cedula, Nullable<System.DateTime> fechaInicioR, Nullable<System.DateTime> fechaFinR)
         {
-            var cedulaParameter = cedula.HasValue ?
+            var cedulaParameter = cedula != null ?
                 new ObjectParameter("cedula", cedula) :
-                new ObjectParameter("cedula", typeof(int));
+                new ObjectParameter("cedula", typeof(string));
     
             var fechaInicioRParameter = fechaInicioR.HasValue ?
                 new ObjectParameter("fechaInicioR", fechaInicioR) :

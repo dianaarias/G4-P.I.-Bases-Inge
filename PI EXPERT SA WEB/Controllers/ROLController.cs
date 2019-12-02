@@ -85,6 +85,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             if (ModelState.IsValid)
             {
                 //db.ROL.Add(rOL);
+                //Por cada elemento devuelto por el script por POST se crea una tupla con la información necesario
                 foreach (var developer in miembrosEquipo)
                 {
                     db.ROL.Add(new ROL
@@ -96,6 +97,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 }
 
                 db.SaveChanges();
+                //Retorna json a script de ajax (el de post) 
                 return Json(new
                 {
                     isRedirect = false,
