@@ -18,7 +18,7 @@
             var proyecto;
             $("#proyectos").change(function () {
                 proyecto = $("#proyectos").val();
-                $("#requerimientos").load('/CONSULTAS/GetRequerimientosForCliente', { proyecto: proyecto });
+                $("#requerimientos").load('/CONSULTAS/GetRequerimientoForCliente', { proyecto: proyecto });
             });
         });
     </script>

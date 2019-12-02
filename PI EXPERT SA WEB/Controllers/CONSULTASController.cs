@@ -389,13 +389,61 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
+        //Primera vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente seleccionado
+        public PartialViewResult GetProyectoForCliente(string cliente)
+        {
+
+            var a = db.PROYECTO.Where(x => x.cedulaClienteFK == cliente);
+            ViewBag.proyectos = new SelectList(a, "idProyectoPK", "nombre");
+
+            TempData.Remove("cliente");
+            TempData.Add("cliente", cliente);
+
+            return PartialView();
+        }
+
+
+        public PartialViewResult GetRequerimientoForCliente(int? proyecto) {
+
+
+            var cliente = TempData.Peek("cliente");
+
+            var consultas =
+                from proy in db.PROYECTO
+                join mod in db.MODULO
+                on proy.idProyectoPK equals mod.idProyectoPK
+                join req in db.REQUERIMIENTO
+                on mod.idModuloPK equals req.idModuloPK
+                where proy.cedulaClienteFK == (string)cliente
+                            //where proy.idProyectoPK == proyecto
+                            select new CONSULTAS
+                {
+                    modeloProyecto = proy,
+                    modeloModulo = mod,
+                    modeloRequerimiento = req
+                } into t1
+                group t1 by t1.modeloRequerimiento.estado into g
+                select new Group<string, CONSULTAS>
+                {
+                    Key = g.Key,
+                    Values = g,
+                    suma = g.Count(), //suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
+                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada / 8), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
+                };
+
+                var b = consultas.Where(x => x.Key == "En Ejecución" || x.Key == "Finalizado");
+
+                return PartialView(b.ToList());
+        }
+
 
         //-------------------------JOHN FIN-------------------------
 
+
+
         //-------------------------DIANA COMIENZO-------------------------
 
-        //Primera vista parcial de la consulta que despliega los requerimientos terminados y en ejecución. Filtra los resultados por cliente seleccionado
-        public PartialViewResult GetProyectoForCliente(string cliente) {
+
 
         //Esta consulta retorna los periodos de desocupación de los empleados de la empresa en un rango
         //específico de tiempo, junto con la cantidad total de días de desocupación.
@@ -413,48 +461,12 @@ namespace PI_EXPERT_SA_WEB.Controllers
             {
                 //resultados.Add(db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR));
             }
-            var a = db.PROYECTO.Where(x => x.cedulaClienteFK  == cliente);
-            ViewBag.proyectos = new SelectList(a, "idProyectoPK", "nombre");
-
-            TempData.Remove("cliente");
-            TempData.Add("cliente", cliente);
 
             
             return View();
         }
 
         //-------------------------DIANA FIN------------------------------
-
-
-            consultas =
-                from proy in db.PROYECTO
-                join mod in db.MODULO
-                on proy.idProyectoPK equals mod.idProyectoPK
-                join req in db.REQUERIMIENTO
-                on mod.idModuloPK equals req.idModuloPK
-                where proy.cedulaClienteFK == (string)cliente
-                //where proy.idProyectoPK == proyecto
-                select new CONSULTAS
-                {
-                    modeloProyecto = proy,
-                    modeloModulo = mod,
-                    modeloRequerimiento = req
-                } into t1
-                group t1 by t1.modeloRequerimiento.estado into g
-                select new Group<string, CONSULTAS>
-                {
-                    Key = g.Key,
-                    Values = g,
-                    suma = g.Count(), //suma = g.Count(x => x.modeloRequerimiento.estado == "En Ejecución"),
-                    fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada / 8), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
-                };
-
-            var b = consultas.Where(x => x.Key == "En Ejecución" || x.Key == "Finalizado");
-
-            return PartialView(b.ToList());
-        }
-
-        //-------------------------JOHN FIN-------------------------
 
     }
 }
