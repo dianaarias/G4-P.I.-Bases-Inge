@@ -34,7 +34,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                             on emp.cedulaPK equals equipo.cedulaPK
                             join proy in db.PROYECTO
                             on equipo.idProyectoPK equals proy.idProyectoPK 
-                            where proy.fechaFin != null //solo proyectos sin terminar
+                            where proy.fechaFin == null //solo proyectos sin terminar
                             select new DesarrolladoresAsigDisp { NombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, NombreProy = proy.nombre, 
                                FechaInicio = proy.fechaInicio, FechaEstDesocup = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada/8) };
             ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true); //Lista de desarrolladores disponibles

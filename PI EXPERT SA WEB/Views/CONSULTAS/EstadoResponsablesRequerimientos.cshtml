@@ -1,7 +1,15 @@
 ﻿@model IEnumerable<PI_EXPERT_SA_WEB.Models.ListaDesResp>
 @using PI_EXPERT_SA_WEB.Models
 
+@*Devolverse al index de consultas*@
+<a href="@Url.Action("Index","CONSULTAS", new {})" class="boton-icono" style="float:left">
+    <img src="~/images/left-arrow.svg" width="30" height="30" />
+</a>
+
+
 <h2>Lista de desarrolladores responsables</h2>
+
+
 
 <table id="tablaPrincipal" class="table table-bordered table-striped" width="80%" align="left" border="1">
     <tr>
@@ -52,29 +60,29 @@
             </tr>
         }
     }
-    </table>
+</table>
 
 
 
-    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 
-        <script>
-                $(document).ready(function () {
-                    var cedulaPK;
-                    $("#clientes").change(function () {
-                        cedulaPK = $("#clientes").val();
-                        console.log(cedulaPK)
-                        $("#dropdownproyectos").load("CONSULTAS/GetListaProyectosCliente", { cedulaPK: cedulaPK }); //CONSULTAS/
-                    });
+    <script>
+            $(document).ready(function () {
+                var cedulaPK;
+                $("#clientes").change(function () {
+                    cedulaPK = $("#clientes").val();
+                    console.log(cedulaPK)
+                    $("#dropdownproyectos").load("CONSULTAS/GetListaProyectosCliente", { cedulaPK: cedulaPK }); //CONSULTAS/
                 });
-        </script>
+            });
+    </script>
 
-        <div class="form-group row offset-3">
-            @Html.Label("Cliente", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("clientes", null, "--Seleccionar cliente--", htmlAttributes: new { @class = "form-control" })
-            </div>
-        </div>*@
+    <div class="form-group row offset-3">
+        @Html.Label("Cliente", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("clientes", null, "--Seleccionar cliente--", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>*@
 
 
