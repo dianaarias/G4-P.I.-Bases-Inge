@@ -193,6 +193,9 @@
     <Compile Include="Models\ROL.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_PeriodosDesocupacion_Result.cs">
+      <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_RecuperarRequerimientos_Result.cs">
       <DependentUpon>PI EXPERT SA Model.tt</DependentUpon>
     </Compile>

@@ -47,5 +47,22 @@ namespace PI_EXPERT_SA_WEB.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_RecuperarRequerimientos_Result>("SP_RecuperarRequerimientos", nombreProyectoParameter, nombreModuloParameter);
         }
+    
+        public virtual ObjectResult<SP_PeriodosDesocupacion_Result> SP_PeriodosDesocupacion(Nullable<int> cedula, Nullable<System.DateTime> fechaInicioR, Nullable<System.DateTime> fechaFinR)
+        {
+            var cedulaParameter = cedula.HasValue ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(int));
+    
+            var fechaInicioRParameter = fechaInicioR.HasValue ?
+                new ObjectParameter("fechaInicioR", fechaInicioR) :
+                new ObjectParameter("fechaInicioR", typeof(System.DateTime));
+    
+            var fechaFinRParameter = fechaFinR.HasValue ?
+                new ObjectParameter("fechaFinR", fechaFinR) :
+                new ObjectParameter("fechaFinR", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PeriodosDesocupacion_Result>("SP_PeriodosDesocupacion", cedulaParameter, fechaInicioRParameter, fechaFinRParameter);
+        }
     }
 }
