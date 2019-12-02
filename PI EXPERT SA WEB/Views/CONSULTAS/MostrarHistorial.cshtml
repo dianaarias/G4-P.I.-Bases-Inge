@@ -22,23 +22,34 @@
     @foreach (var group in Model)
     {
 
-        <tr>
-            <td>
-                @group.Key
-            </td>
+<tr>
+    <td>
+        @group.Key
+    </td>
 
-            @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+    @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+    {
+        if (item.i == 0)
+        {
+            <td>@item.value.modeloRol.tipoRol</td>
+        }
+    }
+
+    @foreach (var item in group.Values.Select((value, i) => new { i, value }))
+    {
+        if (item.i == 0)
+        {
+            if (item.value.modeloRol.tipoRol == "Lider")
             {
-                if (item.i == 0)
-                {
-                    <td>@item.value.modeloRol.tipoRol</td>
-                }
+                <td>N/A</td>
             }
-        <td>
-            @group.suma
-        </td>
-
-        </tr>
+            else
+            {
+               <td>@group.suma</td>
+            }
+        }
+    }
+</tr>
     }
 </table>
 
