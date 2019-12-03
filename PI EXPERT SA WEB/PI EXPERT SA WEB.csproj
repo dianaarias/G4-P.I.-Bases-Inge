@@ -371,19 +371,18 @@
     <Content Include="Views\CONSULTAS\HorasEstReal.cshtml" />
     <Content Include="Views\CONSULTAS\EstadoResponsablesRequerimientos.cshtml" />
     <Content Include="Views\CONSULTAS\GetListaProyectosCliente.cshtml" />
-    <Content Include="Views\ROL\Equipo.cshtml" />
     <Content Include="Views\CONSULTAS\HabilidadesFrecuentes.cshtml" />
     <Content Include="Views\CONSULTAS\MostrarResultadoHabilidades.cshtml" />
     <Content Include="Views\CONSULTAS\MostrarResultadoHabilidad.cshtml" />
     <Content Include="Views\CONSULTAS\MostrarComparacionDuracionesProyectos.cshtml" />
     <Content Include="Views\CONSULTAS\RequerimientosTerminadosEjecucion.cshtml" />
     <Content Include="Views\CONSULTAS\GetProyectoForCliente.cshtml" />
-    <Content Include="Views\ROL\Equipo.cshtml" />
     <Content Include="Views\CONSULTAS\GetRequerimientosForCliente.cshtml" />
     <Content Include="Views\ROL\filtroHabilidad.cshtml" />
     <Content Include="Views\CONSULTAS\GetRequerimientoForCliente.cshtml" />
     <Content Include="Views\CONSULTAS\getPeriodosDesocupacion.cshtml" />
     <Content Include="Views\CONSULTAS\getFechas.cshtml" />
+    <Content Include="Views\ROL\Equipo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
