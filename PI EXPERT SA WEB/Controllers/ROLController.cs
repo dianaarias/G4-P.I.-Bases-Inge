@@ -83,10 +83,32 @@ namespace PI_EXPERT_SA_WEB.Controllers
                            select proyecto);
 
             ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
-            //ViewBag.idProyectoPK = new SelectList(db.PROYECTO, "idProyectoPK", "nombre");
+
             return View();
         }
 
+
+        public PartialViewResult PreEquipo(string habilidad) {
+
+            var eem =
+                from emp in db.EMPLEADO
+                where emp.disponibilidad == true
+                select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
+
+
+
+
+            ViewBag.cedulaPK = new SelectList(eem, "cedulaPK", "nombreEmp");
+
+            //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
+            var query = (from proyecto in db.PROYECTO
+                         where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
+                         select proyecto);
+
+            ViewBag.proyectosSinEquipo = new SelectList(query, "idProyectoPK", "nombre");
+
+            return PartialView();
+        }
     
         // POST: ROL/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
