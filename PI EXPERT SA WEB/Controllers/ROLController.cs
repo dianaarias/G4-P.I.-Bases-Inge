@@ -28,7 +28,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
             return View();
         }
 
-
+        //Comentado porque al final no se está utilizando una vista parcial para filtrar los empleados por habilidad
         //public PartialViewResult filtroHabilidad() {
 
         //    return PartialView();
@@ -62,7 +62,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
         [HttpGet]
         public ActionResult Create(string busqueda)
         {
-            //Lista de empleados que están disponibles, es decir, que no forman parte de ningún equipo 
+            //Exiten dos escenarios a la hora de filtrar los empleados:
+            //1. No se ha introducido ninguna habilidad en la búsqueda. Se muestran todos los empleados disponibles
+            //2. Se ha introducido una habilidad en la búsqueda. Se filtran los empleados
             var eem = (System.Collections.IEnumerable)null;
             if (String.IsNullOrEmpty(busqueda))
             {
@@ -85,21 +87,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
                     };
             }
 
-
-            //Select inicial
-            //List<EMPLEADO> empleadosDisponibles;
-            //empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
-
-            // Búsqueda que permite mostrar nombres y apellidos de empleados disponibles FUNCIONAL
-            //var eem =
-            //  from emp in db.EMPLEADO
-            //  where emp.disponibilidad == true
-            //  select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
-
-
             ViewBag.cedulaPK = new SelectList(eem, "cedulaPK", "nombreEmp");
 
             //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
+            //Se necesita esta lsita de proyectos para el dropdown en Crear
             var query = (from proyecto in db.PROYECTO
                            where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
                            select proyecto);
@@ -112,6 +103,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         public PartialViewResult PreEquipo(string busqueda) {
 
+            //Exiten dos escenarios a la hora de filtrar los empleados:
+            //1. No se ha introducido ninguna habilidad en la búsqueda. Se muestran todos los empleados disponibles
+            //2. Se ha introducido una habilidad en la búsqueda. Se filtran los empleados
             var eem = (System.Collections.IEnumerable)null;
             if (String.IsNullOrEmpty(busqueda))
             {
@@ -134,16 +128,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
                     };
             }
 
-
-            //var eem =
-            //    from emp in db.EMPLEADO
-            //    where emp.disponibilidad == true
-            //    select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
-
-
             ViewBag.cedulaPK = new SelectList(eem, "cedulaPK", "nombreEmp");
 
             //Consulta de proyectos sin equipo, es decir, proyectos cuyo ID no exista en la tabla ROL
+            //Se necesita esta lsita de proyectos para el dropdown en Crear
             var query = (from proyecto in db.PROYECTO
                          where !db.ROL.Any(m => m.idProyectoPK == proyecto.idProyectoPK)
                          select proyecto);

@@ -19,21 +19,16 @@
     <p>*<span style="color:black">Campos requeridos</span> </p>
 </div>
 
-@*Buscador por habilidades*@
+@*Buscador por habilidades para filtrar empleados*@
 <h4>Filtrar por habilidades:</h4>
 <form method="get" action="@Url.Action("Create", "ROL")">
     <label for="busqueda">Ingrese una habilidad</label>
     <input type="text" name="busqueda" id="busqueda" />
     <button type="submit">Buscar</button>
 </form>
-    @*@using (Html.BeginForm("Index", "HABILIDADES", FormMethod.Get))
-    {
-        @Html.TextBox("busqueda")
-        <input type="submit" value="Búsqueda" />
-    }*@
+
 
 @*Se hace uso de un dropdown para que el usuario especifique a qué proyecto quiere asignarle el equipo*@
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -70,15 +65,15 @@
         margin-right: 10px;
     }
 
-        #sortable1 li, #sortable2 li {
-            margin: 0 5px 5px 5px;
-            padding: 5px;
-            font-size: 20px;
-            color: #08415c;
-            width: auto;
-            background-color: #eee;
-            border-color: #4d7ea8;
-        }
+    #sortable1 li, #sortable2 li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        font-size: 20px;
+        color: #08415c;
+        width: auto;
+        background-color: #eee;
+        border-color: #4d7ea8;
+    }
 
     /*Formato de contenedor y elementos del grid que contiene las listas utilizadas en el drag-and-drop*/
     .grid-container {
@@ -135,7 +130,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    @*Scripts para el sortable (drag-and-drop) de las listas*@
+    @*Script para el sortable (drag-and-drop) de las listas*@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
@@ -146,7 +141,7 @@
         });
     </script>
 
-
+    @*Script que toma contenido reorganizado de las listas y lo envía al controlador para crear el equipo*@
     <script type="text/javascript">
         function myFunction() {
 
