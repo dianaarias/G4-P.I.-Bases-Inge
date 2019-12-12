@@ -29,10 +29,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
-        public PartialViewResult filtroHabilidad() {
+        //public PartialViewResult filtroHabilidad() {
 
-            return PartialView();
-        }
+        //    return PartialView();
+        //}
 
 
 
@@ -59,20 +59,42 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         // GET: ROL/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create(string busqueda)
         {
             //Lista de empleados que están disponibles, es decir, que no forman parte de ningún equipo 
-            
+            var eem = (System.Collections.IEnumerable)null;
+            if (String.IsNullOrEmpty(busqueda))
+            {
+                eem =
+                  from emp in db.EMPLEADO
+                  where emp.disponibilidad == true
+                  select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
+            }
+            else
+            {
+                eem =
+                    from emp in db.EMPLEADO
+                    join hab in db.HABILIDADES on emp.cedulaPK equals hab.cedulaEmpleadoPK
+                    where emp.disponibilidad == true && hab.habilidadPK.Contains(busqueda)
+                    select new
+                    {
+                        nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2,
+                        emp.cedulaPK,
+                        emp.apellido1
+                    };
+            }
+
+
+            //Select inicial
             //List<EMPLEADO> empleadosDisponibles;
             //empleadosDisponibles = db.EMPLEADO.Where(x => x.disponibilidad == true).ToList();
 
-
-            var eem =
-              from emp in db.EMPLEADO
-              where emp.disponibilidad == true
-              select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
-
-
+            // Búsqueda que permite mostrar nombres y apellidos de empleados disponibles FUNCIONAL
+            //var eem =
+            //  from emp in db.EMPLEADO
+            //  where emp.disponibilidad == true
+            //  select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
 
 
             ViewBag.cedulaPK = new SelectList(eem, "cedulaPK", "nombreEmp");
@@ -88,14 +110,35 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
 
-        public PartialViewResult PreEquipo(string habilidad) {
+        public PartialViewResult PreEquipo(string busqueda) {
 
-            var eem =
-                from emp in db.EMPLEADO
-                where emp.disponibilidad == true
-                select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
+            var eem = (System.Collections.IEnumerable)null;
+            if (String.IsNullOrEmpty(busqueda))
+            {
+                eem =
+                  from emp in db.EMPLEADO
+                  where emp.disponibilidad == true
+                  select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
+            }
+            else
+            {
+                eem =
+                    from emp in db.EMPLEADO
+                    join hab in db.HABILIDADES on emp.cedulaPK equals hab.cedulaEmpleadoPK
+                    where emp.disponibilidad == true && hab.habilidadPK.Contains(busqueda)
+                    select new
+                    {
+                        nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2,
+                        emp.cedulaPK,
+                        emp.apellido1
+                    };
+            }
 
 
+            //var eem =
+            //    from emp in db.EMPLEADO
+            //    where emp.disponibilidad == true
+            //    select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
 
 
             ViewBag.cedulaPK = new SelectList(eem, "cedulaPK", "nombreEmp");

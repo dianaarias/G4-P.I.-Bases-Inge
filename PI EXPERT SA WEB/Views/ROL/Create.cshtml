@@ -19,9 +19,14 @@
     <p>*<span style="color:black">Campos requeridos</span> </p>
 </div>
 
-@*Buscador ****NO FUNCIONAL**** *@
-@*<h4>Filtrar por habilidades:</h4>
-    @using (Html.BeginForm("Index", "HABILIDADES", FormMethod.Get))
+@*Buscador por habilidades*@
+<h4>Filtrar por habilidades:</h4>
+<form method="get" action="@Url.Action("Create", "ROL")">
+    <label for="busqueda">Ingrese una habilidad</label>
+    <input type="text" name="busqueda" id="busqueda" />
+    <button type="submit">Buscar</button>
+</form>
+    @*@using (Html.BeginForm("Index", "HABILIDADES", FormMethod.Get))
     {
         @Html.TextBox("busqueda")
         <input type="submit" value="Búsqueda" />
