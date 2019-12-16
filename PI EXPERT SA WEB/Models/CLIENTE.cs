@@ -76,7 +76,7 @@ namespace PI_EXPERT_SA_WEB.Models
         //Nombre que se mostrara en pantalla para el atributo      
         [DisplayName("Distrito")]
         public string distrito { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PROYECTO> PROYECTO { get; set; }
     }

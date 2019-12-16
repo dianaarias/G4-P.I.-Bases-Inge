@@ -33,18 +33,18 @@ namespace PI_EXPERT_SA_WEB.Controllers
                             join equipo in db.ROL
                             on emp.cedulaPK equals equipo.cedulaPK
                             join proy in db.PROYECTO
-                            on equipo.idProyectoPK equals proy.idProyectoPK 
+                            on equipo.idProyectoPK equals proy.idProyectoPK
                             where proy.fechaFin == null //solo proyectos sin terminar
-                            select new DesarrolladoresAsigDisp { NombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, NombreProy = proy.nombre, 
-                               FechaInicio = proy.fechaInicio, FechaEstDesocup = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada/8) };
+                            select new DesarrolladoresAsigDisp { NombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, NombreProy = proy.nombre,
+                                FechaInicio = proy.fechaInicio, FechaEstDesocup = DbFunctions.AddDays(proy.fechaInicio, proy.duracionEstimada / 8) };
             ViewBag.EmpDesoc = db.EMPLEADO.Where(x => x.disponibilidad == true); //Lista de desarrolladores disponibles
-            
+
             return View(queryAsig.Distinct().AsEnumerable());
         }
         //Consulta ehoras estimadas y reales de todos los proyectos
         public ActionResult HorasEstRealProy()
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x =>x.fechaFin != null ), "idProyectoPK", "nombre"); //Viewbag que contiene todos los proyectos finalizados
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.fechaFin != null), "idProyectoPK", "nombre"); //Viewbag que contiene todos los proyectos finalizados
             var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)
                                       .Join(db.MODULO, //Join tabla proyecto con modulo
                                                 proy => proy.idProyectoPK,
@@ -67,7 +67,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         public PartialViewResult HorasEstReal(int? idProyectoPK)
         {
             var horasTot = db.PROYECTO.Where(x => x.fechaFin != null)// solo proyectos finalizados
-                                      .Where(x=> x.idProyectoPK == idProyectoPK) // el proyecto debe ser el seleccionado anteriormente
+                                      .Where(x => x.idProyectoPK == idProyectoPK) // el proyecto debe ser el seleccionado anteriormente
                                       .Join(db.MODULO, //join de proyecto con modulo
                                                 proy => proy.idProyectoPK,
                                                 modu => modu.idProyectoPK,
@@ -113,7 +113,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //Vista parcial para desplegar los proyectos de un cliente en especifico
         public PartialViewResult GetListaProyectosCliente(string cedulaPK)
         {
-            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cedulaPK),"idProyectoPK","nombre"); // Viewbag con los proyectos que posee el cliente con propositos de filtrado
+            ViewBag.proyectos = new SelectList(db.PROYECTO.Where(x => x.cedulaClienteFK == cedulaPK), "idProyectoPK", "nombre"); // Viewbag con los proyectos que posee el cliente con propositos de filtrado
             var queryEmp = from req in db.REQUERIMIENTO //Query para la lista de desarrolladores responsables
                            join emp in db.EMPLEADO
                            on req.cedulaDesarrolladorFK equals emp.cedulaPK
@@ -141,10 +141,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
                         join emp in db.EMPLEADO
                         on req.cedulaDesarrolladorFK equals emp.cedulaPK
                         where req.idProyectoPK == idProyecto
-                        select new ListaDesResp 
-                        {   NombreReq = req.nombre, //nombre del requerimiento 
+                        select new ListaDesResp
+                        { NombreReq = req.nombre, //nombre del requerimiento 
                             EstadoReq = req.estado, //estado del requerimiento
-                            NombreResp = emp.nombre+" " + emp.apellido1 + " "+ emp.apellido2 //Nombre del responsable del requerimiento
+                            NombreResp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2 //Nombre del responsable del requerimiento
                         };
             return PartialView(query.Distinct().AsEnumerable());
         }
@@ -160,8 +160,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var query =
                from emp in db.EMPLEADO
-               select new { nombreEmp = emp.nombre +" " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1};
-            
+               select new { nombreEmp = emp.nombre + " " + emp.apellido1 + " " + emp.apellido2, emp.cedulaPK, emp.apellido1 };
+
             ViewBag.empleados = new SelectList(query, "cedulaPK", "nombreEmp");
             return View();
         }
@@ -175,7 +175,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 where r.cedulaPK == cedulaPK
                 where p.fechaFin != null
                 where r.tipoRol != "Lider"
-                select new {p.idProyectoPK, p.nombre }).Distinct();
+                select new { p.idProyectoPK, p.nombre }).Distinct();
 
             List<SelectListItem> items = new SelectList(query, "idProyectoPK", "nombre").ToList();
             items.Insert(0, (new SelectListItem { Text = "Todos proyectos", Value = "Todos" }));
@@ -201,7 +201,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
         }
 
         //Consulta para dar los resultados de las compraciones de las duraciones de un proyecto especifico en el que ha participado el desarrollador
-        public PartialViewResult MostrarComparacionDuraciones( string cedulaPk, int? idProyectoPK){
+        public PartialViewResult MostrarComparacionDuraciones(string cedulaPk, int? idProyectoPK) {
             var CONSULTAS =
                from req in db.REQUERIMIENTO
                join mod in db.MODULO
@@ -237,7 +237,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
                on proy.idProyectoPK equals rol.idProyectoPK
                join emp in db.EMPLEADO
                on rol.cedulaPK equals emp.cedulaPK
-               join req in db.REQUERIMIENTO 
+               join req in db.REQUERIMIENTO
                on emp.cedulaPK equals req.cedulaDesarrolladorFK
                where req.idProyectoPK == proy.idProyectoPK
                where req.fechaFin != null
@@ -248,10 +248,10 @@ namespace PI_EXPERT_SA_WEB.Controllers
                    modeloRol = rol,
                    modeloEmpleado = emp,
                    modeloRequerimiento = req
-       
+
                } into t1
-               group t1 by t1.modeloProyecto.nombre  into g
-               select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x=>  x.modeloRequerimiento.duracionReal) };
+               group t1 by t1.modeloProyecto.nombre into g
+               select new Group<string, CONSULTAS> { Key = g.Key, Values = g, suma = g.Sum(x => x.modeloRequerimiento.duracionReal) };
 
             return PartialView(CONSULTAS.ToList());
         }
@@ -262,8 +262,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
         {
             var query =
                 (from emp in db.EMPLEADO
-                join h in db.HABILIDADES on emp.cedulaPK equals h.cedulaEmpleadoPK
-                select new { h.habilidadPK }).Distinct();
+                 join h in db.HABILIDADES on emp.cedulaPK equals h.cedulaEmpleadoPK
+                 select new { h.habilidadPK }).Distinct();
 
             List<SelectListItem> items = new SelectList(query, "habilidadPK", "habilidadPK").ToList();
             items.Insert(0, (new SelectListItem { Text = "Todas habilidades", Value = "Todas" }));
@@ -316,7 +316,7 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //-------------------------Celeste fin-------------------------
 
-     
+
 
 
         //-------------------------JOHN COMIENZO-------------------------
@@ -415,8 +415,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
                 join req in db.REQUERIMIENTO
                 on mod.idModuloPK equals req.idModuloPK
                 where proy.cedulaClienteFK == (string)cliente
-                            //where proy.idProyectoPK == proyecto
-                            select new CONSULTAS
+                //where proy.idProyectoPK == proyecto
+                select new CONSULTAS
                 {
                     modeloProyecto = proy,
                     modeloModulo = mod,
@@ -431,9 +431,9 @@ namespace PI_EXPERT_SA_WEB.Controllers
                     fecha = System.Data.Entity.SqlServer.SqlFunctions.DateAdd("DAY", g.Sum(x => x.modeloRequerimiento.duracionEstimada / 8), System.Data.Entity.SqlServer.SqlFunctions.GetDate())
                 };
 
-                var b = consultas.Where(x => x.Key == "En Ejecución" || x.Key == "Finalizado");
+            var b = consultas.Where(x => x.Key == "En Ejecución" || x.Key == "Finalizado");
 
-                return PartialView(b.ToList());
+            return PartialView(b.ToList());
         }
 
 
@@ -450,31 +450,31 @@ namespace PI_EXPERT_SA_WEB.Controllers
         //Es una consulta avanzada de baja frecuencia, cuyo objetivo es el de realizar una comparación
         //entre los periodos de desocupación de los empleados de manera que la empresa pueda determinar si
         //existen empleados que estén generando pérdidas económicas para la empresa.
-        
-        
+        [HttpGet]
         public ActionResult getPeriodosDesocupacion(DateTime? fechaInicioR, DateTime? fechaFinR) {
 
-            //Lista de empleados sobre la que se iterará 
+            //Lista de empleados sobre la cual se iterará 
             List<EMPLEADO> empleados = db.EMPLEADO.ToList();
-            List <SP_PeriodosDesocupacion_Result> resultados = new List<SP_PeriodosDesocupacion_Result>();
-            //DateTime fechaInicioR = new DateTime();
-            //DateTime fechaFinR = new DateTime();
+            //Lista de objetos de tipo SP_PeriodosDesocupacion_Result, para guardar los resultados obtenidos
+            //de la ejecución del procedimiento almacenado para todos los empleados.
+            List<SP_PeriodosDesocupacion_Result> resultados = new List<SP_PeriodosDesocupacion_Result>();
+         
+            //Ciclo for que itera sobre los empleados y llama al SP, especificando los parámetros a usar
             for (int i = 0; i < empleados.Count(); ++i)
             {
-                var result = db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR).Single();
-                resultados.Add(result);
+                var results = db.SP_PeriodosDesocupacion(empleados[i].cedulaPK, fechaInicioR, fechaFinR);
+                foreach(SP_PeriodosDesocupacion_Result res in results)
+                {
+                    resultados.Add(res);
+                }
+                
             }
-
-
-            return View(resultados.Distinct().AsEnumerable());
-        }
-
-        public ActionResult getFechas()
-        {
-
 
             return View();
         }
+
+
+      
 
         //-------------------------DIANA FIN------------------------------
 

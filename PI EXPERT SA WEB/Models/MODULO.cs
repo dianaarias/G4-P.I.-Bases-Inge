@@ -39,7 +39,7 @@ namespace PI_EXPERT_SA_WEB.Models
         //[DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fechaInicio { get; set; }
-    
+
         public virtual PROYECTO PROYECTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<REQUERIMIENTO> REQUERIMIENTO { get; set; }

@@ -18,7 +18,7 @@ namespace PI_EXPERT_SA_WEB.Models
     public partial class ROL
     {
         [Key]
-        [Display(Name = "CÃ©dula LÃ­der")]
+        [Display(Name = "Cédula Líder")]
         [Required(ErrorMessage = "Campo requerido")]
         public string cedulaPK { get; set; }
         [Key]
@@ -27,7 +27,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [Display(Name = "Tipo de rol")]
         [Required(ErrorMessage = "Campo requerido")]
         public string tipoRol { get; set; }
-    
+
         public virtual EMPLEADO EMPLEADO { get; set; }
         public virtual PROYECTO PROYECTO { get; set; }
     }

@@ -7,6 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+//Modelo autogenerado utilizado para almacenar resultados de un llamado al procedimiento almacenado.
+//Utilizado en el controlador para guardar los periodos de desocupación de cada empleado, durante la iteración
+//de la lista de empleados.
 namespace PI_EXPERT_SA_WEB.Models
 {
     using System;

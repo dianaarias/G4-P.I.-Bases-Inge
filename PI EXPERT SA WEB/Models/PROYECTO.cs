@@ -65,7 +65,7 @@ namespace PI_EXPERT_SA_WEB.Models
         [DisplayName("Líder")]
         [Required(ErrorMessage = "Campo requerido")]
         public string cedulaLiderFK { get; set; }
-    
+
         public virtual CLIENTE CLIENTE { get; set; }
         public virtual EMPLEADO EMPLEADO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

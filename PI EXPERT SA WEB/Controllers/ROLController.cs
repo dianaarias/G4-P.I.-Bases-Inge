@@ -30,11 +30,8 @@ namespace PI_EXPERT_SA_WEB.Controllers
 
         //Comentado porque al final no se está utilizando una vista parcial para filtrar los empleados por habilidad
         //public PartialViewResult filtroHabilidad() {
-
         //    return PartialView();
         //}
-
-
 
         public PartialViewResult Equipo(int idProyectoPK) {
             var query = db.ROL.Where(x => x.idProyectoPK == idProyectoPK);
